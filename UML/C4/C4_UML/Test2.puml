@@ -1,0 +1,12 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+Person(user, "User", "Is the user of the system")
+System(fatt, "FATT", "Is the fitness applikation")
+
+
+
+Rel(user, fatt, "Interract", "Optional Technology")
+@enduml
