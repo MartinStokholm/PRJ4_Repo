@@ -1,0 +1,19 @@
+@startuml C4_Elements
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+Person(user, "User", "Is the user of the system")
+System_Boundary(c1, "FATT") {
+    Container(Web_api, "Web Api", "C#, ASP.NET Core 6 Web API", "Data Acess to MongoDB ")
+    SystemDb(database, "Database", "MongoDB, NoSQL ")
+    Container(Web_app, "Web application", "React, Javasprict, Client", $link="https://github.com/plantuml-stdlib/C4-PlantUML/blob/master/LayoutOptions.md")
+    
+}
+
+
+Rel(Web_api, database, "Acess data", "JSON")
+Rel(Web_app, Web_api, "Make API Calls", "JSON")
+Rel(user, Web_app, "Interract", "Web browser")
+SHOW_LEGEND()
+@enduml
