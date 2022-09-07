@@ -3,17 +3,28 @@
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Container.puml
 
-Person(user, "User", "Is the user of the system")
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/react.puml
+!include DEVICONS/java.puml
+!include DEVICONS/mongodb.puml
+!include FONTAWESOME/users.puml
+
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
+
+Person(user, "Users", "The users of the system", $sprite="users")
 System_Boundary(c1, "FATT") {
-    Container(Web_api, "Web Api", "C#, ASP.NET Core 6 Web API", "Data Acess to MongoDB ")
-    SystemDb(database, "Database", "MongoDB, NoSQL ")
-    Container(Web_app, "Web application", "React, Javasprict, Client", $link="https://github.com/plantuml-stdlib/C4-PlantUML/blob/master/LayoutOptions.md")
+    Container(Web_api, "Web Api", "C#, ASP.NET Core 6 Web API", "Data Acess to MongoDB ", $sprite="")
+    ContainerDb(db, "Database", "MongoDB, NoSQL", "Holds product, order and invoice information", $sprite="mongodb", $tag="storage")
+    Container(Web_app, "Web application", "React, Javasprict, Client", $sprite="react")
     
 }
 
 
-Rel(Web_api, database, "Acess data", "JSON")
+Rel(Web_api, db, "Reads/Writes to", "JSON")
 Rel(Web_app, Web_api, "Make API Calls", "JSON")
-Rel(user, Web_app, "Interract", "Web browser")
+Rel(user, Web_app, "Interract", "HTTPS")
+
 SHOW_LEGEND()
+
 @enduml
