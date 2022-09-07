@@ -3,6 +3,9 @@
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Container.puml
 
+
+
+
 !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
 !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
 !include DEVICONS/react.puml
@@ -10,19 +13,24 @@
 !include DEVICONS/mongodb.puml
 !include FONTAWESOME/users.puml
 
+AddContainerTag("webApp", $sprite="application_server", $legendText="web app container")
+AddContainerTag("db", $sprite="database_server", $legendText="database container")
+AddContainerTag("files", $sprite="file_server", $legendText="file server container")
+AddContainerTag("conApp", $sprite="service_application", $legendText="console app container")
+
 AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
 
 Person(user, "Users", "The users of the system", $sprite="users")
 System_Boundary(c1, "FATT") {
-    Container(Web_api, "Web Api", "C#, ASP.NET Core 6 Web API", "Data Acess to MongoDB ", $sprite="")
-    ContainerDb(db, "Database", "MongoDB, NoSQL", "Holds product, order and invoice information", $sprite="mongodb", $tag="storage")
-    Container(Web_app, "Web application", "React, Javasprict, Client", $sprite="react")
+    Container(Web_api, "Web Api", "C#, ASP.NET Core 6 Web API", "Provides user access and exercises functionality via a JSON/HTTPS API.")
+    ContainerDb(db, "Database", "MongoDB, NoSQL", "Store user registration, exercises and the combustion registration information, hashed authentication credentials, access log.", $sprite="mongodb")
+    Container(Web_app, "Web application", "React, Javasprict, Client", "Delivers the static content and the training (single) page application", $sprite="react")
     
 }
 
 
-Rel(Web_api, db, "Reads/Writes to", "JSON")
-Rel(Web_app, Web_api, "Make API Calls", "JSON")
+Rel(Web_api, db, "Reads from and writes to", "JSON/HTTPS")
+Rel(Web_app, Web_api, "Make API calls to", "JSON/HTTPS")
 Rel(user, Web_app, "Interract", "HTTPS")
 
 SHOW_LEGEND()
