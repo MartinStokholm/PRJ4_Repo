@@ -6,6 +6,52 @@
 
 
 
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/react.puml
+!include DEVICONS/java.puml
+!include DEVICONS/mongodb.puml
+!include FONTAWESOME/users.puml
 
+AddContainerTag("webApp", $sprite="application_server", $legendText="web app container")
+AddContainerTag("db", $sprite="database_server", $legendText="database container")
+AddContainerTag("files", $sprite="file_server", $legendText="file server container")
+AddContainerTag("conApp", $sprite="service_application", $legendText="console app container")
+
+
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
+
+Person(user, "Users", "The users of the system", $sprite="users")
+System_Boundary(c1, "APIWeb") {
+    Container(ctrl_user, "User Controller", "C#, ASP.NET Core 6 Web API", "")
+    Container(ctrl_signin, "Sign-in Controller", "C#, ASP.NET Core 6 Web API", "")
+    Container(ctrl_signup, "Sign-up Controller", "C#, ASP.NET Core 6 Web API")
+    Container(ctrl_workoutplan, "Workout plan Controller", "User can get a workout plan")
+    
+    Container(model_user, "User Model", "")
+    Container(model_workoutplan, "Workoutplan Model", "")
+}
+
+ContainerDb(db, "Database", "MongoDB, NoSQL", "Store user registration, exercises and the combustion registration information, hashed authentication credentials, access log.", $sprite="mongodb")
+
+Container(Web_app, "Web application", "React, Javasprict, Client", "Delivers the static content and the training (single) page application", $sprite="react")
+
+
+Rel(Web_app, ctrl_user, "Make API calls to", "JSON")
+Rel(Web_app, ctrl_workoutplan, "Make API calls to", "JSON")
+Rel(Web_app, ctrl_signin, "Make API calls to", "JSON")
+Rel(Web_app, ctrl_signup, "Make API calls to", "JSON")
+
+Rel(user, Web_app, "Interract", "HTTPS")
+
+Rel(ctrl_signup, model_user, "Uses", )
+Rel(ctrl_signin, model_user, "Uses", )
+Rel(ctrl_workoutplan, model_workoutplan, "Uses", )
+Rel(ctrl_user, model_user, "Adds user to", )
+
+Rel(model_user, db, "Uses")
+
+SHOW_LEGEND()
 
 @enduml
+
