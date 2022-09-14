@@ -1,12 +1,12 @@
-@startuml C4_Elements
+@startuml C1
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Container.puml
 
-Person(user, "User", "Is the user of the system")
-System(fatt, "FATT", "Is the fitness applikation")
+Person(user, "User", "A person who has an account in the system. The user is a novice fitness gym-member")
+System(fatt, "FATT", "A web-application for structuring and guiding a novice gym-member in their training.")
 
 
 
-Rel(user, fatt, "Interract", "Optional Technology")
+Rel(user, fatt, "Views training plans and diet plans, reports training data")
 @enduml

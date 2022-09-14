@@ -1,4 +1,4 @@
-@startuml C4_Elements
+@startuml C4_WebApi
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 ' uncomment the following line and comment the first to use locally
 ' !include C4_Container.puml
@@ -22,7 +22,7 @@ AddContainerTag("conApp", $sprite="service_application", $legendText="console ap
 AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
 
 Person(user, "Users", "The users of the system", $sprite="users")
-System_Boundary(c1, "APIWeb") {
+System_Boundary(c2, "APIWeb") {
     Container(ctrl_user, "User Controller", "C#, ASP.NET Core 6 Web API", "")
     Container(ctrl_signin, "Sign-in Controller", "C#, ASP.NET Core 6 Web API", "")
     Container(ctrl_signup, "Sign-up Controller", "C#, ASP.NET Core 6 Web API")
