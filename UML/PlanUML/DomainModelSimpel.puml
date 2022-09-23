@@ -30,6 +30,10 @@ class Legs {
 
 }
 
+class Abs{
+    
+}
+
 class Shoulders {
 
 }
@@ -76,6 +80,7 @@ Exercise -- Back : Can be a
 Exercise -- Arms : Can be a
 Exercise -- Legs : Can be a
 Exercise -- Shoulders : Can be a
+Exercise -- Abs : Can be a 
 
 Calender -- "*.." WorkoutProgram : Show
 Calender --  "*.." MealPlan : Show
