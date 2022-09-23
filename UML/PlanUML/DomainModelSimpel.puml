@@ -1,0 +1,88 @@
+@startuml
+' !theme carbon-gray
+' !theme plain
+' !theme aws-orange
+!theme materia
+
+class Account {
+}
+
+
+Class WorkoutProgram {
+}
+
+class PredinedWorkoutProgram {
+}
+
+class Exercise {
+}
+
+class Chest {
+}
+
+class Back {
+}
+
+class Arms {
+}
+
+class Legs {
+
+}
+
+class Shoulders {
+
+}
+
+class MealPlan {
+
+}
+
+class PredefinedMealPlan {
+
+}
+
+class Meal {
+}
+
+class Calender {
+}
+
+Class FATT {
+    - ID
+}
+
+FATT -- Account : Is operated by 
+FATT -- Exercise : Has 
+FATT -- Meal : Has 
+FATT -- PredefinedMealPlan : Has
+FATT -- PredinedWorkoutProgram : Has 
+
+
+Account "1..*" -- "1..*" MealPlan : Has a 
+Account "1..*" -- "1..*" Calender : Has a
+Account "1..*" -- "1" WorkoutProgram : Creates
+
+
+MealPlan -- Meal : Is made of
+PredefinedMealPlan -- Meal : Has
+PredinedWorkoutProgram -- Exercise : Has
+
+
+WorkoutProgram "N..*" -- "1" Exercise : Used  
+
+Exercise -- Chest : Can be a
+Exercise -- Back : Can be a
+Exercise -- Arms : Can be a
+Exercise -- Legs : Can be a
+Exercise -- Shoulders : Can be a
+
+Calender -- "*.." WorkoutProgram : Show
+Calender --  "*.." MealPlan : Show
+
+
+
+
+
+
+@enduml
