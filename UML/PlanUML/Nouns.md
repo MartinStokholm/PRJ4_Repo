@@ -175,6 +175,7 @@ class Milestone {
     Id
     Category
     Weight
+    Size
     Date
 }
 
@@ -188,6 +189,7 @@ class MealPlan {
 
 class Account {
     Id
+    Name
     Weight
     Gender
     Age
@@ -204,6 +206,8 @@ class Meal {
 }
 
 class Calender {
+    Id
+    Date
 }
 
 Class Workout{
@@ -266,12 +270,14 @@ class Milestone {
     Id
     Category
     Weight
+    Size
     Date
 }
 
 
 class MealPlan {
     Id
+    Date
     Category
     Description
 }
@@ -279,6 +285,7 @@ class MealPlan {
 
 class Account {
     Id
+    Name
     Weight
     Gender
     Age
@@ -295,6 +302,9 @@ class Meal {
 }
 
 class Calender {
+    Id
+    Titel
+    Date
 }
 
 Class Workout{
