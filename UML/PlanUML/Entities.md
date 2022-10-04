@@ -38,8 +38,6 @@ På milepælsfanen vil brugeren kunne oprette mål for enten kost eller øvelser
 
 På indstillingsfanen vil brugeren kunne ændre password og ændre relevante indstillinger relateret til brugerens profil. 
 
-
-
 ## Entity
 
 * User
@@ -161,7 +159,8 @@ class Meal {
 
 class Calender {
     Id
-    Date
+    Tuple (Workout, Date)
+    
 }
 
 Class Workout{
@@ -182,9 +181,6 @@ Class Exercise {
     Set
 }
 
-Class Friends {
-
-}
 
 'Account "1..*" -- "1..*" MealPlan : Has a 
 'Account "1..*" -- "1..*" Meal : Create
