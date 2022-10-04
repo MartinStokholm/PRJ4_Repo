@@ -1,10 +1,44 @@
 # Analysing Nouns
 
-For at opretholde en sund **livsstil** er **træning** en vigtig del af hverdagen (sundhed.dk 2014). Hertil medfølger udfordringer med at strukturere sin **træning**, eksempelvis en **plan** for hvilke **øvelser** man udfører på en given **dag**, samt **varighed** og **intensitet** af disse. Desuden er det vigtigt at være vedholdende, og få løbende **feedback** på sin **træning**. Foruden **træning** er **kosten** en vigtig **del**, især at holde styr på sit **energiindtag**, hvis man ønsker at tabe eller øge **vægt**. **Motivation** for at træne og opdage nye **øvelser** kan ofte findes blandt ligesindede og **venner** (Træning 2011), hvortil en fælle og let tilgængelig **platform** kan hjælpe med dette.
+For at opretholde en sund **livsstil** er **træning** en vigtig del af hverdagen (sundhed.dk 2014). Hertil medfølger udfordringer med at strukturere sin **træning**, eksempelvis en **plan** for hvilke **øvelser** man udfører på en given **dag**, samt **varighed** og **intensitet** af disse. Desuden er det vigtigt at være vedholdende, og få løbende **feedback** på sin **milepæl**. Foruden **træning** er **kosten** en vigtig **del**, hvor en milepæl kunne være at holde styr på sit **energiindtag**, for at eller øge **vægt**. **Motivation** for at træne og opdage nye **øvelser** kan ofte findes blandt ligesindede og **venner** (Træning 2011), hvortil en fælle og let tilgængelig **platform** kan hjælpe med dette.
 
-Som følge af problemstillingerne, vil gruppen fremstille og præsentere en **Web-applikation** med tilhørende **database**. **Web-applikationen** vil først præsentere en **loginside**, hvor **bruger** enten kan oprette sig eller logge ind med et eksisterede **login**. Herefter præsenteres **brugeren** for sin **personlige startside**, hvorpå der blandt andet kan vises **kalenderen** med **brugerens personlige træningsplan** og eventuelle **kostplan**. Foruden **startsiden** findes der i **navigations-menuen** links til **fanerne** vedrørende **træning**, **kost** og **venner**. Se Figur 1 og Figur 2
+**Web-applikationen** vil fungere som et alternativ for en **personlig træner**, således det er nemmere at starte sin **personlige træningsrejse** og opnå sin **milepæle** uden at være nødsaget til at investere **penge** i det. **Web-applikationen** vil indeholde **visuelle features**, som skal hjælpe med at motivere **brugeren**, til at opnå sine **milepæle**.
 
-**Hjemmesiden** vil fungere som et alternativ for en **personlig træner**, således det er nemmere at starte sin **personlige træningsrejse** uden at være nødsaget til at investere **penge** og **tid** i det. **Web-applikationen** vil indeholde **visuelle features**, som skal hjælpe med at motivere **brugeren**. Dette er bl.a. **prædefineret øvelser** eller **træningsprogrammer** med **forklaringer** og **video**, men også mulighed for at oprette **egne øvelser**, til at tilpasse sin **personlige træningsplan**. Desuden vil det være muligt at se **historik** over ens **træningsforløb** med tilhørende **milepæle** for at øge **motivationen** til at fastholde en god **træningsrutine**. Der vil senere hen være mulighed for **udvidelse**, som sætter fokus på **kost**. Dette skal give anledning til at kunne dokumentere sit **kalorieindtag**, og få guidelines til **makrofordeling**, som er reguleret efter **brugerens** **træningsrytme**.
+Som følge af problemstillingerne, vil gruppen fremstille og præsentere en **Web-applikation** med tilhørende **database**. **Web-applikationen** vil bestå af fanerne **login**, **kalender**, **træning**, **diet**, **milepæle** og **indstillinger** Se Figur 1 og Figur 2, samt beskrivelserne længere nede (indsæt ref).
+
+Der vil i **Web-aplikationen** være mulighedfor at se **øvelser** med **forklaringer** og **video**. Desuden vil det være muligt at se en **kalender** indeholdende ens **trænningspas** og **madplaner**. Dette skal give anledning til at kunne dokumentere sit **kalorieindtag**, og få guidelines til **makrofordeling**, som er reguleret efter **brugerens** **træningsrytme**.
+
+## Web-applikationens sider
+
+
+
+### Loginpage
+
+Består af FATT-logo, Email flet, Password flet og et sign up new user flet
+
+#### Signup page
+  
+Består af FATT-logo, Email, Username flet, Password flet og Password flet
+  
+### Frontpage/Calender
+
+På forsiden vil brugeren kunne se sin kalender, og det er også herfra at bruger vil kunne tilføje måltider og trænningspas
+
+### Trainingpage
+
+På træningsfanen vil brugeren kunne sammensætte øvelser i et trænningspas.
+
+### Dietpage
+
+På kostfanen vil brugeren kunne sammensætte retter i et måltid.
+
+### Goalspage
+
+På milepælsfanen vil brugeren kunne oprette mål for enten kost eller øvelser.
+
+### Settingspage
+
+På indstillingsfanen vil brugeren kunne ændre password og ændre relevante indstillinger relateret til brugerens profil. 
 
 ## Nouns
 
@@ -91,9 +125,8 @@ Som følge af problemstillingerne, vil gruppen fremstille og præsentere en **We
 
 ## Entity
 
-* Bruger
-* Plan
-* Træningprogram
+* User
+* Workout
 * Øvelse
 * Milepæl
 * Kosten
@@ -102,28 +135,30 @@ Som følge af problemstillingerne, vil gruppen fremstille og præsentere en **We
 
 ## Entity to attributes relationship
 
-### Bruger relationship
+### User relationship
 
-* Hver **bruger** har mulighed for at oprette egne *øvelser*
-* Hver **bruger** har mulighed til at tilpasse sin *personlige træningsplan*.
-* Hver **bruger** har en *vægt*
-* Hver **bruger** har en *milepæle* (mangler i projektbeskrivelsen)
-* Hver **bruger** har et *køn* (mangler i projektbeskrivelsen)
-* Hver **bruger** har en *alder* (mangler i projektbeskrivelsen)
-* Hver **bruger**
+* Hver **User** har mulighed til at tilpasse sin *Workout*.
+* Hver **User** har en *vægt*
+* Hver **User** har en *milepæle*
+* Hver **User** har et *køn*
+* Hver **User** har en *alder*
+* Hver **User**
 
-### Træningsprogram relationship
+### Workout relationship
 
-* Hver (plan) **træningsprogram** består af *øvelser*
-* Hver (plan) **træningsprogram** har en given *dag*, samt *varighed* og *intensitet*
-* Hver **træningsprogram** består af et antal *gentagelser* (mangler i projektbeskrivelsen)
+* Hver **Workout** består af en eller flere *exercises*
+* Hver **Workout** har en samlet *varighed* og *intensitet* baseret på de exercises, den består af
 
-### Øvelser relationship
+### exerciser relationship
 
-* Hver (prædefineret) **øvelser** har en *forklaringer* og *video*
-* Hver **øvelser** består af en *kategori* (arms, back, chest, legs, abs, shoulders)(mangler i projektbeskrivelsen)
-* Hver **øvelse** består af en *forbænding*
-* Hver **øvelse** har et *billedet*
+* Hver **exercise** har en *forklaringer*
+* Hver **exercise** kan have en *video*
+* Hver **exercise** består af en *category* (arms, back, chest, legs, abs, shoulders)
+* Hver **exercise** har en samt *varighed*
+* Hver **exercise** består af en *intensitet*
+* Hver **exercise** kan have et *billedet*
+* Hver **exercise** består af et antal *gentagelser*
+* Hver **exercise** består af et antal *sæt*
 
 ### Milepæle relationship
 
@@ -148,12 +183,12 @@ Som følge af problemstillingerne, vil gruppen fremstille og præsentere en **We
 
 ### Kalender relationship
 
-* Hver
-Desuden vil det være muligt at se historik over ens træningsforløb med tilhørende milepæle for at øge motivationen til at fastholde en god træningsrutine
+* Hver består af en Workout, start tidspunkt og slut tidspunkt
+* Hver består af en Meal, start tidspunkt og slut tidspunkt
 
 ### Venner relationship
 
-* Hver
+* Hver 
 
 ### Relationship between entities
 
@@ -215,7 +250,6 @@ Class Workout{
     Date
     Duration
     Intensity
-    Repetitions
 }
 
 Class Exercise {
@@ -225,6 +259,8 @@ Class Exercise {
     Video
     Combustion
     Pictures
+    Repetitions
+    Set
 }
 
 Class Friends {
@@ -261,10 +297,7 @@ Calender --  "*.." MealPlan : Show
 ' !theme plain
 ' !theme aws-orange
 !theme materia
-
 hide circle
-
-
 
 class Milestone {
     Id
