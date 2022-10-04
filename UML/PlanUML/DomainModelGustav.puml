@@ -1,0 +1,82 @@
+@startuml Domain Model (Gustav)
+!theme cerulean
+
+class Account {
+    
+    username
+    password
+    email
+    settings
+}
+
+Class Workout {}
+
+class PredefinedWorkout {}
+
+class Exercise {
+    name
+    repititions
+    sets
+}
+
+class Chest {}
+class Back {}
+class Arms {}
+class Legs {}
+class Abs {}
+class Shoulders {}
+
+class MealPlan {}
+
+class PredefinedMealPlan {}
+
+class Meal {
+    
+}
+
+class Dish {
+    name
+    ingredients
+    recipe
+    calories
+    nutrition
+}
+
+class Calender {
+    date
+}
+
+Class FATT {
+    id
+}
+
+FATT -- Account : is operated by 
+FATT -- Exercise : has a list of
+FATT -- Meal : has a list of
+FATT -- PredefinedMealPlan : has
+FATT -- PredefinedWorkout : has 
+
+Account "1" -- "0..n" MealPlan : creates
+Account "1" -- "1" Calender : has a
+Account "1" -- "0..n" Workout : creates
+
+MealPlan "1" -- "1..n" Meal : consists of
+Meal "1" -- "1..n" Dish : consists of
+
+PredefinedMealPlan -- Meal : consists of
+PredefinedWorkout -- Exercise : consists of
+
+
+Workout "1" -- "1..n" Exercise : Consists of
+
+Exercise -- Chest : can target
+Exercise -- Back : can target
+Exercise -- Arms : can target
+Exercise -- Legs : can target
+Exercise -- Shoulders : can target
+Exercise -- Abs : can target 
+
+Calender "1" -- "0..n" Workout : shows
+Calender "1" --  "0..n" MealPlan : shows
+
+@enduml
