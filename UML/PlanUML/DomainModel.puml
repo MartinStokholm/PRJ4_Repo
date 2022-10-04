@@ -1,4 +1,4 @@
-@startuml
+@startuml DomainModel
 ' !theme carbon-gray
 ' !theme plain
 ' !theme aws-orange
