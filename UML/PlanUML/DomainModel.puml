@@ -1,24 +1,81 @@
-@startuml DomainModel
+@startuml
 ' !theme carbon-gray
 ' !theme plain
 ' !theme aws-orange
 !theme materia
+hide circle
+'hide members
+'hide fields
 
-class Object << general >>
-Object <|--- ArrayList
+class Account {
+    I d
+    Name
+    Weight
+    Gender
+    Age
+    Email
+    Password
+}
 
-note top of Object : In java, every class\nextends this one.
+Class Workout{
+    I d
+    Duration
+    Intensity
+}
 
-note "This is a floating note" as N1
-note "This note is connected\nto several objects." as N2
-Object .. N2
-N2 .. ArrayList
+Class Exercise {
+    I d
+    Category
+    Duration
+    Intensity
+    Repetitions
+    Set
+    Pictures 
+    Video
+}
 
-class Car
-User - Calender : has a
-Driver - Car : drives >
-Car *- Wheel : have 4 >
-Car -- Person : < owns
-note left: On last defined class
 
+class Milestone {
+    I d
+    Category
+    Goal
+    StartDate
+    EndDate
+}
+
+class Meal {
+    I d
+    Category
+    Description
+    NutritunalValue
+}
+
+class Dish {
+    I d
+    Category
+    NutritunalValue 
+    Recipe
+    Ingredients
+    Picture
+}
+
+class Calender {
+    I d
+    List<Workout, Date>
+    List<Meal, Date>
+}
+
+
+
+
+Account "1" -l- "0..*" Workout : Creates
+Account "1" -r- "0..*" Meal : Creates
+Account "1" -- "0..*" Milestone : Creates
+Workout"1" -- "1..*" Exercise : Consists of  
+Meal"1" -- "1..*" Dish : Consists of  
+Account "1" -u- "1" Calender : Has a
+
+
+Calender "1" -- "0..*" Workout : Shows
+Calender "1" --  "0..*" Meal : Shows
 @enduml
