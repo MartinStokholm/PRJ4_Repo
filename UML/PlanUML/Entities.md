@@ -52,7 +52,6 @@ På indstillingsfanen vil brugeren kunne ændre password og ændre relevante ind
 
 ### User relationship
 
-* Each **user** has a option to adapt their *workout*.
 * Each **user** has a *weight*
 * Each **user** can have one or more *goals*
 * Each **user** can have *gender*
@@ -62,13 +61,12 @@ På indstillingsfanen vil brugeren kunne ændre password og ændre relevante ind
 
 ### Workout relationship
 
-* Each **Workout** consists of one or more *exercises*
-* Each **Workout** has a accumulated *duration* and *intensity* based on the *exercises*
+* Each **workout** has a accumulated *duration* and *intensity* based on the *exercises*
 
 ### exerciser relationship
 
-* Each **exercise** has a *describtion*
 * Each **exercise** consists of *category* (arms, back, chest, legs, abs, shoulders)
+* Each **exercise** has a *describtion*
 * Each **exercise** has a *duration*
 * Each **exercise** has a *intensity*
 * Each **exercise** has as one or more *repetitions*
@@ -92,16 +90,16 @@ På indstillingsfanen vil brugeren kunne ændre password og ændre relevante ind
 
 ### Dish
 
-* Each **dish** has a *nutritunalvalue*
 * Each **dish** has a *category*
-* Each **dish** has a *recepie*
+* Each **dish** has a *nutritunalvalue*
+* Each **dish** has a *recipe*
 * Each **dish** consists of *ingridients*
 * Each **dish** har et *picture*
 
-### Kalender relationship
+### Calender relationship
 
-* Each **calender** consists of one or more *workouts*
-* Each **calender** consists of one or more *meals*
+* Each **calender** consists of one or more **workouts**
+* Each **calender** consists of one or more **meals**
 
 ### Friends relationship
 
@@ -109,107 +107,11 @@ På indstillingsfanen vil brugeren kunne ændre password og ændre relevante ind
 
 ### Relationship between entities
 
-## Domain Model without attributes
-
-```plantuml
-
+* Each **user** has a option to adapt their **workout**.
+* Each **workout** consists of one or more **exercises**
 
 
-
-@enduml
-
-```
 
 ## Domain Model with attributes
 
-```plantuml
-
-@startuml
-' !theme carbon-gray
-' !theme plain
-' !theme aws-orange
-!theme materia
-hide circle
-
-class Milestone {
-    Id
-    Category
-    Weight
-    Size
-    Date
-}
-
-
-class MealPlan {
-    Id
-    Date
-    Category
-    Description
-}
-
-
-class Account {
-    Id
-    Name
-    Weight
-    Gender
-    Age
-
-}
-
-class Meal {
-    Id
-    EnergiIntake 
-    Category
-    Description
-    Ingrediens
-    Picture
-}
-
-class Calender {
-    Id
-    Titel
-    Date
-}
-
-Class Workout{
-    Id
-    Date
-    Duration
-    Intensity
-    Repetitions
-}
-
-Class Exercise {
-    Id
-    Category
-    Description
-    Video
-    Combustion
-    Pictures
-}
-
-Class Friends {
-    
-}
-
-'Account "1..*" -- "1..*" MealPlan : Has a 
-'Account "1..*" -- "1..*" Meal : Create
-Account "1..*" -- "1..*" Calender : Has a
-Account "1..*" -- "1..*" Milestone : Has a
-'Account "0..*" -- "1" Workout : Creates
-'Account "0..*" -- "1" Exercise : Creates
-
-
-MealPlan -- Meal : Is made of
-
-Workout"N..*" -- "1" Exercise : Used  
-
-Calender -- "*.." Workout : Show
-Calender --  "*.." MealPlan : Show
-
-
-
-@enduml
-
-```
+![](DomainModel.svg)
