@@ -4,78 +4,81 @@
 ' !theme aws-orange
 !theme materia
 hide circle
-'hide members
-'hide fields
+hide members
+
+class Calender {
+    - I d
+    - WorkoutPlan List<Workout, Date> 
+    - MealPlan List<Meal, Date> 
+}
 
 class Account {
-    I d
-    Name
-    Weight
-    Gender
-    Age
-    Email
-    Password
-}
-
-Class Workout{
-    I d
-    Duration
-    Intensity
-}
-
-Class Exercise {
-    I d
-    Category
-    Duration
-    Intensity
-    Repetitions
-    Set
-    Pictures 
-    Video
+    - I d
+    - Name
+    - Weight
+    - Gender
+    - Age
+    - Email 
+    - Password
 }
 
 
-class Milestone {
-    I d
-    Category
-    Goal
-    StartDate
-    EndDate
+Class Workout {
+    - I d
+    - Duration
+    - Intensity
 }
+
+class Exercise {
+    - I d
+    - Category
+    - Duration
+    - Intensity
+    - Repetitions
+    - Set
+    - Picture
+    - Video
+}
+
 
 class Meal {
-    I d
-    Category
-    Description
-    NutritunalValue
+    - I d 
+    - Category
+    - Description
+    - NutritunalValue
 }
 
 class Dish {
-    I d
-    Category
-    NutritunalValue 
-    Recipe
-    Ingredients
-    Picture
-}
-
-class Calender {
-    I d
-    List<Workout, Date>
-    List<Meal, Date>
+    - I d 
+    - Category
+    - NutritunalValue
+    - Recipe
+    - Ingredients
+    - Picture
+    - Preptime
 }
 
 
 
+class Milestone {
+    - I d
+    - Category
+    - Goal
+    - StartDate
+    - EndDate 
+}
 
-Account "1" -l- "0..*" Workout : Creates
-Account "1" -r- "0..*" Meal : Creates
-Account "1" -- "0..*" Milestone : Creates
-Workout"1" -- "1..*" Exercise : Consists of  
-Meal"1" -- "1..*" Dish : Consists of  
-Account "1" -u- "1" Calender : Has a
+
+Account  -l- "0..*" Meal : Has 
+Account  -u- Calender : Has a
+Account  -r-  "0..*"Workout : Has 
+Account  -d- "0.-*" Milestone : Has 
+
+Meal -d- "1..*" Dish : Consists of 
+Workout -d- "1..*" Exercise : Consists of
+
+Calender -- "0..*" Workout : Contains
+Calender -- "0..*" Meal : Contains
 
 
-Calender "1" -- "0..*" Workout : Shows
-Calender "1" --  "0..*" Meal : Shows
 @enduml
