@@ -8,36 +8,6 @@ Som følge af problemstillingerne, vil gruppen fremstille og præsentere en **We
 
 Der vil i **Web-aplikationen** være mulighedfor at se **øvelser** med **forklaringer** og **video**. Desuden vil det være muligt at se en **kalender** indeholdende ens **trænningspas** og **madplaner**. Dette skal give anledning til at kunne dokumentere sit **kalorieindtag**, og få guidelines til **makrofordeling**, som er reguleret efter **brugerens** **træningsrytme**.
 
-## Web-applikationens sider
-
-### Loginpage
-
-Består af FATT-logo, Email flet, Password flet og et sign up new user flet
-
-#### Signup page
-  
-Består af FATT-logo, Email, Username flet, Password flet og Password flet
-  
-### Frontpage/Calender
-
-På forsiden vil brugeren kunne se sin kalender, og det er også herfra at bruger vil kunne tilføje måltider og trænningspas
-
-### Trainingpage
-
-På træningsfanen vil brugeren kunne sammensætte øvelser i et trænningspas.
-
-### Dietpage
-
-På kostfanen vil brugeren kunne sammensætte retter i et måltid. Retterne vil kunne kategoriseres efter diettype, for eksempel vegetar, veganer eller ordinær.
-
-### Goalspage
-
-På milepælsfanen vil brugeren kunne oprette mål for enten kost eller øvelser. En milepæl kan for eksempel være en kategori som vægttab, styrke, muskelmasse eller lignene.
-
-### Settingspage
-
-På indstillingsfanen vil brugeren kunne ændre password og ændre relevante indstillinger relateret til brugerens profil. 
-
 ## Entity
 
 * User
@@ -110,8 +80,9 @@ På indstillingsfanen vil brugeren kunne ændre password og ændre relevante ind
 * Each **user** has a option to adapt their **workout**.
 * Each **workout** consists of one or more **exercises**
 
+## Domain Model without attributes
 
+![](output/../out/DomainModel/S_DomainModel.png)
 
 ## Domain Model with attributes
-
-![](DomainModel.svg)
+![](output/../out/DomainModel/DomainModel.png)
