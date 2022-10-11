@@ -27,11 +27,13 @@ System_Boundary(c2, "APIWeb") {
     Container(c_signin, "Sign-in Controller", "C#, ASP.NET Core 6 Web API", "")
     Container(c_signup, "Sign-up Controller", "C#, ASP.NET Core 6 Web API")
     Container(c_workout, "Workout Controller", "User can get a workout")
+    Container(c_meal, "Meal Controller", "User can get a meal")
+    Container(c_calendar, "Calendar Controller", "User can get a calendar")
     
     Container(m_user, "User Model", "")
     Container(m_workout, "Workout Model", "")
     Container(m_meal, "Meal Model", "")
-    Container(m_calender, "Calender Model", "")
+    Container(m_calendar, "Calendar Model", "")
     Container(m_exercise, "Exercise Model", "")
     Container(m_milestone, "Milestone Model", "")
     Container(m_dish, "Dish Model", "")
@@ -41,13 +43,17 @@ ContainerDb(db, "Database", "MongoDB, NoSQL", "Store user registration, exercise
 
 Container(Web_app, "Web application", "React, Javasprict, Client", "Delivers the static content and the training (single) page application", $sprite="react")
 
-System_Ext(mails, "E-Mail System", "Not yet know" )
+System_Ext(mails, "E-Mail System", "Not yet known" )
 
 
 Rel(Web_app, c_user, "Make API calls to", "JSON")
 Rel(Web_app, c_workout, "Make API calls to", "JSON")
 Rel(Web_app, c_signin, "Make API calls to", "JSON")
 Rel(Web_app, c_signup, "Make API calls to", "JSON")
+Rel(Web_app, c_meal, "Make API calls to", "JSON")
+Rel(Web_app, c_calendar, "Make API calls to", "JSON")
+
+
 
 Rel(user, Web_app, "Interract", "HTTPS")
 Rel_Up(c2, mails,"Sends notification using","SMTP")
@@ -57,8 +63,13 @@ Rel(c_signup, m_user, "Uses", )
 Rel(c_signin, m_user, "Uses", )
 Rel(c_workout, m_workout, "Uses", )
 Rel(c_user, m_user, "Adds user to", )
+Rel(c_meal, m_meal, "Gets meal from", )
+Rel(c_calendar, m_calendar, "Gets calendar from", )
 
+Rel(m_meal, m_dish, "Has", )
+Rel(m_workout, m_exercise, "Has", )
 Rel(m_user, db, "Uses")
+Rel(m_user, m_milestone, "Has", )
 
 SHOW_LEGEND()
 
