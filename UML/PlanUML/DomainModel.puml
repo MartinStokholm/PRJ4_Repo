@@ -1,0 +1,84 @@
+@startuml
+' !theme carbon-gray
+' !theme plain
+' !theme aws-orange
+!theme materia
+hide circle
+hide members
+
+class Calender {
+    - I d
+    - WorkoutPlan List<Workout, Date> 
+    - MealPlan List<Meal, Date> 
+}
+
+class Account {
+    - I d
+    - Name
+    - Weight
+    - Gender
+    - Age
+    - Email 
+    - Password
+}
+
+
+Class Workout {
+    - I d
+    - Duration
+    - Intensity
+}
+
+class Exercise {
+    - I d
+    - Category
+    - Duration
+    - Intensity
+    - Repetitions
+    - Set
+    - Picture
+    - Video
+}
+
+
+class Meal {
+    - I d 
+    - Category
+    - Description
+    - NutritunalValue
+}
+
+class Dish {
+    - I d 
+    - Category
+    - NutritunalValue
+    - Recipe
+    - Ingredients
+    - Picture
+    - Preptime
+}
+
+
+
+class Milestone {
+    - I d
+    - Category
+    - Goal
+    - StartDate
+    - EndDate 
+}
+
+
+Account  -l- "0..*" Meal : Has 
+Account  -u- Calender : Has a
+Account  -r-  "0..*"Workout : Has 
+Account  -d- "0.-*" Milestone : Has 
+
+Meal -d- "1..*" Dish : Consists of 
+Workout -d- "1..*" Exercise : Consists of
+
+Calender -- "0..*" Workout : Contains
+Calender -- "0..*" Meal : Contains
+
+
+@enduml

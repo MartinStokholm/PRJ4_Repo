@@ -1,0 +1,50 @@
+@startuml Domain Model (Gustav)
+!theme cerulean
+
+class Account {
+    username
+    password
+    email
+    height
+    weight
+}
+
+class Calender {
+    date
+    time
+}
+
+Class Workout {}
+
+class Exercise {
+    name
+    description
+    muscle group target
+    image/video
+    repititions
+    sets
+}
+
+class Meal {}
+
+class Dish {
+    name
+    image
+    ingredients
+    recipe
+    calories
+    nutrition
+}
+
+Account -- Calender : has a
+Account -- "0..n" Workout : creates
+Account -- "0..n" Meal : creates
+
+Calender -- "0..n" Workout : shows
+Calender -- "0..n" Meal : shows
+
+Workout -- "1..n" Exercise : consists of
+
+Meal -- "1..n" Dish : consists of
+
+@enduml
