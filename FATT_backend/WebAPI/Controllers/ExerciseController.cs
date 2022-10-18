@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ExerciseSimple>> PostExercise(ExerciseCreate exerciseCreate)
+        public async Task<ActionResult<ExerciseSimple>> PostExercise(ExerciseFull exerciseCreate)
         {
             var dbExercise = _context.Exercises.ToList().Find(e => e.Name == exerciseCreate.Name);
             if (dbExercise != null) { return Conflict($"Exercise with name {exerciseCreate.Name} already exists"); }
@@ -63,15 +63,24 @@ namespace WebAPI.Controllers
             return Ok(dbExercise.Adapt<List<ExerciseSimple>>());
         }
 
+        [HttpGet("Full")]
+        public async Task<ActionResult<List<ExerciseFull>>> GetExerciseFull()
+        {
+            var dbExercise = await _context.Exercises.ToListAsync();
+
+            return Ok(dbExercise.Adapt<List<ExerciseFull>>());
+        }
+
         [HttpGet("{exerciseId}")]
-        public async Task<ActionResult<ExerciseCreate>> GetExerciseById(long exerciseId) 
+        public async Task<ActionResult<ExerciseFull>> GetExerciseById(long exerciseId) 
         {
             var dbExercise = await _context.Exercises.FindAsync(exerciseId);
             if (dbExercise == null)
             {
                 return NotFound($"Exercise with id {exerciseId} was not found");
             }
-            return Ok(dbExercise.Adapt<ExerciseCreate>());
+  
+            return Ok(dbExercise.Adapt<ExerciseFull>());
         }
 
     }

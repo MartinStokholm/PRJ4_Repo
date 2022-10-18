@@ -11,6 +11,5 @@
         public int Sets { get; set; }
         public string PicturePath { get; set; } = "";
         public string VideoPath { get; set; } = "";
-
     }
 }
