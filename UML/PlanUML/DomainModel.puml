@@ -25,12 +25,14 @@ class Account {
 
 Class Workout {
     - I d
+    - Name 
     - Duration
     - Intensity
 }
 
 class Exercise {
     - I d
+    - Name 
     - Category
     - Duration
     - Intensity
@@ -43,13 +45,15 @@ class Exercise {
 
 class Meal {
     - I d 
+    - Name 
     - Category
     - Description
     - NutritunalValue
 }
 
 class Dish {
-    - I d 
+    - I d
+    - Name 
     - Category
     - NutritunalValue
     - Recipe
@@ -64,6 +68,7 @@ class Milestone {
     - I d
     - Category
     - Goal
+    - Progress List<Improvement, Date>
     - StartDate
     - EndDate 
 }
