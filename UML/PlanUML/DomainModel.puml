@@ -1,10 +1,11 @@
-@startuml
+@startuml Domain Model
 ' !theme carbon-gray
 ' !theme plain
 ' !theme aws-orange
-!theme materia
+' !theme materia
+!theme cerulean
 hide circle
-hide members
+' hide members
 
 class Calender {
     - I d
@@ -22,7 +23,6 @@ class Account {
     - Password
 }
 
-
 Class Workout {
     - I d
     - Name 
@@ -34,14 +34,14 @@ class Exercise {
     - I d
     - Name 
     - Category
-    - Duration
+'    - Duration  // Doesn't make sense to include
     - Intensity
+    - Equipment
     - Repetitions
-    - Set
+    - Sets
     - Picture
     - Video
 }
-
 
 class Meal {
     - I d 
@@ -62,8 +62,6 @@ class Dish {
     - Preptime
 }
 
-
-
 class Milestone {
     - I d
     - Category
@@ -72,7 +70,6 @@ class Milestone {
     - StartDate
     - EndDate 
 }
-
 
 Account  -l- "0..*" Meal : Has 
 Account  -u- Calender : Has a
@@ -84,6 +81,5 @@ Workout -d- "1..*" Exercise : Consists of
 
 Calender -- "0..*" Workout : Contains
 Calender -- "0..*" Meal : Contains
-
 
 @enduml

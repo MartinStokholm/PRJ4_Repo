@@ -1,0 +1,16 @@
+{
+"Dishes":
+[{
+    "_id" : 1,
+    "Name" : "Cooked Rice",
+    "Category" : "Carbs",
+    "NutritionalValue" : {
+        "Energy" : "?? kcal",
+        "Carbohydrates" : "?? grams",
+        "Protein" : "?? grams",
+        "Fat" : "?? grams"},
+    "Ingredients" : ["Rice", "Water", "Salt"],
+    "Recipe" : "",
+    "Picture" : "",
+    "Preptime" : ""
+}]}
