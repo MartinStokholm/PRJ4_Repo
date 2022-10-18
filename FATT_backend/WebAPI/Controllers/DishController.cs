@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
         // PUT: api/DishModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDishModel(int id, DishDtoPost dish)
+        public async Task<IActionResult> PutDishModel(int id, DishDtoNoId dish)
         {
             var found = await _context.DishModel.FindAsync(id);
             if (found == null)
@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
         // POST: api/DishModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DishModel>> PostDishModel(DishDtoPost dishModel)
+        public async Task<ActionResult<DishModel>> PostDishModel(DishDtoNoId dishModel)
         {
 
             _context.DishModel.Add(dishModel.Adapt<DishModel>());
