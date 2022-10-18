@@ -31,6 +31,22 @@ namespace WebAPI.Controllers
             return Ok(exerciseToAdd.Adapt<ExerciseSimple>());
         }
 
+        [HttpPut("{exerciseId}")]
+        public async Task<ActionResult<Exercise>> PutExercise(long exerciseId, ExerciseUpdate exerciseUpdate)
+        {
+            var dbExercise = await _context.Exercises.FindAsync(exerciseId);
+                
+            if (dbExercise == null) { return NotFound($"Could not find exercise with id {exerciseId}"); }
+
+            _context.Entry(dbExercise)
+                .CurrentValues
+                .SetValues(exerciseUpdate);
+            
+            await _context.SaveChangesAsync();
+
+            return Ok(await _context.Exercises.FindAsync(exerciseId));
+        }
+
         [HttpGet("Thumbnail")]
         public async Task<ActionResult<List<ExerciseThumbnail>>> GetExerciseThumbnail()
         {

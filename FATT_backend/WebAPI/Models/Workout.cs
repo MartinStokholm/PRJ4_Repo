@@ -8,6 +8,6 @@ namespace WebAPI.Models
         public string Name { get; set; } = "";
         public double Duration { get; set; } = 0;
         public string Intensity { get; set; } = "";
-        public ICollection<Exercise> Exercises{ get; set; } 
+        public ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
     }
 }
