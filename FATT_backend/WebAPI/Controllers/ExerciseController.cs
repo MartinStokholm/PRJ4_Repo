@@ -27,7 +27,6 @@ namespace WebAPI.Controllers
             
             return Ok(exerciseToAdd.Adapt<ExerciseWithName>());
         }
-        
 
         [HttpGet("WithNames")]
         public async Task<ActionResult<List<ExerciseWithName>>> GetExercisesWithNames()
@@ -36,5 +35,17 @@ namespace WebAPI.Controllers
             
             return Ok(dbExerciseWithName.Adapt<List<ExerciseWithName>>());
         }
+
+        [HttpGet("{exerciseId}")]
+        public async Task<ActionResult<ExerciseCreate>> GetExerciseById(long exerciseId) 
+        {
+            var dbExercise = await _context.ExerciseModels.FindAsync(exerciseId);
+            if (dbExercise == null)
+            {
+                return NotFound($"Exercise with id {exerciseId} was not found");
+            }
+            return Ok(dbExercise.Adapt<ExerciseCreate>());
+        }
+
     }
 }
