@@ -2,7 +2,7 @@
 {
     public class MealModel
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }
         public double NutritunalValue { get; set; }

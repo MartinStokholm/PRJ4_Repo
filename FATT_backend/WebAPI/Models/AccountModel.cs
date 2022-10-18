@@ -2,7 +2,7 @@
 {
     public class AccountModel
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public double Weigth { get; set; }
         public string Gender { get; set; }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Dto;
 using WebAPI.Dto.Exercise;
 using WebAPI.Models;
 using Mapster;
@@ -25,22 +24,28 @@ namespace WebAPI.Controllers
             _context.ExerciseModels.Add(exerciseToAdd);
 
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetExercise", new { id = exerciseToAdd.Id }, exercise);
-        }
-        
-        /// <summary>
-        /// Get all exercises with their name
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("WithNames")]
-        public async Task<ActionResult<ExerciseWithName>> GetExercisesWithNames()
-        {
-            var dbExerciseWithName = await _context.ExerciseModels
-                .Include(e => e.Name)
-                .ToListAsync();
             
-            return Ok(dbExerciseWithName);
+            return Ok(exerciseToAdd.Adapt<ExerciseWithName>());
         }
+
+        [HttpGet("WithNames")]
+        public async Task<ActionResult<List<ExerciseWithName>>> GetExercisesWithNames()
+        {
+            var dbExerciseWithName = await _context.ExerciseModels.ToListAsync();
+            
+            return Ok(dbExerciseWithName.Adapt<List<ExerciseWithName>>());
+        }
+
+        [HttpGet("{exerciseId}")]
+        public async Task<ActionResult<ExerciseCreate>> GetExerciseById(long exerciseId) 
+        {
+            var dbExercise = await _context.ExerciseModels.FindAsync(exerciseId);
+            if (dbExercise == null)
+            {
+                return NotFound($"Exercise with id {exerciseId} was not found");
+            }
+            return Ok(dbExercise.Adapt<ExerciseCreate>());
+        }
+
     }
 }
