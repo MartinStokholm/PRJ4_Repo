@@ -13,8 +13,8 @@ using WebAPI.Models;
         }
 
         public DbSet<AccountModel> AccountModels { get; set; } = default!;
-        public DbSet<WorkoutModel> WorkoutModels { get; set; } = default!;
-        public DbSet<ExerciseModel> ExerciseModels { get; set; } = default!;
+        public DbSet<Workout> Workouts { get; set; } = default!;
+        public DbSet<Exercise> Exercises { get; set; } = default!;
         public DbSet<MealModel> MealModels { get; set; } = default!;
         public DbSet<DishModel> DishModels { get; set; } = default!;
 
