@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
 
         // PUT {exerciseid} on Workout list of exercises
         [HttpPut("{workoutId}/AddExercise/{exerciseId}")]
-        public async Task<ActionResult<List<ExerciseSimple>>> AddExerciseToWorkout(long workoutId, long exerciseId)
+        public async Task<ActionResult<WorkoutWithExerciseFull>> AddExerciseToWorkout(long workoutId, long exerciseId)
         {
             var dbExercise = await _context.Exercises.FindAsync(exerciseId);
             if (dbExercise == null) { return NotFound("Could not find exercise"); }
@@ -44,19 +44,16 @@ namespace WebAPI.Controllers
                 .Load();
 
             if (dbWorkout.Exercises.Contains(dbExercise)) { return Conflict("Exercise already exists in workout"); }
-
-            var exerciseToAdd = new Exercise();
-            exerciseToAdd = dbExercise;
-
-            dbWorkout.Exercises.Add(exerciseToAdd);
+            
+            dbWorkout.Exercises.Add(dbExercise);
             await _context.SaveChangesAsync();
 
-            return Accepted(dbWorkout);
+            return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFull>());
         }
 
         // PUT {exerciseid} from Workout list of exercises
         [HttpPut("{workoutId}/RemoveExercise/{exerciseId}")]
-        public async Task<ActionResult<List<ExerciseSimple>>> RemoveExerciseFromWorkout(long workoutId, long exerciseId)
+        public async Task<ActionResult<WorkoutWithExerciseFull>> RemoveExerciseFromWorkout(long workoutId, long exerciseId)
         {
             var dbExercise = await _context.Exercises.FindAsync(exerciseId);
             if (dbExercise == null) { return NotFound("Could not find exercise"); }
@@ -74,11 +71,11 @@ namespace WebAPI.Controllers
             dbWorkout.Exercises.Remove(dbExercise);
             await _context.SaveChangesAsync();
 
-            return Accepted(dbWorkout);
+            return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFull>());
         }
 
         [HttpGet("{workoutId}")]
-        public async Task<ActionResult<Workout>> GetWorkoutById(long workoutId)
+        public async Task<ActionResult<WorkoutWithExerciseFull>> GetWorkoutById(long workoutId)
         {
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
             if (dbWorkout == null)
@@ -90,7 +87,7 @@ namespace WebAPI.Controllers
                 .Collection(w => w.Exercises)
                 .Load();
 
-            return Ok(dbWorkout);
+            return Ok(dbWorkout.Adapt<WorkoutWithExerciseFull>());
         }
 
         [HttpGet("Simple")]
