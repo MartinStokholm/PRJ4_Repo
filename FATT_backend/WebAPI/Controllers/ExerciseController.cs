@@ -20,8 +20,8 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<ExerciseWithName>> PostExercise(ExerciseCreate exerciseCreate)
         {
-            var exerciseToAdd = exerciseCreate.Adapt<ExerciseModel>();
-            _context.ExerciseModels.Add(exerciseToAdd);
+            var exerciseToAdd = exerciseCreate.Adapt<Exercise>();
+            _context.Exercises.Add(exerciseToAdd);
 
             await _context.SaveChangesAsync();
             
@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
         [HttpGet("WithNames")]
         public async Task<ActionResult<List<ExerciseWithName>>> GetExercisesWithNames()
         {
-            var dbExerciseWithName = await _context.ExerciseModels.ToListAsync();
+            var dbExerciseWithName = await _context.Exercises.ToListAsync();
             
             return Ok(dbExerciseWithName.Adapt<List<ExerciseWithName>>());
         }
@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         [HttpGet("{exerciseId}")]
         public async Task<ActionResult<ExerciseCreate>> GetExerciseById(long exerciseId) 
         {
-            var dbExercise = await _context.ExerciseModels.FindAsync(exerciseId);
+            var dbExercise = await _context.Exercises.FindAsync(exerciseId);
             if (dbExercise == null)
             {
                 return NotFound($"Exercise with id {exerciseId} was not found");
