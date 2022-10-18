@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Dto;
 using WebAPI.Dto.Exercise;
 using WebAPI.Models;
 using Mapster;
@@ -25,22 +24,17 @@ namespace WebAPI.Controllers
             _context.ExerciseModels.Add(exerciseToAdd);
 
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetExercise", new { id = exerciseToAdd.Id }, exercise);
+            
+            return Ok(exerciseToAdd.Adapt<ExerciseWithName>());
         }
         
-        /// <summary>
-        /// Get all exercises with their name
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet("WithNames")]
-        public async Task<ActionResult<ExerciseWithName>> GetExercisesWithNames()
+        public async Task<ActionResult<List<ExerciseWithName>>> GetExercisesWithNames()
         {
-            var dbExerciseWithName = await _context.ExerciseModels
-                .Include(e => e.Name)
-                .ToListAsync();
+            var dbExerciseWithName = await _context.ExerciseModels.ToListAsync();
             
-            return Ok(dbExerciseWithName);
+            return Ok(dbExerciseWithName.Adapt<List<ExerciseWithName>>());
         }
     }
 }
