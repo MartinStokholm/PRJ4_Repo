@@ -36,8 +36,6 @@ namespace WebAPI.Controllers
             var dbExercise = await _context.Exercises.FindAsync(exerciseId);
             if (dbExercise == null) { return NotFound("Could not find exercise"); }
             
-            
-
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
             if (dbWorkout == null) { return NotFound("Could not find workout"); }
 
@@ -47,7 +45,10 @@ namespace WebAPI.Controllers
 
             if (dbWorkout.Exercises.Contains(dbExercise)) { return Conflict("Exercise already exists in workout"); }
 
-            dbWorkout.Exercises.Add(dbExercise);
+            var exerciseToAdd = new Exercise();
+            exerciseToAdd = dbExercise;
+
+            dbWorkout.Exercises.Add(exerciseToAdd);
             await _context.SaveChangesAsync();
 
             return Accepted(dbWorkout);
