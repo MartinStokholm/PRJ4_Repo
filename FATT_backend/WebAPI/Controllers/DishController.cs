@@ -84,7 +84,7 @@ namespace WebAPI.Controllers
             _context.DishModels.Add(dishModel.Adapt<DishModel>());
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(dishModel.Adapt<DishModel>());
+            return CreatedAtAction("GetDishModel",dishModel.Adapt<DishModel>());
         }
 
         // DELETE: api/DishModels/5
