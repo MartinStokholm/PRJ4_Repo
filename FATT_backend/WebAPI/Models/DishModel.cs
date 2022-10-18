@@ -9,6 +9,6 @@
         public string Ingredients { get; set; }
         
         // no clue what data type
-        public int Picture { get; set; }
+        public string PicturePath { get; set; }
     }
 }

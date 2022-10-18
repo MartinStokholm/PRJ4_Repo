@@ -10,8 +10,8 @@
         public int Sets { get; set; }
         
         // no clue what data type
-        public int Picture { get; set; }
-        public int Video { get; set; }
+        public string PicturePath { get; set; }
+        public string VideoPath { get; set; }
 
     }
 }
