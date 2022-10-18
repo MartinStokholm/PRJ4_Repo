@@ -18,22 +18,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ExerciseWithName>> PostExercise(ExerciseCreate exerciseCreate)
+        public async Task<ActionResult<ExerciseSimple>> PostExercise(ExerciseCreate exerciseCreate)
         {
+            var dbExercise = _context.Exercises.ToList().Find(e => e.Name == exerciseCreate.Name);
+            if (dbExercise != null) { return Conflict($"Exercise with name {exerciseCreate.Name} already exists"); }
+            
             var exerciseToAdd = exerciseCreate.Adapt<Exercise>();
             _context.Exercises.Add(exerciseToAdd);
 
             await _context.SaveChangesAsync();
             
-            return Ok(exerciseToAdd.Adapt<ExerciseWithName>());
+            return Ok(exerciseToAdd.Adapt<ExerciseSimple>());
         }
 
-        [HttpGet("WithNames")]
-        public async Task<ActionResult<List<ExerciseWithName>>> GetExercisesWithNames()
+        [HttpGet("Thumbnail")]
+        public async Task<ActionResult<List<ExerciseThumbnail>>> GetExerciseThumbnail()
         {
-            var dbExerciseWithName = await _context.Exercises.ToListAsync();
+            var dbExercise = await _context.Exercises.ToListAsync();
             
-            return Ok(dbExerciseWithName.Adapt<List<ExerciseWithName>>());
+            return Ok(dbExercise.Adapt<List<ExerciseThumbnail>>());
+        }
+
+        [HttpGet("Simple")]
+        public async Task<ActionResult<List<ExerciseSimple>>> GetExerciseSimple()
+        {
+            var dbExercise = await _context.Exercises.ToListAsync();
+
+            return Ok(dbExercise.Adapt<List<ExerciseSimple>>());
         }
 
         [HttpGet("{exerciseId}")]
