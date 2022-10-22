@@ -27,6 +27,7 @@ Class Workout {
     - I d
     - Name 
     - Duration
+    - Exercises List<Exercise>
 }
 
 class Exercise {
