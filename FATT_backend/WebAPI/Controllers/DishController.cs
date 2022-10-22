@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
 using Mapster;
 using WebAPI.Dto.Dish;
+using WebAPI.Dto.Meal;
 
 namespace WebAPI.Controllers
 {
@@ -31,22 +32,28 @@ namespace WebAPI.Controllers
 
         // GET: api/DishModels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DishModel>> GetDishModel(int id)
+        public async Task<ActionResult<DishMealNames>> GetDish(long id)
         {
-            var dishModel = await _context.DishModels.FindAsync(id);
+            var dish = await _context.DishModels.FindAsync(id);
 
-            if (dishModel == null)
+            if (dish == null)
             {
                 return NotFound();
             }
 
-            return dishModel;
+            _context.Entry(dish)
+                .Collection(d => d.Meals)
+                .Load();
+
+            DishMealNames ret = dish.Adapt<DishMealNames>();
+
+            return ret;
         }
 
         // PUT: api/DishModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDishModel(int id, DishDtoNoId dish)
+        public async Task<IActionResult> PutDishModel(long id, DishDtoNoId dish)
         {
             var found = await _context.DishModels.FindAsync(id);
             if (found == null)
@@ -62,7 +69,7 @@ namespace WebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DishModelExists(id))
+                if (!DishModelExists((int)id))
                 {
                     return NotFound();
                 }
@@ -75,23 +82,27 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
+        /* POST requests*/
+
         // POST: api/DishModels
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<DishModel>> PostDishModel(DishDtoNoId dishModel)
         {
 
             _context.DishModels.Add(dishModel.Adapt<DishModel>());
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetDishModel",dishModel.Adapt<DishModel>());
+            var created = _context.DishModels.FirstOrDefault(d =>
+                d.Id == _context.DishModels.Max(i => i.Id));
+            return Accepted(created);
         }
+
+        /* DELETE requests */
 
         // DELETE: api/DishModels/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDishModel(int id)
         {
-            var dishModel = await _context.DishModels.FindAsync(id);
+            var dishModel = await _context.DishModels.FindAsync((long)id);
             if (dishModel == null)
             {
                 return NotFound();

@@ -1,6 +1,7 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAPI.Dto.Dish;
 using WebAPI.Dto.Meal;
 using WebAPI.Models;
 
@@ -17,6 +18,9 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
+
+        /* GET requests */
+
         // GET: api/Meal
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MealModel>>> GetMeals()
@@ -25,29 +29,38 @@ namespace WebAPI.Controllers
         }
 
 
-        // Get full information about the meal including the dishes
+        // Get information about the meal including dish names
         // GET: api/Meal/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MealModel>> GetMeal(long id)
+        public async Task<ActionResult<MealDishNames>> GetMeal(long id)
         {
             var meal = await _context.MealModels.FindAsync(id);
-
-            _context.Entry(meal)
-                .Collection(m => m.Dishes)
-                .Load();
 
             if (meal == null)
             {
                 return NotFound();
             }
 
-            return meal;
+            _context.Entry(meal)
+                .Collection(m => m.Dishes)
+                .Load();
+
+
+            MealDishNames ret = meal.Adapt<MealDishNames>();
+            // Need to convert the inner list manually??
+            /*foreach (var dish in meal.Dishes)
+            {
+                var d = meal.Dishes.Adapt<DishJustName>();
+                ret.Dishes.Add(d);
+            }*/
+            return ret;
         }
 
+        /* PUT requests */
+
         // PUT: api/MealModels/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(long id, MealDtoNoId meal)
+        public async Task<IActionResult> PutMeal(long id, MealNoId meal)
         {
             var found = await _context.MealModels.FindAsync(id);
             if (found == null)
@@ -77,7 +90,6 @@ namespace WebAPI.Controllers
         }
 
         // PUT: api/Meal/1/AddDish/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{mealId}/AddDish/{dishId}")]
         public async Task<IActionResult> PutAddDish(long mealId, long dishId)
         {
@@ -99,7 +111,7 @@ namespace WebAPI.Controllers
 
             if(!meal.Dishes.Contains(dish))
                 meal.Dishes.Add(dish);
-            dish.Meals.Add(meal);
+            //dish.Meals.Add(meal);
 
             try
             {
@@ -120,16 +132,18 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
+
+        /* POST requests */
+
         // POST: api/Meal
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MealModel>> PostMeal(MealDtoNoId meal)
+        public async Task<ActionResult<MealModel>> PostMeal(MealNoId meal)
         {
 
             _context.MealModels.Add(meal.Adapt<MealModel>());
             await _context.SaveChangesAsync();
-
-            return Accepted( meal.Adapt<MealModel>());
+            var created = _context.MealModels.FirstOrDefault(m => m.Id == _context.MealModels.Max(i => i.Id));
+            return Accepted(created);
         }
 
         // POST: api/Meal/Simple
@@ -140,13 +154,17 @@ namespace WebAPI.Controllers
 
             _context.MealModels.Add(meal.Adapt<MealModel>());
             await _context.SaveChangesAsync();
-
-            return Accepted(meal.Adapt<MealModel>());
+            var created = _context.MealModels.FirstOrDefault(m => m.Id == _context.MealModels.Max(i => i.Id));
+            return Accepted(created);
         }
+
+
+
+        /* DELETE */
 
         // DELETE: api/Meal/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMeal(int id)
+        public async Task<IActionResult> DeleteMeal(long id)
         {
             var mealModel = await _context.MealModels.FindAsync(id);
             if (mealModel == null)
