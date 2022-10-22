@@ -1,4 +1,6 @@
-﻿using Mapster;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Dto.Dish;
@@ -47,14 +49,34 @@ namespace WebAPI.Controllers
 
 
             MealDishNames ret = meal.Adapt<MealDishNames>();
-            // Need to convert the inner list manually??
-            /*foreach (var dish in meal.Dishes)
-            {
-                var d = meal.Dishes.Adapt<DishJustName>();
-                ret.Dishes.Add(d);
-            }*/
+          
             return ret;
         }
+
+        // Get all the dish names and id o a particular meal
+        // GET: api/Meal/5
+        [HttpGet("{id}/Dishes")]
+        public async Task<ActionResult<IEnumerable<DishWThumbnail>>> GetDishes(long id)
+        {
+            var meal = await _context.MealModels.FindAsync(id);
+
+            if (meal == null)
+            {
+                return NotFound();
+            }
+
+            _context.Entry(meal)
+                .Collection(m => m.Dishes)
+                .Load();
+
+            List<DishWThumbnail> dishes = new List<DishWThumbnail>();
+            foreach (var d in meal.Dishes)
+            {
+                dishes.Add(d.Adapt<DishWThumbnail>());
+            }
+            return dishes;
+        }
+
 
         /* PUT requests */
 
@@ -111,7 +133,6 @@ namespace WebAPI.Controllers
 
             if(!meal.Dishes.Contains(dish))
                 meal.Dishes.Add(dish);
-            //dish.Meals.Add(meal);
 
             try
             {
