@@ -10,7 +10,7 @@
         "Protein" : "?? grams",
         "Fat" : "?? grams"},
     "Ingredients" : ["Rice", "Water", "Salt"],
+    "Preptime" : "",
     "Recipe" : "",
-    "Picture" : "",
-    "Preptime" : ""
+    "Picture" : ""
 }]}

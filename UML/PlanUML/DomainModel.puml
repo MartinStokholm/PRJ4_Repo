@@ -27,14 +27,12 @@ Class Workout {
     - I d
     - Name 
     - Duration
-    - Intensity
 }
 
 class Exercise {
     - I d
     - Name 
     - Category
-'    - Duration  // Doesn't make sense to include
     - Intensity
     - Equipment
     - Repetitions
@@ -48,14 +46,14 @@ class Meal {
     - Name 
     - Category
     - Description
-    - NutritunalValue
+    - NutritionalValue
 }
 
 class Dish {
     - I d
     - Name 
     - Category
-    - NutritunalValue
+    - NutritionalValue
     - Recipe
     - Ingredients
     - Picture

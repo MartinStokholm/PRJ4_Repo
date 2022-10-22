@@ -1,0 +1,62 @@
+{
+"PredefinedWorkouts":
+[{
+    "_id" : 1,
+    "Name" : "Full-body 1",
+    "Duration" : "1.5h-2h",
+    "Exercises" : [1, 4, 6, 12, 15, 16, 18]
+},
+{
+    "_id" : 2,
+    "Name" : "Full-body 2",
+    "Duration" : "1.5h-2h",
+    "Exercises" : [2, 3, 10, 13, 19, 20, 22]
+},
+{
+    "_id" : 3,
+    "Name" : "Upper-body",
+    "Duration" : "1.5h-2h",
+    "Exercises" : [3, 5, 11, 12, 14, 16, 18]
+},
+{
+    "_id" : 4,
+    "Name" : "Lower-body",
+    "Duration" : "1h-1.5h",
+    "Exercises" : [2, 7, 8, 9, 22]
+},
+{
+    "_id" : 5,
+    "Name" : "Push",
+    "Duration" : "1h-1.5h",
+    "Exercises" : [3, 4, 6, 13, 17]
+},
+{
+    "_id" : 6,
+    "Name" : "Pull",
+    "Duration" : "1h-1.5h",
+    "Exercises" : [1, 10, 11, 12, 16]
+},
+{
+    "_id" : 7,
+    "Name" : "Compound",
+    "Duration" : "1.5h-2h",
+    "Exercises" : [1, 2, 3, 12, 13]
+},
+{
+    "_id" : 8,
+    "Name" : "Isolation",
+    "Duration" : "1h-1.5h",
+    "Exercises" : [5, 8, 9, 15, 16, 17]
+},
+{
+    "_id" : 9,
+    "Name" : "Core",
+    "Duration" : "30m-1h",
+    "Exercises" : [1, 18, 19, 20]
+},
+{
+    "_id" : 10,
+    "Name" : "Cardio",
+    "Duration" : "30m-1h",
+    "Exercises" : [22, 21]
+}]}
