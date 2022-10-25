@@ -1,0 +1,75 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Sund kost giver dig ikke automatisk et bedre helbred",
+      "body": "Stik modsat den gængse opfattelse er det langt fra sikkert, at du automatisk bliver sundere af at spise mindre fedt og mere grønt, f.eks. gennem Ny Nordisk Hverdagsmad. ",
+      "image": "https://videnskab.dk/files/styles/columns_12_12_tablet/public/article_media/sund_kost.jpg?itok=Vjhnpt3N&timestamp=1464219173",
+      "author": "Admin"
+    },
+    {
+      "title": "Træningsprogram til begynderen",
+      "body": "Træningsprogrammet er sammensat sådan, at du træner to øvelser i træk – 10 gentagelser per øvelse. Hold så 60 sekunder pause, inden du gentager øvelserne. Kør 3-4 runder i alt.",
+      "image": "https://www.gheir.com/UserFiles/qw.jpg",
+      "author": "Admin",
+      "id": 4
+    },
+    {
+      "title": "5 øvelser: Sådan slipper du for lændesmerter",
+      "body": "Hold i ryggen, hekseskud, ondt i ryggen og lumbago. Der findes mange ord for lændesmerter, der faktisk er en af de mest almindelige lidelser herhjemme. ",
+      "image": "https://img.youm7.com/ArticleImgs/2020/12/21/54032-%D8%AA%D9%85%D8%A7%D8%B1%D9%8A%D9%86-%D8%A7%D9%84%D9%83%D8%A7%D8%B1%D8%AF%D9%8A%D9%88.jpg",
+      "author": "Admin",
+      "id": 5
+    },
+    {
+      "title": "5 øvelser: Sådan slipper du for lændesmerter",
+      "body": "Hold i ryggen, hekseskud, ondt i ryggen og lumbago. Der findes mange ord for lændesmerter, der faktisk er en af de mest almindelige lidelser herhjemme. ",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLfh8Tgn2xc4CGJKBgM90COCZaFclK0eXOrTQU9QzffNgzTSIiUk2aE9eoU8vN1Yg3utc&usqp=CAU",
+      "author": "Admin",
+      "id": 6
+    },
+    {
+      "title": "5 øvelser: Sådan slipper du for lændesmerter",
+      "body": "Hold i ryggen, hekseskud, ondt i ryggen og lumbago. Der findes mange ord for lændesmerter, der faktisk er en af de mest almindelige lidelser herhjemme. ",
+      "image": "https://www.alt.dk/media/753997f781c64233bd2013e20c53a3da/e1d9c5949e0d42a79795f8ca412b1636.jpg?width=980",
+      "author": "Admin",
+      "id": 3
+    },
+    {
+      "title": "5 øvelser: Sådan slipper du for lændesmerter",
+      "body": "Hold i ryggen, hekseskud, ondt i ryggen og lumbago. Der findes mange ord for lændesmerter, der faktisk er en af de mest almindelige lidelser herhjemme. ",
+      "image": "https://seniornews.dk/wp-content/uploads/sites/5/2022/01/ny-kost-2022-683x385.jpg",
+      "author": "Admin",
+      "id": 2
+    },
+    {
+      "title": "Ahmad",
+      "body": "asdasafdsfsdf",
+      "image": "https://niviskar.org/wene/profil/baran-birdoz-edbdf.jpg",
+      "author": "codv",
+      "id": 7
+    }
+  ],
+  "Register": [
+    {
+      "UserName": "masdmasd",
+      "Password": "asfasfdsghgjghkujghjhgjf",
+      "FirstN": "mohmad",
+      "LastN": "al",
+      "Email": "maehr@g.com",
+      "Gender": "",
+      "age": "28",
+      "id": 1
+    },
+    {
+      "UserName": "kasdfkfa",
+      "Password": "klkasd",
+      "FirstN": "Baran",
+      "LastN": "lasdask",
+      "Email": "baran@gmail.com",
+      "Gender": "",
+      "age": "60",
+      "id": 2
+    }
+  ]
+}
