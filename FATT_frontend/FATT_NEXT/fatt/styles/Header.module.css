@@ -1,0 +1,21 @@
+.header{
+    background-color: #C1D343;
+  
+    display: left;
+    background-image: url("../src/utils/img/LOGO-trans.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 50px 50px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    padding: 0%;
+  }
+  
+  .headerTitel  {
+    margin-left: 52px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 33px;
+    color: #6B1AD3;
+    padding: 0%;
+  }
