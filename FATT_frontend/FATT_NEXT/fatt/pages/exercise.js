@@ -1,23 +1,13 @@
-import Header from "../src/components/Header";
-import Footer from "../src/components/Footer";
-import MenuNav from '../src/components/Menu';
 // import Exercises from '../../interfaces/Exercises';
-import exerciseHandler from "./api/exercise/[id]"  
+import exerciseHandler from "./api/exercise/[id]";
 import HeadComponent from "../src/components/HeadComponent";
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function ExercisePage() {
- // () => exerciseHandler(Exercises, Exercises);
-  
-  return (
-    <div className='grid-container'>
+  // () => exerciseHandler(Exercises, Exercises);
 
-    </div>
-
-  );
+  return <div className="grid-container"></div>;
 }
-
-
 
 // export const getStaticExercises = async () => {
 //     const res = await fetch($`{server}/api/Exercise`)
