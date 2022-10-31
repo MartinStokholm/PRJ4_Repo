@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
         // Get information about the meal including dish names
         // GET: api/Meal/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MealDishNames>> GetMeal(long id)
+        public async Task<ActionResult<MealNameWDishes>> GetMeal(long id)
         {
             var meal = await _context.MealModels.FindAsync(id);
 
@@ -48,12 +48,12 @@ namespace WebAPI.Controllers
                 .Load();
 
 
-            MealDishNames ret = meal.Adapt<MealDishNames>();
+            MealNameWDishes ret = meal.Adapt<MealNameWDishes>();
           
             return ret;
         }
 
-        // Get all the dish names and id o a particular meal
+        // Get all the dishes of a particular meal
         // GET: api/Meal/5
         [HttpGet("{id}/Dishes")]
         public async Task<ActionResult<IEnumerable<DishWThumbnail>>> GetDishes(long id)
@@ -82,15 +82,23 @@ namespace WebAPI.Controllers
 
         // PUT: api/MealModels/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(long id, MealNoId meal)
+        public async Task<IActionResult> PutMeal(long id, MealNameWDishes meal)
         {
             var found = await _context.MealModels.FindAsync(id);
             if (found == null)
             {
                 return BadRequest("Couldn't find Meal with specified id");
             }
-
-            found.Adapt(meal);
+            _context.Entry(found).
+                Collection(m => m.Dishes)
+                .Load();
+            found.Name = meal.Name;
+            found.Dishes.Clear();
+            foreach (var d in meal.Dishes)
+            {
+                found.Dishes.Add(meal.Dishes.Adapt<DishModel>());
+            }
+            
 
             try
             {
@@ -158,12 +166,12 @@ namespace WebAPI.Controllers
 
         // POST: api/Meal
         [HttpPost]
-        public async Task<ActionResult<MealModel>> PostMeal(MealNoId meal)
+        public async Task<ActionResult<MealModel>> PostMeal(MealNameWDishes meal)
         {
 
             _context.MealModels.Add(meal.Adapt<MealModel>());
             await _context.SaveChangesAsync();
-            var created = _context.MealModels.FirstOrDefault(m => m.Id == _context.MealModels.Max(i => i.Id));
+            var created = _context.MealModels.FirstOrDefault(m => m.Id == _context.MealModels.Max(i => meal.Id));
             return Accepted(created);
         }
 
