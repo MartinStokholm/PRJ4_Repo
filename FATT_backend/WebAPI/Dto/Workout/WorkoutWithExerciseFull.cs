@@ -6,8 +6,7 @@ namespace WebAPI.Dto.Workout
     {
         public long Id { get; set; }
         public string Name { get; set; } = "";
-        public double DurationInMin { get; set; } = 0;
-        public string Intensity { get; set; } = "";
+        public string Duration { get; set; } = "";
         public virtual ICollection<ExerciseFull> Exercises { get; set; } = new HashSet<ExerciseFull>();
     }
 }

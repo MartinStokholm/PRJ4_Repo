@@ -11,8 +11,7 @@ namespace WebAPI.Models
         }
         public long Id { get; set; }
         public string Name { get; set; } = "";
-        public double DurationInMin { get; set; } = 0;
-        public string Intensity { get; set; } = "";
+        public string Duration { get; set; } = "";
         public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
     }
 }

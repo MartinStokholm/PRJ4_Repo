@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Models
 {
-    public class DishModel
+    public class Dish
     {
         public long Id { get; set; }
         public string Category { get; set; } = "";

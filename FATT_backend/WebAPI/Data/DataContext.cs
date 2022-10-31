@@ -9,11 +9,11 @@ public class DataContext : DbContext
 {
     public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
-    public DbSet<AccountModel> AccountModels { get; set; } = default!;
+    public DbSet<Account> AccountModels { get; set; } = default!;
     public DbSet<Workout> Workouts { get; set; } = default!;
     public DbSet<Exercise> Exercises { get; set; } = default!;
-    public DbSet<MealModel> MealModels { get; set; } = default!;
-    public DbSet<DishModel> DishModels { get; set; } = default!;
+    public DbSet<Meal> MealModels { get; set; } = default!;
+    public DbSet<Dish> DishModels { get; set; } = default!;
 
 }
 

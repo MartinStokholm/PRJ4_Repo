@@ -3,7 +3,7 @@
     public class ExerciseUpdate
     {
         public string Intensity { get; set; } = "low";
-        public int Repetitions { get; set; }
-        public int Sets { get; set; }
+        public string Repetitions { get; set; } = "";
+        public string Sets { get; set; } = "";
     }
 }

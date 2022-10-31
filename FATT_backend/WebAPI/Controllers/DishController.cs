@@ -24,14 +24,14 @@ namespace WebAPI.Controllers
 
         // GET: api/DishModels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DishModel>>> GetDishModel()
+        public async Task<ActionResult<IEnumerable<Dish>>> GetDishModel()
         {
             return await _context.DishModels.ToListAsync();
         }
 
         // GET: api/DishModels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DishModel>> GetDishModel(int id)
+        public async Task<ActionResult<Dish>> GetDishModel(int id)
         {
             var dishModel = await _context.DishModels.FindAsync(id);
 
@@ -78,13 +78,13 @@ namespace WebAPI.Controllers
         // POST: api/DishModels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DishModel>> PostDishModel(DishDtoNoId dishModel)
+        public async Task<ActionResult<Dish>> PostDishModel(DishDtoNoId dishModel)
         {
 
-            _context.DishModels.Add(dishModel.Adapt<DishModel>());
+            _context.DishModels.Add(dishModel.Adapt<Dish>());
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDishModel",dishModel.Adapt<DishModel>());
+            return CreatedAtAction("GetDishModel",dishModel.Adapt<Dish>());
         }
 
         // DELETE: api/DishModels/5

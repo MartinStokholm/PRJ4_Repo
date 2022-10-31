@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Models
 {
-    public class MilestoneModel
+    public class Milestone
     {
         public long Id { get; set; }
         public string Category { get; set; } = "";

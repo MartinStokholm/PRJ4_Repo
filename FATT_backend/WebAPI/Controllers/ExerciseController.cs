@@ -17,6 +17,15 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
+        [HttpPost("list")]
+        public async Task<ActionResult<List<Exercise>>> PostExercises(List<ExerciseCreateNoid> exercises)
+        {
+            var exercisesToAdd = exercises.Adapt<List<Exercise>>();
+            await _context.Exercises.AddRangeAsync(exercisesToAdd);
+            await _context.SaveChangesAsync();
+            return exercisesToAdd;
+        }
+
         [HttpPost]
         public async Task<ActionResult<ExerciseSimple>> PostExercise(ExerciseFull exerciseCreate)
         {
