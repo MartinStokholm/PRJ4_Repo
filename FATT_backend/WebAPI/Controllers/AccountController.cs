@@ -5,11 +5,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountModelsController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public AccountModelsController(DataContext context)
+        public AccountController(DataContext context)
         {
             _context = context;
         }

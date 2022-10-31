@@ -18,12 +18,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("list")]
-        public async Task<ActionResult<List<Exercise>>> PostExercises(List<ExerciseCreateNoid> exercises)
+        public async Task<ActionResult<List<ExerciseSimple>>> PostExercises(List<ExerciseCreateNoId> exercises)
         {
             var exercisesToAdd = exercises.Adapt<List<Exercise>>();
             await _context.Exercises.AddRangeAsync(exercisesToAdd);
             await _context.SaveChangesAsync();
-            return exercisesToAdd;
+            return exercisesToAdd.Adapt<List<ExerciseSimple>>();
         }
 
         [HttpPost]

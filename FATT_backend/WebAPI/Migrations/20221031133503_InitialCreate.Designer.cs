@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221031122149_InitialCreate")]
+    [Migration("20221031133503_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountModels");
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("WebAPI.Models.Dish", b =>
@@ -111,7 +111,7 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("MealId");
 
-                    b.ToTable("DishModels");
+                    b.ToTable("Dishes");
                 });
 
             modelBuilder.Entity("WebAPI.Models.Exercise", b =>
@@ -142,11 +142,13 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Repetitions")
-                        .HasColumnType("int");
+                    b.Property<string>("Repetitions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Sets")
-                        .HasColumnType("int");
+                    b.Property<string>("Sets")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VideoPath")
                         .IsRequired()
@@ -178,7 +180,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MealModels");
+                    b.ToTable("Meals");
                 });
 
             modelBuilder.Entity("WebAPI.Models.Workout", b =>

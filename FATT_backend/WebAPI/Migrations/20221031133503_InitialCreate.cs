@@ -9,7 +9,7 @@ namespace WebAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AccountModels",
+                name: "Accounts",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -24,7 +24,7 @@ namespace WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccountModels", x => x.Id);
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,8 +37,8 @@ namespace WebAPI.Migrations
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Intensity = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Equipment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Repetitions = table.Column<int>(type: "int", nullable: false),
-                    Sets = table.Column<int>(type: "int", nullable: false),
+                    Repetitions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sets = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VideoPath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -48,7 +48,7 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MealModels",
+                name: "Meals",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -59,7 +59,7 @@ namespace WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MealModels", x => x.Id);
+                    table.PrimaryKey("PK_Meals", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,7 +77,7 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DishModels",
+                name: "Dishes",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -91,11 +91,11 @@ namespace WebAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DishModels", x => x.Id);
+                    table.PrimaryKey("PK_Dishes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DishModels_MealModels_MealId",
+                        name: "FK_Dishes_Meals_MealId",
                         column: x => x.MealId,
-                        principalTable: "MealModels",
+                        principalTable: "Meals",
                         principalColumn: "Id");
                 });
 
@@ -124,8 +124,8 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DishModels_MealId",
-                table: "DishModels",
+                name: "IX_Dishes_MealId",
+                table: "Dishes",
                 column: "MealId");
 
             migrationBuilder.CreateIndex(
@@ -137,16 +137,16 @@ namespace WebAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AccountModels");
+                name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "DishModels");
+                name: "Dishes");
 
             migrationBuilder.DropTable(
                 name: "ExerciseWorkout");
 
             migrationBuilder.DropTable(
-                name: "MealModels");
+                name: "Meals");
 
             migrationBuilder.DropTable(
                 name: "Exercises");

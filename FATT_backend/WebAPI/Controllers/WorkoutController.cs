@@ -16,8 +16,55 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
+        [HttpPost("{workoutId}/AddExercise/list")]
+        public async Task<ActionResult<List<WorkoutWithExerciseFull>>> AddExercisesToWorkout(long workoutId, List<long> exerciseIds)
+        {
+            var dbWorkout = await _context.Workouts.FindAsync(workoutId);
+            if (dbWorkout == null) { return NotFound($"Could not find workout with id {workoutId}"); }
+            var dbExercises = _context.Exercises.ToList().FindAll(e => exerciseIds.Contains(e.Id));
+            if (dbExercises.Count != exerciseIds.Count) { return NotFound($"Could not find all exercises"); }
+
+            _context.Entry(dbWorkout)
+               .Collection(w => w.Exercises)
+               .Load();
+            
+            foreach (var exercise in dbExercises)
+            {
+                if (dbWorkout.Exercises.Contains(exercise)) { return Conflict("Exercise already exists in workout"); }
+
+                dbWorkout.Exercises.Add(exercise);
+            }
+        
+            await _context.SaveChangesAsync();
+            return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFull>());
+
+        }
+        [HttpPost("{workoutId}/RemoveExercise/list")]
+        public async Task<ActionResult<List<WorkoutWithExerciseFull>>> RemoveExercisesToWorkout(long workoutId, List<long> exerciseIds)
+        {
+            var dbWorkout = await _context.Workouts.FindAsync(workoutId);
+            if (dbWorkout == null) { return NotFound($"Could not find workout with id {workoutId}"); }
+            var dbExercises = _context.Exercises.ToList().FindAll(e => exerciseIds.Contains(e.Id));
+            if (dbExercises.Count != exerciseIds.Count) { return NotFound($"Could not find all exercises"); }
+
+            _context.Entry(dbWorkout)
+               .Collection(w => w.Exercises)
+               .Load();
+
+            foreach (var exercise in dbExercises)
+            {
+                if (!dbWorkout.Exercises.Contains(exercise)) { return Conflict("Exercise does not exist in workout"); }
+
+                dbWorkout.Exercises.Remove(exercise);
+            }
+
+            await _context.SaveChangesAsync();
+            return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFull>());
+
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreate workoutCreate)
+        public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreateNameNoid workoutCreate)
         {
             var dbWorkout = _context.Workouts.ToList().Find(w => w.Name == workoutCreate.Name);
             if (dbWorkout != null) { return Conflict($"Workout with name {workoutCreate.Name} already exists"); }

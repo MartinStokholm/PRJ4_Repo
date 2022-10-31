@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Dto.Exercise
 {
-    public class ExerciseCreateNoid
+    public class ExerciseCreateNoId
     {
         public string Name { get; set; } = "";
         public string Category { get; set; } = "";

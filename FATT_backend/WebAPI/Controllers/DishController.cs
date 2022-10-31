@@ -26,14 +26,14 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Dish>>> GetDishModel()
         {
-            return await _context.DishModels.ToListAsync();
+            return await _context.Dishes.ToListAsync();
         }
 
         // GET: api/DishModels/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Dish>> GetDishModel(int id)
         {
-            var dishModel = await _context.DishModels.FindAsync(id);
+            var dishModel = await _context.Dishes.FindAsync(id);
 
             if (dishModel == null)
             {
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDishModel(int id, DishDtoNoId dish)
         {
-            var found = await _context.DishModels.FindAsync(id);
+            var found = await _context.Dishes.FindAsync(id);
             if (found == null)
             {
                 return BadRequest("Couldn't find Dish with specified id");
@@ -81,7 +81,7 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<Dish>> PostDishModel(DishDtoNoId dishModel)
         {
 
-            _context.DishModels.Add(dishModel.Adapt<Dish>());
+            _context.Dishes.Add(dishModel.Adapt<Dish>());
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDishModel",dishModel.Adapt<Dish>());
@@ -91,13 +91,13 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDishModel(int id)
         {
-            var dishModel = await _context.DishModels.FindAsync(id);
+            var dishModel = await _context.Dishes.FindAsync(id);
             if (dishModel == null)
             {
                 return NotFound();
             }
 
-            _context.DishModels.Remove(dishModel);
+            _context.Dishes.Remove(dishModel);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
 
         private bool DishModelExists(int id)
         {
-            return _context.DishModels.Any(e => e.Id == id);
+            return _context.Dishes.Any(e => e.Id == id);
         }
     }
 }
