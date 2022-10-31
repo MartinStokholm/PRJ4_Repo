@@ -5,10 +5,6 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Make sure to change path to where your secret is saved
-builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("C:\\Users\\msldk\\AppData\\Roaming\\Microsoft\\UserSecrets\\ea531bc4-79d0-465e-9313-b6711b47fe62\\secrets.json");
-
 // Add to fix circular reference problem with JSON serialization
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
