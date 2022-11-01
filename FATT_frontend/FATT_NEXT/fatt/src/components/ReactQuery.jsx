@@ -1,15 +1,15 @@
 import {QueryClient, useQuery} from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";
-import { fetchAccount } from "./account/account"
-import { Account } from "../../interfaces/Account";
+import { fetchWorkouts } from "../fetchers/workout"
+// import { Account } from "../../interfaces/Account";
 
-export function WithReactQuery(){
+export function ReactQuery(){
     console.log("Render");
 
     const {isError, isSuccess, isLoading, data, error} = useQuery(
-        ["accounts"], 
-        fetchAccount, 
+        ["workout"], 
+        fetchWorkouts, 
         {staleTime: 60000}
     );
 
@@ -29,7 +29,7 @@ export function WithReactQuery(){
 
     return (
         <div>
-            {data && data.map((account) =>  <Account key={account.id} account={account} />) }
+            {data && data.map((workout) =>  <Account key={workout.id} workout={workout} />) }
         </div>
     )
 }

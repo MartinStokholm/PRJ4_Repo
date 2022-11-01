@@ -4,40 +4,57 @@ import HeadComponent from "../src/components/Meta";
 import Image from "next/image";
 import Link from "next/link";
 import type { Exercise } from "../interfaces/Exercises";
-import useSwr from "swr";
-import cors from "cors";
+import { useQuery } from "react-query";
+import axios from "axios";
+import fecthExercises  from "../src/fetchers/exercise";
+
+
 
 export default function ExercisePage() {
-  // () => exerciseHandler(Exercises, Exercises);
-  const allowedOrigins = ["http://localhost:7257"];
+  const {isLoading, data, isError, error } = useQuery(
+    'exerciseKey', 
+    fecthExercises,
+     {
+    //   cacheTime: 50000, // Default is 5 minuts
+    //   staleTime: 30000, // If we don't need update much and first update after 30 seconds
+    //   refetchOnMount: false, // Will no opdate when page is called
+    //   refetchInterval: 2000, // the query will automatic refresh every 2 seconds
+    //   refetchIntervalInBackground: true, // will update automatic in background
+       refetchOnWindowFocus: true // Every time your tab loose focus and we gain it again it updates
+                                  // In other words list will automated update when change in db
+     } 
+  )
+  
 
-  const fetcher = (url: string) =>
-    fetch("https://localhost:7257").then((res) => res.json());
+  if (isLoading) {
+    return <h2>Loading...</h2>
+  }
 
-  //const urlstring = (url: string) => fetch(url).then((res) => res.json());
-  // Add a list of allowed origins.
-  // If you have more origins you would like to add, you can add them to the array below.
+  if (isError){
+    return <h2>{error.message}</h2>
+  }
 
-  const { data, error } = useSwr<Exercise[]>("/api/exercises", fetcher);
-
-  if (error) return <div>Failed to load exercises</div>;
-  if (!data) return <div>Loading...</div>;
 
   return (
     <div>
-      <ul>
-        {data.map((exercise) => (
-          <li key={exercise.id}>
-            <Link href="/user/[id]" as={`/user/${exercise.id}`} legacyBehavior>
-              {`User ${exercise.id}`}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <h2>Exercises</h2>
+      {data?.data.map(exercise =>{
+        return <div key={exercise.name}>{exercise.name} </div> 
+        })}
     </div>
   );
 }
 
+
+{/* <ul>
+{data.map((exercise) => (
+  <li key={exercise.id}>
+    <Link href="/user/[id]" as={`/user/${exercise.id}`} legacyBehavior>
+      {`User ${exercise.id}`}
+    </Link>
+  </li>
+))}
+</ul> */}
 // export const getStaticExercises = async () => {
 //     const res = await fetch($`{server}/api/Exercise`)
 //     const exercises = await res.json()
