@@ -17,9 +17,9 @@ const Exercises = ({ exercises }) => {
     <div>
     
       <h1>All Exercises</h1>
+
       
-      
-      </div>
+    </div>
     
   );
 }

@@ -3,17 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://localhost:3000/Exercise/Full");
-
-                      });
-});
 
 // Add to fix circular reference problem with JSON serialization
 builder.Services.AddControllers().AddJsonOptions(x =>
@@ -21,7 +10,6 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConxStr") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
-
 
 //builder.Services.AddDbContext<DataContext>(options =>
 //    options.UseInMemoryDatabase("InMemoryDb"));
@@ -44,10 +32,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
 app.UseHttpsRedirection();
-
-app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
