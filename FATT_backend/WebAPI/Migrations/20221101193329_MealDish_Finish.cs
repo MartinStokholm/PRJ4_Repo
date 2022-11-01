@@ -4,7 +4,7 @@
 
 namespace WebAPI.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class MealDish_Finish : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,6 +25,23 @@ namespace WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dishes",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NutritionalValue = table.Column<double>(type: "float", nullable: true),
+                    Recipe = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ingredients = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dishes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,9 +70,9 @@ namespace WebAPI.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NutritunalValue = table.Column<double>(type: "float", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,26 +94,27 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dishes",
+                name: "DishMeal",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NutritunalValue = table.Column<double>(type: "float", nullable: false),
-                    Recipe = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ingredients = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MealId = table.Column<long>(type: "bigint", nullable: true)
+                    DishesId = table.Column<long>(type: "bigint", nullable: false),
+                    MealsId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Dishes", x => x.Id);
+                    table.PrimaryKey("PK_DishMeal", x => new { x.DishesId, x.MealsId });
                     table.ForeignKey(
-                        name: "FK_Dishes_Meals_MealId",
-                        column: x => x.MealId,
+                        name: "FK_DishMeal_Dishes_DishesId",
+                        column: x => x.DishesId,
+                        principalTable: "Dishes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DishMeal_Meals_MealsId",
+                        column: x => x.MealsId,
                         principalTable: "Meals",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,9 +142,9 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dishes_MealId",
-                table: "Dishes",
-                column: "MealId");
+                name: "IX_DishMeal_MealsId",
+                table: "DishMeal",
+                column: "MealsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExerciseWorkout_WorkoutsId",
@@ -140,10 +158,13 @@ namespace WebAPI.Migrations
                 name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "Dishes");
+                name: "DishMeal");
 
             migrationBuilder.DropTable(
                 name: "ExerciseWorkout");
+
+            migrationBuilder.DropTable(
+                name: "Dishes");
 
             migrationBuilder.DropTable(
                 name: "Meals");

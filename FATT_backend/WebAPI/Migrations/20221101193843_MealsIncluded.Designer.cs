@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221031133503_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221101193843_MealsIncluded")]
+    partial class MealsIncluded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,21 @@ namespace WebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("DishMeal", b =>
+                {
+                    b.Property<long>("DishesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("MealsId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("DishesId", "MealsId");
+
+                    b.HasIndex("MealsId");
+
+                    b.ToTable("DishMeal");
+                });
 
             modelBuilder.Entity("ExerciseWorkout", b =>
                 {
@@ -86,30 +101,25 @@ namespace WebAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ingredients")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("MealId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double>("NutritunalValue")
+                    b.Property<double?>("NutritionalValue")
                         .HasColumnType("float");
 
                     b.Property<string>("PicturePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Recipe")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MealId");
 
                     b.ToTable("Dishes");
                 });
@@ -168,15 +178,14 @@ namespace WebAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("NutritunalValue")
-                        .HasColumnType("float");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -204,6 +213,21 @@ namespace WebAPI.Migrations
                     b.ToTable("Workouts");
                 });
 
+            modelBuilder.Entity("DishMeal", b =>
+                {
+                    b.HasOne("WebAPI.Models.Dish", null)
+                        .WithMany()
+                        .HasForeignKey("DishesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Models.Meal", null)
+                        .WithMany()
+                        .HasForeignKey("MealsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ExerciseWorkout", b =>
                 {
                     b.HasOne("WebAPI.Models.Exercise", null)
@@ -217,18 +241,6 @@ namespace WebAPI.Migrations
                         .HasForeignKey("WorkoutsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("WebAPI.Models.Dish", b =>
-                {
-                    b.HasOne("WebAPI.Models.Meal", null)
-                        .WithMany("Dishes")
-                        .HasForeignKey("MealId");
-                });
-
-            modelBuilder.Entity("WebAPI.Models.Meal", b =>
-                {
-                    b.Navigation("Dishes");
                 });
 #pragma warning restore 612, 618
         }
