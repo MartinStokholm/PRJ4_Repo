@@ -1,0 +1,64 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Work Sans', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+
+
+
+
+.nav__menu-list{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 60px;
+  width: 288px;
+  row-gap: 24px;
+  right: -288px;
+  padding: 24px 16px;
+  transition: all 0.2s;
+  min-height: calc(100vh - 60px);
+  background-color: #f1f1f1;
+}
+
+.nav__menu-list.active{
+  right: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .nav__menu-list{
+    position: unset;
+    flex-direction: row;
+    min-height: fit-content;
+    width: fit-content;
+    column-gap: 24px;
+    align-items: center;
+  }
+
+}
