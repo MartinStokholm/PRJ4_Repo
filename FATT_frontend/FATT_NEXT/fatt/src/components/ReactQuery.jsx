@@ -1,16 +1,18 @@
-import {QueryClient, useQuery} from "@tanstack/react-query";
+import {QueryClient, useQuery} from "react-query";
 import axios from "axios";
 import { useEffect } from "react";
 import { fetchWorkouts } from "../fetchers/workout"
 // import { Account } from "../../interfaces/Account";
 
-export function ReactQuery(){
+export  function ReactQuery(){
     console.log("Render");
 
     const {isError, isSuccess, isLoading, data, error} = useQuery(
-        ["workout"], 
+        'exercisesKey',  
         fetchWorkouts, 
-        {staleTime: 60000}
+        {
+            staleTime: 60000
+        }
     );
 
     useEffect(() => {
@@ -18,18 +20,20 @@ export function ReactQuery(){
     }, []);
     
     if (isLoading) {
-        console.log("Loading");
-        return <div>Loading...</div>;
-    }
+        return <h2>Loading...</h2>;
+      }
     
-    if (isError) {
-        console.log("Error; ", error);
-        return <div>Error</div>;
-    }
-
-    return (
+      if (isError) {
+        return <h2>{error.message}</h2>;
+      }
+    
+      return (
         <div>
-            {data && data.map((workout) =>  <Account key={workout.id} workout={workout} />) }
+          <h2>Exercises</h2>
+          {data?.data.map((exercise) => {
+            return <div key={exercise.name}>{exercise.name} </div>;
+          })}
         </div>
-    )
+      );
 }
+// {data?.data && data?.data.map((workout) =>  <workout key={workout.id} workout={workout} />) }

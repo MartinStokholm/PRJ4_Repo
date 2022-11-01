@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serve-json": "json-server --watch db.json --port 4000 ",
+    "server-json": "json-server --watch db.json --port 4000 ",
     "install": "npm install axios && npm install react-query"
   },
   "dependencies": {
