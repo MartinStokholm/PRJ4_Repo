@@ -6,12 +6,12 @@ namespace WebAPI.Dto.Dish;
 public class DishMealNames
 {
     public long Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = "";
     public string? Category { get; set; }
     public double? NutritionalValue { get; set; }
     public string? Recipe { get; set; }
     public string? Ingredients { get; set; }
 
     public string? PicturePath { get; set; }
-    public List<MealJustName> Meals { get; set; }
+    public List<MealJustName> Meals { get; set; } = new();
 }

@@ -94,27 +94,21 @@ namespace WebAPI.Controllers
 
             _context.Dishes.Add(dishModel.Adapt<Dish>());
             await _context.SaveChangesAsync();
-<<<<<<< HEAD
-            var created = _context.DishModels.FirstOrDefault(d =>
-                d.Id == _context.DishModels.Max(i => i.Id));
-            return Accepted(created);
-=======
 
-            return CreatedAtAction("GetDishModel",dishModel.Adapt<Dish>());
->>>>>>> da81d67a095b70ba7263e3b1b47dabfa5cfdcea0
+            var created = _context.Dishes.FirstOrDefault(d =>
+                d.Id == _context.Dishes.Max(i => i.Id));
+            return Accepted(created);
         }
 
         /* DELETE requests */
 
         // DELETE: api/DishModels/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDishModel(int id)
+        public async Task<IActionResult> DeleteDishModel(long id)
         {
-<<<<<<< HEAD
-            var dishModel = await _context.DishModels.FindAsync((long)id);
-=======
+
             var dishModel = await _context.Dishes.FindAsync(id);
->>>>>>> da81d67a095b70ba7263e3b1b47dabfa5cfdcea0
+
             if (dishModel == null)
             {
                 return NotFound();
@@ -126,7 +120,7 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        private bool DishModelExists(int id)
+        private bool DishModelExists(long id)
         {
             return _context.Dishes.Any(e => e.Id == id);
         }

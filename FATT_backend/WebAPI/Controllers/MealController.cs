@@ -25,9 +25,9 @@ namespace WebAPI.Controllers
 
         // GET: api/Meal
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MealModel>>> GetMeals()
+        public async Task<ActionResult<IEnumerable<Meal>>> GetMeals()
         {
-            return await _context.MealModels.ToListAsync();
+            return await _context.Meals.ToListAsync();
         }
 
 
@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<MealNameWDishes>> GetMeal(long id)
         {
-            var meal = await _context.MealModels.FindAsync(id);
+            var meal = await _context.Meals.FindAsync(id);
 
             if (meal == null)
             {
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}/Dishes")]
         public async Task<ActionResult<IEnumerable<DishWThumbnail>>> GetDishes(long id)
         {
-            var meal = await _context.MealModels.FindAsync(id);
+            var meal = await _context.Meals.FindAsync(id);
 
             if (meal == null)
             {
@@ -85,7 +85,7 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMeal(long id, MealSimple meal)
         {
-            var found = await _context.MealModels.FindAsync(id);
+            var found = await _context.Meals.FindAsync(id);
             if (found == null)
             {
                 return BadRequest("Couldn't find Meal with specified id");
@@ -118,7 +118,7 @@ namespace WebAPI.Controllers
         [HttpPut("{mealId}/AddDish/{dishId}")]
         public async Task<IActionResult> PutAddDish(long mealId, long dishId)
         {
-            var meal = (from m in _context.MealModels
+            var meal = (from m in _context.Meals
                 where m.Id == mealId
                 select m).Include(m => m.Dishes)
                 .FirstOrDefault();
@@ -132,7 +132,7 @@ namespace WebAPI.Controllers
                 return BadRequest("Meal already contains specified Dish");
             }
 
-            var dish = _context.DishModels.FirstOrDefault(d => d.Id == dishId);
+            var dish = _context.Dishes.FirstOrDefault(d => d.Id == dishId);
 
             if (dish == null)
             {
@@ -163,7 +163,7 @@ namespace WebAPI.Controllers
         [HttpPut("{mealId}/RemoveDish/{dishId}")]
         public async Task<IActionResult> PutRemoveDish(long mealId, long dishId)
         {
-            var meal = (from m in _context.MealModels select m)
+            var meal = (from m in _context.Meals select m)
                 .Include(m => m.Dishes)
                 .FirstOrDefault(meal => meal.Id == mealId);
 
@@ -201,12 +201,12 @@ namespace WebAPI.Controllers
 
         // POST: api/Meal
         [HttpPost]
-        public async Task<ActionResult<MealModel>> PostMeal(MealSimple meal)
+        public async Task<ActionResult<Meal>> PostMeal(MealSimple meal)
         {
 
-            var added = _context.MealModels.Add(meal.Adapt<MealModel>());
+            var added = _context.Meals.Add(meal.Adapt<Meal>());
             await _context.SaveChangesAsync();
-            var created = _context.MealModels.FirstOrDefault(m => m.Id == added.Entity.Id);
+            var created = _context.Meals.FirstOrDefault(m => m.Id == added.Entity.Id);
             return Accepted(created);
         }
 
@@ -216,21 +216,21 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMeal(long id)
         {
-            var mealModel = await _context.MealModels.FindAsync(id);
+            var mealModel = await _context.Meals.FindAsync(id);
             if (mealModel == null)
             {
                 return NotFound();
             }
 
-            _context.MealModels.Remove(mealModel);
+            _context.Meals.Remove(mealModel);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool MealModelExists(int id)
+        private bool MealModelExists(long id)
         {
-            return _context.MealModels.Any(e => e.Id == id);
+            return _context.Meals.Any(e => e.Id == id);
         }
     }
 }
