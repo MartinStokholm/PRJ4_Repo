@@ -1,20 +1,27 @@
 
-export const getStaticPosts = async () => {
+export const getStaticProps = async () => {
 
-  const res = await fetch('https://jsonplaceholder.typicode.com/users')
+  const res = await fetch('https://localhost:7257/api/Exercise/Full')
   const data = await res.json()
 
   return { 
-    props: { ninjas: data } 
+    props: { exercises: data } 
   }
 
 }
+const Exercises = ({ exercises }) => {
+  console.log(exercises)
 
-const exercises = ( {ninjas} ) => {
-  console.log(ninjas)
   return (
+    
     <div>
-      <h2>List of exercises</h2>
-    </div>
-)}
-export default exercises
+    
+      <h1>All Exercises</h1>
+      
+      
+      </div>
+    
+  );
+}
+
+export default Exercises

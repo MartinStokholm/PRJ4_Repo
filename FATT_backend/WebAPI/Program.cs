@@ -3,7 +3,17 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:3000/Exercise/Full");
+                                              
+                      });
+});
 
 // Add to fix circular reference problem with JSON serialization
 builder.Services.AddControllers().AddJsonOptions(x =>
@@ -33,6 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

@@ -29,3 +29,7 @@
   margin-right: 10px;
   display: flex;
 }
+
+.active {
+  color: #fff;
+}
