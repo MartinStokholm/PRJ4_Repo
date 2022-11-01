@@ -7,7 +7,24 @@
         // What is meal category???
         public string? Category { get; set; }
         public string? Description { get; set; }
-        public double NutritionalValue { get; set; }
+
+        // No set, get value from dishes
+        public double NutritionalValue
+        {
+            get
+            {
+                double total = 0;
+                foreach (var d in Dishes)
+                {
+                    if (d.NutritionalValue != null)
+                    {
+                        total +=(double)d.NutritionalValue;
+                    }
+                }
+                return total;
+            }
+        }
+
         public List<DishModel> Dishes { get; set; } = new List<DishModel>();
     }
 }

@@ -80,6 +80,7 @@ namespace WebAPI.Controllers
 
         /* PUT requests */
 
+        // Change Name, Category or Description
         // PUT: api/MealModels/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMeal(long id, MealSimple meal)
@@ -90,7 +91,10 @@ namespace WebAPI.Controllers
                 return BadRequest("Couldn't find Meal with specified id");
             }
 
-            found = meal.Adapt<MealModel>();
+            _context.Entry(found)
+                .CurrentValues
+                .SetValues(meal);
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -197,28 +201,14 @@ namespace WebAPI.Controllers
 
         // POST: api/Meal
         [HttpPost]
-        public async Task<ActionResult<MealModel>> PostMeal(MealNameWDishes meal)
+        public async Task<ActionResult<MealModel>> PostMeal(MealSimple meal)
         {
 
-            _context.MealModels.Add(meal.Adapt<MealModel>());
+            var added = _context.MealModels.Add(meal.Adapt<MealModel>());
             await _context.SaveChangesAsync();
-            var created = _context.MealModels.FirstOrDefault(m => m.Id == _context.MealModels.Max(i => meal.Id));
+            var created = _context.MealModels.FirstOrDefault(m => m.Id == added.Entity.Id);
             return Accepted(created);
         }
-
-        // POST: api/Meal/Simple
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("Simple")]
-        public async Task<ActionResult<MealModel>> PostMealSimple(MealSimple meal)
-        {
-
-            _context.MealModels.Add(meal.Adapt<MealModel>());
-            await _context.SaveChangesAsync();
-            var created = _context.MealModels.FirstOrDefault(m => m.Id == _context.MealModels.Max(i => i.Id));
-            return Accepted(created);
-        }
-
-
 
         /* DELETE */
 

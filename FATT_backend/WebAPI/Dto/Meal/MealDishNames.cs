@@ -7,8 +7,8 @@ public class MealDishNames
 {
     public long Id { get; set; }
     public string Name { get; set; }
-    public string Category { get; set; }
-    public string Description { get; set; }
-    public double NutritionalValue { get; set; }
-    public List<DishJustName> Dishes { get; set; } = new List<DishJustName>();
+    public string? Category { get; set; }
+    public string? Description { get; set; }
+    public double? NutritionalValue { get; set;}
+    public List<MealJustName> Dishes { get; set; } = new List<MealJustName>();
 }
