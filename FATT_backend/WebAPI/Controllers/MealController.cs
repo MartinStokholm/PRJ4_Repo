@@ -82,24 +82,15 @@ namespace WebAPI.Controllers
 
         // PUT: api/MealModels/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(long id, MealNameWDishes meal)
+        public async Task<IActionResult> PutMeal(long id, MealSimple meal)
         {
             var found = await _context.MealModels.FindAsync(id);
             if (found == null)
             {
                 return BadRequest("Couldn't find Meal with specified id");
             }
-            _context.Entry(found).
-                Collection(m => m.Dishes)
-                .Load();
-            found.Name = meal.Name;
-            found.Dishes.Clear();
-            foreach (var d in meal.Dishes)
-            {
-                found.Dishes.Add(meal.Dishes.Adapt<DishModel>());
-            }
-            
 
+            found = meal.Adapt<MealModel>();
             try
             {
                 await _context.SaveChangesAsync();
@@ -123,27 +114,67 @@ namespace WebAPI.Controllers
         [HttpPut("{mealId}/AddDish/{dishId}")]
         public async Task<IActionResult> PutAddDish(long mealId, long dishId)
         {
-            var meal = await _context.MealModels.FindAsync(mealId);
-            var dish = await _context.DishModels.FindAsync(dishId);
-            if (meal == null || dish == null)
+            var meal = (from m in _context.MealModels
+                where m.Id == mealId
+                select m).Include(m => m.Dishes)
+                .FirstOrDefault();
+
+            if (meal == null)
+                return BadRequest("Couldn't find Meal with specified id");
+
+            var dishInMeal = meal.Dishes.FirstOrDefault(d => d.Id == dishId);
+            if (dishInMeal != null)
             {
-                if(meal == null)
-                    return BadRequest("Couldn't find Meal with specified id");
-                return BadRequest("Couldn't find Dish with specified id");
+                return BadRequest("Meal already contains specified Dish");
             }
 
-            _context.Entry(meal)
-                .Collection(m => m.Dishes)
-                .Load();
-            _context.Entry(dish)
-                .Collection(d => d.Meals)
-                .Load();
+            var dish = _context.DishModels.FirstOrDefault(d => d.Id == dishId);
 
-            if(!meal.Dishes.Contains(dish))
-                meal.Dishes.Add(dish);
+            if (dish == null)
+            {
+                return BadRequest("Dish does not exist in database");
+            }
 
             try
             {
+                meal.Dishes.Add(dish);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MealModelExists((int)mealId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // PUT: api/Meal/1/RemoveDish/5
+        [HttpPut("{mealId}/RemoveDish/{dishId}")]
+        public async Task<IActionResult> PutRemoveDish(long mealId, long dishId)
+        {
+            var meal = (from m in _context.MealModels select m)
+                .Include(m => m.Dishes)
+                .FirstOrDefault(meal => meal.Id == mealId);
+
+            if (meal == null)
+                return BadRequest("Couldn't find Meal with specified id");
+
+            var dish = meal.Dishes.FirstOrDefault(d => d.Id == dishId);
+            if (dish == null)
+            {
+                return BadRequest("Meal does not contain specified Dish");
+            }
+
+            try
+            {
+                meal.Dishes.Remove(dish);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

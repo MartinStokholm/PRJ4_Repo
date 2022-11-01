@@ -60,8 +60,10 @@ namespace WebAPI.Controllers
             {
                 return BadRequest("Couldn't find Dish with specified id");
             }
-
-            found.Adapt(dish);
+            
+            _context.Entry(found)
+                .CurrentValues
+                .SetValues(dish);
 
             try
             {
