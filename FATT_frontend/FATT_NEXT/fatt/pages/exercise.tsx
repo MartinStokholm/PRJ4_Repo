@@ -1,6 +1,6 @@
 // import Exercises from '../../interfaces/Exercises';
 import exerciseHandler from "./api/exercise/[id]";
-import HeadComponent from "../src/components/HeadComponent";
+import HeadComponent from "../src/components/Meta";
 import Image from "next/image";
 import Link from "next/link";
 import type { Exercise } from "../interfaces/Exercises";

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import styles from "../../styles/Header.module.css";
+import styles from "../../styles/Nav.module.css";
 // import Logo from "./Logo";
 import { MENULIST } from "../utils/Menu-List";
 import NavItem from "./NavItem";

@@ -1,22 +1,22 @@
 import styles from "../../styles/Layout.module.css";
 
-import HeadComponent from "./HeadComponent";
+import Meta from "./Meta";
 import Footer from "./Footer";
-import NavBar from "./Header";
+import Nav from "./Nav";
 
 const Layout = ({ children }) => {
   return (
     <>
-      <div className={styles.container}>
-        {/* <HeadComponent title={"FATT"} /> */}
-        <NavBar />
-
+      
+        <Meta />
+        <Nav />
+        <div className={styles.container}>
         <main className={styles.main}>
           {children}
         </main>
-
-        <Footer />
-      </div>
+        </div>
+        {/* <Footer /> */}
+      
     </>
   );
 };
