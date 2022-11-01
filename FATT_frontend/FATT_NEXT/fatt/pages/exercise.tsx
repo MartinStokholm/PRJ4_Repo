@@ -11,9 +11,6 @@ export default function ExercisePage() {
   // () => exerciseHandler(Exercises, Exercises);
   const allowedOrigins = ["http://localhost:7257"];
 
-  const options: cors.CorsOptions = {
-    origin: allowedOrigins,
-  };
   const fetcher = (url: string) =>
     fetch("https://localhost:7257").then((res) => res.json());
 
