@@ -1,0 +1,52 @@
+[
+    {
+        "name" : "Full-body 1",
+        "duration" : "1.5h-2h",
+        "exercisesIds" : [1, 4, 6, 12, 15, 16, 18]
+    },
+    {
+        "name" : "Full-body 2",
+        "duration" : "1.5h-2h",
+        "exercisesIds" : [2, 3, 10, 13, 19, 20, 22]
+    },
+    {
+        "name" : "Upper-body",
+        "duration" : "1.5h-2h",
+        "exercisesIds" : [3, 5, 11, 12, 14, 16, 18]
+    },
+    {
+        "name" : "Lower-body",
+        "duration" : "1h-1.5h",
+        "exercisesIds" : [2, 7, 8, 9, 22]
+    },
+    {
+        "name" : "Push",
+        "duration" : "1h-1.5h",
+        "exercisesIds" : [3, 4, 6, 13, 17]
+    },
+    {
+        "name" : "Pull",
+        "duration" : "1h-1.5h",
+        "exercisesIds" : [1, 10, 11, 12, 16]
+    },
+    {
+        "name" : "Compound",
+        "duration" : "1.5h-2h",
+        "exercisesIds" : [1, 2, 3, 12, 13]
+    },
+    {
+        "name" : "Isolation",
+        "duration" : "1h-1.5h",
+        "exercisesIds" : [5, 8, 9, 15, 16, 17]
+    },
+    {
+        "name" : "Core",
+        "duration" : "30m-1h",
+        "exercisesIds" : [1, 18, 19, 20]
+    },
+    {
+        "name" : "Cardio",
+        "duration" : "30m-1h",
+        "exercisesIds" : [22, 21]
+    }
+]

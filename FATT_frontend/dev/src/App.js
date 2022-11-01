@@ -1,45 +1,31 @@
-import React, { Component } from'react'
-import axios from 'axios'
-export default class App extends Component{
-  constructor(props){
-  super(props)
-  this.state={
-    imageUrl:"",
-  }
-   }
-componentDidMount(){
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-  this.callApi()
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Error from "./components/Error";
+import PostDetails from "./components/posts/PostDetails";
+import CreatePost from "./components/posts/CreatePost";
+import Register from "./components/posts/Register";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Header />
+        <main className="container">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/post/:id" component={PostDetails} />
+            <Route path="/create" component={CreatePost} />
+            <Route path="/Register" component={Register} />
+            <Route path="*" component={Error} />
+          </Switch>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
 }
 
-  callApi= ()=>{
-axios.get("https://api.thecatapi.com/v1/images/search")
-.then((response) => {
-console.log(response.data[0].url)
-this.setState({ imageUrl: response.data[0].url})
-})
-  }
-render() {
-
-
-return(
-
-<div>
-Hi!!! 
-<img src={this.state.imageUrl} alt="cat" width="1000" heiht= "1000" />
-</div>
-) 
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
+export default App;

@@ -2,8 +2,8 @@
 {
     public class ExerciseThumbnail
     {
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public string PicturePath { get; set; }
+        public string Name { get; set; } = ""; 
+        public string Category { get; set; } = "";
+        public string PicturePath { get; set; } = "";
     }
 }
