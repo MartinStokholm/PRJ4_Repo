@@ -6,9 +6,8 @@ import Nav from "./Nav";
 
 const Layout = ({ children }) => {
   return (
-    <>
-      
-        <Meta />
+    <> 
+        <Meta/>
         <Nav />
         <div className={styles.container}>
         <main className={styles.main}>
