@@ -14,7 +14,10 @@ builder.Services.AddDbContext<DataContext>(options =>
 //builder.Services.AddDbContext<DataContext>(options =>
 //    options.UseInMemoryDatabase("InMemoryDb"));
 
+
 // Add services to the container.
+
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
