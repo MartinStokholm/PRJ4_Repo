@@ -2,10 +2,10 @@
 import { useQuery } from "react-query";
 import fecthExercise from "../fetchers/exercise";
 
-export const useExerciseData = (heroId, onSuccess, onError) => {
+export const useExerciseData = (id, onSuccess, onError) => {
     return useQuery(
-      [`exerciseKey`, heroId], 
-      () => fecthExercise(heroId), 
+      [`exerciseKey`, id], 
+      () => fecthExercise(id), 
       { 
         refetchOnWindowFocus: true, 
         onSuccess,
