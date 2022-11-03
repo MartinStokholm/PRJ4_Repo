@@ -71,7 +71,7 @@ const NavBar = () => {
                 setActiveIdx(idx);
                 setNavActive(false);
               }}
-              key={menu.text}
+              key={menu.path}
             >
               <NavItem active={activeIdx === idx} {...menu} />
             </div>

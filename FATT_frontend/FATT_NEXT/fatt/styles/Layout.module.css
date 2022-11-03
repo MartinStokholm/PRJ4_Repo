@@ -4,17 +4,15 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+
 }
 
 .main {
   min-height: 100vh;
-  padding: 45rem 0;
-  flex: 1;
+  flex: 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
   font-size: 1.25rem;
 }
 

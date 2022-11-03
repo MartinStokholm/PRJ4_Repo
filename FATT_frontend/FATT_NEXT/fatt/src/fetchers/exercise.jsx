@@ -1,9 +1,10 @@
 import axios from "axios";
-import { server } from "../../config/server"
+import { server } from "../../config/config"
 
- const  fecthExercises = async () => {
-    console.log(`${server}exercise`)
-    return await axios.get(`${server}exercise`)
+
+  const fetchExercise = async (id)=> {
+    console.log(`${server}exercise/${id}`)
+    return await axios.get(`${server}exercise/${id}`)
   }
 
-  export default fecthExercises;
+  export default fetchExercise;

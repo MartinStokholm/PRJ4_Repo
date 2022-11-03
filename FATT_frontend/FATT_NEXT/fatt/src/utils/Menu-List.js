@@ -22,6 +22,12 @@ export const MENULIST = [
   {
     text: "Exercise",
     href: "/exercise",
+    children: [
+      {
+        text: "Exercise",
+        href: "exercise[id]/:exerciseId",
+      },
+    ],
   },
   {
     text: "Settings",

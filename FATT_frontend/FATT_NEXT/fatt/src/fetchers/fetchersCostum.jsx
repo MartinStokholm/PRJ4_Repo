@@ -1,5 +1,5 @@
 import axios from "axios";
-import { server } from "../../config/server"
+import { server } from "../../config/config"
 import PropTypes from 'prop-types';
 
 const fecth = ({type}) => {

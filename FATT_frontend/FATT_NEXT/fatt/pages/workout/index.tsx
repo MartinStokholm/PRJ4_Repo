@@ -2,15 +2,13 @@ import Image from "next/image";
 import { ReactQuery } from "../src/components/ReactQuery";
 import { useQuery } from "react-query";
 import fecthWorkouts from "../src/fetchers/workout";
+import {useWorkoutsData} from "../src/hooks/useWorkoutsData";
+
+
 
 export default function Workout() {
-  const { isLoading, data, isError, error } = useQuery(
-    "workoutsKey",
-    fecthWorkouts,
-    {
-      refetchOnWindowFocus: true,
-    }
-  );
+  const { isLoading, data, isError, error } = 
+    useWorkoutsData()
 
   if (isLoading) {
     return <h2>Loading</h2>;

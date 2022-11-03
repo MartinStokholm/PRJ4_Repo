@@ -1,5 +1,6 @@
 { "exercise": [
     {
+        "id" : 1,
         "name" : "Deadlift",
         "Category" : "Back",
         "Intensity" : "High",
@@ -10,6 +11,7 @@
         "VideoPath" : "https://youtu.be/wjsu6ceEkAQ"
     },
     {
+        "id" : 2,
         "name" : "Back Squat",
         "Category" : "Legs",
         "Intensity" : "High",
@@ -20,6 +22,7 @@
         "VideoPath" : "https://youtu.be/R2dMsNhN3DE"
     },
     {
+        "id" : 3,
         "name" : "Bench Press",
         "Category" : "Chest",
         "Intensity" : "High",

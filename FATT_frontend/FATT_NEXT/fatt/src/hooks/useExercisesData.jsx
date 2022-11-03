@@ -1,20 +1,20 @@
 
 import { useQuery } from "react-query";
-import fecthExercises from "../fetchers/exercise";
+import fecthExercises from "../fetchers/exercises";
 
 export const useExercisesData = (onSuccess, onError) => {
     return useQuery(
-      "exerciseKey", 
+      "exercisesKey", 
       fecthExercises, 
       { 
         enabled: false, 
         refetchOnWindowFocus: true, 
         onSuccess,
         onError,
-        select: (data) => {
-          const exerciseName = data.data.map((exercise) => exercise.name);
-          return exerciseName;
-        },
+        // select: (data) => {
+        //   const exerciseName = data.data.map((exercise) => exercise.name);
+        //   return exerciseName;
+        // },
       }
     );
 }
