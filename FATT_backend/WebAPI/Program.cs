@@ -20,12 +20,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddJsonOptions(x =>
     x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+// builder.Services.AddDbContext<DataContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("myConxStr") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
+
+
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("myConxStr") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
+   options.UseInMemoryDatabase("InMemoryDb"));
 
-
-//builder.Services.AddDbContext<DataContext>(options =>
-//    options.UseInMemoryDatabase("InMemoryDb"));
 
 
 // Add services to the container.
