@@ -4,7 +4,7 @@
 
 namespace WebAPI.Migrations
 {
-    public partial class MealDish_Finish : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,7 @@ namespace WebAPI.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmailAdress = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -33,6 +33,7 @@ namespace WebAPI.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NutritionalValue = table.Column<double>(type: "float", nullable: true),
                     Recipe = table.Column<string>(type: "nvarchar(max)", nullable: true),

@@ -72,11 +72,11 @@ namespace WebAPI.Controllers
             return Ok(dbExercise.Adapt<List<ExerciseSimple>>());
         }
 
-        [HttpGet("Full")]
+        [HttpGet]
         public async Task<ActionResult<List<ExerciseFull>>> GetExerciseFull()
         {
             var dbExercise = await _context.Exercises.ToListAsync();
-
+            
             return Ok(dbExercise.Adapt<List<ExerciseFull>>());
         }
 
