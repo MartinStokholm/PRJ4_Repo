@@ -63,8 +63,17 @@ namespace WebAPI.Controllers
 
         }
 
+        [HttpPost("list")]
+        public async Task<ActionResult<List<Workout>>> PostWorkouts(List<WorkoutCreateNoIdDto> workouts)
+        {
+            var workoutsToAdd = workouts.Adapt<List<Workout>>();
+            await _context.Workouts.AddRangeAsync(workoutsToAdd);
+            await _context.SaveChangesAsync();
+            return workoutsToAdd.Adapt<List<Workout>>();
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreateNameNoid workoutCreate)
+        public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreateNoIdDto workoutCreate)
         {
             var dbWorkout = _context.Workouts.ToList().Find(w => w.Name == workoutCreate.Name);
             if (dbWorkout != null) { return Conflict($"Workout with name {workoutCreate.Name} already exists"); }

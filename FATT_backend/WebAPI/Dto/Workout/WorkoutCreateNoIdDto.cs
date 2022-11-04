@@ -2,8 +2,9 @@
 
 namespace WebAPI.Dto.Workout
 {
-    public class WorkoutCreateNameNoid
+    public class WorkoutCreateNoIdDto
     {
         public string Name { get; set; } = "";
+        public string Duration { get; set; } = "";
     }
 }
