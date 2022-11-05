@@ -2,7 +2,7 @@
 
 public class DishDtoNoId
 {
-    public string Name { get; set; } = "";
+    public string Name { get; set; }
     public string? Category { get; set; }
     public double? NutritionalValue { get; set; }
     public string? Recipe { get; set; }

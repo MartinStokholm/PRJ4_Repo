@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
 
             DishMealNames ret = dish.Adapt<DishMealNames>();
 
-            return ret;
+            return Ok(ret);
         }
 
         // PUT: api/DishModels/5
