@@ -88,7 +88,7 @@ namespace APIUnitTesting
 
         /* POST tests */
         [Test]
-        public async Task TestPostCorrect_ResultAccepted()
+        public async Task TestPostCorrect_StatusCode202()
         {
             var data = _correctData;
             var response = await _controller.PostDishModel(data);
