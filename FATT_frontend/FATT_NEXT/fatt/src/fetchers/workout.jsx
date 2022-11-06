@@ -1,8 +1,8 @@
 import axios from "axios";
 import { server } from "../../config/config"
 
- const fecthWorkouts = () => {
+const fecthWorkouts = () => {
     return axios.get(`${server}workout`)
-  }
+}
 
-  export default fecthWorkouts;
+export default fecthWorkouts;

@@ -1,9 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
 import Button from "../../src/components/Button";
+import ExerciseList from "../../src/components/ExerciseList";
 import {useExercisesData} from "../../src/hooks/useExercisesData";
-
-import styles from '../../styles/Layout.module.css'
 
 const onSuccess = (data) => {
   console.log("Perform side effect after data fetching", data);
@@ -24,28 +21,13 @@ export default function ExercisePage() {
   if (isError) {
     return <h2>{error.message}</h2>;
   }
-
   return (
-    <div className={styles.grid}>
-      <h2>Exercises</h2>
+    <div>
+      
       <Button text={"Get exercise"} onClick={refetch} />
-      {data?.data.map((exercise) => {
-        return <div key={exercise.id} className={styles.card}>
-          { <Link href={{
-                        pathname:`/exercise/${exercise.id}`,
-                        // query: {id: `${exercise.id}`}
-                      }} key={exercise.id}
-                        
-          >
-                        {exercise.name}
-                        
-          </Link> }
-          {/* <Link  to={`/exercise/${exercise.id}`}>{exercise.name}</Link> */}
-          </div>;
-      })}
-      {/* {data?.map((exerciseName) => {
-        return <div key={exerciseName}>{exerciseName} </div>;
-      })} */}
+
+      <ExerciseList data={data} />
+
     </div>
   );
 }

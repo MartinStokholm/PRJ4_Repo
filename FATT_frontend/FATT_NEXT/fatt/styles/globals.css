@@ -11,12 +11,13 @@ a {
   text-decoration: none;
 }
 
+
 * {
   margin: 0;
   padding: 0;
   outline: none;
   box-sizing: border-box;
-  font-family: 'Work Sans', sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,13 +26,10 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: rgb(184,229,233);
+    background: linear-gradient(90deg, rgba(184,229,233,1) 0%, rgba(89,190,71,1) 35%, rgba(102,199,218,1) 100%);
   }
 }
-
-
-
-
 
 .nav__menu-list{
   display: flex;

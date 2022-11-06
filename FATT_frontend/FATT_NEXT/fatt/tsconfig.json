@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/components/Layout.jsx", "pages/exercise.js"  ],
+, "src/components/Layout.jsx", "pages/exercise.js", "src/components/ExerciseItem.jsx"  ],
   "exclude": [
     "node_modules"
   ]

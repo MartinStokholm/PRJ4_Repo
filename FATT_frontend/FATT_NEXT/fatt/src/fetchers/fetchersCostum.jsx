@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 const fecth = ({type}) => {
     return axios.get(`${server}type`)
-  }
+}
 
-  export default fecth;
+export default fecth;
 
-  fecth.propType = {
-    type: PropTypes.string.isRequired,
-  };
+fecth.propType = {
+  type: PropTypes.string.isRequired,
+};
