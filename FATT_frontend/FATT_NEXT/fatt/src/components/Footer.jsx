@@ -3,9 +3,7 @@ import { navLinks } from "../utils/footer-data";
 import styles from '../../styles/Footer.module.css'
 import Link from "next/link";
 
-
-
-export default  function Footer() {
+export default function Footer() {
     return (
         <footer className={styles.footer}>            
             <nav className={styles.footeBar}>

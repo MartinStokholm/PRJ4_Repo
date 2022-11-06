@@ -1,15 +1,9 @@
-// import Exercises from '../../interfaces/Exercises';
-import HeadComponent from "../../src/components/Meta";
 import Image from "next/image";
 import Link from "next/link";
-// import type { Exercise } from "../interfaces/Exercises";
-import { useQuery } from "react-query";
-import axios from "axios";
-import { useParams, useHref } from "react-router-dom" 
-import fecthExercises from "../../src/fetchers/exercise";
 import Button from "../../src/components/Button";
 import {useExercisesData} from "../../src/hooks/useExercisesData";
-import { useRouter } from 'next/router'
+
+import styles from '../../styles/Layout.module.css'
 
 const onSuccess = (data) => {
   console.log("Perform side effect after data fetching", data);
@@ -32,11 +26,11 @@ export default function ExercisePage() {
   }
 
   return (
-    <div>
+    <div className={styles.grid}>
       <h2>Exercises</h2>
       <Button text={"Get exercise"} onClick={refetch} />
       {data?.data.map((exercise) => {
-        return <div key={exercise.id}>
+        return <div key={exercise.id} className={styles.card}>
           { <Link href={{
                         pathname:`/exercise/${exercise.id}`,
                         // query: {id: `${exercise.id}`}
