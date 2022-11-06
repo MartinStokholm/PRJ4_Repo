@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import styles from "../../styles/Nav.module.css";
-// import Logo from "./Logo";
 import { MENULIST } from "../utils/Menu-List";
 import NavItem from "./NavItem";
 import Link from "next/link";
@@ -14,9 +13,7 @@ const NavBar = () => {
     <header>
       <nav className={styles.nav}>
         <Link href={"/"}>
-
-            <h1 className="logo">Logo</h1>
-
+            <Image src="/fatt-logo.png" alt="logo" width={100} height={100} />
         </Link>
         <div
           onClick={() => setNavActive(!navActive)}

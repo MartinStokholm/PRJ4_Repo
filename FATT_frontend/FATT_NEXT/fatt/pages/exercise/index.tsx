@@ -15,7 +15,7 @@ export default function ExercisePage() {
        useExercisesData (onSuccess, onError);
 
   if (isLoading || isFetching) {
-    return <h2>Loading...</h2>;
+    return <h2>Loading...</h2>
   }
 
   if (isError) {

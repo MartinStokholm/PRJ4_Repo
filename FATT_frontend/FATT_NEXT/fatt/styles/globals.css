@@ -44,7 +44,10 @@ a {
   min-height: calc(100vh - 60px);
   background-color: #f1f1f1;
 }
-
+.loading {
+  justify-content: center;
+  align-items: center;
+}
 .nav__menu-list.active{
   right: 0;
   

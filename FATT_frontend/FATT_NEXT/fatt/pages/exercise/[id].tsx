@@ -1,4 +1,3 @@
-
 import { useRouter } from "next/router"
 import { useExerciseData } from "../../src/hooks/useExerciseData";
 import ExerciseItem  from "../../src/components/ExerciseItem";
@@ -23,12 +22,11 @@ export default function ExercisePage() {
   const { isLoading, data, isError, error } = useExerciseData(id, onSuccess, onError);
 
   if (isLoading) {
-    return <h2>Loading...</h2>;
+    return <h2>Loading...</h2>
   }
 
   if (isError) {
     return <h2>{error.message}</h2>;
-    console.log(`log of id; ${data?.data.id}`)
   }
   
   return (
