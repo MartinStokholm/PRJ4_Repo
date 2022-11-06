@@ -1,0 +1,41 @@
+.title {
+    font-size: 4rem;
+}
+
+
+.container {
+    padding: 10%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.caption a {
+    color: #0070f3;
+    text-decoration: none;
+    
+  }
+  
+  .caption a:hover,
+  .caption a:focus,
+  .caption a:active {
+    text-decoration: underline;
+  }
+  
+  .caption {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 2rem;
+    padding: 10%;
+  }
+
+  @media (max-width: 400px) {
+    .caption {
+        display: block;
+    }
+  }
+ 
+
+  .description {
+    font-size: 1rem;
+  }
+

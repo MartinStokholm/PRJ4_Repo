@@ -1,15 +1,22 @@
-
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import fecthExercise from "../fetchers/exercise";
 
 export const useExerciseData = (id, onSuccess, onError) => {
-    return useQuery(
-      [`exerciseKey`, id], 
-      () => fecthExercise(id), 
-      { 
-        refetchOnWindowFocus: true, 
-        onSuccess,
-        onError,
+  const queryClient = useQueryClient();
+  return useQuery([`exerciseKey`, id], fecthExercise, {
+    initialData: () => {
+      const exercise = queryClient
+        .getQueriesData("exercisesKey")
+        ?.data?.find((exercise) => exercise.id === parseInt(id));
+
+      if (exercise) {
+        return { data: exercise };
+      } else {
+        return undefined;
       }
-    );
-}
+    },
+    refetchOnWindowFocus: true,
+    onSuccess,
+    onError,
+  });
+};
