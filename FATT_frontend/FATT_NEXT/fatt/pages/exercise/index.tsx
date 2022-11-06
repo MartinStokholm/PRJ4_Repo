@@ -22,12 +22,12 @@ export default function ExercisePage() {
     return <h2>{error.message}</h2>;
   }
   return (
-    <div>
+    <>
       
       <Button text={"Get exercise"} onClick={refetch} />
 
       <ExerciseList data={data} />
 
-    </div>
+    </>
   );
 }

@@ -15,7 +15,6 @@ export const useExerciseData = (id, onSuccess, onError) => {
         return undefined;
       }
     },
-    refetchOnWindowFocus: true,
     onSuccess,
     onError,
   });

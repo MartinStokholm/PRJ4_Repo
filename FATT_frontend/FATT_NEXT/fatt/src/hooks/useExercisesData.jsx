@@ -7,7 +7,6 @@ export const useExercisesData = (onSuccess, onError) => {
       "exercisesKey", 
       fecthExercises, 
       { 
-        refetchOnWindowFocus: true, 
         onSuccess,
         onError,
         // select: (data) => {
