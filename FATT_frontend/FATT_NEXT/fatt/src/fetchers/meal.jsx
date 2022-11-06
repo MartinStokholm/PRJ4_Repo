@@ -5,4 +5,4 @@ const fecthMeals = () => {
   return axios.get(`${server}meal`)
 }
 
-export default fecthWorkouts;
+export default fecthMeals;

@@ -1,4 +1,4 @@
-export default function MealsPage() {
+export default function DishesPage() {
   return (
     <>
       

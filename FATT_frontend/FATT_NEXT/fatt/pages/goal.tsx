@@ -1,5 +1,3 @@
-import Image from "next/image";
-
-export default function Goals() {
+export default function GoalsPage() {
   return <div></div>;
 }

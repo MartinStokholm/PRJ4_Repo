@@ -4,28 +4,38 @@ export const MENULIST = [
     href: "/",
   },
   {
-    text: "Workout",
+    text: "Workouts",
     href: "/workout",
   },
   {
-    text: "Diet",
-    href: "/diet",
+    text: "Meals",
+    href: "/meal",
   },
   {
     text: "Friends",
-    href: "/friends",
+    href: "/friend",
   },
   {
     text: "Goals",
-    href: "/goals",
+    href: "/goal",
   },
   {
-    text: "Exercise",
+    text: "Exercises",
     href: "/exercise",
     children: [
       {
         text: "Exercise",
         href: "exercise[id]/:exerciseId",
+      },
+    ],
+  },
+  {
+    text: "Dishes",
+    href: "/dish",
+    children: [
+      {
+        text: "Dishes",
+        href: "dish[id]/:dishId",
       },
     ],
   },

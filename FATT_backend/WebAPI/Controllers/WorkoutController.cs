@@ -27,14 +27,14 @@ namespace WebAPI.Controllers
             _context.Entry(dbWorkout)
                .Collection(w => w.Exercises)
                .Load();
-            
+
             foreach (var exercise in dbExercises)
             {
                 if (dbWorkout.Exercises.Contains(exercise)) { return Conflict("Exercise already exists in workout"); }
 
                 dbWorkout.Exercises.Add(exercise);
             }
-        
+
             await _context.SaveChangesAsync();
             return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFull>());
 
@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
         {
             var dbWorkout = _context.Workouts.ToList().Find(w => w.Name == workoutCreate.Name);
             if (dbWorkout != null) { return Conflict($"Workout with name {workoutCreate.Name} already exists"); }
-            
+
             var newWorkout = workoutCreate.Adapt<Workout>();
             _context.Workouts.Add(newWorkout);
             _context.SaveChanges();
@@ -91,7 +91,7 @@ namespace WebAPI.Controllers
         {
             var dbExercise = await _context.Exercises.FindAsync(exerciseId);
             if (dbExercise == null) { return NotFound("Could not find exercise"); }
-            
+
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
             if (dbWorkout == null) { return NotFound("Could not find workout"); }
 
@@ -100,7 +100,7 @@ namespace WebAPI.Controllers
                 .Load();
 
             if (dbWorkout.Exercises.Contains(dbExercise)) { return Conflict("Exercise already exists in workout"); }
-            
+
             dbWorkout.Exercises.Add(dbExercise);
             await _context.SaveChangesAsync();
 
