@@ -23,11 +23,7 @@ export default function ExercisePage() {
   }
   return (
     <>
-      
-      <Button text={"Get exercise"} onClick={refetch} />
-
       <ExerciseList data={data} />
-
     </>
   );
 }
