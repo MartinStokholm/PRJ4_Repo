@@ -1,8 +1,9 @@
 import axios from "axios";
-import { server } from "../../config/config"
+import { server } from "../../config/config";
 
-const fecthWorkouts = () => {
-    return axios.get(`${server}workout`)
-}
+const fetchWorkout = async ({ queryKey }) => {
+  const id = queryKey[1];
+  return await axios.get(`${server}workout/${id}`);
+};
 
-export default fecthWorkouts;
+export default fetchWorkout;
