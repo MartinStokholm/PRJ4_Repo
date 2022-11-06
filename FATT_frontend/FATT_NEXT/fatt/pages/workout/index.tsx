@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useQuery } from "react-query";
-import fecthWorkouts from "../../src/fetchers/workout";
+import fecthWorkouts from "../../src/fetchers/Workouts";
 import { useWorkoutsData } from "../../src/hooks/useWorkoutsData";
 import { useExercisesData } from "../../src/hooks/useExercisesData";
 import styles from "../../styles/Workout.module.css";
