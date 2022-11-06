@@ -1,26 +1,41 @@
+.title {
+    font-size: 4rem;
+}
 
-.title a {
+
+.container {
+    padding: 10%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.caption a {
     color: #0070f3;
     text-decoration: none;
+    
   }
   
-  .title a:hover,
-  .title a:focus,
-  .title a:active {
+  .caption a:hover,
+  .caption a:focus,
+  .caption a:active {
     text-decoration: underline;
   }
   
-  .title {
+  .caption {
     margin: 0;
     line-height: 1.15;
-    font-size: 4rem;
-  }
-  
-  .title,
-  .description {
-    text-align: center;
+    font-size: 2rem;
+    padding: 10%;
   }
 
-  .text {
+  @media (max-width: 400px) {
+    .caption {
+        display: block;
+    }
+  }
+ 
+
+  .description {
     font-size: 1rem;
   }
+
