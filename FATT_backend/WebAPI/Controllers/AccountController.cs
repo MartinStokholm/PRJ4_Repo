@@ -73,6 +73,21 @@ namespace WebAPI.Controllers
             return Ok(token); 
         }
 
+        [HttpPut("ChangeUsername")]
+        public async Task<ActionResult<string>> ChangeUsername(AccountChangeUsernameDto request)
+        {
+            if (request.Username != account.Username)
+            {
+                return BadRequest("Wrong Username");
+            }
+
+            account.Username = request.NewUsername;
+            
+            
+            return Ok("Username Changed");
+        }
+        
+        
         private string CreateToken(Account account)
         {
             List<Claim> claims = new List<Claim>
