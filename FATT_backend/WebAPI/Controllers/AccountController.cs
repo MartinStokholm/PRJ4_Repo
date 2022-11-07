@@ -36,6 +36,7 @@ namespace WebAPI.Controllers
             return Ok(account);
         }
 
+
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(AccountDto request)
         {
@@ -52,6 +53,24 @@ namespace WebAPI.Controllers
             string token = CreateToken(account);
             return Ok(token);
 
+        }
+
+
+        [HttpPut("ChangePassword")]
+        public async Task<ActionResult<string>> ChangePassword(AccountChangePasswordDto request)
+        {
+            if (!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
+            {
+                return BadRequest("Wrong password");
+            }
+            
+            CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+            account.PasswordHash = passwordHash;
+            account.PasswordSalt = passwordSalt;
+
+            string token = CreateToken(account);
+            return Ok(token); 
         }
 
         private string CreateToken(Account account)
