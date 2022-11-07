@@ -11,7 +11,7 @@ const ExerciseItemTHumbnail = ({ exercise }) => {
         href={{ pathname: `/exercise/${exercise.id}` }}
         key={exercise.id}
       >
-        <h2>Click to read more</h2>
+        <p>Click to read more</p>
       </Link>
     </div>
   );

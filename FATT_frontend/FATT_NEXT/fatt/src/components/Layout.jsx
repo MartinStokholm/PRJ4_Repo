@@ -6,7 +6,9 @@ const Layout = ({ children }) => {
     <>
       <Meta />
       <Nav />
-      <main className="flex flex-wrap -mb-4 -mx-2">{children}</main>
+      <main className="flex flex-wrap mb-4 mx-2 place-items-center items-start content-evenly">
+        {children}
+      </main>
       <Footer />
     </>
   );

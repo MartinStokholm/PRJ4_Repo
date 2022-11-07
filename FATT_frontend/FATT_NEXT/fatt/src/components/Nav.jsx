@@ -11,7 +11,7 @@ const Nav = () => {
           alt="Fattylee"
           width={100}
           height={100}
-          className="mr-3 h6 sm:h-9"
+          className="mr-3 h6"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white"></span>
       </Navbar.Brand>
