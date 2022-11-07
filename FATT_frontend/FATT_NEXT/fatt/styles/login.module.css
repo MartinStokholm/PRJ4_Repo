@@ -1,69 +1,4 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-
-* {
-  margin: 0;
-  padding: 0;
-  outline: none;
-  box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: rgb(184,229,233);
-    background: linear-gradient(90deg, rgba(184,229,233,1) 0%, rgba(89,190,71,1) 35%, rgba(102,199,218,1) 100%);
-  }
-}
-
-.nav__menu-list{
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 60px;
-  width: 288px;
-  row-gap: 24px;
-  right: -288px;
-  padding: 24px 16px;
-  transition: all 0.2s;
-  min-height: calc(100vh - 60px);
-  background-color: #f1f1f1;
-}
-.loading {
-  justify-content: center;
-  align-items: center;
-}
-.nav__menu-list.active{
-  right: 0;
-  
-  
-}
-
-@media screen and (min-width: 768px) {
-  .nav__menu-list{
-    position: unset;
-    flex-direction: row;
-    min-height: fit-content;
-    width: fit-content;
-    column-gap: 24px;
-    align-items: center;
-  }
-  * {
+/** {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -71,9 +6,9 @@ a {
   :root {
     --color-bg: #f9fafa;
     --color-gray: #0a264e;
-    --color-gray-dark: #518a6d;
-    --color-primary: #7a7a77;
-    --color-primary-dark: #0e0505;
+    --color-gray-dark: #e79e62;
+    --color-primary: #f3f7e4;
+    --color-primary-dark: #e61616;
     --color:var(--color)
     
   }
@@ -125,7 +60,6 @@ a {
     color: var(--color-primary-dark);
   }
   .btn {
-    /* background: var(--color-primary-dark); */
     background: linear-gradient(
       330deg,
       var(--color-primary-dark) 0%,
@@ -141,7 +75,6 @@ a {
     cursor: pointer;
   }
   .btn-df {
-    /* background: var(--color-primary-dark); */
     background: linear-gradient(
       330deg,
       var(--color-primary-dark) 0%,
@@ -319,5 +252,4 @@ a {
     border-radius: 3px;
     padding: 0.25rem 0.75rem;
     font-weight: bold;
-  }
-}
+  }*/
