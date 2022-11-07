@@ -181,12 +181,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("Simple")]
-        public ActionResult<List<WorkoutSimple>> GetWorkoutsSimple()
+        public ActionResult<List<WorkoutSimpleDto>> GetWorkoutsSimple()
         {
             var dbWorkouts = _context.Workouts;
             if (dbWorkouts == null) { return NotFound("No workouts found"); }
 
-            return Ok(dbWorkouts.Adapt<List<WorkoutSimple>>());
+            return Ok(dbWorkouts.Adapt<List<WorkoutSimpleDto>>());
         }
     }
 }

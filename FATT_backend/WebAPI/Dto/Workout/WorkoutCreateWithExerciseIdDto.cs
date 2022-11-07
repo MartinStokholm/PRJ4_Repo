@@ -3,7 +3,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Dto.Workout
 {
-    public class WorkoutCreateWithExerciseId
+    public class WorkoutCreateWithExerciseIdDto
     {
         public string Name { get; set; } = "";
         public string Duration { get; set; } = "";
