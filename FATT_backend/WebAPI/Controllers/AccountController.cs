@@ -7,6 +7,8 @@ using System.Security.Cryptography;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+
 
 namespace WebAPI.Controllers
 {
@@ -28,7 +30,13 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<Account>> Register(AccountDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            if (!VerifyEmail(request.Email))
+            {
+                return BadRequest("Email is not valid");
+            }
             
+            account.Email = request.Email;
             account.Username = request.Username;
             account.PasswordHash = passwordHash;
             account.PasswordSalt = passwordSalt;
@@ -38,16 +46,16 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(AccountDto request)
+        public async Task<ActionResult<string>> Login(AccountLoginDto request)
         {
-            if(account.Username != request.Username)
+            if(account.Email != request.Email)
             {
-                return NotFound("User not found");
+                return BadRequest("Not a valid login");
             }
 
             if(!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
             {
-                return BadRequest("Wrong password");
+                return BadRequest("Not a valid login");
             }
             
             string token = CreateToken(account);
@@ -55,6 +63,18 @@ namespace WebAPI.Controllers
 
         }
 
+        
+        [HttpPut("ChangeEmail")]
+        public async Task<ActionResult<string>> ChangeEmail(AccountChangeEmailDto request)
+        {
+            if (!VerifyEmail(request.Email))
+            {
+                return BadRequest("Email is not valid");
+            }
+
+            account.Email = request.NewEmail;
+            return Ok(account);
+        }
 
         [HttpPut("ChangePassword")]
         public async Task<ActionResult<string>> ChangePassword(AccountChangePasswordDto request)
@@ -86,8 +106,37 @@ namespace WebAPI.Controllers
             
             return Ok("Username Changed");
         }
+
+        //WIP 
+        [HttpDelete("DeleteAccount")]
+        public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
+        {
+            if (request.Username != account.Username)
+            {
+                return BadRequest("Wrong Username");
+            }
+            
+            if (!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
+            {
+                return BadRequest("Wrong password");
+            }
+            return Ok();
+        }
         
-        
+        //WIP 
+        [HttpGet("GetAccount")]
+        public async Task<ActionResult<string>> GetAccount(AccountGetDto request)
+        {
+            if (request.Username != account.Username)
+            {
+                return BadRequest("Wrong Username");
+            }
+            
+            
+            
+            return Ok();
+        }
+
         private string CreateToken(Account account)
         {
             List<Claim> claims = new List<Claim>
@@ -108,6 +157,20 @@ namespace WebAPI.Controllers
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             
             return jwt;
+        }
+        
+        private bool VerifyEmail(string email)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+            
         }
         private void CreatePasswordHash(string password, out byte [] passwordHash, out byte [] passwordSalt)
         {
