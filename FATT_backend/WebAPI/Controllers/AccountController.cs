@@ -108,7 +108,7 @@ namespace WebAPI.Controllers
         }
 
         //WIP 
-        [HttpDelete("DeleteAccount")]
+        [HttpDelete("DeleteAccount/{id}")]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
         {
             if (request.Username != account.Username)
@@ -124,7 +124,7 @@ namespace WebAPI.Controllers
         }
         
         //WIP 
-        [HttpGet("GetAccount")]
+        [HttpGet("GetAccount/{id}")]
         public async Task<ActionResult<string>> GetAccount(AccountGetDto request)
         {
             if (request.Username != account.Username)
