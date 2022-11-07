@@ -30,31 +30,23 @@ export default function WorkoutPage() {
 
   return (
     <>
-        {/* This maps out all workouts with their exercise as names */}
-        {WorkoutData.data?.map((workout) => (
-          <div className={styles.listItem} key={workout.name}>
+      {/* This maps out all workouts with their exercise as names */}
+      {WorkoutData.data?.map((workout) => (
+        <div className={styles.listItem} key={workout.name}>
+          <Link href={{ pathname: `/workout/${workout.id}` }} key={workout.id}>
+            <h1>{workout.name}</h1>
+            <h2>{workout.duration}</h2>
 
-              <Link 
-                  href={{pathname:`/workout/${workout.id}`}} 
-                  key={workout.id}>
-                  
-                  <h1>{workout.name}</h1>
-                  <h2>{workout.duration}</h2>
-
-                  {ExerciseData?.data.map((exercise) =>
-                    workout.exercisesIds.includes(exercise.id) ? (
-                    <div 
-                    
-                      className={styles.description} 
-                      key={exercise.id}>
-                      <p>{exercise.name}</p>
-
-                    </div>
+            {ExerciseData?.data.map((exercise) =>
+              workout.exercisesIds.includes(exercise.id) ? (
+                <div className={styles.description} key={exercise.id}>
+                  <p>{exercise.name}</p>
+                </div>
               ) : null
             )}
-              </Link> 
-          </div>
-        ))}
+          </Link>
+        </div>
+      ))}
     </>
   );
 }

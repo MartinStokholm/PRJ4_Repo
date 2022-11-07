@@ -30,7 +30,7 @@ export default function WorkoutPage() {
 
   return (
     <>
-        <p>We you will be able to add or remove exercises from a workout</p>
+      <p>We you will be able to add or remove exercises from a workout</p>
     </>
   );
 }

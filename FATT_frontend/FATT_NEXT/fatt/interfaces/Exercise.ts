@@ -1,5 +1,5 @@
 export type Exercise = {
-    id: number
+    id: number | null
     name: string
     category: string
     durantion: number
@@ -7,3 +7,7 @@ export type Exercise = {
     repetitions: number
     sets: number
 };
+
+export type Exercises = {
+    data: Exercise[];
+}

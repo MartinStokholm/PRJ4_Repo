@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server-json": "json-server --watch db.json --port 4000 ",
-    "install": "npm install axios && npm install react-query"
+    "server-json": "json-server --watch db.json --port 4000 "
   },
   "dependencies": {
     "@tanstack/react-query": "^4.14.0",
