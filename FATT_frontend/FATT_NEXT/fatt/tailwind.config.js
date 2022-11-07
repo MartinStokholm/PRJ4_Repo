@@ -6,6 +6,7 @@ module.exports = {
     "./node_modules/flowbite-react/**/*.js",
     "./public/**/*.html",
     "./pages/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   plugins: [require("flowbite/plugin")],
   theme: {},

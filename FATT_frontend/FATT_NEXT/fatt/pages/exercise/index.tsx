@@ -19,11 +19,15 @@ export default function ExercisePage() {
   }
 
   if (isError) {
-    return <h2>{error.message}</h2>;
+    return (
+      <>
+        <p>Something went wrong</p>
+      </>
+    );
   }
   return (
-    <div>
+    <>
       <ExerciseList data={data} />
-    </div>
+    </>
   );
 }

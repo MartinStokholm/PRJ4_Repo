@@ -1,4 +1,3 @@
-import Link from "next/link";
 import ExerciseItemThumbnail from "./ExerciseItemTHumbnail";
 
 const ExerciseList = ({ data }) => {
@@ -6,16 +5,9 @@ const ExerciseList = ({ data }) => {
     <>
       {data?.data.map((exercise) => {
         return (
-          <div key={exercise.id}>
+          <div key={exercise.id} className="w-1/3 mb-4 px-2">
             {" "}
-            {
-              <Link
-                href={{ pathname: `/exercise/${exercise.id}` }}
-                key={exercise.id}
-              >
-                <ExerciseItemThumbnail exercise={exercise} />
-              </Link>
-            }
+            {<ExerciseItemThumbnail exercise={exercise} />}
           </div>
         );
       })}

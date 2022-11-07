@@ -25,14 +25,17 @@ export default function WorkoutPage() {
   }
 
   if (isError) {
-    return <h2>{error.message}</h2>;
+    return;
+    <>
+      <p>Something went wrong</p>
+    </>;
   }
 
   return (
     <>
       {/* This maps out all workouts with their exercise as names */}
       {WorkoutData.data?.map((workout) => (
-        <div key={workout.name}>
+        <div key={workout.name} className="w-1/3 mb-4 px-2">
           <Link href={{ pathname: `/workout/${workout.id}` }} key={workout.id}>
             <h1>{workout.name}</h1>
             <h2>{workout.duration}</h2>
