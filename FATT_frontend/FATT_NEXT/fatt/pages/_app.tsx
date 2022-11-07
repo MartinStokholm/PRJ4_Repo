@@ -1,11 +1,12 @@
-import "../styles/globals.css";
+import Meta from "../src/components/Meta";
+
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import Layout from "../src/components/Layout";
+import "../styles/globals.css";
 
-import { QueryClientProvider, QueryClient } from 'react-query'
-import { ReactQueryDevtools  } from "react-query/devtools";
-
-const queryClient = new QueryClient()
-const dev = process.env.NODE_ENV !== 'production'
+const queryClient = new QueryClient();
+const dev = process.env.NODE_ENV !== "production";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,10 +14,8 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      
-      <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
-      
-      </QueryClientProvider>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+    </QueryClientProvider>
   );
 }
 
