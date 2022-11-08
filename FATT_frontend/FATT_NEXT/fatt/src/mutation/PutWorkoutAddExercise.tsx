@@ -6,7 +6,7 @@ import type { Workout } from "../../interfaces/Workout";
 
 export const updateWorkoutAddExercise = async (workout) => {
   return request({
-    url: `workout/${workout.id}/AddExercise/${workout.exerciseId}`,
+    url: `workout/${workout.workoutId}/AddExercise/${workout.exerciseId}`,
     method: "put",
     data: workout,
   });

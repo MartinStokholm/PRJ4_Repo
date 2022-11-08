@@ -2,18 +2,17 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { request } from "../utils/axios";
 
-export const updateWorkout = async (workoutId: number, exerciseId) => {
+export const updateWorkoutRemoveExercise = async (workout) => {
   return request({
-    url: `workout/${workoutId}/RemoveExercise/${exerciseId}`,
+    url: `workout/${workout.workoutId}/RemoveExercise/${workout.exerciseId}`,
     method: "put",
-    data: workoutId,
-    workoutId,
+    data: workout,
   });
 };
 
-export const useUpdateWorkoutData = () => {
+export const useUpdateWorkoutRemoveExercise = () => {
   const queryClient = useQueryClient();
-  return useMutation(updateWorkout, {
+  return useMutation(updateWorkoutRemoveExercise, {
     onSuccess: (data) => {
       alert("Update");
     },
