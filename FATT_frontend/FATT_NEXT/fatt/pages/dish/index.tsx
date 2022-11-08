@@ -1,7 +1,3 @@
 export default function DishesPage() {
-  return (
-    <>
-      
-    </>
-  );
+  return <></>;
 }
