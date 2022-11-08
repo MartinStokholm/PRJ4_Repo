@@ -3,9 +3,9 @@ import axios, { AxiosResponse } from "axios";
 import { server } from "../../config/config";
 import { request } from "../utils/axios";
 
-import type { Workout } from "../../interfaces/Workout";
+import type { WorkoutCreateNoIdDto } from "../../interfaces/Workout";
 
-export const addWorkout = async (workout: Workout) => {
+export const addWorkout = async (workout: WorkoutCreateNoIdDto) => {
   return request({ url: `workout`, method: "post", data: workout });
 };
 

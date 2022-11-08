@@ -15,7 +15,7 @@ export const removeExercisesToWorkout = async (
   });
 };
 
-export const useAddExercisesToWorkoutData = () => {
+export const useRemoveExercisesToWorkoutData = () => {
   const queryClient = useQueryClient();
   return useMutation(removeExercisesToWorkout, {
     onMutate: async (newExerciseList) => {

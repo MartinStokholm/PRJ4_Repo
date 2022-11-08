@@ -20,7 +20,6 @@ export const useUpdateWorkoutData = () => {
       alert("Update");
     },
     onError: () => {
-      queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
       alert("there was an error");
     },
     onSettled: () => {
