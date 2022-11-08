@@ -12,6 +12,10 @@ h2 {
   @apply text-center;
 }
 
+h3 {
+  @apply text-center;
+}
+
 p {
   @apply text-base;
   @apply text-center;

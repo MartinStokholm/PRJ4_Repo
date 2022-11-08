@@ -5,7 +5,7 @@ const ExerciseList = ({ data }) => {
     <>
       {data?.data.map((exercise) => {
         return (
-          <div key={exercise.id} className="w-1/2 md:w-1/4 mb-4 px-4 md:px-12">
+          <div key={exercise.id} className="w-1/2 md:w-1/4 mb-4 px-4 md:px-8">
             {" "}
             {<ExerciseItemThumbnail exercise={exercise} />}
           </div>

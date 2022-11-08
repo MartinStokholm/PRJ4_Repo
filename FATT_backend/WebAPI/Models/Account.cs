@@ -10,5 +10,7 @@
         public string Email { get; set; } = "";
         public string PasswordHash { get; set; } = "";
         public string EmailAdress { get; set; } = "";
+        public long CalenderId { get; set; }
+        public Calender Calender { get; set; } = new Calender();
     }
 }

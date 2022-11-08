@@ -14,6 +14,7 @@ public class DataContext : DbContext
     public DbSet<Exercise> Exercises { get; set; } = default!;
     public DbSet<Meal> Meals { get; set; } = default!;
     public DbSet<Dish> Dishes { get; set; } = default!;
+    public DbSet<WebAPI.Models.Calender> Calender { get; set; }
 
 }
 
