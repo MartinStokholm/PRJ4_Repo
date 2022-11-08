@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "react-query";
-import fecthExercise from "../fetchers/exercise";
+import fecthExercise from "../fetchers/Exercise";
 
 export const useExerciseData = (id, onSuccess, onError) => {
   const queryClient = useQueryClient();

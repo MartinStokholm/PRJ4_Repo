@@ -3,7 +3,7 @@ import fetchWorkout from "../fetchers/Workout";
 
 export const useWorkoutData = (id, onSuccess, onError) => {
   const queryClient = useQueryClient();
-  return useQuery([`workoutKey`, id], fecthworkout, {
+  return useQuery([`workoutKey`, id], fetchWorkout, {
     initialData: () => {
       const workout = queryClient
         .getQueriesData("workoutsKey")

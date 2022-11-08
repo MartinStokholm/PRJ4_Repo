@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import fecthExercises from "../fetchers/exercises";
+import fecthExercises from "../fetchers/Exercises";
 
 export const useExercisesData = (onSuccess, onError) => {
   return useQuery("exercisesKey", fecthExercises, {
