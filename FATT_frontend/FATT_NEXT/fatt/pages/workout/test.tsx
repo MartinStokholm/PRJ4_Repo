@@ -11,19 +11,25 @@ import {
   addExercisesToWorkout,
   useAddExercisesToWorkoutData,
 } from "../../src/mutation/PostWorkoutAddExerciseList";
+import { useExercisesData } from "../../src/hooks/useExercisesData";
+import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/PutWorkoutAddExercise";
 
 export default function TestPage() {
+  const { data: ExerciseData } = useExercisesData();
+
   const [id, setId] = useState();
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [exercisesIds, setExerciseIds] = useState("");
-  const [exercisesId, setExerciseId] = useState();
+  const [exerciseId, setExerciseId] = useState();
   // I Get server error if we don't give id, maybe it works on real server without
   //const id = "44";
   const { mutate: addWorkout } = useAddWorkoutData();
   const { mutate: updateWorkout } = useUpdateWorkoutData();
   const { mutate: deleteWorkout } = useDeleteWorkoutData();
   const { mutate: addExercisesToWorkout } = useAddExercisesToWorkoutData();
+  const { mutate: updateWorkoutAddExercise } =
+    useUpdateWorkoutAddExerciseData();
 
   const handleAddWorkoutClick = () => {
     console.log({ name, duration, exercisesIds });
@@ -40,10 +46,17 @@ export default function TestPage() {
   };
 
   const handleaddExercisesToWorkoutClick = () => {
-    console.log({ id, name, duration, exercisesIds });
+    console.log({ id, exercisesIds });
 
-    const workout = { id, name, duration, exercisesIds };
-    addExercisesToWorkout(workout);
+    const workout = { id, exercisesIds };
+    addExercisesToWorkout(id, exercisesIds);
+  };
+
+  const handleUpdateWorkoutAddExerciseClick = () => {
+    console.log({ id, exerciseId });
+
+    const workout = { id, exerciseId };
+    updateWorkoutAddExercise(workout);
   };
 
   const handleDeleteWorkoutClick = () => {
@@ -81,8 +94,8 @@ export default function TestPage() {
       />
       <input
         type="text"
-        value={exercisesId}
-        placeholder="exercisesId"
+        value={exerciseId}
+        placeholder="exerciseId"
         onChange={(e) => setExerciseId(e.target.value)}
       />
       <Button onClick={handleAddWorkoutClick} text={"Add"} />
@@ -91,6 +104,10 @@ export default function TestPage() {
       <Button
         onClick={handleaddExercisesToWorkoutClick}
         text={"Add Exercises To Workout"}
+      />
+      <Button
+        onClick={handleUpdateWorkoutAddExerciseClick}
+        text={"Add Exercise To Workout"}
       />
       <div></div>
     </>

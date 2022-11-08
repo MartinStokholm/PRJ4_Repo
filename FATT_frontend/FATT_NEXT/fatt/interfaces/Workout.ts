@@ -20,7 +20,6 @@ export type WorkoutCreateWithExerciseIdDto = {
     name: string;
     duration: string;
     exerciseIds: number[];
-
 };
 
 export type WorkoutSimpleDto = {

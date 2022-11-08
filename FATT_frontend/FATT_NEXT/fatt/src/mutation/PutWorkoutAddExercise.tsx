@@ -4,23 +4,21 @@ import { request } from "../utils/axios";
 
 import type { Workout } from "../../interfaces/Workout";
 
-export const updateWorkout = async (workoutId: number, exerciseId) => {
+export const updateWorkoutAddExercise = async (workout) => {
   return request({
-    url: `workout/${workoutId}/AddExercise/${exerciseId}`,
+    url: `workout/${workout.id}/AddExercise/${workout.exerciseId}`,
     method: "put",
-    data: workoutId,
-    workoutId,
+    data: workout,
   });
 };
 
-export const useUpdateWorkoutData = () => {
+export const useUpdateWorkoutAddExerciseData = () => {
   const queryClient = useQueryClient();
-  return useMutation(updateWorkout, {
+  return useMutation(updateWorkoutAddExercise, {
     onSuccess: (data) => {
       alert("Update");
     },
     onError: () => {
-      queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
       alert("there was an error");
     },
     onSettled: () => {
@@ -30,7 +28,3 @@ export const useUpdateWorkoutData = () => {
 };
 
 import type { WorkoutCreateNoIdDto } from "../../interfaces/Workout";
-
-export const addWorkout = async (workout: WorkoutCreateNoIdDto) => {
-  return request({ url: `workout`, method: "post", data: workout });
-};
