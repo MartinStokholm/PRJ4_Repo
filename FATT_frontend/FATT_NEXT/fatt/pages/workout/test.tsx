@@ -69,49 +69,52 @@ export default function TestPage() {
   };
 
   return (
-    <>
-      <input
-        type="text"
-        placeholder="workoutId"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-      />
-      <input
-        type="text"
-        value={name}
-        placeholder="name"
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="text"
-        value={duration}
-        placeholder="duration"
-        onChange={(e) => setDuration(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="exercisesIds"
-        value={exercisesIds}
-        onChange={(e) => setExerciseIds(e.target.value)}
-      />
-      <input
-        type="text"
-        value={exerciseId}
-        placeholder="exerciseId"
-        onChange={(e) => setExerciseId(e.target.value)}
-      />
-      <Button onClick={handleAddWorkoutClick} text={"Add"} />
-      <Button onClick={handleUpdateWorkoutClick} text={"Update"} />
-      <Button onClick={handleDeleteWorkoutClick} text={"Delete"} />
-      <Button
-        onClick={handleaddExercisesToWorkoutClick}
-        text={"Add Exercises To Workout"}
-      />
-      <Button
-        onClick={handleUpdateWorkoutAddExerciseClick}
-        text={"Add Exercise To Workout"}
-      />
-      <div></div>
-    </>
+    <div>
+      <div className="py-4 px-8">
+        <input
+          type="text"
+          placeholder="workoutId"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
+        />
+        <input
+          type="text"
+          value={name}
+          placeholder="name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          value={duration}
+          placeholder="duration"
+          onChange={(e) => setDuration(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="exercisesIds"
+          value={exercisesIds}
+          onChange={(e) => setExerciseIds(e.target.value)}
+        />
+        <input
+          type="text"
+          value={exerciseId}
+          placeholder="exerciseId"
+          onChange={(e) => setExerciseId(e.target.value)}
+        />
+      </div>
+      <div className="py-4 px-8">
+        <Button onClick={handleAddWorkoutClick} text={"Add"} />
+        <Button onClick={handleUpdateWorkoutClick} text={"Update"} />
+        <Button onClick={handleDeleteWorkoutClick} text={"Delete"} />
+        <Button
+          onClick={handleaddExercisesToWorkoutClick}
+          text={"Add Exercises To Workout"}
+        />
+        <Button
+          onClick={handleUpdateWorkoutAddExerciseClick}
+          text={"Add Exercise To Workout"}
+        />
+      </div>
+    </div>
   );
 }

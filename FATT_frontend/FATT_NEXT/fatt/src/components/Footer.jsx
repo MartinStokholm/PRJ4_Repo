@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+    <div className="sticky top-[100vh] p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900 sticky bottom-0">
       <div className="sm:flex sm:items-center sm:justify-between">
         <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
           <li>
