@@ -3,15 +3,14 @@ import axios, { AxiosResponse } from "axios";
 import { request } from "../utils/axios";
 
 import type { ExerciseIds } from "../../interfaces/Exercise";
-
-export const addExercisesToWorkout = async (
-  workoutId: number,
-  exerciseIds: ExerciseIds
-) => {
+// workoutId: number,
+//   exerciseIds: ExerciseIds
+export const addExercisesToWorkout = async (data) => {
+  console.log(data.workoutId, data.exerciseIds);
   return request({
-    url: `${workoutId}/AddExercise/list`,
+    url: `${data.workoutId}/AddExercise/list`,
     method: "post",
-    data: exerciseIds,
+    data: data.exerciseIds,
   });
 };
 

@@ -45,11 +45,13 @@ export default function TestPage() {
     updateWorkout(workout);
   };
 
+  // Need to make a array builder, because the data that is tranfered over
+  // is a list of numbers
   const handleaddExercisesToWorkoutClick = () => {
     console.log({ id, exercisesIds });
 
     const workout = { id, exercisesIds };
-    addExercisesToWorkout(id, exercisesIds);
+    addExercisesToWorkout(workout);
   };
 
   const handleUpdateWorkoutAddExerciseClick = () => {
