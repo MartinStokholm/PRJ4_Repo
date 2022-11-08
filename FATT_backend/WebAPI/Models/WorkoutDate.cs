@@ -1,9 +1,9 @@
-﻿namespace WebAPI.Dto.Workout
+﻿namespace WebAPI.Models
 {
-    public class WorkoutWithCalenderDateDto
+    public class WorkoutDate
     {
         public long Id { get; set; }
-
+        
         public long WorkoutId { get; set; }
 
         public DateTime Date { get; set; } = new DateTime();

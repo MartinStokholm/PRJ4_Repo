@@ -22,8 +22,22 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Calender>>> GetCalender()
+        {
+            return await _context.Calender.ToListAsync();
+        }
+
+        [HttpGet("{accountId}")]
+        public async Task<ActionResult<Calender>> GetCalender(long accountId)
+        {
+            var dbAccountCalender = await _context.Calender.FindAsync(accountId);
+
+            return dbAccountCalender;
+        }
+
         [HttpPut("{calenderId}/AddWorkout/{workoutId}")]
-        public async Task<ActionResult<WorkoutWithCalenderDateDto>> AddWorkoutToCalender(long calenderId, long workoutId)
+        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long calenderId, long workoutId)
         {
             var dbCalender = await _context.Calender.FindAsync(calenderId);
             if (dbCalender == null) { return NotFound("Could not find calender"); }
@@ -36,12 +50,12 @@ namespace WebAPI.Controllers
                 .Load();
 
 
-            dbCalender.WorkoutPlan.Add(new WorkoutWithCalenderDateDto
+            dbCalender.WorkoutDates.Add(new WorkoutDate
             {
-                Id = dbWorkout.Id,
-                Date = new DateTime().Date
-                
+                WorkoutId = dbWorkout.Id,
+                Date = DateTime.Now
             });
+            
             await _context.SaveChangesAsync();
 
             return Accepted(dbCalender);

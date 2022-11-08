@@ -6,8 +6,9 @@ namespace WebAPI.Models
     public class Calender
     {
         public long Id { get; set; }
-       
-        public List<WorkoutWithCalenderDateDto> WorkoutPlan { get; set; } = new List<WorkoutWithCalenderDateDto>();
+        public long AccountId { get; set; }
+
+        public List<WorkoutDate> WorkoutDates { get; set; } = new List<WorkoutDate>();
 
 
     }
