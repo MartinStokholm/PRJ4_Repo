@@ -1,3 +1,3 @@
 # PRJ4_Repo
 
-Source code for project for fatt frontend
+Source code for project Fatt
