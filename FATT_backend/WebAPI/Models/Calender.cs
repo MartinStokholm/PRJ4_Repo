@@ -1,4 +1,6 @@
-﻿using WebAPI.Dto.Meal;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata.Ecma335;
+using WebAPI.Dto.Meal;
 using WebAPI.Dto.Workout;
 
 namespace WebAPI.Models
@@ -6,10 +8,8 @@ namespace WebAPI.Models
     public class Calender
     {
         public long Id { get; set; }
-        public long AccountId { get; set; }
 
-        public List<WorkoutDate> WorkoutDates { get; set; } = new List<WorkoutDate>();
-
-
+        public virtual ICollection<WorkoutDate> WorkoutDates { get; set; } = new List<WorkoutDate>();
+        
     }
 }

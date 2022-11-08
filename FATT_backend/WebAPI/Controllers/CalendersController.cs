@@ -22,24 +22,25 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Calender>>> GetCalender()
-        {
-            return await _context.Calender.ToListAsync();
-        }
-
         [HttpGet("{accountId}")]
         public async Task<ActionResult<Calender>> GetCalender(long accountId)
         {
             var dbAccountCalender = await _context.Calender.FindAsync(accountId);
-
+           
+            if (dbAccountCalender == null)
+            {
+                return NotFound("Could not find calender for account");
+            }
+            
+            _context.Entry(dbAccountCalender).Collection(c => c.WorkoutDates).Load();
+            
             return dbAccountCalender;
         }
 
-        [HttpPut("{calenderId}/AddWorkout/{workoutId}")]
-        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long calenderId, long workoutId)
+        [HttpPut("{accountId}/AddWorkout/{workoutId}")]
+        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long accountId, long workoutId)
         {
-            var dbCalender = await _context.Calender.FindAsync(calenderId);
+            var dbCalender = await _context.Calender.FindAsync(accountId);
             if (dbCalender == null) { return NotFound("Could not find calender"); }
 
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);

@@ -65,10 +65,6 @@ namespace WebAPI.Migrations
                     b.Property<long>("CalenderId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("EmailAdress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

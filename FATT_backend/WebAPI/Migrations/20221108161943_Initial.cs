@@ -1,30 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace WebAPI.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Accounts",
+                name: "Calender",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Weigth = table.Column<double>(type: "float", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailAdress = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                    table.PrimaryKey("PK_Calender", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,6 +89,51 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Weigth = table.Column<double>(type: "float", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CalenderId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Accounts_Calender_CalenderId",
+                        column: x => x.CalenderId,
+                        principalTable: "Calender",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkoutDate",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    WorkoutId = table.Column<long>(type: "bigint", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CalenderId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkoutDate", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkoutDate_Calender_CalenderId",
+                        column: x => x.CalenderId,
+                        principalTable: "Calender",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DishMeal",
                 columns: table => new
                 {
@@ -143,6 +182,11 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Accounts_CalenderId",
+                table: "Accounts",
+                column: "CalenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DishMeal_MealsId",
                 table: "DishMeal",
                 column: "MealsId");
@@ -151,6 +195,11 @@ namespace WebAPI.Migrations
                 name: "IX_ExerciseWorkout_WorkoutsId",
                 table: "ExerciseWorkout",
                 column: "WorkoutsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkoutDate_CalenderId",
+                table: "WorkoutDate",
+                column: "CalenderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -165,6 +214,9 @@ namespace WebAPI.Migrations
                 name: "ExerciseWorkout");
 
             migrationBuilder.DropTable(
+                name: "WorkoutDate");
+
+            migrationBuilder.DropTable(
                 name: "Dishes");
 
             migrationBuilder.DropTable(
@@ -175,6 +227,9 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Workouts");
+
+            migrationBuilder.DropTable(
+                name: "Calender");
         }
     }
 }

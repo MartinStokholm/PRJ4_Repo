@@ -7,5 +7,6 @@
         public long WorkoutId { get; set; }
 
         public DateTime Date { get; set; } = new DateTime();
+        
     }
 }
