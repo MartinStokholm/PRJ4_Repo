@@ -72,36 +72,42 @@ export default function TestPage() {
     <div>
       <div className="py-4 px-8">
         <input
+          className="border rounded-md m-4"
           type="text"
           placeholder="workoutId"
           value={id}
           onChange={(e) => setId(e.target.value)}
         />
         <input
+          className="border rounded-md m-4"
           type="text"
           value={name}
           placeholder="name"
           onChange={(e) => setName(e.target.value)}
         />
         <input
+          className="border rounded-md m-4"
           type="text"
           value={duration}
           placeholder="duration"
           onChange={(e) => setDuration(e.target.value)}
         />
         <input
+          className="border rounded-md m-4"
           type="text"
           placeholder="exercisesIds"
           value={exercisesIds}
           onChange={(e) => setExerciseIds(e.target.value)}
         />
         <input
+          className="border rounded-md m-4"
           type="text"
           value={exerciseId}
           placeholder="exerciseId"
           onChange={(e) => setExerciseId(e.target.value)}
         />
       </div>
+
       <div className="py-4 px-8">
         <Button onClick={handleAddWorkoutClick} text={"Add"} />
         <Button onClick={handleUpdateWorkoutClick} text={"Update"} />
