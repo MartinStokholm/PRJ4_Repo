@@ -245,175 +245,55 @@
   ],
   "workout": [
     {
-      "id": 1,
       "name": "Full-body 1",
       "duration": "1.5h-2h",
-      "exercisesIds": [
-        1,
-        4,
-        6,
-        12,
-        15,
-        16,
-        18
-      ]
+      "exercisesIds": [1, 4, 6, 12, 15, 16, 18]
     },
     {
-      "id": 2,
       "name": "Full-body 2",
       "duration": "1.5h-2h",
-      "exercisesIds": [
-        2,
-        3,
-        10,
-        13,
-        19,
-        20,
-        22
-      ]
+      "exercisesIds": [2, 3, 10, 13, 19, 20, 22]
     },
     {
-      "id": 3,
       "name": "Upper-body",
       "duration": "1.5h-2h",
-      "exercisesIds": [
-        3,
-        5,
-        11,
-        12,
-        14,
-        16,
-        18
-      ]
+      "exercisesIds": [3, 5, 11, 12, 14, 16, 18]
     },
     {
-      "id": 4,
       "name": "Lower-body",
       "duration": "1h-1.5h",
-      "exercisesIds": [
-        2,
-        7,
-        8,
-        9,
-        22
-      ]
+      "exercisesIds": [2, 7, 8, 9, 22]
     },
     {
-      "id": 5,
       "name": "Push",
       "duration": "1h-1.5h",
-      "exercisesIds": [
-        3,
-        4,
-        6,
-        13,
-        17
-      ]
+      "exercisesIds": [3, 4, 6, 13, 17]
     },
     {
-      "id": 6,
       "name": "Pull",
       "duration": "1h-1.5h",
-      "exercisesIds": [
-        1,
-        10,
-        11,
-        12,
-        16
-      ]
+      "exercisesIds": [1, 10, 11, 12, 16]
     },
     {
-      "id": 7,
       "name": "Compound",
       "duration": "1.5h-2h",
-      "exercisesIds": [
-        1,
-        2,
-        3,
-        12,
-        13
-      ]
+      "exercisesIds": [1, 2, 3, 12, 13]
     },
     {
-      "id": 8,
       "name": "Isolation",
       "duration": "1h-1.5h",
-      "exercisesIds": [
-        5,
-        8,
-        9,
-        15,
-        16,
-        17
-      ]
+      "exercisesIds": [5, 8, 9, 15, 16, 17]
     },
     {
-      "id": 9,
       "name": "Core",
       "duration": "30m-1h",
-      "exercisesIds": [
-        1,
-        18,
-        19,
-        20
-      ]
+      "exercisesIds": [1, 18, 19, 20]
     },
     {
-      "id": 10,
       "name": "Cardio",
       "duration": "30m-1h",
-      "exercisesIds": [
-        22,
-        21
-      ]
-    },
-    {
-      "name": "nsefs",
-      "duration": "fsdf",
-      "exercisesIds": "3,5,6,7",
-      "id": 11
-    },
-    {
-      "name": "adawid",
-      "duration": "wfwe",
-      "exercisesIds": "3,5,1,5",
-      "id": 12
-    },
-    {
-      "name": "adwda",
-      "duration": "23",
-      "exercisesIds": "2,1,4,6",
-      "id": 13
-    },
-    {
-      "name": "bjarke",
-      "duration": "9 hours",
-      "exercisesIds": "1,2,3,4,5,6,7,8,9",
-      "id": 14
-    },
-    {
-      "name": "bjarke",
-      "duration": "9 hours",
-      "exercisesIds": "1,2,3,4,5,6,7,8,9",
-      "id": 15
-    },
-    {
-      "name": "bjarkess",
-      "duration": "9 hours",
-      "exercisesIds": "1,2,3,4,5,6,7,8,9,10",
-      "id": 16
-    },
-    {
-      "name": "bla",
-      "duration": "2",
-      "exercisesIds": "4,5",
-      "id": 19
-    },
-    {
-      "name": "bla",
-      "duration": "2",
-      "exercisesIds": "4,5",
-      "id": 20
+      "exercisesIds": [22, 21]
     }
-  ]
+  ],
+  "Register": []
 }
