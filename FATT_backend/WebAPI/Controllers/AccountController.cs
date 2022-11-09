@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
 using WebAPI.Dto.Account;
 using System.Security.Cryptography;
@@ -16,7 +14,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        public static Account account = new Account();
+        private static Account account = new Account();
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
 
@@ -113,12 +111,12 @@ namespace WebAPI.Controllers
         {
             if (request.Username != account.Username)
             {
-                return BadRequest("Wrong Username");
+                return BadRequest("Not a valid login");
             }
             
             if (!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
             {
-                return BadRequest("Wrong password");
+                return BadRequest("Not a valid login");
             }
             return Ok();
         }
@@ -189,9 +187,5 @@ namespace WebAPI.Controllers
             }
         }
     }
-
     
-    
-
-   
 }

@@ -51,7 +51,7 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailAdress")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -63,13 +63,15 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("Weigth")
                         .HasColumnType("float");
 
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+                    
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+                    
                     b.HasKey("Id");
 
                     b.ToTable("Accounts");
@@ -228,6 +230,7 @@ namespace WebAPI.Migrations
                 {
                     b.Navigation("Dishes");
                 });
+            
 #pragma warning restore 612, 618
         }
     }
