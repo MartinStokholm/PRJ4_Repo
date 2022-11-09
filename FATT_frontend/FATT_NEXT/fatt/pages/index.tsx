@@ -1,6 +1,11 @@
 import LoadingSpinner from "../src/components/LoadingSpinner";
-
+import { useGetCalender } from "../src/hooks/GetCalander";
 export default function HomePage() {
+  //Just temp account id
+  const accountId = 1;
+  //Get calender for an account from
+  const { data: Calenders } = useGetCalender(accountId);
+
   return (
     <>
       <LoadingSpinner />
