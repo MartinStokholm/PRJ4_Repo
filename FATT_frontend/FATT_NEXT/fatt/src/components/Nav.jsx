@@ -4,7 +4,11 @@ import Image from "next/image";
 
 const Nav = () => {
   return (
-    <Navbar fluid={true} rounded={false} className="sticky top-0 mx-auto">
+    <Navbar
+      fluid={true}
+      rounded={false}
+      className="sticky top-0 mx-auto shadow-md"
+    >
       <Navbar.Brand href="/">
         <Image
           src="/fatt-logo.png"

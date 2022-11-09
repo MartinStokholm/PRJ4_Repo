@@ -1,6 +1,7 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import React from "react";
 import { useState } from "react";
+import Image from "next/image";
 
 const Login = (props) => {
   const [Password, setPassword] = useState("");
@@ -21,7 +22,8 @@ const Login = (props) => {
   };
   return (
     <section>
-      <h2>Log Into FATT</h2>
+      <img src="/fatt-logo.png" alt="Fattylee" width="100%" height="100%" />
+      <h2>Log-in</h2>
       <form onSubmit={handleForm}>
         <Label>Email :</Label>
         <TextInput

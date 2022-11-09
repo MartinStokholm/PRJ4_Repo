@@ -6,7 +6,7 @@ const ExerciseItem = ({ exercise }) => {
 
   return (
     <div className="bg-white max-w-m rounded overflow-hidden shadow-lg content-center h-200">
-      <h1> {exercise?.data.name}</h1>
+      <h1 className="bg-blue-200"> {exercise?.data.name}</h1>
       <h2>Category: {exercise?.data.category}</h2>
       <h3>Intenisty: {exercise?.data.intensity}</h3>
 

@@ -34,6 +34,7 @@ const SignUp = (props) => {
   };
   return (
     <section>
+      <img src="/fatt-logo.png" alt="Fattylee" width="100%" height="100%" />
       <h2> Sign Up</h2>
       <h3>It’s quick and easy</h3>
       <form onSubmit={handleForm}>
