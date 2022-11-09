@@ -69,7 +69,7 @@ export default function TestPage() {
   };
 
   return (
-    <div>
+    <div className="bg-white max-w-m rounded overflow-hidden shadow-lg content-center h-200">
       <div className="py-4 px-8">
         <input
           className="border rounded-md m-4"

@@ -20,3 +20,7 @@ p {
   @apply text-base;
   @apply text-center;
 }
+
+img {
+  @apply mx-auto;
+}

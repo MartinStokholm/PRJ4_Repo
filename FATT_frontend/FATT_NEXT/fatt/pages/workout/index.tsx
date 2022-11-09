@@ -1,7 +1,7 @@
 import LoadingSpinner from "../../src/components/LoadingSpinner";
 import { useWorkoutsData } from "../../src/hooks/useWorkoutsData";
 import { useExercisesData } from "../../src/hooks/useExercisesData";
-import Link from "next/link";
+import WorkoutList from "../../src/components/WorkoutList";
 
 const onSuccess = (WorkoutData, ExerciseData) => {
   {
@@ -16,9 +16,9 @@ const onError = (error) => {
 };
 
 export default function WorkoutPage() {
-  const { isLoading, data: WorkoutData, isError, error } = useWorkoutsData();
+  const { isLoading, data: workoutData, isError, error } = useWorkoutsData();
 
-  const { data: ExerciseData } = useExercisesData(onSuccess, onError);
+  const { data: exerciseData } = useExercisesData(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -31,30 +31,5 @@ export default function WorkoutPage() {
     </>;
   }
 
-  return (
-    <>
-      {/* This maps out all workouts with their exercise as names */}
-      {WorkoutData.data?.map((workout) => (
-        <div key={workout.name} className="w-1/2 md:w-1/4 mb-4 px-4 md:px-12">
-          <div className="bg-white max-w-sm rounded overflow-hidden shadow-lg content-center h-200">
-            <Link
-              href={{ pathname: `/workout/${workout.id}` }}
-              key={workout.id}
-            >
-              <h1>{workout.name}</h1>
-              <h2>{workout.duration}</h2>
-
-              {ExerciseData?.data.map((exercise) =>
-                workout.exercisesIds.includes(exercise.id) ? (
-                  <div key={exercise.id}>
-                    <p>{exercise.name}</p>
-                  </div>
-                ) : null
-              )}
-            </Link>
-          </div>
-        </div>
-      ))}
-    </>
-  );
+  return <WorkoutList workoutData={workoutData} exerciseData={exerciseData} />;
 }

@@ -11,12 +11,12 @@ import {
   useUpdateWorkoutRemoveExercise,
 } from "../../src/mutation/PutWorkoutRemoveExercise";
 
-const onSuccess = (WorkoutData, ExerciseData) => {
+const onSuccess = (workoutData, exerciseData) => {
   {
     /* Maybe we only should show data if success*/
   }
 
-  console.log("Perform side effect after data fetching", ExerciseData);
+  console.log("Perform side effect after data fetching", exerciseData);
 };
 
 const onError = (error) => {
@@ -31,12 +31,12 @@ export default function WorkoutPage() {
   // Get Workout
   const {
     isLoading,
-    data: WorkoutData,
+    data: workoutData,
     isError,
     error,
   } = useWorkoutData(workoutId);
   // Get Exercises
-  const { data: ExerciseData } = useExercisesData(onSuccess, onError);
+  const { data: exerciseData } = useExercisesData(onSuccess, onError);
 
   // State for exercise id
   const [exerciseId, setExerciseId] = useState();
@@ -62,20 +62,24 @@ export default function WorkoutPage() {
   }
 
   if (isError) {
-    return <h2>{error.message}</h2>;
+    return (
+      <h2>
+        <p>Something went wrong</p>
+      </h2>
+    );
   }
 
   return (
     <>
       <p>We you will be able to add or remove exercises from a workout</p>
       <br />
-      {WorkoutData.name}
+      {workoutData.name}
       <br />
       {/* This is a idea only. We map a button add and remove relative to if the 
           workout already contains the exercise. I going to move all the put information (mutate) in 
           a component were we only have to give id's with  */}
-      {ExerciseData?.data.map((exercise) =>
-        WorkoutData?.data.exercisesIds.includes(exercise.id) ? (
+      {exerciseData?.data.map((exercise) =>
+        workoutData?.data.exercisesIds.includes(exercise.id) ? (
           <div key={exercise.id}>
             <p>{exercise.name}</p>
             {/* <Button onClick={handleAddButtonClick(exercise.id)} text={"Add"} /> */}
