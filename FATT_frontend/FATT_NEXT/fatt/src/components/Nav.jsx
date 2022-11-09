@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Nav = () => {
   return (
-    <Navbar fluid={true} rounded={false} className="sticky top-0">
+    <Navbar fluid={true} rounded={false} className="sticky top-0 mx-auto">
       <Navbar.Brand href="/">
         <Image
           src="/fatt-logo.png"
@@ -22,7 +22,6 @@ const Nav = () => {
         <Navbar.Link href="/exercise">Exercises</Navbar.Link>
         <Navbar.Link href="/meal">Meals</Navbar.Link>
         <Navbar.Link href="/dish">Recipes</Navbar.Link>
-        <Navbar.Link href="/settings">Settings</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

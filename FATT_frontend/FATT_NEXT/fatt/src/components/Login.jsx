@@ -1,6 +1,6 @@
-import React from 'react'
-import { useState } from 'react';
-import '../../styles/login.module.css'
+import { Button, Label, TextInput } from "flowbite-react";
+import React from "react";
+import { useState } from "react";
 
 const Login = (props) => {
   const [Password, setPassword] = useState("");
@@ -8,49 +8,43 @@ const Login = (props) => {
   const handleForm = (e) => {
     e.preventDefault();
     const post = {
-       Password,
-      Email
-   
-
-     
+      Password,
+      Email,
     };
     fetch("http://localhost:4000/Register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(post),
-      
-    }).then(() => { 
+    }).then(() => {
       props.history.push("/");
     });
   };
   return (
+    <section>
+      <h2>Log Into FATT</h2>
+      <form onSubmit={handleForm}>
+        <Label>Email :</Label>
+        <TextInput
+          type="Email"
+          required
+          placeholder="johndoe@mail.com"
+          value={Email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Label>Password :</Label>
+        <TextInput
+          type="Password"
+          required
+          placeholder="********"
+          value={Password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button className="mx-auto my-4" type="submit">
+          Log In
+        </Button>
+      </form>
+    </section>
+  );
+};
 
-        
-        <section className="create-post">
-        <h2>Log Into FATT
-</h2>
-        <form onSubmit={handleForm}>     
-           <label>Email :</label>
-          <input
-            type="Email"
-            required
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-         <label>Password :</label>
-          <input
-            type="Password"
-            required
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-                <button className="btn" type="submit">
-                Log In
-          </button>
-        </form>
-        </section>
-    );
-  };
-        
-
-  export default Login;
+export default Login;

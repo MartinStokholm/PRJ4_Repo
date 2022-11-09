@@ -11,17 +11,17 @@ const Footer = () => {
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
-              Privacy Policy
+            <a href="/settings" className="mr-4 hover:underline md:mr-6">
+              Settings
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6 ">
-              Sign-in
+            <a href="/login" className="mr-4 hover:underline md:mr-6 ">
+              Log-in
             </a>
           </li>
           <li>
-            <a href="#" className="hover:underline">
+            <a href="/signup" className="hover:underline">
               Sign-up
             </a>
           </li>
