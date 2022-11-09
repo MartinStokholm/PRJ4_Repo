@@ -8,21 +8,21 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
       {workoutData.data?.map((workout) => (
         <div
           key={workout.name}
-          className="hover:bg-blue-200 rounded bg-white shadow-lg w-full md:w-1/3 m-4"
+          className="hover:bg-green-50 rounded bg-white shadow-lg w-full md:w-1/3 m-4"
         >
           <Link
             href={{ pathname: `/workout/${workout.id}` }}
             key={workout.id}
             className="mt-4"
           >
-            <h1 className="mt-4 ">{workout.name}</h1>
-            <h2>{workout.duration}</h2>
+            <h1 className="mt-4 font-bold">{workout.name}</h1>
+            <h2 className="italic">{workout.duration}</h2>
 
             {exerciseData?.data.map((exercise) =>
               workout.exercisesIds.includes(exercise.id) ? (
                 <div
                   key={exercise.id}
-                  className="bg-white overflow-hidden shadow-lg mx-4 my-2"
+                  className="bg-white overflow-hidden shadow-lg mx-4 my-4"
                 >
                   <WorkoutItemThumbnail exercise={exercise} />
                 </div>

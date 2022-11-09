@@ -21,31 +21,36 @@ const Login = (props) => {
     });
   };
   return (
-    <section>
-      <img src="/fatt-logo.png" alt="Fattylee" width="100%" height="100%" />
-      <h2>Log-in</h2>
-      <form onSubmit={handleForm}>
-        <Label>Email :</Label>
-        <TextInput
-          type="Email"
-          required
-          placeholder="johndoe@mail.com"
-          value={Email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Label>Password :</Label>
-        <TextInput
-          type="Password"
-          required
-          placeholder="********"
-          value={Password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button className="mx-auto my-4" type="submit">
-          Log In
-        </Button>
-      </form>
-    </section>
+    <div className="grid place-items-center">
+      <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+      <section className="w-1/3">
+        <h2>Log-in</h2>
+        <form onSubmit={handleForm}>
+          <Label>Email: </Label>
+          <TextInput
+            type="Email"
+            required
+            placeholder="johndoe@mail.com"
+            value={Email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Label>Password: </Label>
+          <TextInput
+            type="Password"
+            required
+            placeholder="********"
+            value={Password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            className="mx-auto my-4 col-span-2 bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded m-4 "
+            type="submit"
+          >
+            Log In
+          </Button>
+        </form>
+      </section>
+    </div>
   );
 };
 

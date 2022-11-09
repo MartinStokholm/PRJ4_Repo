@@ -1,6 +1,5 @@
 import React from "react";
 import { Navbar } from "flowbite-react";
-import Image from "next/image";
 
 const Nav = () => {
   return (
@@ -10,22 +9,49 @@ const Nav = () => {
       className="sticky top-0 mx-auto shadow-md"
     >
       <Navbar.Brand href="/">
-        <Image
+        <img
           src="/fatt-logo.png"
           alt="Fattylee"
-          width={100}
-          height={100}
+          width="100px"
+          height="100px"
           className="mr-3 h6"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white"></span>
       </Navbar.Brand>
-      <Navbar.Toggle />
+
+      <Navbar.Toggle className="hover:text-green-500 md:hover:text-green-500" />
+
       <Navbar.Collapse>
-        <Navbar.Link href="/">Home</Navbar.Link>
-        <Navbar.Link href="/workout">Workouts</Navbar.Link>
-        <Navbar.Link href="/exercise">Exercises</Navbar.Link>
-        <Navbar.Link href="/meal">Meals</Navbar.Link>
-        <Navbar.Link href="/dish">Recipes</Navbar.Link>
+        <Navbar.Link
+          className="hover:text-green-500 md:hover:text-green-500"
+          href="/"
+        >
+          Home
+        </Navbar.Link>
+        <Navbar.Link
+          className="hover:text-green-500 md:hover:text-green-500"
+          href="/workout"
+        >
+          Workouts
+        </Navbar.Link>
+        <Navbar.Link
+          className="hover:text-green-500 md:hover:text-green-500"
+          href="/exercise"
+        >
+          Exercises
+        </Navbar.Link>
+        <Navbar.Link
+          className="hover:text-green-500 md:hover:text-green-500"
+          href="/meal"
+        >
+          Meals
+        </Navbar.Link>
+        <Navbar.Link
+          className="hover:text-green-500 md:hover:text-green-500"
+          href="/dish"
+        >
+          Recipes
+        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );

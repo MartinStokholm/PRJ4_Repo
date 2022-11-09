@@ -1,7 +1,9 @@
 export default function AboutPage() {
   return (
     <>
-      <h1>About page</h1>
+      <div className="bg-red-600 m-8">
+        <h1>About page for descibtion of the website</h1>
+      </div>
     </>
   );
 }
