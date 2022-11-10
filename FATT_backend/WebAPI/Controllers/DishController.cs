@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
 
             DishMealNames ret = dish.Adapt<DishMealNames>();
 
-            return ret;
+            return Ok(ret);
         }
 
         // PUT: api/DishModels/5
@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
             var found = await _context.Dishes.FindAsync(id);
             if (found == null)
             {
-                return BadRequest("Couldn't find Dish with specified id");
+                return NotFound("Couldn't find Dish with specified id");
             }
             
             _context.Entry(found)
@@ -91,13 +91,11 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Dish>> PostDishModel(DishDtoNoId dishModel)
         {
-
-            _context.Dishes.Add(dishModel.Adapt<Dish>());
+            Dish d = dishModel.Adapt<Dish>();
+            _context.Dishes.Add(d);
             await _context.SaveChangesAsync();
 
-            var created = _context.Dishes.FirstOrDefault(d =>
-                d.Id == _context.Dishes.Max(i => i.Id));
-            return Accepted(created);
+            return Accepted(d);
         }
 
         /* DELETE requests */
