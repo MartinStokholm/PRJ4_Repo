@@ -4,7 +4,6 @@ namespace WebAPI.Models
 {
     public class Account
     {
-        
         public long Id { get; set; }
         public string Username { get; set; } = string.Empty;
         public double Weigth { get; set; }
@@ -14,6 +13,9 @@ namespace WebAPI.Models
         public byte[] PasswordHash { get; set; } 
 
         public byte[] PasswordSalt {get; set; }
+
+        public Calender Calender { get; set; }
+        public long CalenderId { get; set; }
 
     }
 }

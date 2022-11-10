@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         }
          
         [HttpPost("register")]
-        public async Task<ActionResult<Account>> Register(AccountDto request)
+        public ActionResult<Account> Register(AccountDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -38,13 +38,15 @@ namespace WebAPI.Controllers
             account.Username = request.Username;
             account.PasswordHash = passwordHash;
             account.PasswordSalt = passwordSalt;
-
-            return Ok(account);
+            account.Calender = new Calender();
+            account.CalenderId = account.Calender.Id;
+            
+            return Accepted(account);
         }
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(AccountLoginDto request)
+        public ActionResult<string> Login(AccountLoginDto request)
         {
             if(account.Email != request.Email)
             {
@@ -57,13 +59,13 @@ namespace WebAPI.Controllers
             }
             
             string token = CreateToken(account);
-            return Ok(token);
+            return Accepted(token);
 
         }
 
         
         [HttpPut("ChangeEmail")]
-        public async Task<ActionResult<string>> ChangeEmail(AccountChangeEmailDto request)
+        public ActionResult<string> ChangeEmail(AccountChangeEmailDto request)
         {
             if (!VerifyEmail(request.Email))
             {
@@ -71,11 +73,11 @@ namespace WebAPI.Controllers
             }
 
             account.Email = request.NewEmail;
-            return Ok(account);
+            return Accepted(account);
         }
 
         [HttpPut("ChangePassword")]
-        public async Task<ActionResult<string>> ChangePassword(AccountChangePasswordDto request)
+        public ActionResult<string> ChangePassword(AccountChangePasswordDto request)
         {
             if (!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
             {
@@ -88,11 +90,11 @@ namespace WebAPI.Controllers
             account.PasswordSalt = passwordSalt;
 
             string token = CreateToken(account);
-            return Ok(token); 
+            return Accepted(token); 
         }
 
         [HttpPut("ChangeUsername")]
-        public async Task<ActionResult<string>> ChangeUsername(AccountChangeUsernameDto request)
+        public ActionResult<string> ChangeUsername(AccountChangeUsernameDto request)
         {
             if (request.Username != account.Username)
             {
@@ -102,12 +104,12 @@ namespace WebAPI.Controllers
             account.Username = request.NewUsername;
             
             
-            return Ok("Username Changed");
+            return Accepted("Username Changed");
         }
 
         //WIP 
         [HttpDelete("DeleteAccount/{id}")]
-        public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
+        public ActionResult<string> DeleteAccount(AccountDeleteDto request)
         {
             if (request.Username != account.Username)
             {
@@ -118,7 +120,7 @@ namespace WebAPI.Controllers
             {
                 return BadRequest("Not a valid login");
             }
-            return Ok();
+            return NoContent();
         }
         
         //WIP 
@@ -130,7 +132,7 @@ namespace WebAPI.Controllers
                 return BadRequest("Wrong Username");
             }
  
-            return Ok();
+            return Ok(account);
         }
 
         private string CreateToken(Account account)
