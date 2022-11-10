@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAPI.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate69 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -94,12 +94,13 @@ namespace WebAPI.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Weigth = table.Column<double>(type: "float", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailAdress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     CalenderId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -114,20 +115,20 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkoutDate",
+                name: "WorkoutOnDay",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WorkoutId = table.Column<long>(type: "bigint", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Day = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CalenderId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WorkoutDate", x => x.Id);
+                    table.PrimaryKey("PK_WorkoutOnDay", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkoutDate_Calender_CalenderId",
+                        name: "FK_WorkoutOnDay_Calender_CalenderId",
                         column: x => x.CalenderId,
                         principalTable: "Calender",
                         principalColumn: "Id");
@@ -197,8 +198,8 @@ namespace WebAPI.Migrations
                 column: "WorkoutsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkoutDate_CalenderId",
-                table: "WorkoutDate",
+                name: "IX_WorkoutOnDay_CalenderId",
+                table: "WorkoutOnDay",
                 column: "CalenderId");
         }
 
@@ -214,7 +215,7 @@ namespace WebAPI.Migrations
                 name: "ExerciseWorkout");
 
             migrationBuilder.DropTable(
-                name: "WorkoutDate");
+                name: "WorkoutOnDay");
 
             migrationBuilder.DropTable(
                 name: "Dishes");
