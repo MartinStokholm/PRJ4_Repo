@@ -9,7 +9,7 @@ namespace WebAPI.Models
     {
         public long Id { get; set; }
 
-        public virtual ICollection<WorkoutDate> WorkoutDates { get; set; } = new List<WorkoutDate>();
+        public virtual ICollection<WorkoutOnDay> WorkoutDates { get; set; } = new List<WorkoutOnDay>();
         
     }
 }

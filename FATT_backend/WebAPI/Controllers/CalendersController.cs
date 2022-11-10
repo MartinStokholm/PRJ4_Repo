@@ -37,8 +37,8 @@ namespace WebAPI.Controllers
             return dbAccountCalender;
         }
 
-        [HttpPut("{accountId}/AddWorkout/{workoutId}")]
-        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long accountId, long workoutId)
+        [HttpPut("{accountId}/AddWorkout/{workoutId}/{day}")]
+        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long accountId, long workoutId, string day)
         {
             var dbCalender = await _context.Calender.FindAsync(accountId);
             if (dbCalender == null) { return NotFound("Could not find calender"); }
@@ -51,10 +51,10 @@ namespace WebAPI.Controllers
                 .Load();
 
 
-            dbCalender.WorkoutDates.Add(new WorkoutDate
+            dbCalender.WorkoutDates.Add(new WorkoutOnDay
             {
                 WorkoutId = dbWorkout.Id,
-                Date = DateTime.Now
+                Day = day
             });
             
             await _context.SaveChangesAsync();
