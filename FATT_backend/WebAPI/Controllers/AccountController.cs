@@ -6,6 +6,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
+using Mapster;
 
 
 namespace WebAPI.Controllers
@@ -38,6 +39,13 @@ namespace WebAPI.Controllers
             account.Username = request.Username;
             account.PasswordHash = passwordHash;
             account.PasswordSalt = passwordSalt;
+            account.Name = request.Name;
+            account.Age = request.Age;
+            account.Weigth = request.Weigth;
+            
+            _context.Accounts.Add(account.Adapt<Account>());
+
+            await _context.SaveChangesAsync();
 
             return Ok(account);
         }
@@ -46,12 +54,14 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(AccountLoginDto request)
         {
-            if(account.Email != request.Email)
+            var found = await _context.Accounts.FindAsync(request.Email);
+            
+            if (found == null)
             {
                 return BadRequest("Not a valid login");
             }
-
-            if(!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
+            
+            if(!VerifyPasswordHash(request.Password, found.PasswordHash, found.PasswordSalt))
             {
                 return BadRequest("Not a valid login");
             }

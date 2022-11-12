@@ -9,9 +9,11 @@
         public string Gender { get; set; } = "";
         public int Age { get; set; }
         public string Email { get; set; } = "";
-        public byte[] PasswordHash { get; set; } 
-
-        public byte[] PasswordSalt {get; set; }
-
+        public byte[] PasswordHash { get; set; } = new byte[0];
+        public byte[] PasswordSalt {get; set; } = new byte[0];
+        
+        public string Name { get; set; } = "";
+        
+        
     }
 }
