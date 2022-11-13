@@ -50,7 +50,7 @@ const Nav = () => {
           className="hover:text-green-500 md:hover:text-green-500"
           href="/dish"
         >
-          Recipes
+          Dishes
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>

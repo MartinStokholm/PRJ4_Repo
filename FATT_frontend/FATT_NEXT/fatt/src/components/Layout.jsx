@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
     <div className="min-h-screen">
       <Meta />
       <Nav />
-      <main className="flex flex-wrap mb-4 mt-4 mx-2 items-start content-evenly ">
+      <main className="flex flex-wrap mb-4 mt-4 mx-2 items-start content-evenly justify-center ">
         {children}
       </main>
       <Footer />

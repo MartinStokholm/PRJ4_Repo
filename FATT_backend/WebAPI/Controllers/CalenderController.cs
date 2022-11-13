@@ -23,25 +23,35 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
-        [HttpGet("{accountId}")]
-        public async Task<ActionResult<Calender>> GetCalender(long accountId)
+        [HttpPost]
+        public async Task<ActionResult<CalenderDto>> CreateTestCalender()
         {
-            var dbAccountCalender = await _context.Calender.FindAsync(accountId);
+            var newCalender = new Calender();
+            _context.Calender.Add(newCalender);
+            await _context.SaveChangesAsync();
+            return Ok(newCalender.Adapt<CalenderDto>());
+            
+        }
+        
+        [HttpGet("{calenderId}")]
+        public async Task<ActionResult<Calender>> GetCalender(long calenderId)
+        {
+            var dbCalender = await _context.Calender.FindAsync(calenderId);
            
-            if (dbAccountCalender == null)
+            if (dbCalender == null)
             {
-                return NotFound("Could not find calender for account");
+                return NotFound("Could not find calender");
             }
             
-            _context.Entry(dbAccountCalender).Collection(c => c.WorkoutDates).Load();
+            _context.Entry(dbCalender).Collection(c => c.WorkoutDates).Load();
             
-            return dbAccountCalender;
+            return dbCalender;
         }
 
-        [HttpPut("{accountId}/AddWorkout/{workoutId}/{day}")]
-        public async Task<ActionResult<CalenderDto>> AddWorkoutToCalender(long accountId, long workoutId, string day)
+        [HttpPut("{calenderId}/AddWorkout/{workoutId}/{day}")]
+        public async Task<ActionResult<CalenderDto>> AddWorkoutToCalender(long calenderId, long workoutId, string day)
         {
-            var dbCalender = await _context.Calender.FindAsync(accountId);
+            var dbCalender = await _context.Calender.FindAsync(calenderId);
             if (dbCalender == null) { return NotFound("Could not find calender"); }
 
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
