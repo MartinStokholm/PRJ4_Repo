@@ -2,7 +2,7 @@ import LoadingSpinner from "../../src/components/LoadingSpinner";
 import { useMealData } from "../../src/hooks/useMealData";
 import { useDishData } from "../../src/hooks/useDishData";
 import MealList from "../../src/components/MealList";
-
+import Error from "next/error";
 const onSuccess = (mealData, dishData) => {
   {
     /* Maybe we only should show data if success*/
@@ -25,10 +25,7 @@ export default function MealPage() {
   }
 
   if (isError) {
-    return;
-    <>
-      <p>Something went wrong</p>
-    </>;
+    return <Error statusCode={error.message} />;
   }
 
   return <MealList mealData={mealData} dishData={dishData} />;

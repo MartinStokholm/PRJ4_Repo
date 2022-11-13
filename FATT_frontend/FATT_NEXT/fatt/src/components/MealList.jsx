@@ -1,10 +1,9 @@
-import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
+import MealItemThumbnail from "./MealItemThumbnail";
 import Link from "next/link";
 
-const WorkoutList = ({ mealData, dishData }) => {
+const MealList = ({ mealData, dishData }) => {
   return (
     <>
-      {/* This maps out all workouts with their exercise as names */}
       {mealData.data?.map((meal) => (
         <div
           key={meal.name}
@@ -12,19 +11,19 @@ const WorkoutList = ({ mealData, dishData }) => {
         >
           <Link
             href={{ pathname: `/meal/${meal.id}` }}
-            key={workout.id}
+            key={meal.id}
             className="mt-4"
           >
-            <h1 className="mt-4 font-bold">{workout.name}</h1>
-            <h2 className="italic">{workout.duration}</h2>
+            <h1 className="mt-4 font-bold">{meal.name}</h1>
+            <h2 className="italic">{meal.category}</h2>
 
             {dishData?.data.map((dish) =>
-              meal.dishesIds.includes(exercise.id) ? (
+              meal.dishIds.includes(dish.id) ? (
                 <div
-                  key={exercise.id}
+                  key={dish.id}
                   className="bg-white overflow-hidden shadow-lg mx-4 my-4"
                 >
-                  <WorkoutItemThumbnail exercise={exercise} />
+                  <MealItemThumbnail dish={dish} />
                 </div>
               ) : null
             )}
@@ -35,4 +34,4 @@ const WorkoutList = ({ mealData, dishData }) => {
   );
 };
 
-export default WorkoutList;
+export default MealList;

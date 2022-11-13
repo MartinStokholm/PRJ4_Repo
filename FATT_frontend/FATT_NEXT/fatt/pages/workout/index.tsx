@@ -2,7 +2,7 @@ import LoadingSpinner from "../../src/components/LoadingSpinner";
 import { useWorkoutsData } from "../../src/hooks/useWorkoutsData";
 import { useExercisesData } from "../../src/hooks/useExercisesData";
 import WorkoutList from "../../src/components/WorkoutList";
-
+import Error from "next/error";
 const onSuccess = (WorkoutData, ExerciseData) => {
   {
     /* Maybe we only should show data if success*/
@@ -25,10 +25,7 @@ export default function WorkoutPage() {
   }
 
   if (isError) {
-    return;
-    <>
-      <p>Something went wrong</p>
-    </>;
+    return <Error statusCode={error.message} />;
   }
 
   return <WorkoutList workoutData={workoutData} exerciseData={exerciseData} />;

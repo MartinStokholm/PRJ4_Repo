@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useExerciseData } from "../../src/hooks/useExerciseData";
 import ExerciseItem from "../../src/components/ExerciseItem";
 import LoadingSpinner from "../../src/components/LoadingSpinner";
+import Error from "next/error";
 const onSuccess = (data) => {
   console.log("Perform side effect after data fetching", data);
 };
@@ -32,7 +33,7 @@ export default function ExercisePage() {
   if (isError) {
     return (
       <>
-        <p>Something went wrong</p>
+        <Error statusCode={error.message} />
       </>
     );
   }

@@ -1,15 +1,15 @@
 import Link from "next/link";
-const WorkoutItemThumbnail = ({ exercise }) => {
+const MealItemThumbnail = ({ dish }) => {
   return (
     <>
-      <Link href={{ pathname: `/exercise/${exercise.id}` }} key={exercise.id}>
+      <Link href={{ pathname: `/dish/${dish.id}` }} key={dish.id}>
         <div className="hover:bg-green-50 grid grid-cols-[80%_20%] w-full items-center">
-          <h1 className="ml-2 justify-self-start">{exercise.name}</h1>
-          <img src={exercise.picturePath} className="h-20" />
+          <h1 className="ml-2 justify-self-start">{dish.name}</h1>
+          <img src={dish.picturePath} className="h-20" />
         </div>
       </Link>
     </>
   );
 };
 
-export default WorkoutItemThumbnail;
+export default MealItemThumbnail;

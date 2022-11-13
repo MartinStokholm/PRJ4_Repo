@@ -10,7 +10,7 @@ import {
   updateWorkoutRemoveExercise,
   useUpdateWorkoutRemoveExercise,
 } from "../../src/mutation/PutWorkoutRemoveExercise";
-
+import Error from "next/error";
 const onSuccess = (workoutData, exerciseData) => {
   {
     /* Maybe we only should show data if success*/
@@ -62,11 +62,7 @@ export default function WorkoutPage() {
   }
 
   if (isError) {
-    return (
-      <h2>
-        <p>Something went wrong</p>
-      </h2>
-    );
+    return <Error statusCode={error.message} />;
   }
 
   return (

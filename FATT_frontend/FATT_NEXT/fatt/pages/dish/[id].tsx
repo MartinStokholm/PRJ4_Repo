@@ -2,6 +2,8 @@ import { useRouter } from "next/router";
 import { useDishData } from "../../src/hooks/useDishData";
 import DishItem from "../../src/components/DishItem";
 import LoadingSpinner from "../../src/components/LoadingSpinner";
+import Error from "next/error";
+
 const onSuccess = (data) => {
   console.log("Perform side effect after data fetching", data);
 };
@@ -32,7 +34,7 @@ export default function DishPage() {
   if (isError) {
     return (
       <>
-        <p>Something went wrong</p>
+        <Error statusCode={error.message} />
       </>
     );
   }
