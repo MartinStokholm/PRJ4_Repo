@@ -1,6 +1,6 @@
 import LoadingSpinner from "../../src/components/LoadingSpinner";
-import { useMealData } from "../../src/hooks/useMealData";
-import { useDishData } from "../../src/hooks/useDishData";
+import { useMealsData } from "../../src/hooks/useMealsData";
+import { useDishsData } from "../../src/hooks/useDishsData";
 import MealList from "../../src/components/MealList";
 import Error from "next/error";
 const onSuccess = (mealData, dishData) => {
@@ -16,9 +16,9 @@ const onError = (error) => {
 };
 
 export default function MealPage() {
-  const { isLoading, data: mealData, isError, error } = useMealData();
+  const { isLoading, data: mealData, isError, error } = useMealsData();
 
-  const { data: dishData } = useDishData(onSuccess, onError);
+  const { data: dishData } = useDishsData(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;
