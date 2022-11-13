@@ -36,7 +36,6 @@ namespace WebAPI.Controllers
             }
             
             account.Email = request.Email;
-            account.Username = request.Username;
             account.PasswordHash = passwordHash;
             account.PasswordSalt = passwordSalt;
             account.Name = request.Name;
@@ -101,25 +100,12 @@ namespace WebAPI.Controllers
             return Ok(token); 
         }
 
-        [HttpPut("ChangeUsername")]
-        public async Task<ActionResult<string>> ChangeUsername(AccountChangeUsernameDto request)
-        {
-            if (request.Username != account.Username)
-            {
-                return BadRequest("Wrong Username");
-            }
-
-            account.Username = request.NewUsername;
-            
-            
-            return Ok("Username Changed");
-        }
 
         //WIP 
         [HttpDelete("DeleteAccount/{id}")]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
         {
-            if (request.Username != account.Username)
+            if (request.Email!= account.Email)
             {
                 return BadRequest("Not a valid login");
             }
@@ -135,9 +121,9 @@ namespace WebAPI.Controllers
         [HttpGet("GetAccount/{id}")]
         public async Task<ActionResult<string>> GetAccount(AccountGetDto request)
         {
-            if (request.Username != account.Username)
+            if (request.Email != account.Email)
             {
-                return BadRequest("Wrong Username");
+                return BadRequest("Wrong Email");
             }
  
             return Ok();
@@ -147,7 +133,7 @@ namespace WebAPI.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, account.Username),
+                new Claim(ClaimTypes.Name, account.Name),
                 new Claim(ClaimTypes.Role, "Admin")
 
             };
