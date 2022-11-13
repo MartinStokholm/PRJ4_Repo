@@ -81,28 +81,48 @@ namespace WebAPI.Controllers
         [HttpPut("ChangeEmail")]
         public async Task<ActionResult<string>> ChangeEmail(AccountChangeEmailDto request)
         {
-            if (!VerifyEmail(request.Email))
+            var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
+            
+            if (found == null)
             {
                 return BadRequest("Email is not valid");
             }
+            
+            if(!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
+            {
+                return BadRequest("Not a valid Password");
+            }
 
-            account.Email = request.NewEmail;
-            return Ok(account);
+            found[0].Email = request.NewEmail;
+
+            found.Adapt(found[0]);
+            _context.SaveChangesAsync();
+            return Ok(found);
         }
 
         [HttpPut("ChangePassword")]
         public async Task<ActionResult<string>> ChangePassword(AccountChangePasswordDto request)
         {
-            if (!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
+            var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
+            
+            if (found == null)
+            {
+                return BadRequest("Not a valid login");
+            }
+            
+            if (!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
             {
                 return BadRequest("Wrong password");
             }
             
             CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
 
-            account.PasswordHash = passwordHash;
-            account.PasswordSalt = passwordSalt;
+            found[0].PasswordHash = passwordHash;
+            found[0].PasswordSalt = passwordSalt;
 
+            found.Adapt(found[0]);
+            _context.SaveChangesAsync();
+            
             string token = CreateToken(account);
             return Ok(token); 
         }
@@ -127,7 +147,6 @@ namespace WebAPI.Controllers
             return Ok();
         }
         
-        //WIP 
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(string id)
         {
