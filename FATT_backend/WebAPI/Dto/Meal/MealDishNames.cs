@@ -10,5 +10,5 @@ public class MealDishNames
     public string? Category { get; set; }
     public string? Description { get; set; }
     public double? NutritionalValue { get; set;}
-    public List<MealJustName> Dishes { get; set; } = new();
+    public List<MealSimple> Dishes { get; set; } = new();
 }
