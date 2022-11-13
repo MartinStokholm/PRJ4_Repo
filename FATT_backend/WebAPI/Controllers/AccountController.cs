@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
 using Mapster;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Controllers
 {
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         }
          
         [HttpPost("register")]
-        public async Task<ActionResult<Account>> Register(AccountDto request)
+        public async Task<ActionResult> Register(AccountDto request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -52,9 +52,9 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(AccountLoginDto request)
+        public async Task<ActionResult<Account>> Login(AccountLoginDto request)
         {
-            var found = await _context.Accounts.FindAsync(request.Email);
+            var found =  await _context.Accounts.FindAsync(request);
             
             if (found == null)
             {
