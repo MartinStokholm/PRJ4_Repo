@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
 using Mapster;
 
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
