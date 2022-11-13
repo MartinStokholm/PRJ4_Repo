@@ -1,9 +1,10 @@
 import React from "react";
-
+import WorkoutList from "./WorkoutList";
 import Button from "./Button";
-const CalenderItem = () => {
+const CalenderColumn = ({ day }) => {
   return (
-    <div className="grid-rows-4 border">
+    <div className="border mb-4">
+      <h1>{day}</h1>
       <Button text="Add Workout" />
       <Button text="Add Meal" />
       <h1>your workout here</h1>
@@ -12,4 +13,4 @@ const CalenderItem = () => {
   );
 };
 
-export default CalenderItem;
+export default CalenderColumn;

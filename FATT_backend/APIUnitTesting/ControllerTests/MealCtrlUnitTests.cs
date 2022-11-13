@@ -15,7 +15,7 @@ public class MealCtrlUnitTests
     private MealController _controller;
     private MealSimple _correctMeal;
     private MealSimple _incorrectMeal;
-    private DishDtoNoId _correctDish;
+    private DishNoIdDto _correctDish;
     private List<long> _dataId = new();
     [SetUp]
     public void Setup()

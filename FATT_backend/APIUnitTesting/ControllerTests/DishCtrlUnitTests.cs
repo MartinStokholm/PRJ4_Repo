@@ -24,8 +24,8 @@ namespace APIUnitTesting.ControllerTests
     {
         private DataContext _context;
         private DishController _controller;
-        private DishDtoNoId _correctData;
-        private DishDtoNoId _incorrectData;
+        private DishNoIdDto _correctData;
+        private DishNoIdDto _incorrectData;
         private List<long> _dataId = new();
         [SetUp]
         public void Setup()
@@ -49,7 +49,7 @@ namespace APIUnitTesting.ControllerTests
             };
 
             // Incorrect data: Name is required
-            _incorrectData = new DishDtoNoId()
+            _incorrectData = new DishNoIdDto()
             {
                 Category = "Dinner",
                 Ingredients = "2 flour 3 waters",
@@ -63,7 +63,7 @@ namespace APIUnitTesting.ControllerTests
 
         void SeedData()
         {
-            var data = new DishDtoNoId()
+            var data = new DishNoIdDto()
             {
                 Name = "Gulasch",
                 Category = "Dinner",
@@ -78,7 +78,7 @@ namespace APIUnitTesting.ControllerTests
             _context.SaveChanges();
             _dataId.Add(converted.Id);
 
-            data = new DishDtoNoId()
+            data = new DishNoIdDto()
             {
                 Name = "Caek",
                 Category = "Dessert",
@@ -248,7 +248,7 @@ namespace APIUnitTesting.ControllerTests
         [TestCase(1)]
         public async Task Put_ChangesDishCorrectly(int index)
         {
-            DishDtoNoId d = new DishDtoNoId()
+            DishNoIdDto d = new DishNoIdDto()
             {
                 Name = "Garlic Bread"
             };
@@ -272,7 +272,7 @@ namespace APIUnitTesting.ControllerTests
         [Test]
         public async Task PutNonexisting_Status404()
         {
-            DishDtoNoId d = new();
+            DishNoIdDto d = new();
             var result = await _controller.PutDishModel(20, d);
             ObjectResult statusCodeResult = result as ObjectResult;
             if (statusCodeResult != null)

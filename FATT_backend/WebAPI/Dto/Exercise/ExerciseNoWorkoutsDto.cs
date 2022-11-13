@@ -1,6 +1,6 @@
 ﻿namespace WebAPI.Dto.Exercise
 {
-    public class ExerciseFullDto
+    public class ExerciseNoWorkoutsDto
     {
         public long Id { get; set; }
         public string Name { get; set; } = "";

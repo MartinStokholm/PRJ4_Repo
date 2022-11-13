@@ -27,7 +27,15 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Meal>>> GetMeals()
         {
-            return await _context.Meals.ToListAsync();
+            var dbMeals = await _context.Meals.ToListAsync();
+
+            foreach (var meal in dbMeals)
+            {
+                _context.Entry(meal)
+                    .Collection(m => m.Dishes)
+                    .Load();
+            }
+            return Ok(dbMeals);
         }
 
 
@@ -56,7 +64,7 @@ namespace WebAPI.Controllers
         // Get all the dishes of a particular meal
         // GET: api/Meal/5
         [HttpGet("{id}/Dishes")]
-        public async Task<ActionResult<IEnumerable<DishWThumbnail>>> GetDishes(long id)
+        public async Task<ActionResult<IEnumerable<DishThumbnailDto>>> GetDishes(long id)
         {
             var meal = await _context.Meals.FindAsync(id);
 
@@ -69,10 +77,10 @@ namespace WebAPI.Controllers
                 .Collection(m => m.Dishes)
                 .Load();
 
-            List<DishWThumbnail> dishes = new List<DishWThumbnail>();
+            List<DishThumbnailDto> dishes = new List<DishThumbnailDto>();
             foreach (var d in meal.Dishes)
             {
-                dishes.Add(d.Adapt<DishWThumbnail>());
+                dishes.Add(d.Adapt<DishThumbnailDto>());
             }
             return dishes;
         }

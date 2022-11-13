@@ -25,14 +25,15 @@ namespace WebAPI.Controllers
 
         // GET: api/DishModels
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Dish>>> GetDishModel()
+        public async Task<ActionResult<List<DishNoMealsDto>>> GetDishModel()
         {
-            return await _context.Dishes.ToListAsync();
+            var dbDishes = await _context.Dishes.ToListAsync();
+            return dbDishes.Adapt<List<DishNoMealsDto>>();
         }
 
         // GET: api/DishModels/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DishMealNames>> GetDish(long id)
+        public async Task<ActionResult<DishNoMealsDto>> GetDish(long id)
         {
             var dish = await _context.Dishes.FindAsync(id);
 
@@ -46,7 +47,7 @@ namespace WebAPI.Controllers
                 .Collection(d => d.Meals)
                 .Load();
 
-            DishMealNames ret = dish.Adapt<DishMealNames>();
+            var ret = dish.Adapt<DishNoMealsDto>();
 
             return Ok(ret);
         }
@@ -54,7 +55,7 @@ namespace WebAPI.Controllers
         // PUT: api/DishModels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDishModel(long id, DishDtoNoId dish)
+        public async Task<IActionResult> PutDishModel(long id, DishNoIdDto dish)
         {
             var found = await _context.Dishes.FindAsync(id);
             if (found == null)
@@ -89,13 +90,13 @@ namespace WebAPI.Controllers
 
         // POST: api/DishModels
         [HttpPost]
-        public async Task<ActionResult<Dish>> PostDishModel(DishDtoNoId dishModel)
+        public async Task<ActionResult<DishNoIdDto>> PostDishModel(DishNoIdDto dishModel)
         {
             Dish d = dishModel.Adapt<Dish>();
             _context.Dishes.Add(d);
             await _context.SaveChangesAsync();
 
-            return Accepted(d);
+            return Accepted(d.Adapt<DishNoIdDto>());
         }
 
         /* DELETE requests */
