@@ -67,7 +67,10 @@ namespace WebAPI.Controllers
                 return BadRequest("Not a valid Password");
             }
             
-    
+            // if(!VerifyPasswordHash(request.Password, found.PasswordHash, found.PasswordSalt))
+            // {
+            //     return BadRequest("Not a valid login");
+            // }
             
             string token = CreateToken(account);
             return Ok(token);
@@ -106,33 +109,36 @@ namespace WebAPI.Controllers
 
 
         //WIP 
-        [HttpDelete("DeleteAccount/{id}")]
+        [HttpDelete("DeleteAccount/")]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
         {
-            if (request.Email!= account.Email)
+            var found = await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
+            if (found == null)
             {
                 return BadRequest("Not a valid login");
             }
             
-            if (!VerifyPasswordHash(request.Password, account.PasswordHash, account.PasswordSalt))
+            if (!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
             {
                 return BadRequest("Not a valid login");
             }
+            
+            _context.Accounts.Remove(account.Adapt<Account>());
             return Ok();
         }
         
         //WIP 
-        [HttpGet("GetAccount/{id}")]
-        public async Task<ActionResult<string>> GetAccount(AccountGetDto request)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Account>> GetAccount(string id)
         {
-            var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
-
-            if (found != null)
+            var found =  await _context.Accounts.Where(x => x.Email == id).ToListAsync();
+            
+            if (found == null)
             {
                 return BadRequest("Wrong Email");
             }
  
-            return Ok(found);
+            return found[0];
         }
 
         private string CreateToken(Account account)
