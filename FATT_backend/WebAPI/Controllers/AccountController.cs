@@ -67,10 +67,7 @@ namespace WebAPI.Controllers
                 return BadRequest("Not a valid Password");
             }
             
-            // if(!VerifyPasswordHash(request.Password, found.PasswordHash, found.PasswordSalt))
-            // {
-            //     return BadRequest("Not a valid login");
-            // }
+    
             
             string token = CreateToken(account);
             return Ok(token);
@@ -128,12 +125,14 @@ namespace WebAPI.Controllers
         [HttpGet("GetAccount/{id}")]
         public async Task<ActionResult<string>> GetAccount(AccountGetDto request)
         {
-            if (request.Email != account.Email)
+            var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
+
+            if (found != null)
             {
                 return BadRequest("Wrong Email");
             }
  
-            return Ok();
+            return Ok(found);
         }
 
         private string CreateToken(Account account)
