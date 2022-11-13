@@ -17,11 +17,7 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConxStr") ?? throw new InvalidOperationException("Connection string 'DataContext' not found.")));
 
-
-
 // Add services to the container.
-
-
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
