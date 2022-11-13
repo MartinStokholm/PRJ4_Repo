@@ -4,7 +4,6 @@
     {
         
         public long Id { get; set; }
-        public string Username { get; set; } = string.Empty;
         public double Weigth { get; set; }
         public string Gender { get; set; } = "";
         public int Age { get; set; }

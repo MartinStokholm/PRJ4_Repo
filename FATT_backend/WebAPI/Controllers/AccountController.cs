@@ -53,17 +53,24 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<Account>> Login(AccountLoginDto request)
         {
-            var found =  await _context.Accounts.FindAsync(request);
+            var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
             
+            
+    
             if (found == null)
             {
                 return BadRequest("Not a valid login");
             }
             
-            if(!VerifyPasswordHash(request.Password, found.PasswordHash, found.PasswordSalt))
+            if(!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
             {
-                return BadRequest("Not a valid login");
+                return BadRequest("Not a valid Password");
             }
+            
+            // if(!VerifyPasswordHash(request.Password, found.PasswordHash, found.PasswordSalt))
+            // {
+            //     return BadRequest("Not a valid login");
+            // }
             
             string token = CreateToken(account);
             return Ok(token);
@@ -176,7 +183,7 @@ namespace WebAPI.Controllers
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac = new HMACSHA512(account.PasswordSalt))
+            using (var hmac = new HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
