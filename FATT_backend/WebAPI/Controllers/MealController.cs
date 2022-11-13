@@ -25,17 +25,19 @@ namespace WebAPI.Controllers
 
         // GET: api/Meal
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Meal>>> GetMeals()
+        public async Task<ActionResult<List<MealWithDishIdDto>>> GetMeals()
         {
             var dbMeals = await _context.Meals.ToListAsync();
-
+            var result = dbMeals.Adapt<List<MealWithDishIdDto>>();
             foreach (var meal in dbMeals)
             {
                 _context.Entry(meal)
                     .Collection(m => m.Dishes)
                     .Load();
+
+                result.Find(m => m.Id == meal.Id).DishIds = meal.Dishes.Select(e => e.Id).ToList();
             }
-            return Ok(dbMeals);
+            return Ok(result);
         }
 
 
