@@ -1,0 +1,42 @@
+[
+    {
+        "name" : "Full-body 1",
+        "duration" : "1.5h-2h"
+    },
+    {
+        "name" : "Full-body 2",
+        "duration" : "1.5h-2h"
+    },
+    {
+        "name" : "Upper-body",
+        "duration" : "1.5h-2h"
+    },
+    {
+        "name" : "Lower-body",
+        "duration" : "1h-1.5h"
+    },
+    {
+        "name" : "Push",
+        "duration" : "1h-1.5h"
+    },
+    {
+        "name" : "Pull",
+        "duration" : "1h-1.5h"
+    },
+    {
+        "name" : "Compound",
+        "duration" : "1.5h-2h"
+    },
+    {
+        "name" : "Isolation",
+        "duration" : "1h-1.5h"
+    },
+    {
+        "name" : "Core",
+        "duration" : "30m-1h"
+    },
+    {
+        "name" : "Cardio",
+        "duration" : "30m-1h"
+    }
+]

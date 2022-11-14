@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         }
          
         [HttpPost("register")]
-        public async Task<ActionResult> Register(AccountDto request)
+        public async Task<ActionResult<Account>> Register(AccountDto request)
         {
 
             if (await _context.Accounts.AnyAsync(x => x.Email == request.Email))
@@ -42,20 +42,21 @@ namespace WebAPI.Controllers
             _account.Email = request.Email;
             _account.PasswordHash = passwordHash;
             _account.PasswordSalt = passwordSalt;
-            _account.Name = request.Name;
-            _account.Age = request.Age;
             _account.Weigth = request.Weigth;
+            
+            _account.Calender = new Calender();
+            _account.CalenderId = _account.Calender.Id;
             
             _context.Accounts.Add(_account.Adapt<Account>());
 
             await _context.SaveChangesAsync();
 
-            return Ok(_account);
+            return Accepted(_account);
         }
 
 
         [HttpPost("login")]
-        public async Task<ActionResult<Account>> Login(AccountLoginDto request)
+        public async Task<ActionResult<string>> Login(AccountLoginDto request)
         {
             try
             {
@@ -66,7 +67,6 @@ namespace WebAPI.Controllers
                     return BadRequest("Not a valid Password");
                 }
    
-            
                 string token = CreateToken(found[0]);
                 return Ok(token);
             }
@@ -74,8 +74,6 @@ namespace WebAPI.Controllers
             {
                 return BadRequest("Not a valid login");
             }
-           
-
         }
 
         
@@ -85,8 +83,6 @@ namespace WebAPI.Controllers
             try 
             {
                 var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
-            
-            
             
                 if(!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
                 {
@@ -104,6 +100,8 @@ namespace WebAPI.Controllers
                 return BadRequest("Not a valid login");
             }
             
+            _account.Email = request.NewEmail;
+            return Accepted(_account);
         }
 
         [HttpPut("ChangePassword")]
@@ -112,9 +110,7 @@ namespace WebAPI.Controllers
             try
             {
                 var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
-            
-      
-            
+              
                 if (!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
                 {
                     return BadRequest("Wrong password");
@@ -138,16 +134,14 @@ namespace WebAPI.Controllers
            
         }
 
-
-        
-        [HttpDelete("DeleteAccount/")]
+        //WIP 
+        [HttpDelete("DeleteAccount/{id}")]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
         {
             try
             {
                 var found = await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
-            
-            
+                   
                 if (!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
                 {
                     return BadRequest("Not a valid login");
@@ -162,6 +156,11 @@ namespace WebAPI.Controllers
                 return BadRequest("Not a valid login");
             }
             
+            if (!VerifyPasswordHash(request.Password, _account.PasswordHash, _account.PasswordSalt))
+            {
+                return BadRequest("Not a valid login");
+            }
+            return NoContent();
         }
         
         [HttpGet("{id}")]
@@ -179,7 +178,7 @@ namespace WebAPI.Controllers
             }
 
  
-            
+            return Ok(_account);
         }
 
         private string CreateToken(Account account)
@@ -226,7 +225,6 @@ namespace WebAPI.Controllers
             }
         
         }
-
         private static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(passwordSalt))

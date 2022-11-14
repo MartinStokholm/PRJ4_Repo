@@ -1,5 +1,9 @@
-import Image from "next/image";
-
-export default function Home() {
-  return <div></div>;
+export default function AboutPage() {
+  return (
+    <>
+      <div className="bg-red-600 m-8">
+        <h1>About page for descibtion of the website</h1>
+      </div>
+    </>
+  );
 }

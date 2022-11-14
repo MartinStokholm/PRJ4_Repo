@@ -21,6 +21,21 @@ namespace WebAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("DishMeal", b =>
+                {
+                    b.Property<long>("DishesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("MealsId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("DishesId", "MealsId");
+
+                    b.HasIndex("MealsId");
+
+                    b.ToTable("DishMeal");
+                });
+
             modelBuilder.Entity("ExerciseWorkout", b =>
                 {
                     b.Property<long>("ExercisesId")
@@ -47,30 +62,50 @@ namespace WebAPI.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<long>("CalenderId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-                    
+
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Weigth")
                         .HasColumnType("float");
 
-                    b.Property<byte[]>("PasswordHash")
-                        .HasColumnType("varbinary(max)");
-                    
-                    b.Property<byte[]>("PasswordSalt")
-                        .HasColumnType("varbinary(max)");
-                    
                     b.HasKey("Id");
 
+                    b.HasIndex("CalenderId");
+
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.Calender", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Calender");
                 });
 
             modelBuilder.Entity("WebAPI.Models.Dish", b =>
@@ -82,30 +117,25 @@ namespace WebAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ingredients")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("MealId")
-                        .HasColumnType("bigint");
-
-                    b.Property<double>("NutritunalValue")
+                    b.Property<double?>("NutritionalValue")
                         .HasColumnType("float");
 
                     b.Property<string>("PicturePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Recipe")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MealId");
 
                     b.ToTable("Dishes");
                 });
@@ -164,15 +194,14 @@ namespace WebAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("NutritunalValue")
-                        .HasColumnType("float");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -200,6 +229,46 @@ namespace WebAPI.Migrations
                     b.ToTable("Workouts");
                 });
 
+            modelBuilder.Entity("WebAPI.Models.WorkoutOnDay", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long?>("CalenderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("WorkoutId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CalenderId");
+
+                    b.ToTable("WorkoutOnDay");
+                });
+
+            modelBuilder.Entity("DishMeal", b =>
+                {
+                    b.HasOne("WebAPI.Models.Dish", null)
+                        .WithMany()
+                        .HasForeignKey("DishesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Models.Meal", null)
+                        .WithMany()
+                        .HasForeignKey("MealsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ExerciseWorkout", b =>
                 {
                     b.HasOne("WebAPI.Models.Exercise", null)
@@ -215,18 +284,28 @@ namespace WebAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Dish", b =>
+            modelBuilder.Entity("WebAPI.Models.Account", b =>
                 {
-                    b.HasOne("WebAPI.Models.Meal", null)
-                        .WithMany("Dishes")
-                        .HasForeignKey("MealId");
+                    b.HasOne("WebAPI.Models.Calender", "Calender")
+                        .WithMany()
+                        .HasForeignKey("CalenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Calender");
                 });
 
-            modelBuilder.Entity("WebAPI.Models.Meal", b =>
+            modelBuilder.Entity("WebAPI.Models.WorkoutOnDay", b =>
                 {
-                    b.Navigation("Dishes");
+                    b.HasOne("WebAPI.Models.Calender", null)
+                        .WithMany("WorkoutDates")
+                        .HasForeignKey("CalenderId");
                 });
-            
+
+            modelBuilder.Entity("WebAPI.Models.Calender", b =>
+                {
+                    b.Navigation("WorkoutDates");
+                });
 #pragma warning restore 612, 618
         }
     }

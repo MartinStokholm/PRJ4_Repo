@@ -1,0 +1,299 @@
+{
+  "exercise": [
+    {
+      "id": 1,
+      "name": "Deadlift",
+      "Category": "Back",
+      "Intensity": "High",
+      "Equipment": "Barbell",
+      "Repetitions": "5-8",
+      "Sets": "3-5",
+      "PicturePath": "https://content.artofmanliness.com/uploads/2012/12/Deadlifts-1.jpg",
+      "VideoPath": "https://youtu.be/wjsu6ceEkAQ"
+    },
+    {
+      "id": 2,
+      "name": "Back Squat",
+      "Category": "Legs",
+      "Intensity": "High",
+      "Equipment": "Barbell",
+      "Repetitions": "5-10",
+      "Sets": "3-5",
+      "PicturePath": "https://content.artofmanliness.com/uploads/2012/10/backsquat.jpg",
+      "VideoPath": "https://youtu.be/R2dMsNhN3DE"
+    },
+    {
+      "id": 3,
+      "name": "Bench Press",
+      "Category": "Chest",
+      "Intensity": "High",
+      "Equipment": "Barbell",
+      "Repetitions": "5-10",
+      "Sets": "4-5",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/bench-press-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/tuwHzzPdaGc"
+    },
+    {
+      "id": 4,
+      "name": "Incline Chest Press",
+      "Category": "Chest",
+      "Intensity": "Medium",
+      "Equipment": "Dumbbells",
+      "Repetitions": "8-12",
+      "Sets": "3-4",
+      "PicturePath": "https://www.bodybuildingmealplan.com/wp-content/uploads/Dumbbell-Incline-Bench-Press-scaled.jpg",
+      "VideoPath": "https://youtu.be/8nNi8jbbUPE"
+    },
+    {
+      "id": 5,
+      "name": "Cable Chest Flies",
+      "Category": "Chest",
+      "Intensity": "Low",
+      "Equipment": "Cable Machine",
+      "Repetitions": "10-16",
+      "Sets": "3-4",
+      "PicturePath": "https://i.pinimg.com/originals/5e/79/b1/5e79b192cc253a8a467be9f7449e902c.jpg",
+      "VideoPath": "https://youtu.be/OPYrUGZL8nU"
+    },
+    {
+      "id": 6,
+      "name": "Leg Press",
+      "Category": "Legs",
+      "Intensity": "High",
+      "Equipment": "Leg Press Machine",
+      "Repetitions": "5-10",
+      "Sets": "3-4",
+      "PicturePath": "https://mobilephysiotherapyclinic.in/wp-content/uploads/2022/03/leg-press-muscles-worked-1280x720.jpg",
+      "VideoPath": "https://youtu.be/sEM_zo9w2ss"
+    },
+    {
+      "id": 7,
+      "name": "Reverse Lunges",
+      "Category": "Legs",
+      "Intensity": "Medium",
+      "Equipment": "Dumbbells",
+      "Repetitions": "8-12",
+      "Sets": "3-4",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/dumbbell-lunge-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/Ix9QZ3Pnneo"
+    },
+    {
+      "id": 8,
+      "name": "Seated Leg Curls",
+      "Category": "Legs",
+      "Intensity": "Medium",
+      "Equipment": "Leg Curls Machine",
+      "Repetitions": "8-12",
+      "Sets": "3-4",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/seated-leg-curl-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/3BWiLFc8Dbg"
+    },
+    {
+      "id": 9,
+      "name": "Seated Calf Raises",
+      "Category": "Legs",
+      "Intensity": "Low",
+      "Equipment": "Barbell",
+      "Repetitions": "12-20",
+      "Sets": "3-4",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/seated-calf-raise-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/Yh5TXz99xwY"
+    },
+    {
+      "id": 10,
+      "name": "Pull-ups",
+      "Category": "Back",
+      "Intensity": "Medium",
+      "Equipment": "Pull-up Bar",
+      "Repetitions": "5-10",
+      "Sets": "3-4",
+      "PicturePath": "https://content.artofmanliness.com/uploads/2021/09/Perfect-Pullup-WEB-2.jpg",
+      "VideoPath": "https://youtu.be/poyr8KenUfc"
+    },
+    {
+      "id": 11,
+      "name": "Single-arm Bent-over Rows",
+      "Category": "Back",
+      "Intensity": "Medium",
+      "Equipment": "Dumbbells",
+      "Repetitions": "8-12",
+      "Sets": "3-4",
+      "PicturePath": "https://splitandfit.com/wp-content/uploads/2021/08/one-arm-dummbell-row.jpg",
+      "VideoPath": "https://youtu.be/78Z2mk9LQoI"
+    },
+    {
+      "id": 12,
+      "name": "Neutral-grip Pull-downs",
+      "Category": "Back",
+      "Intensity": "Medium",
+      "Equipment": "Cable Machine",
+      "Repetitions": "8-12",
+      "Sets": "3-4",
+      "PicturePath": "https://www.blackridgefitness.com/wp-content/uploads/2022/02/neutral-grip-pulldown-1.jpg",
+      "VideoPath": "https://youtu.be/7wEpfpKAiQ0"
+    },
+    {
+      "id": 13,
+      "name": "Overhead Press",
+      "Category": "Shoulders",
+      "Intensity": "High",
+      "Equipment": "Barbell",
+      "Repetitions": "5-10",
+      "Sets": "3-4",
+      "PicturePath": "https://content.artofmanliness.com/uploads/2013/02/Overhead-Press-1.jpg",
+      "VideoPath": "https://youtu.be/j7ULT6dznNc"
+    },
+    {
+      "id": 14,
+      "name": "Seated Arnold Press",
+      "Category": "Shoulders",
+      "Intensity": "Medium",
+      "Equipment": "Dumbbells",
+      "Repetitions": "8-12",
+      "Sets": "3-4",
+      "PicturePath": "https://www.bodybuildingmealplan.com/wp-content/uploads/shutterstock_428906836-scaled.jpg",
+      "VideoPath": "https://youtu.be/hmnZKRpYaV8"
+    },
+    {
+      "id": 15,
+      "name": "Single-arm Cable Lateral Raises",
+      "Category": "Shoulders",
+      "Intensity": "Low",
+      "Equipment": "Cable Machine",
+      "Repetitions": "10-16",
+      "Sets": "3-4",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/cable-lateral-raise-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/Fv-eAW1uKDI"
+    },
+    {
+      "id": 16,
+      "name": "Incline Bicep Curls",
+      "Category": "Arms",
+      "Intensity": "Low",
+      "Equipment": "Dumbbells",
+      "Repetitions": "12-20",
+      "Sets": "3-4",
+      "PicturePath": "https://i.pinimg.com/originals/9d/89/b0/9d89b04811556ef4cc26c57aa496b509.png",
+      "VideoPath": "https://youtu.be/UeleXjsE-98"
+    },
+    {
+      "id": 17,
+      "name": "Tricep Extensions",
+      "Category": "Arms",
+      "Intensity": "Low",
+      "Equipment": "Cable Machine",
+      "Repetitions": "10-16",
+      "Sets": "3-4",
+      "PicturePath": "https://www.cablearmworkout.com/wp-content/uploads/2022/04/tricep-cable-exercises.webp",
+      "VideoPath": "https://youtu.be/mpZ9VRisAyw"
+    },
+    {
+      "id": 18,
+      "name": "Sit-ups",
+      "Category": "Abdominals",
+      "Intensity": "Low",
+      "Equipment": "None",
+      "Repetitions": "12-20",
+      "Sets": "4-5",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/sit-ups-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/MQDopvLZOS8"
+    },
+    {
+      "id": 19,
+      "name": "Bicycle Crunches",
+      "Category": "Abdominals",
+      "Intensity": "Low",
+      "Equipment": "None",
+      "Repetitions": "12-20",
+      "Sets": "3-4",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/bicycle-crunch-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/vV_sKNCpiVM"
+    },
+    {
+      "id": 20,
+      "name": "Lying Leg Raises",
+      "Category": "Abdominals",
+      "Intensity": "Medium",
+      "Equipment": "None",
+      "Repetitions": "8-12",
+      "Sets": "3-4",
+      "PicturePath": "https://static.strengthlevel.com/images/illustrations/lying-leg-raise-1000x1000.jpg",
+      "VideoPath": "https://youtu.be/r24ntO4IvKc"
+    },
+    {
+      "id": 21,
+      "name": "Sprint",
+      "Category": "Cardio",
+      "Intensity": "High",
+      "Equipment": "Treadmill",
+      "Repetitions": "30-60 seconds",
+      "Sets": "1-3",
+      "PicturePath": "https://speedendurance.com/wp-content/uploads/2014/08/Usain-Bolt-WC-2013-650.jpg",
+      "VideoPath": ""
+    },
+    {
+      "id": 22,
+      "name": "Jog",
+      "Category": "Cardio",
+      "Intensity": "Low",
+      "Equipment": "Treadmill",
+      "Repetitions": "",
+      "Sets": "",
+      "PicturePath": "https://fitpage.in/wp-content/uploads/2021/10/Article_Banner-1-1.jpg",
+      "VideoPath": ""
+    }
+  ],
+  "workout": [
+    {
+      "name": "Full-body 1",
+      "duration": "1.5h-2h",
+      "exercisesIds": [1, 4, 6, 12, 15, 16, 18]
+    },
+    {
+      "name": "Full-body 2",
+      "duration": "1.5h-2h",
+      "exercisesIds": [2, 3, 10, 13, 19, 20, 22]
+    },
+    {
+      "name": "Upper-body",
+      "duration": "1.5h-2h",
+      "exercisesIds": [3, 5, 11, 12, 14, 16, 18]
+    },
+    {
+      "name": "Lower-body",
+      "duration": "1h-1.5h",
+      "exercisesIds": [2, 7, 8, 9, 22]
+    },
+    {
+      "name": "Push",
+      "duration": "1h-1.5h",
+      "exercisesIds": [3, 4, 6, 13, 17]
+    },
+    {
+      "name": "Pull",
+      "duration": "1h-1.5h",
+      "exercisesIds": [1, 10, 11, 12, 16]
+    },
+    {
+      "name": "Compound",
+      "duration": "1.5h-2h",
+      "exercisesIds": [1, 2, 3, 12, 13]
+    },
+    {
+      "name": "Isolation",
+      "duration": "1h-1.5h",
+      "exercisesIds": [5, 8, 9, 15, 16, 17]
+    },
+    {
+      "name": "Core",
+      "duration": "30m-1h",
+      "exercisesIds": [1, 18, 19, 20]
+    },
+    {
+      "name": "Cardio",
+      "duration": "30m-1h",
+      "exercisesIds": [22, 21]
+    }
+  ],
+  "Register": []
+}

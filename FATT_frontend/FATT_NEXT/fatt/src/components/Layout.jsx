@@ -1,23 +1,16 @@
-import styles from "../../styles/Layout.module.css";
-
-import HeadComponent from "./HeadComponent";
+import Meta from "./Meta";
+import Nav from "./Nav";
 import Footer from "./Footer";
-import NavBar from "./Header";
-
 const Layout = ({ children }) => {
   return (
-    <>
-      <div className={styles.container}>
-        {/* <HeadComponent title={"FATT"} /> */}
-        <NavBar />
-
-        <main className={styles.main}>
-          {children}
-        </main>
-
-        <Footer />
-      </div>
-    </>
+    <div className="min-h-screen">
+      <Meta />
+      <Nav />
+      <main className="flex flex-wrap mb-4 mt-4 mx-2 items-start content-evenly justify-center ">
+        {children}
+      </main>
+      <Footer />
+    </div>
   );
 };
 
