@@ -2,24 +2,37 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 
-import type { CalandarCreateNoIdDto } from "../../../interfaces/Workout";
+import type { DishNoIdDto, Dishs } from "../../../interfaces/Dish";
 
-export const addWorkout = async (calandar: CalandarCreateNoIdDto) => {
-  return request({ url: `calanar`, method: "post", data: calandar });
+export const addWorkout = async (dish: DishNoIdDto) => {
+  return request({ url: `dish`, method: "post", data: dish });
 };
 
 export const useAddWorkoutData = () => {
   const queryClient = useQueryClient();
-  return useMutation(addCalandar, {
-    onSuccess: (data) => {
-      console.log("calandar created");
+  return useMutation(addWorkout, {
+    onMutate: async (newWorkout) => {
+      await queryClient.cancelQueries("workoutsKey");
+      const previouesWorkoutData = queryClient.getQueryData("workoutsKey");
+      queryClient.setQueryData("workoutsKey", (oldQueryData: Dishs) => {
+        return {
+          ...oldQueryData,
+          data: [
+            ...oldQueryData.data,
+            { ...(oldQueryData?.data?.length + 1), ...newWorkout },
+          ],
+        };
+      });
+      return {
+        previouesWorkoutData,
+      };
     },
     onError: (_error, _workout, context) => {
-      queryClient.setQueryData("calandarKey", context.previouesWorkoutData);
+      queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
       alert("there was an error");
     },
     onSettled: () => {
-      queryClient.invalidateQueries("calandarKey");
+      queryClient.invalidateQueries("workoutsKey");
     },
   });
 };
