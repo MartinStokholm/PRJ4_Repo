@@ -1,35 +1,25 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
-import { server } from "../../config/config";
-import { request } from "../utils/axios";
+import { server } from "../../../config/config";
+import { request } from "../../utils/axios";
 
-import type { WorkoutCreateNoIdDto } from "../../interfaces/Workout";
+import type { Workout } from "../../../interfaces/Workout";
 
-export const addWorkout = async (workout: WorkoutCreateNoIdDto) => {
-  return request({ url: `workout`, method: "post", data: workout });
+export const updateWorkout = async (workout: Workout) => {
+  return request({
+    url: `workout/${workout.id}`,
+    method: "put",
+    data: workout,
+  });
 };
 
-export const useAddWorkoutData = () => {
+export const useUpdateWorkoutData = () => {
   const queryClient = useQueryClient();
-  return useMutation(addWorkout, {
-    onMutate: async (newWorkout) => {
-      await queryClient.cancelQueries("workoutsKey");
-      const previouesWorkoutData = queryClient.getQueryData("workoutsKey");
-      queryClient.setQueryData("workoutsKey", (oldQueryData) => {
-        return {
-          ...oldQueryData,
-          data: [
-            ...oldQueryData.data,
-            { ...(oldQueryData?.data?.length + 1), ...newWorkout },
-          ],
-        };
-      });
-      return {
-        previouesWorkoutData,
-      };
+  return useMutation(updateWorkout, {
+    onSuccess: (data) => {
+      alert("Update");
     },
-    onError: (_error, _workout, context) => {
-      queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
+    onError: () => {
       alert("there was an error");
     },
     onSettled: () => {

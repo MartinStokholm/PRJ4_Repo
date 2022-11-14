@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
-import { request } from "../utils/axios";
+import { request } from "../../utils/axios";
 
-import type { ExerciseIds } from "../../interfaces/Exercise";
+import type { ExerciseIds } from "../../../interfaces/Exercise";
 // workoutId: number,
 //   exerciseIds: ExerciseIds
 export const addExercisesToWorkout = async (data) => {

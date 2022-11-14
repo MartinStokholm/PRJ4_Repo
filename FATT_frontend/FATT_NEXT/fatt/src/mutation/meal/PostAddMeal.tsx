@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "react-query";
-import { server } from "../../config/config";
-import type { Meal } from "../../interfaces/Meal";
-import { request } from "../utils/axios";
+import { server } from "../../../config/config";
+import type { Meal } from "../../../interfaces/Meal";
+import { request } from "../../utils/axios";
 
 const addMeal = (meal: Meal) => {
   return request({ url: `meal`, methode: "post", data: meal });
 };
 
-export const useAddMealData = () => {
+export const postAddMealData = () => {
   const queryClient = useQueryClient();
   return useMutation(addMeal, {
     onSuccess: (data) => {

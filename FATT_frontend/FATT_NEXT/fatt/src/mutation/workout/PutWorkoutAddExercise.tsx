@@ -1,18 +1,20 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
-import { request } from "../utils/axios";
+import { request } from "../../utils/axios";
 
-export const updateWorkoutRemoveExercise = async (workout) => {
+import type { Workout } from "../../../interfaces/Workout";
+
+export const updateWorkoutAddExercise = async (workout) => {
   return request({
-    url: `workout/${workout.workoutId}/RemoveExercise/${workout.exerciseId}`,
+    url: `workout/${workout.workoutId}/AddExercise/${workout.exerciseId}`,
     method: "put",
     data: workout,
   });
 };
 
-export const useUpdateWorkoutRemoveExercise = () => {
+export const useUpdateWorkoutAddExerciseData = () => {
   const queryClient = useQueryClient();
-  return useMutation(updateWorkoutRemoveExercise, {
+  return useMutation(updateWorkoutAddExercise, {
     onSuccess: (data) => {
       alert("Update");
     },
@@ -24,3 +26,5 @@ export const useUpdateWorkoutRemoveExercise = () => {
     },
   });
 };
+
+import type { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
