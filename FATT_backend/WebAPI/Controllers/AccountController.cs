@@ -28,6 +28,9 @@ namespace WebAPI.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(AccountDto request)
         {
+
+            if (await _context.Accounts.AnyAsync(x => x.Email == request.Email))
+                return BadRequest("Email is already taken");
             
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -64,7 +67,7 @@ namespace WebAPI.Controllers
                 }
    
             
-                string token = CreateToken(account);
+                string token = CreateToken(found[0]);
                 return Ok(token);
             }
             catch (Exception e)
