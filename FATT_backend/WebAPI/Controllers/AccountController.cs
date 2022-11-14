@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private static Account account = new Account();
+        private static Account _account = new Account();
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
 
@@ -39,18 +39,18 @@ namespace WebAPI.Controllers
                 return BadRequest("Email is not valid");
             }
             
-            account.Email = request.Email;
-            account.PasswordHash = passwordHash;
-            account.PasswordSalt = passwordSalt;
-            account.Name = request.Name;
-            account.Age = request.Age;
-            account.Weigth = request.Weigth;
+            _account.Email = request.Email;
+            _account.PasswordHash = passwordHash;
+            _account.PasswordSalt = passwordSalt;
+            _account.Name = request.Name;
+            _account.Age = request.Age;
+            _account.Weigth = request.Weigth;
             
-            _context.Accounts.Add(account.Adapt<Account>());
+            _context.Accounts.Add(_account.Adapt<Account>());
 
             await _context.SaveChangesAsync();
 
-            return Ok(account);
+            return Ok(_account);
         }
 
 
@@ -96,7 +96,7 @@ namespace WebAPI.Controllers
                 found[0].Email = request.NewEmail;
 
                 found.Adapt(found[0]);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return Ok(found);
             }
             catch (Exception e)
@@ -126,9 +126,9 @@ namespace WebAPI.Controllers
                 found[0].PasswordSalt = passwordSalt;
 
                 found.Adapt(found[0]);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             
-                string token = CreateToken(account);
+                string token = CreateToken(_account);
                 return Ok(token); 
             }
             catch (Exception e)
@@ -154,7 +154,7 @@ namespace WebAPI.Controllers
                 }
             
                 _context.Accounts.Remove(found[0]);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return Ok();
             }
             catch (Exception e)
@@ -204,7 +204,7 @@ namespace WebAPI.Controllers
             return jwt;
         }
         
-        private bool VerifyEmail(string email)
+        private static bool VerifyEmail(string email)
         {
             try
             {
@@ -217,7 +217,7 @@ namespace WebAPI.Controllers
             }
             
         }
-        private void CreatePasswordHash(string password, out byte [] passwordHash, out byte [] passwordSalt)
+        private static void CreatePasswordHash(string password, out byte [] passwordHash, out byte [] passwordSalt)
         {
             using(var hmac = new HMACSHA512())
             {
@@ -227,7 +227,7 @@ namespace WebAPI.Controllers
         
         }
 
-        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512(passwordSalt))
             {
