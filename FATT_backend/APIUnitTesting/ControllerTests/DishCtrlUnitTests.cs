@@ -14,12 +14,12 @@ using WebAPI.Models;
 
 namespace APIUnitTesting.ControllerTests
 {
-    using Tools = TestUtils.TestUtils;
     // Note that for some reason ActionResult does not contain a getter for StatusCode
     // So to check StatusCodes we need to type convert into smth else
 
     // All tests done using InMemory EFCore db. This way there is no need to mock
     // The DbContext. See Testing in EFCore 5 link in Docs
+    using Tools = TestUtils.TestUtils;
     public class DishCtrlUnitTests
     {
         private DataContext _context;
@@ -30,13 +30,8 @@ namespace APIUnitTesting.ControllerTests
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<DataContext>()
-                .UseInMemoryDatabase("TestDb")
-                .EnableDetailedErrors()
-                .EnableSensitiveDataLogging()
-                .Options;
 
-            _context = new DataContext(options);
+            _context = Tools.TestContextSetup();
             _controller = new DishController(_context);
             _correctData = new()
             {
