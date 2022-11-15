@@ -1,8 +1,9 @@
 ﻿namespace WebAPI.Dto.Meal;
 
-public class MealSimple
+
+// For creating meals without ingredients already in them
+public class MealSimpleNoId
 {
-    public long Id { get; set; }
     public string Name { get; set; }
     public string? Category { get; set; }
     public string? Description { get; set; }
