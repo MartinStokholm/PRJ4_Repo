@@ -140,12 +140,12 @@ namespace APIUnitTesting.ControllerTests
             var data = _correctData;
             var result = await _controller.PostDishModel(data);
             var accepted = (AcceptedResult)result.Result;
-            var Id = ((Dish)accepted.Value).Id;
+            var Id = ((DishNoMealsDto)accepted.Value).Id;
 
-            var d = data.Adapt<Dish>();
+            var d = data.Adapt<DishNoMealsDto>();
             d.Id = Id;
 
-            Assert.IsTrue(Tools.CompareProperties(d, (Dish)accepted.Value, "Meals"));
+            Assert.IsTrue(Tools.CompareProperties(d, ((DishNoMealsDto)accepted.Value)));
         }
 
         /* GET tests with manually seeded data*/
@@ -255,13 +255,13 @@ namespace APIUnitTesting.ControllerTests
             try
             {
                 long dataId = _dataId[index];
-                StatusCodeResult? putResult = await _controller.PutDishModel(dataId, d) as StatusCodeResult;
-                Assert.AreEqual(putResult.StatusCode, 204);
-                DishMealNames toCheck = d.Adapt<DishMealNames>();
+                ObjectResult? putResult = await _controller.PutDishModel(dataId, d) as ObjectResult;
+                Assert.AreEqual(putResult.StatusCode, 202);
+                DishNoMealsDto toCheck = d.Adapt<DishNoMealsDto>();
                 toCheck.Id = dataId;
                 var getResult = await _controller.GetDish(dataId);
                 var callResult = new Tools.TestCallResult<DishNoMealsDto>(getResult);
-                Assert.IsTrue(Tools.CompareProperties(toCheck, callResult.Value as DishMealNames, "Meals"));
+                Assert.IsTrue(Tools.CompareProperties(toCheck, callResult.Value as DishNoMealsDto, "Meals"));
             }
             catch (Exception e)
             {
