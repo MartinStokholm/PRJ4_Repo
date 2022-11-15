@@ -221,7 +221,7 @@ namespace APIUnitTesting.ControllerTests
         {
             var result = await _controller.PostDishModel(_correctData);
             var accepted = (AcceptedResult)result.Result;
-            var Id = ((Dish)accepted.Value).Id;
+            var Id = ((DishNoMealsDto)accepted.Value).Id;
 
             await _controller.DeleteDishModel(Id);
             var get = new Tools.TestCallResult<DishNoMealsDto>(await _controller.GetDish(Id));
