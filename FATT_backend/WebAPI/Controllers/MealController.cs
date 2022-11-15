@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
         // Should deprecate and use .Include andre steder
         // GET: api/Meal/5
         [HttpGet("{id}/Dishes")]
-        public async Task<ActionResult<IEnumerable<DishThumbnailDto>>> GetDishes(long id)
+        public async Task<ActionResult<IEnumerable<DishNoMealsDto>>> GetDishes(long id)
         {
             var meal = await _context.Meals.FindAsync(id);
 
@@ -80,10 +80,10 @@ namespace WebAPI.Controllers
                 .Collection(m => m.Dishes)
                 .Load();
 
-            List<DishThumbnailDto> dishes = new List<DishThumbnailDto>();
+            List<DishNoMealsDto> dishes = new List<DishNoMealsDto>();
             foreach (var d in meal.Dishes)
             {
-                dishes.Add(d.Adapt<DishThumbnailDto>());
+                dishes.Add(d.Adapt<DishNoMealsDto>());
             }
             return Ok(dishes);
         }

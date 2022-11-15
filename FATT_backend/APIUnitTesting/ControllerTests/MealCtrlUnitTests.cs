@@ -17,8 +17,8 @@ public class MealCtrlUnitTests
 
     private MealController _mealController;
     private DishController _dishController;
-    private DishDtoNoId _correctDish;
-    private DishWThumbnail _dishToCheck;
+    private DishNoIdDto _correctDish;
+    private DishNoMealsDto _dishToCheck;
 
     private List<long> _dataId = new();
     [SetUp]
@@ -27,15 +27,16 @@ public class MealCtrlUnitTests
         _context = Tools.TestContextSetup();
         _mealController = new MealController(_context);
         _dishController = new DishController(_context);
-        _correctDish = new DishDtoNoId
+        _correctDish = new DishNoIdDto()
         {
             Name = "TestDish",
         };
         var d = await _dishController.PostDishModel(_correctDish);
         var res = d.Result as ObjectResult;
-        var dish = res.Value as Dish;
+        var dish = res.Value as DishNoMealsDto;
         _dataId.Add(dish.Id);
-        _dishToCheck = dish.Adapt<DishWThumbnail>();
+        _dishToCheck = _correctDish.Adapt<DishNoMealsDto>();
+        _dishToCheck.Id = dish.Id;
     }
 
     [TearDown]
