@@ -48,8 +48,16 @@ namespace APIUnitTesting.TestUtils
                     {
                         try
                         {
-                            Id = (long)typeof(T).GetProperty("Id").GetValue(objectResult.Value, null);
                             Value = (T)objectResult.Value;
+                        }
+                        catch
+                        {
+                            Error = true;
+                        }
+
+                        try
+                        {
+                            Id = (long)typeof(T).GetProperty("Id").GetValue(objectResult.Value, null);
                         }
                         catch
                         {
