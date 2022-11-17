@@ -83,20 +83,20 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Accepted(found.Adapt<DishNoMealsDto>());
+            return NoContent();
         }
 
         /* POST requests*/
 
         // POST: api/DishModels
         [HttpPost]
-        public async Task<ActionResult<DishNoMealsDto>> PostDishModel(DishNoIdDto dishModel)
+        public async Task<ActionResult<DishNoIdDto>> PostDishModel(DishNoIdDto dishModel)
         {
             Dish d = dishModel.Adapt<Dish>();
             _context.Dishes.Add(d);
             await _context.SaveChangesAsync();
 
-            return Accepted(d.Adapt<DishNoMealsDto>());
+            return Accepted(d.Adapt<DishNoIdDto>());
         }
 
         /* DELETE requests */

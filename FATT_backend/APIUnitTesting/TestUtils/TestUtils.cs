@@ -14,61 +14,14 @@ namespace APIUnitTesting.TestUtils
     {
         public class TestCallResult<T>
         {
-            /// <summary>
-            /// Converts ActionResult into TestCallResult 
-            /// <para>TestCallResult properties include Id, Value and StatusCode of the call result.
-            /// If conversion fails, Error is set to true and other values return null. On StatusCodeResult only StatusCode is set</para>
-            /// <para>Type T is return type of the call</para>
-            /// </summary>
             public TestCallResult(ActionResult<T> actionResult)
             {
-                ObjectResult objectResult = null;
-                try
-                {
-                    var res = actionResult.Result as ObjectResult;
-                    objectResult = res;
-                }
-                catch
-                {
-                    try
-                    {
-                        var sts = actionResult.Result as StatusCodeResult;
-                        StatusCode = sts.StatusCode;
-                    }
-                    catch
-                    {
-                        Error = true;
-                        return;
-                    }
-                }
+                var objectResult = actionResult.Result as ObjectResult;
                 if (objectResult != null && objectResult.Value != null)
                 {
                     StatusCode = objectResult.StatusCode;
-                    if (objectResult.Value != null)
-                    {
-                        try
-                        {
-                            Value = (T)objectResult.Value;
-                        }
-                        catch
-                        {
-                            Error = true;
-                        }
-
-                        try
-                        {
-                            Id = (long)typeof(T).GetProperty("Id").GetValue(objectResult.Value, null);
-                        }
-                        catch
-                        {
-                            Error = true;
-                        }
-                        
-                    }
-                }
-                else if (objectResult != null && objectResult.StatusCode != null)
-                {
-                    StatusCode = objectResult.StatusCode;
+                    Id = (long)typeof(T).GetProperty("Id").GetValue(objectResult.Value, null);
+                    Value = objectResult.Value;
                 }
                 else
                 {
@@ -87,14 +40,8 @@ namespace APIUnitTesting.TestUtils
             }
             public long? Id { get; }
             public int? StatusCode { get; }
-            public T? Value { get; }
-            public bool Error { get;}
+            public object? Value { get; }
         }
-        /// <summary>
-        /// Compares properties of two objects of type T
-        /// <para>Third parameter is string ignore list</para>
-        /// <para>Does not work on complex object lists, they need to be added to ignore list</para>
-        /// </summary>
         public static bool CompareProperties<T>(T? obj1, T? obj2, params string[] ignore) where T : class
         {
             Type type = typeof(T);
@@ -116,9 +63,6 @@ namespace APIUnitTesting.TestUtils
             return true;
         }
 
-        /// <summary>
-        /// Sets up InMemory database for testing
-        /// </summary>
         public static DataContext TestContextSetup() 
         {
             var options = new DbContextOptionsBuilder<DataContext>()

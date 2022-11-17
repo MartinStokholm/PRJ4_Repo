@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
@@ -60,14 +60,13 @@ namespace WebAPI.Controllers
 
             MealNameWDishes ret = meal.Adapt<MealNameWDishes>();
           
-            return Ok(ret);
+            return ret;
         }
 
         // Get all the dishes of a particular meal
-        // Should deprecate and use .Include andre steder
         // GET: api/Meal/5
         [HttpGet("{id}/Dishes")]
-        public async Task<ActionResult<IEnumerable<DishNoMealsDto>>> GetDishes(long id)
+        public async Task<ActionResult<IEnumerable<DishThumbnailDto>>> GetDishes(long id)
         {
             var meal = await _context.Meals.FindAsync(id);
 
@@ -80,12 +79,12 @@ namespace WebAPI.Controllers
                 .Collection(m => m.Dishes)
                 .Load();
 
-            List<DishNoMealsDto> dishes = new List<DishNoMealsDto>();
+            List<DishThumbnailDto> dishes = new List<DishThumbnailDto>();
             foreach (var d in meal.Dishes)
             {
-                dishes.Add(d.Adapt<DishNoMealsDto>());
+                dishes.Add(d.Adapt<DishThumbnailDto>());
             }
-            return Ok(dishes);
+            return dishes;
         }
 
 
@@ -94,7 +93,7 @@ namespace WebAPI.Controllers
         // Change Name, Category or Description
         // PUT: api/MealModels/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(long id, MealSimpleNoId meal)
+        public async Task<IActionResult> PutMeal(long id, MealSimple meal)
         {
             var found = await _context.Meals.FindAsync(id);
             if (found == null)
@@ -122,7 +121,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Accepted(found);
+            return NoContent();
         }
 
         // PUT: api/Meal/1/AddDish/5
@@ -167,7 +166,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Accepted(meal.Adapt<MealNameWDishes>());
+            return NoContent();
         }
 
         // PUT: api/Meal/1/RemoveDish/5
@@ -204,7 +203,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Accepted(meal.Adapt<MealNameWDishes>());
+            return NoContent();
         }
 
 
@@ -212,12 +211,13 @@ namespace WebAPI.Controllers
 
         // POST: api/Meal
         [HttpPost]
-        public async Task<ActionResult<MealSimple>> PostMeal(MealSimpleNoId meal)
+        public async Task<ActionResult<Meal>> PostMeal(MealSimple meal)
         {
-            var adapted = meal.Adapt<Meal>();
-            _context.Meals.Add(adapted);
+
+            var added = _context.Meals.Add(meal.Adapt<Meal>());
             await _context.SaveChangesAsync();
-            return Accepted(adapted.Adapt<MealSimple>());
+            var created = _context.Meals.FirstOrDefault(m => m.Id == added.Entity.Id);
+            return Accepted(created);
         }
 
         /* DELETE */
