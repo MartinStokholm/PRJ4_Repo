@@ -82,7 +82,7 @@ namespace WebAPI.Controllers
             _context.Workouts.Add(newWorkout);
             _context.SaveChanges();
 
-            return Ok(await _context.Workouts.FindAsync(newWorkout.Id));
+            return Accepted(await _context.Workouts.FindAsync(newWorkout.Id));
         }
 
         // PUT {exerciseid} on Workout list of exercises

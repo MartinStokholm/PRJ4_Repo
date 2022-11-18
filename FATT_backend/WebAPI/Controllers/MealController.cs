@@ -94,7 +94,7 @@ namespace WebAPI.Controllers
         // Change Name, Category or Description
         // PUT: api/MealModels/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMeal(long id, MealSimple meal)
+        public async Task<ActionResult<MealNameWDishes>> PutMeal(long id, MealSimple meal)
         {
             var found = await _context.Meals.FindAsync(id);
             if (found == null)

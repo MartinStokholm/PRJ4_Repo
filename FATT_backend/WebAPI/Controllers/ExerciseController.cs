@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
             var exercisesToAdd = exercises.Adapt<List<Exercise>>();
             await _context.Exercises.AddRangeAsync(exercisesToAdd);
             await _context.SaveChangesAsync();
-            return exercisesToAdd.Adapt<List<ExerciseSimpleDto>>();
+            return Accepted(exercisesToAdd.Adapt<List<ExerciseSimpleDto>>());
         }
 
         [HttpPost]
@@ -37,7 +37,7 @@ namespace WebAPI.Controllers
 
             await _context.SaveChangesAsync();
             
-            return Ok(exerciseToAdd.Adapt<ExerciseSimpleDto>());
+            return Accepted(exerciseToAdd.Adapt<ExerciseSimpleDto>());
         }
 
         [HttpPut("{exerciseId}")]
@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
             
             await _context.SaveChangesAsync();
 
-            return Ok(await _context.Exercises.FindAsync(exerciseId));
+            return Accepted(await _context.Exercises.FindAsync(exerciseId));
         }
 
         [HttpGet("Thumbnail")]

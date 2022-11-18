@@ -103,8 +103,8 @@ public class MealCtrlUnitTests
             Name = "TestMeal2",
             Description = "TestDescription2",
         };
-        var result = await _mealController.PutMeal(m.Id, meal2);
-        var statusCode = (result as ObjectResult).StatusCode;
+        var result = new Tools.TestCallResult<MealNameWDishes>(await _mealController.PutMeal(m.Id, meal2));
+        var statusCode = result.StatusCode;
         Assert.AreEqual(202, statusCode);
     }
 
@@ -133,16 +133,16 @@ public class MealCtrlUnitTests
             Name = "TestMeal",
             Description = "TestDescription",
         };
-        var post = await _mealController.PostMeal(meal);
-        var m = (post.Result as ObjectResult).Value as MealNameWDishes;
+        var post = new Tools.TestCallResult<MealNameWDishes>(await _mealController.PostMeal(meal));
+       
         var meal2 = new MealSimple
         {
             Name = "TestMeal2",
             Description = "TestDescription2",
         };
-        var result = await _mealController.PutMeal(m.Id, meal2);
-        var entry = (result as ObjectResult).Value.Adapt<MealSimple>();
-        Assert.IsTrue(Tools.CompareProperties<MealSimple>(meal2, entry));
+        var result = new Tools.TestCallResult<MealNameWDishes>(await _mealController.PutMeal(post.Value.Id, meal2));
+        var test = meal2.Adapt<MealNameWDishes>();
+        Assert.IsTrue(Tools.CompareProperties(result.Value, test, "Id", "Dishes"));
     }
     
     [Test]
