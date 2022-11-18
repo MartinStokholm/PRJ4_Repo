@@ -14,8 +14,9 @@ import {
   addExercisesToWorkout,
   useAddExercisesToWorkoutData,
 } from "../../src/mutation/workout/PostWorkoutAddExerciseList";
-import { getExercisesList } from "../../src/queries/Exercises";
+import getExercisesList from "../../src/queries/Exercises";
 import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
+import WorkoutSearchbar from "../../src/components/WorkoutSearchbar";
 
 const onSuccess = () => {
   {
@@ -30,7 +31,7 @@ const onError = (error) => {
 };
 
 export default function TestPage() {
-  const { data: ExerciseData } = getExercisesList(onSuccess, onError);
+  const { data: ExerciseData } = getExercisesList();
 
   const [workoutId, setWorkoutId] = useState();
   const [name, setName] = useState("");
@@ -127,6 +128,7 @@ export default function TestPage() {
         text={"Add Exercise To Workout"}
       />
       <div></div>
+      <WorkoutSearchbar />
     </>
   );
 }

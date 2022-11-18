@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
+import { EventEmitter2 } from "eventemitter2";
+import { toast } from "react-toastify";
 
 export const updateWorkoutRemoveExercise = async (workout) => {
   console.log(workout);
@@ -11,11 +13,26 @@ export const updateWorkoutRemoveExercise = async (workout) => {
   });
 };
 
-export const useUpdateWorkoutRemoveExercise = (onSuccess) => {
+const emitter = new EventEmitter2();
+
+export const useUpdateWorkoutRemoveExercise = () => {
   const queryClient = useQueryClient();
   return useMutation(updateWorkoutRemoveExercise, {
     onSuccess: (data, context) => {
-      <div
+      toast.success(`Removed Exercise "${data.data.name}"`);
+    },
+    onError: () => {
+      toast.error("Failed to remove exercise");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries("workoutsKey");
+      queryClient.invalidateQueries("workoutKey");
+    },
+  });
+};
+
+{
+  /* <div
         id="toast-success"
         className="flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
         role="alert"
@@ -58,15 +75,5 @@ export const useUpdateWorkoutRemoveExercise = (onSuccess) => {
             ></path>
           </svg>
         </button>
-      </div>;
-      console.log("Removed");
-    },
-    onError: () => {
-      alert("there was an error");
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries("workoutsKey");
-      queryClient.invalidateQueries("workoutKey");
-    },
-  });
-};
+      </div>; */
+}

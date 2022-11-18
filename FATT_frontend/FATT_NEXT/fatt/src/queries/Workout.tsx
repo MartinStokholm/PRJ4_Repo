@@ -3,10 +3,10 @@ import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
 const fetchWorkout = async ({ queryKey }) => {
-  console.log(queryKey[1]);
+  console.log(`Fetch from ${queryKey[1]}`);
   const id = queryKey[1];
   const response = await request({ url: `workout/${id}`, method: "get" });
-  console.log(response.status);
+  console.log(`Response code: ${response.status}`);
   if (response.status == 304) {
     throw new Error("Problem fetching data");
   }

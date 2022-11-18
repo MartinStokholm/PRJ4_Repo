@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 import type { Workout } from "../../../interfaces/Workout";
 
@@ -16,10 +17,10 @@ export const useDeleteWorkoutData = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteWorkout, {
     onSuccess: () => {
-      alert("Deleted");
+      toast.success(`Delete workout `);
     },
     onError: () => {
-      alert("there was an error");
+      toast.error(`Error in deleting workout `);
     },
     onSettled: () => {
       queryClient.invalidateQueries("workoutsKey");

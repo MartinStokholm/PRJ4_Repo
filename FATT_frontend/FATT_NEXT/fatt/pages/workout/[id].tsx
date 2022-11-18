@@ -4,21 +4,18 @@ import LoadingSpinner from "../../src/components/LoadingSpinner";
 import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
 import { useRouter } from "next/router";
 import WorkoutItem from "../../src/components/WorkoutItem";
+import WorkoutSearchbar from "../../src/components/WorkoutSearchbar";
 import Error from "next/error";
+import { useEffect, useState } from "react";
 
 export default function WorkoutPage() {
-  // Get id from route
-  const workoutId = useRouter().query.id as string;
-  //parseInt(useRouter().query.id as string, 10);
-
-  // Get Workout
+  // Get Exercises and workout
   const {
     isLoading,
     data: workoutData,
     isError,
     error,
-  } = getWorkout(workoutId);
-  // Get Exercises
+  } = getWorkout(useRouter().query.id as string);
   const { data: exerciseData } = getExercisesList();
 
   // Handler for when button is clicked. We send a request to add or remove a specific exercise to/from workout
@@ -42,12 +39,8 @@ export default function WorkoutPage() {
 
   return (
     <>
-      {/* This is a idea only. We map a button add and remove relative to if the 
-          workout already contains the exercise. I going to move all the put information (mutate) in 
-          a component were we only have to give id's with  */}
+      <WorkoutSearchbar />
       <WorkoutItem workoutData={workoutData} exerciseData={exerciseData} />
-
-      {/* <Button onClick={handleAddButtonClick} text={"Add"} /> */}
     </>
   );
 }

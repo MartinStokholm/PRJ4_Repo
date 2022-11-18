@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
-import { request } from "../utils/axios";
+import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
-import type { ExerciseIds } from "../../interfaces/Exercise";
+import type { ExerciseIds } from "../../../interfaces/Exercise";
 
 export const removeExercisesToWorkout = async (
   workoutId: number,
@@ -19,6 +20,7 @@ export const useRemoveExercisesToWorkoutData = () => {
   const queryClient = useQueryClient();
   return useMutation(removeExercisesToWorkout, {
     onMutate: async (newExerciseList) => {
+      toast(`Remove Exercise List From Workout`);
       await queryClient.cancelQueries("workoutsKey");
       const previouesWorkoutData = queryClient.getQueryData("workoutsKey");
       queryClient.setQueryData("workoutsKey", (oldQueryData) => {
@@ -30,14 +32,17 @@ export const useRemoveExercisesToWorkoutData = () => {
             { ...(oldQueryData?.data?.length + 1), ...newExerciseList },
           ],
         };
-      });
+      }
+      
+      );
       return {
         previouesWorkoutData,
       };
+       //toast(`Add Exercise "${newExerciseList.name}"`);
     },
     onError: (_error, _workout, context) => {
       queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
-      alert("there was an error");
+      toast.error("Failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries("workoutsKey");
@@ -45,3 +50,7 @@ export const useRemoveExercisesToWorkoutData = () => {
     },
   });
 };
+
+onSuccess: (data, context) => {
+  toast.success(`Add Exercise "${data.data.name}"`);
+},
