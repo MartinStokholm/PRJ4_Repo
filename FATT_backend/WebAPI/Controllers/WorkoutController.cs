@@ -177,7 +177,14 @@ namespace WebAPI.Controllers
                 .Collection(w => w.Exercises)
                 .Load();
 
-            return Ok(dbWorkout.Adapt<WorkoutWithExerciseIdDto>());
+            var result = dbWorkout.Adapt<WorkoutWithExerciseIdDto>();
+
+            foreach (var item in dbWorkout.Exercises)
+            {
+                result.ExercisesIds.Add(item.Id);
+            }
+
+            return Ok(result);
         }
 
         [HttpGet("Simple")]
