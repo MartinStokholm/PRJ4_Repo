@@ -25,9 +25,11 @@ const fecthExercises = async () => {
   }
 };
 
-export const getExercisesList = (onSuccess, onError) => {
+const getExercisesList = (onSuccess, onError) => {
   return useQuery("exercisesKey", fecthExercises, {
     onSuccess,
     onError,
   });
 };
+
+export default getExercisesList;

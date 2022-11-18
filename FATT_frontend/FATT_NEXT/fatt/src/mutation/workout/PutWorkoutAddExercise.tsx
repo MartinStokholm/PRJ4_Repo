@@ -5,6 +5,7 @@ import { request } from "../../utils/axios";
 import type { Workout } from "../../../interfaces/Workout";
 
 export const updateWorkoutAddExercise = async (workout) => {
+  console.log(workout);
   return request({
     url: `workout/${workout.workoutId}/AddExercise/${workout.exerciseId}`,
     method: "put",

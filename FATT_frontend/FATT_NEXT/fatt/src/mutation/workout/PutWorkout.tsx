@@ -16,9 +16,9 @@ export const updateWorkout = async (workout: Workout) => {
 export const useUpdateWorkoutData = () => {
   const queryClient = useQueryClient();
   return useMutation(updateWorkout, {
-    onSuccess: (data) => {
-      alert("Update");
-    },
+    // onSuccess: (data) => {
+    //   alert("Update");
+    // },
     onError: () => {
       alert("there was an error");
     },

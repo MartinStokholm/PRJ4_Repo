@@ -1,6 +1,6 @@
 import LoadingSpinner from "../../src/components/LoadingSpinner";
 import { getWorkoutsList } from "../../src/queries/Workouts";
-import { getExercisesList } from "../../src/queries/Exercises";
+import getExercisesList from "../../src/queries/Exercises";
 import WorkoutList from "../../src/components/WorkoutList";
 import Error from "next/error";
 const onSuccess = (WorkoutData, ExerciseData) => {
@@ -23,7 +23,7 @@ export default function WorkoutPage() {
     error,
   } = getWorkoutsList(onSuccess, onError);
 
-  const { data: exerciseData } = getExercisesList(onSuccess, onError);
+  const { data: exerciseData } = getExercisesList();
 
   if (isLoading) {
     return <LoadingSpinner />;

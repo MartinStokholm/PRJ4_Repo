@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "react-query";
 import { request } from "../../utils/axios";
 
-import type { Exercise } from "../../../interfaces/Exercise";
+import type { WorkoutRemoveDto } from "../../../interfaces/Exercise";
 
-export const deleteExercise = async (exercise: Exercise) => {
+export const deleteExercise = async (exercise: WorkoutRemoveDto) => {
   return request({
     url: `exercise/${exercise.Id}`,
     method: "delete",

@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
 const fetchWorkout = async ({ queryKey }) => {
+  console.log(queryKey[1]);
   const id = queryKey[1];
   const response = await request({ url: `workout/${id}`, method: "get" });
   console.log(response.status);
@@ -15,7 +16,7 @@ const fetchWorkout = async ({ queryKey }) => {
   return response;
 };
 
-export const getWorkout = (id, onSuccess, onError) => {
+export const getWorkout = (id: string) => {
   const queryClient = useQueryClient();
   return useQuery([`workoutKey`, id], fetchWorkout, {
     initialData: () => {
@@ -29,8 +30,6 @@ export const getWorkout = (id, onSuccess, onError) => {
         return undefined;
       }
     },
-    onSuccess,
-    onError,
   });
 };
 
