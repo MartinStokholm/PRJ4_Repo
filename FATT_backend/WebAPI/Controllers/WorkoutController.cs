@@ -165,7 +165,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("{workoutId}")]
-        public async Task<ActionResult<WorkoutWithExerciseFullDto>> GetWorkoutById(long workoutId)
+        public async Task<ActionResult<WorkoutWithExerciseIdDto>> GetWorkoutById(long workoutId)
         {
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
             if (dbWorkout == null)
@@ -177,7 +177,7 @@ namespace WebAPI.Controllers
                 .Collection(w => w.Exercises)
                 .Load();
 
-            return Ok(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
+            return Ok(dbWorkout.Adapt<WorkoutWithExerciseIdDto>());
         }
 
         [HttpGet("Simple")]
