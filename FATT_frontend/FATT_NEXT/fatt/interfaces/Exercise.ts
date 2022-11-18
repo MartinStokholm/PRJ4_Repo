@@ -1,60 +1,59 @@
 export type Exercise = {
-    id: number 
-    name: string
-    category: string
-    durantion: number
-    intensity: number
-    repetitions: number
-    sets: number
-    picturePath: string;
-    videoPath: string;
+  Id: number;
+  Name: string;
+  Category: string;
+  Durantion: number;
+  Intensity: number;
+  Repetitions: number;
+  Sets: number;
+  PicturePath: string;
+  VideoPath: string;
 };
 
 export type ExerciseIds = {
-    exerciseIds: number[];
-}
+  ExerciseIds: number[];
+};
 
 export type Exercises = {
-    data: Exercise[];
-}
+  Data: Exercise[];
+};
 
 export type ExerciseCreateNoIdDto = {
-    name: string
-    category: string
-    durantion: number
-    intensity: number
-    repetitions: number
-    sets: number
-    picturePath: string;
-    videoPath: string;
+  Name: string;
+  Category: string;
+  Durantion: number;
+  Intensity: number;
+  Repetitions: number;
+  Sets: number;
+  PicturePath: string;
+  VideoPath: string;
 };
 
 export type ExerciseFullDto = {
-    id: number 
-    name: string
-    category: string
-    durantion: number
-    intensity: number
-    repetitions: number
-    sets: number
-    picturePath: string;
-    videoPath: string;
+  Id: number;
+  Name: string;
+  Category: string;
+  Durantion: number;
+  Intensity: number;
+  Repetitions: number;
+  Sets: number;
+  PicturePath: string;
+  VideoPath: string;
 };
 
-
 export type ExerciseSimpleDto = {
-    id: number;
-    name: string;
+  Id: number;
+  Name: string;
 };
 
 export type ExerciseThumbnailDto = {
-    name: string;
-    category: string;
-    picturePath: string;
+  Id: number;
+  Category: string;
+  PicturePath: string;
 };
 
 export type ExerciseUpdateDto = {
-    intensity: string;
-    reptitions: string;
-    sets: number;
-}
+  Intensity: string;
+  Reptitions: string;
+  Sets: number;
+};

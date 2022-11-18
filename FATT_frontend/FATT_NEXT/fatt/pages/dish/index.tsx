@@ -1,6 +1,6 @@
 import LoadingSpinner from "../../src/components/LoadingSpinner";
 import DishList from "../../src/components/DishList";
-import { useDishsData } from "../../src/hooks/useDishsData";
+import { getDishsList } from "../../src/queries/Dishs";
 import Error from "next/error";
 const onSuccess = (data) => {
   console.log("Perform side effect after data fetching", data);
@@ -11,7 +11,7 @@ const onError = (error) => {
 };
 
 export default function ExercisePage() {
-  const { isLoading, data, isError, error, isFetching, refetch } = useDishsData(
+  const { isLoading, data, isError, error, isFetching, refetch } = getDishsList(
     onSuccess,
     onError
   );

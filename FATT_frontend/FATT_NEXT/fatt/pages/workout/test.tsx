@@ -1,23 +1,38 @@
 import { useMutation } from "react-query";
-import { addWorkout, useAddWorkoutData } from "../../src/mutation/PostWorkout";
+import {
+  addWorkout,
+  useAddWorkoutData,
+} from "../../src/mutation/workout/PostWorkout";
 import { useState } from "react";
 import Button from "../../src/components/Button";
 import {
   updateWorkout,
   useUpdateWorkoutData,
-} from "../../src/mutation/PutWorkout";
-import { useDeleteWorkoutData } from "../../src/mutation/DeleteWorkout";
+} from "../../src/mutation/workout/PutWorkout";
+import { useDeleteWorkoutData } from "../../src/mutation/workout/DeleteWorkout";
 import {
   addExercisesToWorkout,
   useAddExercisesToWorkoutData,
-} from "../../src/mutation/PostWorkoutAddExerciseList";
-import { useExercisesData } from "../../src/hooks/useExercisesData";
-import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/PutWorkoutAddExercise";
+} from "../../src/mutation/workout/PostWorkoutAddExerciseList";
+import { getExercisesList } from "../../src/queries/Exercises";
+import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
+
+const onSuccess = () => {
+  {
+    /* Maybe we only should show data if success*/
+  }
+
+  console.log("Perform side effect after data fetching");
+};
+
+const onError = (error) => {
+  console.log(`Perform side effect after encountered error\n ${error}`);
+};
 
 export default function TestPage() {
-  const { data: ExerciseData } = useExercisesData();
+  const { data: ExerciseData } = getExercisesList(onSuccess, onError);
 
-  const [id, setId] = useState();
+  const [workoutId, setWorkoutId] = useState();
   const [name, setName] = useState("");
   const [duration, setDuration] = useState("");
   const [exercisesIds, setExerciseIds] = useState("");
@@ -39,88 +54,79 @@ export default function TestPage() {
   };
 
   const handleUpdateWorkoutClick = () => {
-    console.log({ id, name, duration, exercisesIds });
+    console.log({ workoutId, name, duration, exercisesIds });
 
-    const workout = { id, name, duration, exercisesIds };
+    const workout = { workoutId, name, duration, exercisesIds };
     updateWorkout(workout);
   };
 
   // Need to make a array builder, because the data that is tranfered over
   // is a list of numbers
   const handleaddExercisesToWorkoutClick = () => {
-    console.log({ id, exercisesIds });
+    console.log({ workoutId, exercisesIds });
 
-    const workout = { id, exercisesIds };
+    const workout = { workoutId, exercisesIds };
     addExercisesToWorkout(workout);
   };
 
   const handleUpdateWorkoutAddExerciseClick = () => {
-    console.log({ id, exerciseId });
+    console.log({ workoutId, exerciseId });
 
-    const workout = { id, exerciseId };
+    const workout = { workoutId, exerciseId };
     updateWorkoutAddExercise(workout);
   };
 
   const handleDeleteWorkoutClick = () => {
-    console.log({ id, name, duration, exercisesIds });
+    console.log({ workoutId, name, duration, exercisesIds });
 
-    const workout = { id, name, duration, exercisesIds };
+    const workout = { workoutId, name, duration, exercisesIds };
     deleteWorkout(workout);
   };
 
   return (
-    <div className="bg-white max-w-m rounded overflow-hidden shadow-lg content-center h-200">
-      <div className="py-4 px-8">
-        <input
-          className="border rounded-md m-4"
-          type="text"
-          placeholder="workoutId"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
-        <input
-          className="border rounded-md m-4"
-          type="text"
-          value={name}
-          placeholder="name"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          className="border rounded-md m-4"
-          type="text"
-          value={duration}
-          placeholder="duration"
-          onChange={(e) => setDuration(e.target.value)}
-        />
-        <input
-          className="border rounded-md m-4"
-          type="text"
-          placeholder="exercisesIds"
-          value={exercisesIds}
-          onChange={(e) => setExerciseIds(e.target.value)}
-        />
-        <input
-          className="border rounded-md m-4"
-          type="text"
-          value={exerciseId}
-          placeholder="exerciseId"
-          onChange={(e) => setExerciseId(e.target.value)}
-        />
-      </div>
-
-      <div className="py-4 px-8">
-        <Button onClick={handleAddWorkoutClick} text={"Add"} />
-        <Button onClick={handleUpdateWorkoutClick} text={"Update"} />
-        <Button onClick={handleDeleteWorkoutClick} text={"Delete"} />
-        <Button
-          onClick={handleaddExercisesToWorkoutClick}
-          text={"Add Exercises To Workout"}
-        />
-        <Button
-          onClick={handleUpdateWorkoutAddExerciseClick}
-          text={"Add Exercise To Workout"}
-        />
-      </div>
-    </div>
+    <>
+      <input
+        type="text"
+        placeholder="workoutId"
+        value={workoutId}
+        onChange={(e) => setWorkoutId(e.target.value)}
+      />
+      <input
+        type="text"
+        value={name}
+        placeholder="name"
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="text"
+        value={duration}
+        placeholder="duration"
+        onChange={(e) => setDuration(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="exercisesIds"
+        value={exercisesIds}
+        onChange={(e) => setExerciseIds(e.target.value)}
+      />
+      <input
+        type="text"
+        value={exerciseId}
+        placeholder="exerciseId"
+        onChange={(e) => setExerciseId(e.target.value)}
+      />
+      <Button onClick={handleAddWorkoutClick} text={"Add"} />
+      <Button onClick={handleUpdateWorkoutClick} text={"Update"} />
+      <Button onClick={handleDeleteWorkoutClick} text={"Delete"} />
+      <Button
+        onClick={handleaddExercisesToWorkoutClick}
+        text={"Add Exercises To Workout"}
+      />
+      <Button
+        onClick={handleUpdateWorkoutAddExerciseClick}
+        text={"Add Exercise To Workout"}
+      />
+      <div></div>
+    </>
   );
 }

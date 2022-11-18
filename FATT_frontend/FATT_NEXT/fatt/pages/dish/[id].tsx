@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useDishData } from "../../src/hooks/useDishData";
+import { getDish } from "../../src/queries/Dish";
 import DishItem from "../../src/components/DishItem";
 import LoadingSpinner from "../../src/components/LoadingSpinner";
 import Error from "next/error";
@@ -21,11 +21,7 @@ export default function DishPage() {
   console.log(id);
 
   // Get dish
-  const { isLoading, data, isError, error } = useDishData(
-    id,
-    onSuccess,
-    onError
-  );
+  const { isLoading, data, isError, error } = getDish(id, onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;

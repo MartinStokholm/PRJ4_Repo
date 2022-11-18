@@ -1,15 +1,15 @@
-import { useWorkoutData } from "../../src/hooks/useWorkoutData";
-import { useExercisesData } from "../../src/hooks/useExercisesData";
+import { useWorkoutData } from "../../src/queries/Workout";
+import { useExercisesData } from "../../src/queries/Exercises";
 import LoadingSpinner from "../../src/components/LoadingSpinner";
 import Link from "next/link";
 import Button from "../../src/components/Button";
-import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/PutWorkoutAddExercise";
+import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import {
   updateWorkoutRemoveExercise,
   useUpdateWorkoutRemoveExercise,
-} from "../../src/mutation/PutWorkoutRemoveExercise";
+} from "../../src/mutation/workout/PutWorkoutRemoveExercise";
 import Error from "next/error";
 const onSuccess = (workoutData, exerciseData) => {
   {

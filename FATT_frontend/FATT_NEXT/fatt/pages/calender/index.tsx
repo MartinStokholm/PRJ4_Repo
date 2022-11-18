@@ -1,5 +1,5 @@
 import Calender from "../../src/components/Calender";
-import { useGetCalendar } from "../../src/hooks/GetCalandar";
+import { getCalendar } from "../../src/queries/Calandar";
 export default function CalenderPage() {
   //Just temp account id
   const accountId = 1;
