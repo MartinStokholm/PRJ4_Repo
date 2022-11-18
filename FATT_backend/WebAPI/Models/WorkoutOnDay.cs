@@ -6,6 +6,8 @@
         
         public long WorkoutId { get; set; }
 
+        public long MealId { get; set; }
+
         public string? Day { get; set; }
         
     }

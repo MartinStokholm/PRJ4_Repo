@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
                 return NotFound("Could not find calender");
             }
             
-            _context.Entry(dbCalender).Collection(c => c.WorkoutDates).Load();
+            _context.Entry(dbCalender).Collection(c => c.WorkoutDays).Load();
             
             return dbCalender;
         }
@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
                 .Load();
 
 
-            dbCalender.WorkoutDates.Add(new WorkoutOnDay
+            dbCalender.WorkoutDays.Add(new WorkoutOnDay
             {
                 WorkoutId = dbWorkout.Id,
                 Day = day
