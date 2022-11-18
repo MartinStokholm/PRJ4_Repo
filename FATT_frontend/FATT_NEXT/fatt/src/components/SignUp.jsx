@@ -35,7 +35,7 @@ const SignUp = (props) => {
   };
   return (
     <div className="grid place-items-center">
-      <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+      <img src="/fatt-logo.png" alt="Fattylee" width="25%" height="25%" />
       <section>
         <h2> Sign Up</h2>
         <h3 className="italic">It’s free, quick and easy</h3>

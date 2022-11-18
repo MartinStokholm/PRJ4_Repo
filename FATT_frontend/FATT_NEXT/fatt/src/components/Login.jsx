@@ -22,7 +22,7 @@ const Login = (props) => {
   };
   return (
     <div className="grid place-items-center">
-      <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+      <img src="/fatt-logo.png" alt="Fattylee" width="25%" height="25%" />
       <section className="w-1/3">
         <h2>Log-in</h2>
         <form onSubmit={handleForm}>
