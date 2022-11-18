@@ -44,7 +44,9 @@ namespace WebAPI.Controllers
             }
             
             _context.Entry(dbCalender).Collection(c => c.WorkoutDays).Load();
-            
+            _context.Entry(dbCalender).Collection(c => c.MealDays).Load();
+
+
             return dbCalender;
         }
 
