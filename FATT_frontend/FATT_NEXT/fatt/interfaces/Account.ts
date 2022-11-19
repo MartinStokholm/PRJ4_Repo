@@ -13,8 +13,6 @@ export type Accounts = {
 
 export type AccountNoIdDto = {
   name: string;
-  weigth: number;
-  gender: string;
-  age: number;
   email: string;
+  password: string;
 };
