@@ -59,7 +59,7 @@ public class WorkoutCtrlUnitTests
         };
         _context.Add(w);
         await _context.SaveChangesAsync();
-        var res = new Tools.TestCallResult<WorkoutWithExercisesIdDto>(await _controller.GetWorkoutById(w.Id));
+        var res = new Tools.TestCallResult<WorkoutCreateWithExercisesIdsDto>(await _controller.GetWorkoutById(w.Id));
         _dataId.Add((long)res.Id);
         Assert.AreEqual(200, res.StatusCode);
     }
