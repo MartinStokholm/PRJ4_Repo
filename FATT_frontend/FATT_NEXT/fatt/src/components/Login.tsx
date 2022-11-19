@@ -4,17 +4,17 @@ import React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import { AccountLoginDto } from "../../interfaces/Account";
-import { usePostLogin } from "../mutation/account/PostLogin";
+import { useLogin } from "../mutation/account/PostLogin";
 
 const Login = (props) => {
-  const { mutate: postLogin } = usePostLogin();
+  const { mutate: login } = useLogin();
   const [Password, setPassword] = useState("");
   const [Email, setEmail] = useState("");
   const handleForm = (e) => {
     e.preventDefault();
 
     const account: AccountLoginDto = { email: Email, password: Password };
-    postLogin(account);
+    login(account);
   };
 
   return (

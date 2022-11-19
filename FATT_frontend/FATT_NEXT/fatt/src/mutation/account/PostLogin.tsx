@@ -6,7 +6,7 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 import { server } from "../../../config/config";
 
-export const postLogin = async (account: AccountLoginDto) => {
+export const login = async (account: AccountLoginDto) => {
   const response = await axios({
     url: `${server}account/login`,
     method: "post",
@@ -16,9 +16,9 @@ export const postLogin = async (account: AccountLoginDto) => {
   localStorage.setItem("token", response.data);
 };
 
-export const usePostLogin = () => {
+export const useLogin = () => {
   const queryClient = useQueryClient();
-  return useMutation(postLogin, {
+  return useMutation(login, {
     onSuccess: (newAccount) => {
       toast.success(`Login`);
       //useRouter().push("/login");

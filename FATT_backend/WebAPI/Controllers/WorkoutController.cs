@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Dto.Exercise;
 using WebAPI.Dto.Workout;
@@ -8,6 +9,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WorkoutController : ControllerBase
     {
         private readonly DataContext _context;
@@ -80,7 +82,7 @@ namespace WebAPI.Controllers
 
                 _context.Workouts.Add(newWorkout);
             }
-            
+
             return Ok(workouts);
         }
 
@@ -155,14 +157,14 @@ namespace WebAPI.Controllers
         public ActionResult<List<WorkoutWithExerciseFullDto>> GetWorkoutsWithExercisesFull()
         {
             var dbWorkouts = _context.Workouts.ToList();
-            
+
             foreach (var workout in dbWorkouts)
             {
                 _context.Entry(workout)
                     .Collection(w => w.Exercises)
                     .Load();
             }
-            
+
             return Ok(dbWorkouts.Adapt<List<WorkoutWithExerciseFullDto>>());
         }
 
@@ -171,7 +173,7 @@ namespace WebAPI.Controllers
         {
             var dbWorkouts = _context.Workouts.ToList();
             var result = dbWorkouts.Adapt<List<WorkoutCreateWithExercisesIdsDto>>();
-            
+
             foreach (var workout in dbWorkouts)
             {
                 _context.Entry(workout)

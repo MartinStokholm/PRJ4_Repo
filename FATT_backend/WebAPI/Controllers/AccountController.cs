@@ -9,11 +9,13 @@ using System.Net.Mail;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountController : ControllerBase
     {
         private readonly DataContext _context;
@@ -25,6 +27,7 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<Account>> Register(AccountDto request)
         {
@@ -48,7 +51,7 @@ namespace WebAPI.Controllers
                 Weigth = 0,
                 Gender = ""
             };
-
+            //_context.Calender.Add(Calender);
             _context.Accounts.Add(account);
 
             var id = await _context.SaveChangesAsync();
@@ -56,7 +59,7 @@ namespace WebAPI.Controllers
             return Accepted(account);
         }
 
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(AccountLoginDto request)
         {
