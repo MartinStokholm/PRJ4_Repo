@@ -20,9 +20,8 @@ export const SetupInterceptors = () => {
     },
     (error) => {
       var status = error.response.status;
-
       if (status === 401) {
-        router.push("/login");
+        return router.push("/login");
       }
       return error;
     }
@@ -30,10 +29,8 @@ export const SetupInterceptors = () => {
 };
 
 export const request = ({ ...options }) => {
-  console.log(getToken());
   client.defaults.headers.common["Authorization"] = `Bearer ${getToken()}`;
   const onSuccess = (response) => {
-    console.log("Response", response);
     return response;
   };
   const onError = (error) => {

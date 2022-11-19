@@ -15,11 +15,12 @@ export const postRegister = async (account: AccountNoIdDto) => {
 };
 
 export const usePostRegister = () => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation(postRegister, {
     onSuccess: (newAccount) => {
       toast.success(`Account Created "${newAccount.data.name}"`);
-      //useRouter().push("/login");
+      router.push("/login");
       // () => middleware();
     },
     onError: (_error, _account, context) => {

@@ -5,6 +5,7 @@ import { AccountLoginDto } from "../../../interfaces/Account";
 import axios from "axios";
 import { NextResponse } from "next/server";
 import { server } from "../../../config/config";
+import { useRouter } from "next/router";
 
 export const login = async (account: AccountLoginDto) => {
   const response = await axios({
@@ -17,11 +18,13 @@ export const login = async (account: AccountLoginDto) => {
 };
 
 export const useLogin = () => {
+  const router = useRouter();
+
   const queryClient = useQueryClient();
   return useMutation(login, {
     onSuccess: (newAccount) => {
       toast.success(`Login`);
-      //useRouter().push("/login");
+      return Promise.resolve(router.push("/"));
       // () => middleware();
     },
     onError: (_error, _account, context) => {
