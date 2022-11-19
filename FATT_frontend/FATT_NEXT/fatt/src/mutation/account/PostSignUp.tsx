@@ -5,20 +5,36 @@ import { toast } from "react-toastify";
 
 import type { AccountNoIdDto } from "../../../interfaces/Account";
 
-export const postRegister = async (account: AccountNoIdDto) => {
-  return request({ url: `account/register`, method: "post", data: account });
+export const addAccount = async (account: AccountNoIdDto) => {
+  return request({ url: `account`, method: "post", data: account });
 };
 
-export const usePostRegister = () => {
+export const useAddAccountData = () => {
   const queryClient = useQueryClient();
-  return useMutation(postRegister, {
-    onSuccess: (newAccount) => {
+  return useMutation(addAccount, {
+    onMutate: async (newAccount) => {
       toast.success(`Account Created "${newAccount.name}"`);
-      queryClient.invalidateQueries("accountKey");
+      await queryClient.cancelQueries("accountsKey");
+      const previouesAccountData = queryClient.getQueryData("accountsKey");
+      queryClient.setQueryData("accountsKey", (oldQueryData) => {
+        return {
+          ...oldQueryData,
+          data: [
+            ...oldQueryData.data,
+            { ...(oldQueryData?.data?.length + 1), ...newAccount },
+          ],
+        };
+      });
+      return {
+        previouesAccountData,
+      };
     },
     onError: (_error, _account, context) => {
       queryClient.setQueryData("accountsKey", context.previouesAccountData);
       toast.error("Creating Account Failed");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries("accountsKey");
     },
   });
 };

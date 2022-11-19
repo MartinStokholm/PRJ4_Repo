@@ -8,7 +8,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 
 namespace WebAPI.Controllers
 {
@@ -16,6 +15,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private static Account _account = new Account();
         private readonly DataContext _context;
         private readonly IConfiguration _configuration;
 
@@ -24,36 +24,34 @@ namespace WebAPI.Controllers
             _configuration = configuration;
             _context = context;
         }
-
+         
         [HttpPost("register")]
         public async Task<ActionResult<Account>> Register(AccountDto request)
         {
-            if (!IsVaildEmail(request.Email))
-            {
-                return BadRequest("Email is not valid");
-            }
 
             if (await _context.Accounts.AnyAsync(x => x.Email == request.Email))
                 return BadRequest("Email is already taken");
-
+            
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            var account = new Account
+            if (!VerifyEmail(request.Email))
             {
-                Name = request.Name,
-                Email = request.Email,
-                PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt,
-                Age = 0,
-                Weigth = 0,
-                Gender = ""
-            };
+                return BadRequest("Email is not valid");
+            }
+            
+            _account.Email = request.Email;
+            _account.PasswordHash = passwordHash;
+            _account.PasswordSalt = passwordSalt;
+            _account.Weigth = request.Weigth;
+            
+            _account.Calender = new Calender();
+            _account.CalenderId = _account.Calender.Id;
+            
+            _context.Accounts.Add(_account.Adapt<Account>());
 
-            _context.Accounts.Add(account);
+            await _context.SaveChangesAsync();
 
-            var id = await _context.SaveChangesAsync();
-
-            return Accepted(account);
+            return Accepted(_account);
         }
 
 
@@ -62,46 +60,48 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var dbAcccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == request.Email);
-                if (dbAcccount == null)
-                {
-                    return NotFound(request.Email);
-                }
+                var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
 
-                if (!TryVerifyPasswordHash(request.Password, dbAcccount.PasswordHash, dbAcccount.PasswordSalt))
+                if(!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
                 {
                     return BadRequest("Not a valid Password");
                 }
-
-                return Ok(CreateToken(dbAcccount));
+   
+                string token = CreateToken(found[0]);
+                return Ok(token);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest("Not a valid login");
             }
         }
 
-
+        
         [HttpPut("ChangeEmail")]
         public async Task<ActionResult<string>> ChangeEmail(AccountChangeEmailDto request)
         {
-            var dbAccount = await _context.Accounts.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
-            try
+            try 
             {
-                if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
+                var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
+            
+                if(!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
                 {
                     return BadRequest("Not a valid Password");
                 }
 
-                dbAccount.Email = request.NewEmail;
+                found[0].Email = request.NewEmail;
 
+                found.Adapt(found[0]);
                 await _context.SaveChangesAsync();
-                return Accepted(dbAccount);
+                return Ok(found);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest("Not a valid login");
             }
+            
+            _account.Email = request.NewEmail;
+            return Accepted(_account);
         }
 
         [HttpPut("ChangePassword")]
@@ -109,69 +109,76 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == request.Email);
-                if (dbAccount == null)
-                    return NotFound(request.Email);
-
-                if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
+                var found =  await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
+              
+                if (!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
                 {
                     return BadRequest("Wrong password");
                 }
-
+            
                 CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
 
-                dbAccount.PasswordHash = passwordHash;
-                dbAccount.PasswordSalt = passwordSalt;
+                found[0].PasswordHash = passwordHash;
+                found[0].PasswordSalt = passwordSalt;
 
-                dbAccount.Adapt(dbAccount);
+                found.Adapt(found[0]);
                 await _context.SaveChangesAsync();
-
-                //string token = CreateToken(dbAccount);
-                return Ok(CreateToken(dbAccount));
+            
+                string token = CreateToken(_account);
+                return Ok(token); 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest("Error in changing password");
+                return BadRequest("Not a valid login");
             }
-
+           
         }
 
         //WIP 
         [HttpDelete("DeleteAccount/{id}")]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
         {
-            var dbAccount = await _context.Accounts.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
-
             try
             {
-
-                if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
+                var found = await _context.Accounts.Where(x => x.Email == request.Email).ToListAsync();
+                   
+                if (!VerifyPasswordHash(request.Password, found[0].PasswordHash, found[0].PasswordSalt))
                 {
-                    return BadRequest("Can't delete account");
+                    return BadRequest("Not a valid login");
                 }
-
-                _context.Accounts.Remove(dbAccount);
+            
+                _context.Accounts.Remove(found[0]);
                 await _context.SaveChangesAsync();
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest("Not a valid login");
             }
+            
+            if (!VerifyPasswordHash(request.Password, _account.PasswordHash, _account.PasswordSalt))
+            {
+                return BadRequest("Not a valid login");
+            }
+            return NoContent();
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(string id)
         {
             try
             {
-                var dbAccount = await _context.Accounts.Where(x => x.Email == id).FirstOrDefaultAsync();
-                return Ok(dbAccount);
+                var found =  await _context.Accounts.Where(x => x.Email == id).ToListAsync();
+                
+                return found[0];
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest("Wrong Email");
             }
+
+ 
+            return Ok(_account);
         }
 
         private string CreateToken(Account account)
@@ -184,44 +191,48 @@ namespace WebAPI.Controllers
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-
+            
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
+            
             var token = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds);
+                signingCredentials: creds);  
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
+            
             return jwt;
         }
-
-        private static bool IsVaildEmail(string email)
+        
+        private static bool VerifyEmail(string email)
         {
             try
             {
-                _ = new MailAddress(email);
+                MailAddress m = new MailAddress(email);
                 return true;
             }
             catch (FormatException)
             {
                 return false;
             }
-
+            
         }
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        private static void CreatePasswordHash(string password, out byte [] passwordHash, out byte [] passwordSalt)
         {
-            using var hmac = new HMACSHA512();
-            passwordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-
+            using(var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        
         }
-        private static bool TryVerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        private static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using var hmac = new HMACSHA512(passwordSalt);
-            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            return computedHash.SequenceEqual(passwordHash);
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
+            }
         }
     }
-
+    
 }
