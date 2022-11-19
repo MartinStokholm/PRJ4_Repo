@@ -30,22 +30,21 @@ namespace WebAPI.Controllers
             _context.Calender.Add(newCalender);
             await _context.SaveChangesAsync();
             return Ok(newCalender);
-            
+
         }
-        
+
         [HttpGet("{calenderId}")]
         public async Task<ActionResult<Calender>> GetCalender(long calenderId)
         {
-            var dbCalender = await _context.Calender.FindAsync(calenderId);
-           
+            var dbCalender = await _context.Calender
+                 .Include(c => c.WorkoutDays)
+                 .Include(c => c.MealDays)
+                 .FirstOrDefaultAsync(x => x.Id == calenderId);
+
             if (dbCalender == null)
             {
                 return NotFound("Could not find calender");
             }
-            
-            _context.Entry(dbCalender).Collection(c => c.WorkoutDays).Load();
-            _context.Entry(dbCalender).Collection(c => c.MealDays).Load();
-
 
             return dbCalender;
         }
@@ -69,11 +68,11 @@ namespace WebAPI.Controllers
                 WorkoutId = dbWorkout.Id,
                 Day = day
             });
-            
+
             await _context.SaveChangesAsync();
 
             return Accepted(dbCalender.Adapt<Calender>());
         }
-       
+
     }
 }
