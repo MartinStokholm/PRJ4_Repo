@@ -70,12 +70,12 @@ namespace WebAPI.Controllers
                 string token = CreateToken(found[0]);
                 return Ok(token);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest("Not a valid login");
             }
         }
-
+         
         
         [HttpPut("ChangeEmail")]
         public async Task<ActionResult<string>> ChangeEmail(AccountChangeEmailDto request)
@@ -95,7 +95,7 @@ namespace WebAPI.Controllers
                 await _context.SaveChangesAsync();
                 return Ok(found);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest("Not a valid login");
             }
@@ -127,7 +127,7 @@ namespace WebAPI.Controllers
                 string token = CreateToken(_account);
                 return Ok(token); 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest("Not a valid login");
             }
@@ -151,7 +151,7 @@ namespace WebAPI.Controllers
                 await _context.SaveChangesAsync();
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest("Not a valid login");
             }
@@ -172,7 +172,7 @@ namespace WebAPI.Controllers
                 
                 return found[0];
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest("Wrong Email");
             }
