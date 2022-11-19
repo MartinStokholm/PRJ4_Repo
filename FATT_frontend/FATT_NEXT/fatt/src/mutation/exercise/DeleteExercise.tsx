@@ -1,9 +1,10 @@
 import { useMutation, useQueryClient } from "react-query";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
-import type { WorkoutRemoveDto } from "../../../interfaces/Exercise";
+import type { Exercise } from "../../../interfaces/Exercise";
 
-export const deleteExercise = async (exercise: WorkoutRemoveDto) => {
+export const deleteExercise = async (exercise: Exercise) => {
   return request({
     url: `exercise/${exercise.Id}`,
     method: "delete",
@@ -13,11 +14,11 @@ export const deleteExercise = async (exercise: WorkoutRemoveDto) => {
 export const useDeleteExercise = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteExercise, {
-    onSuccess: () => {
-      alert("Deleted");
+    onSuccess: (data) => {
+      toast.success(`Deleted Exercise "${data.data.name}"`);
     },
     onError: () => {
-      alert("there was an error");
+      toast.error("Deleting Exercise Failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries("exercisesKey");

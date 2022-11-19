@@ -1,25 +1,40 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
-import type { CalandarCreateNoIdDto } from "../../../interfaces/Workout";
+import type { AccountNoIdDto } from "../../../interfaces/Account";
 
-export const addWorkout = async (calandar: CalandarCreateNoIdDto) => {
-  return request({ url: `calanar`, method: "post", data: calandar });
+export const addAccount = async (account: AccountNoIdDto) => {
+  return request({ url: `account`, method: "post", data: account });
 };
 
-export const useAddWorkoutData = () => {
+export const useAddAccountData = () => {
   const queryClient = useQueryClient();
-  return useMutation(addCalandar, {
-    onSuccess: (data) => {
-      console.log("calandar created");
+  return useMutation(addAccount, {
+    onMutate: async (newAccount) => {
+      toast.success(`Account Created "${newAccount.name}"`);
+      await queryClient.cancelQueries("accountsKey");
+      const previouesAccountData = queryClient.getQueryData("accountsKey");
+      queryClient.setQueryData("accountsKey", (oldQueryData) => {
+        return {
+          ...oldQueryData,
+          data: [
+            ...oldQueryData.data,
+            { ...(oldQueryData?.data?.length + 1), ...newAccount },
+          ],
+        };
+      });
+      return {
+        previouesAccountData,
+      };
     },
-    onError: (_error, _workout, context) => {
-      queryClient.setQueryData("calandarKey", context.previouesWorkoutData);
-      alert("there was an error");
+    onError: (_error, _account, context) => {
+      queryClient.setQueryData("accountsKey", context.previouesAccountData);
+      toast.error("Creating Account Failed");
     },
     onSettled: () => {
-      queryClient.invalidateQueries("calandarKey");
+      queryClient.invalidateQueries("accountsKey");
     },
   });
 };

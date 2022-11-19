@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 import type { ExerciseNoIdDto, Exercise } from "../../../interfaces/Exercise";
 
@@ -19,10 +20,10 @@ export const useUpdateExercise = () => {
   const queryClient = useQueryClient();
   return useMutation(updateExercise, {
     onSuccess: (data) => {
-      alert("Update");
+      toast.success(`Update Exercise "${data.data.name}"`);
     },
     onError: () => {
-      alert("there was an error");
+      toast.error("Updating Failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries("exercisesKey");

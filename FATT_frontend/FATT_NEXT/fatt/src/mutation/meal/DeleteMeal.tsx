@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 import type { Meal } from "../../../interfaces/Meal";
 
@@ -15,11 +16,11 @@ export const deleteMeal = async (meal: Meal) => {
 export const useDeleteMeal = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteMeal, {
-    onSuccess: () => {
-      alert("Deleted");
+    onSuccess: (data) => {
+      toast.success(`Deleted Meal "${data.data.name}"`);
     },
     onError: () => {
-      alert("there was an error");
+      toast.error("Deleting Failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries("mealsKey");

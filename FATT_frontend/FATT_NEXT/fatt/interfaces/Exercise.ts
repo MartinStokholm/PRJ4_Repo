@@ -18,7 +18,7 @@ export type Exercises = {
   Data: Exercise[];
 };
 
-export type ExerciseCreateNoIdDto = {
+export type ExerciseNoIdDto = {
   Name: string;
   Category: string;
   Durantion: number;

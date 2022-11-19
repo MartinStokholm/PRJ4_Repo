@@ -1,38 +1,40 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 import type { DishNoIdDto, Dishs } from "../../../interfaces/Dish";
 
-export const addWorkout = async (dish: DishNoIdDto) => {
+export const addDish = async (dish: DishNoIdDto) => {
   return request({ url: `dish`, method: "post", data: dish });
 };
 
-export const useAddWorkoutData = () => {
+export const useAddDishData = () => {
   const queryClient = useQueryClient();
-  return useMutation(addWorkout, {
-    onMutate: async (newWorkout) => {
-      await queryClient.cancelQueries("workoutsKey");
-      const previouesWorkoutData = queryClient.getQueryData("workoutsKey");
-      queryClient.setQueryData("workoutsKey", (oldQueryData: Dishs) => {
+  return useMutation(addDish, {
+    onMutate: async (newDish) => {
+      toast.success(`Created Dish "${newDish.Name}"`);
+      await queryClient.cancelQueries("dishsKey");
+      const previouesDishData = queryClient.getQueryData("dishsKey");
+      queryClient.setQueryData("dishsKey", (oldQueryData) => {
         return {
           ...oldQueryData,
           data: [
             ...oldQueryData.data,
-            { ...(oldQueryData?.data?.length + 1), ...newWorkout },
+            { ...(oldQueryData?.data?.length + 1), ...newDish },
           ],
         };
       });
       return {
-        previouesWorkoutData,
+        previouesDishData,
       };
     },
-    onError: (_error, _workout, context) => {
-      queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
-      alert("there was an error");
+    onError: (_error, _dish, context) => {
+      queryClient.setQueryData("dishsKey", context.previouesDishData);
+      toast.error("Failed In Creating Dish");
     },
     onSettled: () => {
-      queryClient.invalidateQueries("workoutsKey");
+      queryClient.invalidateQueries("dishsKey");
     },
   });
 };

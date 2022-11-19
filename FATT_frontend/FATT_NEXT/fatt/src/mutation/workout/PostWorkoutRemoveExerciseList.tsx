@@ -32,13 +32,11 @@ export const useRemoveExercisesToWorkoutData = () => {
             { ...(oldQueryData?.data?.length + 1), ...newExerciseList },
           ],
         };
-      }
-      
-      );
+      });
       return {
         previouesWorkoutData,
       };
-       //toast(`Add Exercise "${newExerciseList.name}"`);
+      //toast(`Add Exercise "${newExerciseList.name}"`);
     },
     onError: (_error, _workout, context) => {
       queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
@@ -50,7 +48,3 @@ export const useRemoveExercisesToWorkoutData = () => {
     },
   });
 };
-
-onSuccess: (data, context) => {
-  toast.success(`Add Exercise "${data.data.name}"`);
-},

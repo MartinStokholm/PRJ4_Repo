@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 import type { CalandarCreateNoIdDto } from "../../../interfaces/Calandar";
 
@@ -16,10 +17,10 @@ export const useUpdateWorkoutData = () => {
   const queryClient = useQueryClient();
   return useMutation(updateWorkout, {
     onSuccess: (data) => {
-      alert("Update");
+      toast.success(`Update Calendar "${data.data.name}"`);
     },
     onError: () => {
-      alert("there was an error");
+      toast.error("Updating Calendar Failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries("workoutsKey");

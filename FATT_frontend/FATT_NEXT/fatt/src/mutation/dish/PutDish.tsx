@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
+import { toast } from "react-toastify";
 
 import type { DishNoIdDto, Dish } from "../../../interfaces/Dish";
 
@@ -19,10 +20,10 @@ export const useUpdateDish = () => {
   const queryClient = useQueryClient();
   return useMutation(updateDish, {
     onSuccess: (data) => {
-      alert("Update");
+      toast.success(`Updated Dish "${data.data.name}"`);
     },
     onError: () => {
-      alert("there was an error");
+      toast.error("Failed In Updating Dish");
     },
     onSettled: () => {
       queryClient.invalidateQueries("dishsKey");
