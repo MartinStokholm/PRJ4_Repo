@@ -1,11 +1,11 @@
 import { useQuery } from "react-query";
 import { request } from "../utils/axios";
 
-export const fetchCalendar = async ({ queryKey }) => {
+export const fetchCalender = async ({ queryKey }) => {
   const id = queryKey[1];
   return request({ url: `Calenders/${id}`, method: "get" });
 };
 
-export const GetCalendar = (id) => {
-  return useQuery([`calendarsKey`, id], fetchCalendar, {});
+export const GetCalender = (id) => {
+  return useQuery([`calendersKey`, id], fetchCalender, {});
 };

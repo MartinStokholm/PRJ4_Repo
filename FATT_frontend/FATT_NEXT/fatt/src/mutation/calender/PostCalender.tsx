@@ -3,24 +3,24 @@ import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { CalandarCreateNoIdDto } from "../../../interfaces/Calender";
+import type { CalenderCreateNoIdDto } from "../../../interfaces/Calender";
 
 // There is missing a id and a foreign key between calandar and account
-export const postCalandar = async (calandar: CalandarCreateNoIdDto) => {
+export const postCalender = async (calandar: CalenderCreateNoIdDto) => {
   return request({ url: `calanar`, method: "post", data: calandar });
 };
 
-export const usePostCalandar = () => {
+export const usePostCalender = () => {
   const queryClient = useQueryClient();
-  return useMutation(postCalandar, {
+  return useMutation(postCalender, {
     onSuccess: (data) => {
-      console.log("calandar created");
+      console.log("calender created");
     },
     onError: (_error, _workout, context) => {
       alert("there was an error");
     },
     onSettled: () => {
-      queryClient.invalidateQueries("calandarKey");
+      queryClient.invalidateQueries("calenderKey");
     },
   });
 };
