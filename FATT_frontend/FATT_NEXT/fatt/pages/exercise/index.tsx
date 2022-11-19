@@ -4,9 +4,21 @@ import getExercisesList from "../../src/queries/Exercises";
 import Error from "next/error";
 import { Exercises } from "../../interfaces/Exercise";
 
+const onSuccess = (ExerciseData) => {
+  {
+    /* Maybe we only should show data if success*/
+  }
+
+  console.log("Perform side effect after data fetching", ExerciseData);
+};
+
+const onError = (error) => {
+  console.log(`Perform side effect after encountered error\n ${error}`);
+};
+
 export default function ExercisePage() {
   const { isLoading, data, isError, error, isFetching, refetch } =
-    getExercisesList();
+    getExercisesList(onSuccess, onError);
   //convert to to of interface.
   let exercises: Exercises = null;
   exercises = data;
@@ -18,7 +30,7 @@ export default function ExercisePage() {
   if (isError) {
     return (
       <>
-        <Error statusCode={error.message} />
+        <Error statusCode={(error as any).message} />
       </>
     );
   }
