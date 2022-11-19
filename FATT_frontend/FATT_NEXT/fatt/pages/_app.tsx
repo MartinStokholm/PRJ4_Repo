@@ -2,7 +2,6 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 // import { SessionProvider } from "next-auth/react";
 import Layout from "../src/components/Layout";
-import { ShowToast } from "../src/components/Toast";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,7 +13,6 @@ const dev = process.env.NODE_ENV !== "production";
 function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <ShowToast show={false} /> */}
       <ToastContainer />
       <Layout>
         <Component {...pageProps} />
