@@ -7,6 +7,7 @@ import {
 } from "../mutation/account/PostRegister";
 import MyButton from "./SignUpButton";
 import type { AccountNoIdDto } from "../../interfaces/Account";
+import { useRouter } from "next/router";
 
 export const SignUp = (props) => {
   const [UserName, setUserName] = useState("");
@@ -20,7 +21,7 @@ export const SignUp = (props) => {
   const handleForm = (e) => {
     e.preventDefault();
     const post = {
-      UserName,
+      Name,
       Password,
       Email,
       // Name,
@@ -30,13 +31,15 @@ export const SignUp = (props) => {
     };
   };
 
-  const handleSignUpClick = () => {
+  const handleSignUpClick = (e) => {
+    //e.preventDefault();
     const account: AccountNoIdDto = {
-      name: UserName,
+      name: Name,
       email: Email,
       password: Password,
     };
     postRegister(account);
+    //useRouter().push("/login");
   };
 
   return (

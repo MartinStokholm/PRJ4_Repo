@@ -16,3 +16,8 @@ export type AccountNoIdDto = {
   email: string;
   password: string;
 };
+
+export type AccountLoginDto = {
+  email: string;
+  password: string;
+};

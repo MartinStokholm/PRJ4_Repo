@@ -2,8 +2,13 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
+import { middleware } from "../../components/Redirect";
+import { NextRequest } from "next/server";
+import { useRouter } from "next/router";
 
 import type { AccountNoIdDto } from "../../../interfaces/Account";
+import { NextResponse } from "next/server";
+import { server } from "../../../config/config";
 
 export const postRegister = async (account: AccountNoIdDto) => {
   return request({ url: `account/register`, method: "post", data: account });
@@ -13,15 +18,26 @@ export const usePostRegister = () => {
   const queryClient = useQueryClient();
   return useMutation(postRegister, {
     onSuccess: (newAccount) => {
-      toast.success(`Account Created "${newAccount.name}"`);
-      queryClient.invalidateQueries("accountKey");
+      toast.success(`Account Created "${newAccount.data.name}"`);
+      //useRouter().push("/login");
+      // () => middleware();
     },
     onError: (_error, _account, context) => {
-      queryClient.setQueryData("accountsKey", context.previouesAccountData);
       toast.error("Creating Account Failed");
     },
   });
 };
+
+// fetch("http://localhost:4000/Register", {
+//   method: "POST",
+//   headers: { "Content-Type": "application/json" },
+//   body: JSON.stringify(post),
+// }).then(() => {
+//   // console.log("post added");
+//   // props.history.push("/");
+//   window.location = "/login";
+// });
+// };
 
 // onSuccess we take the data as a parameter and then we use the
 // queryClient we the memory of the old data. First we return a

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { server } from "../../config/config";
 
 export const fetchAccounts = async () => {
   console.log("Fetching Accounts");
