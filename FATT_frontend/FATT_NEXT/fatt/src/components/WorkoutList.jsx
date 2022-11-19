@@ -3,12 +3,12 @@ import Link from "next/link";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
   return (
-    <>
+    <div className="w-full md:flex md:flex-wrap md:justify-center">
       {/* This maps out all workouts with their exercise as names */}
       {workoutData.data?.map((workout) => (
         <div
           key={workout.name}
-          className="hover:bg-green-50 rounded bg-white shadow-lg w-full md:w-1/3 m-4"
+          className="hover:bg-green-50 rounded bg-white shadow-lg m-4"
         >
           <Link
             href={{ pathname: `/workout/${workout.id}` }}
@@ -31,7 +31,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
           </Link>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

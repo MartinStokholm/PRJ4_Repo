@@ -27,11 +27,6 @@ export type WorkoutSimpleDto = {
   name: string;
 };
 
-export type WorkoutSimpleDto = {
-  id: number;
-  exerciseid: number;
-};
-
 export type WorkoutWithExerciseFullDto = {
   id: number;
   name: string;

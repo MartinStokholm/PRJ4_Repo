@@ -3,7 +3,7 @@ import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { CalandarCreateNoIdDto } from "../../../interfaces/Calandar";
+import type { CalandarCreateNoIdDto } from "../../../interfaces/Calender";
 
 export const updateWorkout = async (calandar: CalandarCreateNoIdDto) => {
   return request({

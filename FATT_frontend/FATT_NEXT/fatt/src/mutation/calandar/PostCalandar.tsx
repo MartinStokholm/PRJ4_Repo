@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { CalandarCreateNoIdDto } from "../../../interfaces/Calandar";
+import type { CalandarCreateNoIdDto } from "../../../interfaces/Calender";
 
 // There is missing a id and a foreign key between calandar and account
 export const postCalandar = async (calandar: CalandarCreateNoIdDto) => {
