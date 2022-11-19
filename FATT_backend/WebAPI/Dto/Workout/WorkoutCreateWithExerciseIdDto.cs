@@ -3,10 +3,10 @@ using WebAPI.Models;
 
 namespace WebAPI.Dto.Workout
 {
-    public class WorkoutCreateWithExerciseIdDto
+    public class WorkoutCreateWithExercisesIdsDto
     {
         public string Name { get; set; } = "";
         public string Duration { get; set; } = "";
-        public List<long> ExerciseIds { get; set; } = new List<long>();
+        public List<long> ExercisesIds { get; set; } = new List<long>();
     }
 }
