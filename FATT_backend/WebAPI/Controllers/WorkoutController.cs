@@ -1,5 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Dto.Exercise;
 using WebAPI.Dto.Workout;
 using WebAPI.Models;
@@ -64,30 +65,30 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("list/WithExercisesIds")]
-        public async Task<ActionResult<List<Workout>>> PostWorkoutsWithExercisesIds(List<WorkoutCreateWithExercisesIdsDto> workouts)
+        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> PostWorkoutsWithExercisesIds(List<WorkoutCreateWithExercisesIdsDto> newWorkouts)
         {
-            foreach (var item in workouts)
+            var workoutsToAdd = newWorkouts.Adapt<List<Workout>>();
+
+            foreach (var workout in newWorkouts)
             {
-                var dbExercises = _context.Exercises.ToList().FindAll(e => item.ExercisesIds.Contains(e.Id));
-                if (dbExercises.Count != item.ExercisesIds.Count) { return NotFound($"Could not find all exercises"); }
-
-                var newWorkout = new Workout
+                foreach (var exercise in workout.ExercisesIds)
                 {
-                    Name = item.Name,
-                    Duration = item.Duration,
-                    Exercises = dbExercises
-                };
+                    var dbExercise = await _context.Exercises.FindAsync(exercise);
+                    if (dbExercise == null) { return NotFound($"Could not find exercise with id {exercise}"); }
+                    workoutsToAdd.Find(w => w.Name == workout.Name).Exercises.Add(dbExercise);
+                }
 
-                _context.Workouts.Add(newWorkout);
             }
             
-            return Ok(workouts);
+            await _context.Workouts.AddRangeAsync(workoutsToAdd);
+            await _context.SaveChangesAsync();
+            return Ok(workoutsToAdd.Adapt<List<WorkoutWithExerciseFullDto>>());
         }
 
         [HttpPost("list")]
-        public async Task<ActionResult<List<Workout>>> PostWorkouts(List<WorkoutCreateNoIdDto> workouts)
+        public async Task<ActionResult<List<Workout>>> PostWorkouts(List<WorkoutCreateNoIdDto> newWorkouts)
         {
-            var workoutsToAdd = workouts.Adapt<List<Workout>>();
+            var workoutsToAdd = newWorkouts.Adapt<List<Workout>>();
             await _context.Workouts.AddRangeAsync(workoutsToAdd);
             await _context.SaveChangesAsync();
             return workoutsToAdd.Adapt<List<Workout>>();
