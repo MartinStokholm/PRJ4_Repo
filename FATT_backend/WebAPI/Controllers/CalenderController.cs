@@ -24,12 +24,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CalenderDto>> CreateTestCalender()
+        public async Task<ActionResult<Calender>> CreateTestCalender()
         {
             var newCalender = new Calender();
             _context.Calender.Add(newCalender);
             await _context.SaveChangesAsync();
-            return Ok(newCalender.Adapt<CalenderDto>());
+            return Ok(newCalender);
             
         }
         
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{calenderId}/AddWorkout/{workoutId}/{day}")]
-        public async Task<ActionResult<CalenderDto>> AddWorkoutToCalender(long calenderId, long workoutId, string day)
+        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long calenderId, long workoutId, string day)
         {
             var dbCalender = await _context.Calender.FindAsync(calenderId);
             if (dbCalender == null) { return NotFound("Could not find calender"); }
@@ -72,7 +72,7 @@ namespace WebAPI.Controllers
             
             await _context.SaveChangesAsync();
 
-            return Accepted(dbCalender.Adapt<CalenderDto>());
+            return Accepted(dbCalender.Adapt<Calender>());
         }
        
     }

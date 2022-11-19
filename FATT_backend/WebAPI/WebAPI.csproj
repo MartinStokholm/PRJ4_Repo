@@ -29,7 +29,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.25.0" />
     <PackageReference Include="NunitXml.TestLogger" Version="3.0.127" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />

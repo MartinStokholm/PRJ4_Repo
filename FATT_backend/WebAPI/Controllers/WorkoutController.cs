@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
 
         }
         [HttpPost("{workoutId}/RemoveExercise/list")]
-        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> RemoveExercisesToWorkout(long workoutId, List<long> exerciseIds)
+        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> RemoveExercisesFromWorkout(long workoutId, List<long> exerciseIds)
         {
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
             if (dbWorkout == null) { return NotFound($"Could not find workout with id {workoutId}"); }
@@ -61,6 +61,27 @@ namespace WebAPI.Controllers
             await _context.SaveChangesAsync();
             return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
 
+        }
+
+        [HttpPost("list/WithExercisesIds")]
+        public async Task<ActionResult<List<Workout>>> PostWorkoutsWithExercisesIds(List<WorkoutCreateWithExercisesIdsDto> workouts)
+        {
+            foreach (var item in workouts)
+            {
+                var dbExercises = _context.Exercises.ToList().FindAll(e => item.ExercisesIds.Contains(e.Id));
+                if (dbExercises.Count != item.ExercisesIds.Count) { return NotFound($"Could not find all exercises"); }
+
+                var newWorkout = new Workout
+                {
+                    Name = item.Name,
+                    Duration = item.Duration,
+                    Exercises = dbExercises
+                };
+
+                _context.Workouts.Add(newWorkout);
+            }
+            
+            return Ok(workouts);
         }
 
         [HttpPost("list")]
@@ -145,18 +166,18 @@ namespace WebAPI.Controllers
             return Ok(dbWorkouts.Adapt<List<WorkoutWithExerciseFullDto>>());
         }
 
-        [HttpGet()]
-        public ActionResult<List<WorkoutWithExerciseIdDto>> GetWorkoutsWithExercisesId()
+        [HttpGet]
+        public ActionResult<List<WorkoutCreateWithExercisesIdsDto>> GetWorkoutsWithExercisesId()
         {
             var dbWorkouts = _context.Workouts.ToList();
-            var result = dbWorkouts.Adapt<List<WorkoutWithExerciseIdDto>>();
+            var result = dbWorkouts.Adapt<List<WorkoutCreateWithExercisesIdsDto>>();
             
             foreach (var workout in dbWorkouts)
             {
                 _context.Entry(workout)
                     .Collection(w => w.Exercises)
                     .Load();
-                result.Find(w => w.Id == workout.Id).ExercisesIds = workout.Exercises.Select(e => e.Id).ToList();
+                result.Find(w => w.Name == workout.Name).ExercisesIds = workout.Exercises.Select(e => e.Id).ToList();
             }
 
             return Ok(result);
@@ -165,7 +186,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("{workoutId}")]
-        public async Task<ActionResult<WorkoutWithExerciseIdDto>> GetWorkoutById(long workoutId)
+        public async Task<ActionResult<WorkoutCreateWithExercisesIdsDto>> GetWorkoutById(long workoutId)
         {
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
             if (dbWorkout == null)
@@ -177,7 +198,7 @@ namespace WebAPI.Controllers
                 .Collection(w => w.Exercises)
                 .Load();
 
-            var result = dbWorkout.Adapt<WorkoutWithExerciseIdDto>();
+            var result = dbWorkout.Adapt<WorkoutCreateWithExercisesIdsDto>();
 
             foreach (var item in dbWorkout.Exercises)
             {
