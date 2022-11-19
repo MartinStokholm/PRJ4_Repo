@@ -34,13 +34,13 @@ export default function WorkoutPage() {
   }
 
   if (isError) {
-    return <Error statusCode={error.message} />;
+    return <Error statusCode={(error as any).message} />;
   }
 
   return (
-    <>
+    <div>
       <WorkoutSearchbar />
       <WorkoutItem workoutData={workoutData} exerciseData={exerciseData} />
-    </>
+    </div>
   );
 }
