@@ -23,14 +23,14 @@ export default function WorkoutPage() {
     error,
   } = getWorkoutsList(onSuccess, onError);
 
-  const { data: exerciseData } = getExercisesList();
+  const { data: exerciseData } = getExercisesList(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (isError) {
-    return <Error statusCode={error.message} />;
+    return <Error statusCode={(error as any).message} />;
   }
 
   return <WorkoutList workoutData={workoutData} exerciseData={exerciseData} />;

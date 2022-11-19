@@ -30,7 +30,7 @@ export default function DishPage() {
   if (isError) {
     return (
       <>
-        <Error statusCode={error.message} />
+        <Error statusCode={(error as any).message} />
       </>
     );
   }
