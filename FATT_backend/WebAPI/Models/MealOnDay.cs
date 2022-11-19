@@ -6,7 +6,7 @@
         
         public long MealId { get; set; }
 
-        public string? Day { get; set; }
+        public string Day { get; set; } = "";
         
     }
 }

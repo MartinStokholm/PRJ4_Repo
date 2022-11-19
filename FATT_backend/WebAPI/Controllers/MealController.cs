@@ -209,7 +209,27 @@ namespace WebAPI.Controllers
 
 
         /* POST requests */
+        // POST: api/Meal
+        [HttpPost("WithDishNames")]
+        public async Task<ActionResult<MealWithDishNameDto>> PostMealWithDishes(MealWithDishNameDto newMeal)
+        {
+            var adapted = newMeal.Adapt<Meal>();
+            adapted.Dishes = new List<Dish>();
+            foreach (var dishName in newMeal.DishNames)
+            {
+                var dish = _context.Dishes.FirstOrDefault(d => d.Name == dishName);
+                if (dish == null)
+                {
+                    return BadRequest("Dish does not exist in database");
+                }
 
+                adapted.Dishes.Add(dish);
+            }
+            _context.Meals.Add(adapted);
+            await _context.SaveChangesAsync();
+            return Accepted(adapted.Adapt<MealWithDishNameDto>());
+        }
+        
         // POST: api/Meal
         [HttpPost]
         public async Task<ActionResult<MealNameWDishes>> PostMeal(MealSimple meal)

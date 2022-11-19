@@ -35,22 +35,22 @@ namespace APIUnitTesting.ControllerTests
             _controller = new DishController(_context);
             _correctData = new()
             {
-                Name = "Pierogi",
-                Category = "Dinner",
-                Ingredients = "2 flour 3 waters",
-                NutritionalValue = 400,
-                PicturePath = "mypic.jpg",
-                Recipe = "Dodis den dodat"
+                //Name = "Pierogi",
+                //Category = "Dinner",
+                //Ingredients = "2 flour 3 waters",
+                //NutritionalValue = 400,
+                //PicturePath = "mypic.jpg",
+                //Recipe = "Dodis den dodat"
             };
 
             // Incorrect data: Name is required
             _incorrectData = new DishNoIdDto()
             {
-                Category = "Dinner",
-                Ingredients = "2 flour 3 waters",
-                NutritionalValue = 400,
-                PicturePath = "mypic.jpg",
-                Recipe = "Dodis den dodat"
+                //Category = "Dinner",
+                //Ingredients = "2 flour 3 waters",
+                //NutritionalValue = 400,
+                //PicturePath = "mypic.jpg",
+                //Recipe = "Dodis den dodat"
             };
 
             SeedData();
@@ -60,12 +60,12 @@ namespace APIUnitTesting.ControllerTests
         {
             var data = new DishNoIdDto()
             {
-                Name = "Gulasch",
-                Category = "Dinner",
-                Ingredients = "2 meats, 5 sauces",
-                NutritionalValue = 600,
-                PicturePath = "mypic2.jpg",
-                Recipe = "Cook meat with sauce"
+                //Name = "Gulasch",
+                //Category = "Dinner",
+                //Ingredients = "2 meats, 5 sauces",
+                //NutritionalValue = 600,
+                //PicturePath = "mypic2.jpg",
+                //Recipe = "Cook meat with sauce"
             };
 
             var converted = data.Adapt<Dish>();
@@ -75,12 +75,12 @@ namespace APIUnitTesting.ControllerTests
 
             data = new DishNoIdDto()
             {
-                Name = "Caek",
-                Category = "Dessert",
-                Ingredients = "2 flour 4 waters",
-                NutritionalValue = 11000,
-                PicturePath = "mypic3.jpg",
-                Recipe = "Bake caek"
+                //Name = "Caek",
+                //Category = "Dessert",
+                //Ingredients = "2 flour 4 waters",
+                //NutritionalValue = 11000,
+                //PicturePath = "mypic3.jpg",
+                //Recipe = "Bake caek"
             };
 
             converted = data.Adapt<Dish>();

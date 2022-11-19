@@ -90,13 +90,22 @@ namespace WebAPI.Controllers
 
         // POST: api/DishModels
         [HttpPost]
-        public async Task<ActionResult<DishNoMealsDto>> PostDishModel(DishNoIdDto dishModel)
+        public async Task<ActionResult<DishNoMealsDto>> PostDishModel(DishNoIdDto newDish)
         {
-            Dish d = dishModel.Adapt<Dish>();
+            var d = newDish.Adapt<Dish>();
             _context.Dishes.Add(d);
             await _context.SaveChangesAsync();
 
             return Accepted(d.Adapt<DishNoMealsDto>());
+        }
+        [HttpPost("list")]
+        public async Task<ActionResult<List<DishNoMealsDto>>> PostDishModel(List<DishNoIdDto> newDishes)
+        {
+            var dishes = newDishes.Adapt<List<Dish>>();
+            _context.Dishes.AddRange(dishes);
+            await _context.SaveChangesAsync();
+
+            return Accepted(dishes.Adapt<List<DishNoMealsDto>>());
         }
 
         /* DELETE requests */

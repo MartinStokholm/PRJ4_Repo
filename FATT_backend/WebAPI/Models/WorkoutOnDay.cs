@@ -6,7 +6,7 @@
         
         public long WorkoutId { get; set; }
 
-        public string? Day { get; set; }
-        
+        public string Day { get; set; } = "";
+
     }
 }
