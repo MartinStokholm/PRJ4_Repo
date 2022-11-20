@@ -1,11 +1,9 @@
-import { Button, Label, TextInput } from "flowbite-react";
-import MyButton from "./Button/SignUpButton";
+import { Label, TextInput } from "flowbite-react";
+import MyButton from "../Button/SignUpButton";
 import React from "react";
 import { useState } from "react";
-import Image from "next/image";
-import { AccountLoginDto } from "../../interfaces/Account";
-import { useLogin } from "../mutation/account/PostLogin";
-import { useRouter } from "next/router";
+import { AccountLoginDto } from "../../../interfaces/Account";
+import { useLogin } from "../../mutation/account/PostLogin";
 
 const Login = (props) => {
   const { mutate: login } = useLogin();
@@ -41,12 +39,6 @@ const Login = (props) => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <MyButton type={"submit"} text={"Log In"} key={undefined} />
-          {/* <Button
-            className="mx-auto my-4 col-span-2 bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded m-4 "
-            type="submit"
-          >
-            Log In
-          </Button> */}
         </form>
       </section>
     </div>
