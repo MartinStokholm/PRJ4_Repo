@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
@@ -9,7 +8,7 @@ export const addWorkout = async (workout: WorkoutCreateNoIdDto) => {
   return request({ url: `workout`, method: "post", data: workout });
 };
 
-export const useAddWorkoutData = () => {
+export const useAddWorkout = () => {
   const queryClient = useQueryClient();
   return useMutation(addWorkout, {
     onMutate: async (newWorkout) => {

@@ -4,8 +4,22 @@ import DeleteButton from "../Button/DeleteButton";
 import InputButton from "../Button/InputButton";
 import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
 import { TextInput } from "flowbite-react";
+import { useAddWorkout } from "../../mutation/workout/PostWorkout";
+import { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
+import { useState } from "react";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
+  const [workoutName, setWorkoutName] = useState("");
+  const [duration, setDurantion] = useState("");
+  const { mutate: workout } = useAddWorkout();
+  const handleCreateButtonClick = () => {
+    const workoutDto: WorkoutCreateNoIdDto = {
+      name: workoutName,
+      duration: duration,
+    };
+    workout(workoutDto);
+  };
+
   const handleDeleteButtonClick = (workoutId: number) => {
     deleteWorkout(workoutId);
   };
@@ -13,9 +27,17 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
 
   return (
     <>
-      <form className="flex">
-        <TextInput type="text" placeholder="newWorkoutName" />
-        <TextInput type="text" placeholder="workoutDuration" />
+      <form onSubmit={handleCreateButtonClick} className="flex">
+        <TextInput
+          type="text"
+          placeholder="newWorkoutName"
+          onChange={(e) => setWorkoutName(e.target.value)}
+        />
+        <TextInput
+          type="text"
+          placeholder="workoutDuration"
+          onChange={(e) => setDurantion(e.target.value)}
+        />
         <InputButton type={"submit"} text={"Create"} key={undefined} />
       </form>
       <div className="flex flex-wrap">
@@ -41,7 +63,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
               <h2 className="italic">{workout.duration}</h2>
 
               {exerciseData?.data.map((exercise) =>
-                workout.exercisesIds.includes(exercise.id) ? (
+                workout?.exercisesIds?.includes(exercise.id) ? (
                   <div
                     key={exercise.id}
                     className="bg-white overflow-hidden shadow-lg mx-4 my-4"
