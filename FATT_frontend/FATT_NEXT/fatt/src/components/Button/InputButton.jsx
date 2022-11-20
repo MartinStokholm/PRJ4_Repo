@@ -5,7 +5,7 @@ const Button = ({ text, onClick, key, type }) => {
     <button
       type={type}
       key={key}
-      className="mx-auto my-4 col-span-2 bg-transparent font-semibold hover:bg-green-500 text-green-500 hover:text-white  py-2 px-4 border border-green-500 hover:border-transparent rounded m-4 "
+      className="mx-auto md:mx-4 my-4 col-span-2 bg-transparent font-semibold hover:bg-green-500 text-green-500 hover:text-white  py-2 px-4 border border-green-500 hover:border-transparent rounded m-4 "
       onClick={onClick}
     >
       {text}
