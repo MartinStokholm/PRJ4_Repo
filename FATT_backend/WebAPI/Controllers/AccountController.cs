@@ -164,20 +164,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Account>> GetAccount(string id)
-        //{
-        //    try
-        //    {
-        //        var dbAccount = await _context.Accounts.Where(x => x.Email == id).FirstOrDefaultAsync();
-        //        return Ok(dbAccount);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest("Wrong Email");
-        //    }
-        //}
-
         [HttpGet("{email}")]
         public async Task<ActionResult<AccountGetDto>> GetAccountEmail(string email)
         {
