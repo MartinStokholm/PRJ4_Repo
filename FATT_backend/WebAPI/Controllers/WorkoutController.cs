@@ -167,7 +167,7 @@ namespace WebAPI.Controllers
             return Ok(dbWorkouts.Adapt<List<WorkoutWithExerciseFullDto>>());
         }
 
-        [HttpGet]
+        [HttpGet("noId")]
         public ActionResult<List<WorkoutCreateWithExercisesIdsDto>> GetWorkoutsWithExercisesId()
         {
             var dbWorkouts = _context.Workouts.ToList();
@@ -184,6 +184,22 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        public ActionResult<List<WorkoutWithIdsWithExercisesIdsDto>> GetWorkoutsWithIdExercisesId()
+        {
+            var dbWorkouts = _context.Workouts.ToList();
+            var result = dbWorkouts.Adapt<List<WorkoutWithIdsWithExercisesIdsDto>>();
+            
+            foreach (var workout in dbWorkouts)
+            {
+                _context.Entry(workout)
+                    .Collection(w => w.Exercises)
+                    .Load();
+                result.Find(w => w.Id == workout.Id).ExercisesIds = workout.Exercises.Select(e => e.Id).ToList();
+            }
+
+            return Ok(result);
+        }
 
 
         [HttpGet("{workoutId}")]
