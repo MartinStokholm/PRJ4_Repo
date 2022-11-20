@@ -94,5 +94,21 @@ namespace WebAPI.Controllers
             return Ok(dbExercise.Adapt<ExerciseNoWorkoutsDto>());
         }
 
+        [HttpDelete("{exerciseId}")]
+        public async Task<ActionResult<ExerciseSimpleDto>> DeleteExercise(long exerciseId)
+        {
+
+            var dbExercise = await _context.Exercises.FindAsync(exerciseId);
+            if (dbExercise == null)
+            {
+                return NotFound($"Exercise with id {exerciseId} was not found");
+            }
+
+            _context.Exercises.Remove(dbExercise);
+            await _context.SaveChangesAsync();
+
+            return Ok(dbExercise.Adapt<ExerciseSimpleDto>());
+        }
+
     }
 }
