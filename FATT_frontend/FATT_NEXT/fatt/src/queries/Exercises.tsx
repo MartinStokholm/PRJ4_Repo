@@ -14,13 +14,11 @@ const fecthExercises = async () => {
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log(error);
+      //console.log(error);
       throw new Error("Problem fetching data");
-      //handleAxiosError(error);
     } else {
-      console.log("not Axios", error);
+      //console.log("not Axios", error);
       throw new Error("Problem fetching data");
-      //handleUnexpectedError(error);
     }
   }
 };

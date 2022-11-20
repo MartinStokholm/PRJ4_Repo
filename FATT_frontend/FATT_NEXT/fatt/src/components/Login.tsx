@@ -1,25 +1,23 @@
 import { Button, Label, TextInput } from "flowbite-react";
+import MyButton from "./SignUpButton";
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
+import { AccountLoginDto } from "../../interfaces/Account";
+import { useLogin } from "../mutation/account/PostLogin";
+import { useRouter } from "next/router";
 
 const Login = (props) => {
+  const { mutate: login } = useLogin();
   const [Password, setPassword] = useState("");
   const [Email, setEmail] = useState("");
   const handleForm = (e) => {
     e.preventDefault();
-    const post = {
-      Password,
-      Email,
-    };
-    fetch("http://localhost:4000/Register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(post),
-    }).then(() => {
-      props.history.push("/");
-    });
+
+    const account: AccountLoginDto = { email: Email, password: Password };
+    login(account);
   };
+
   return (
     <div className="grid place-items-center">
       <img src="/fatt-logo.png" alt="Fattylee" width="25%" height="25%" />
@@ -42,12 +40,13 @@ const Login = (props) => {
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
+          <MyButton type={"submit"} text={"Log In"} key={undefined} />
+          {/* <Button
             className="mx-auto my-4 col-span-2 bg-transparent hover:bg-green-500 text-green-500 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded m-4 "
             type="submit"
           >
             Log In
-          </Button>
+          </Button> */}
         </form>
       </section>
     </div>

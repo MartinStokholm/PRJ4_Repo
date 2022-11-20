@@ -1,7 +1,13 @@
 import { Button, Label, Select, TextInput } from "flowbite-react";
 import React from "react";
 import { useState } from "react";
-import MyButton from "./Button";
+import {
+  postRegister,
+  usePostRegister,
+} from "../mutation/account/PostRegister";
+import MyButton from "./SignUpButton";
+import type { AccountNoIdDto } from "../../interfaces/Account";
+import { useRouter } from "next/router";
 
 const SignUp = (props) => {
   const [UserName, setUserName] = useState("");
@@ -15,7 +21,7 @@ const SignUp = (props) => {
   const handleForm = (e) => {
     e.preventDefault();
     const post = {
-      UserName,
+      Name,
       Password,
       Name,
       Email,
@@ -33,6 +39,18 @@ const SignUp = (props) => {
       window.location = "/login";
     });
   };
+
+  const handleSignUpClick = (e) => {
+    //e.preventDefault();
+    const account: AccountNoIdDto = {
+      name: Name,
+      email: Email,
+      password: Password,
+    };
+    postRegister(account);
+    //useRouter().push("/login");
+  };
+
   return (
     <div className="grid place-items-center">
       <img src="/fatt-logo.png" alt="Fattylee" width="25%" height="25%" />

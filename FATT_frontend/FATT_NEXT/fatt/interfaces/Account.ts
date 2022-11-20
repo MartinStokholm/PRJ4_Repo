@@ -18,3 +18,8 @@ export type AccountNoIdDto = {
   age: number;
   email: string;
 };
+
+export type AccountLoginDto = {
+  email: string;
+  password: string;
+};

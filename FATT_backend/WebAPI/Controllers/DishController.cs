@@ -9,11 +9,13 @@ using WebAPI.Models;
 using Mapster;
 using WebAPI.Dto.Dish;
 using WebAPI.Dto.Meal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DishController : ControllerBase
     {
         private readonly DataContext _context;
@@ -62,7 +64,7 @@ namespace WebAPI.Controllers
             {
                 return NotFound("Couldn't find Dish with specified id");
             }
-            
+
             _context.Entry(found)
                 .CurrentValues
                 .SetValues(dish);

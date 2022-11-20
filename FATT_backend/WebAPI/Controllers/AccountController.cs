@@ -8,11 +8,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mail;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Principal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountController : ControllerBase
     {
         private static Account _account = new Account();
@@ -24,37 +27,39 @@ namespace WebAPI.Controllers
             _configuration = configuration;
             _context = context;
         }
-         
+
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<Account>> Register(AccountDto request)
         {
 
-            if (await _context.Accounts.AnyAsync(x => x.Email == request.Email))
-                return BadRequest("Email is already taken");
-            
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-
-            if (!VerifyEmail(request.Email))
+            if (!IsVerifyEmail(request.Email))
             {
                 return BadRequest("Email is not valid");
             }
             
-            _account.Email = request.Email;
-            _account.PasswordHash = passwordHash;
-            _account.PasswordSalt = passwordSalt;
-            _account.Weigth = request.Weigth;
-            
-            _account.Calender = new Calender();
-            _account.CalenderId = _account.Calender.Id;
-            
-            _context.Accounts.Add(_account.Adapt<Account>());
+            if (await _context.Accounts.AnyAsync(x => x.Email == request.Email))
+                return BadRequest("Email is already taken");
 
+            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            var account = new Account { 
+                Name = request.Name,
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Age = 0,
+                Weigth = 0,
+                Gender = ""
+            };
+            //_context.Calender.Add(Calender);
+            _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
-            return Accepted(_account);
+            return Accepted(account);
         }
 
-
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(AccountLoginDto request)
         {
@@ -203,7 +208,7 @@ namespace WebAPI.Controllers
             return jwt;
         }
         
-        private static bool VerifyEmail(string email)
+        private static bool IsVerifyEmail(string email)
         {
             try
             {

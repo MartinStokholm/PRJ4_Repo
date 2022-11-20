@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Dto.Dish;
@@ -11,6 +12,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MealController : ControllerBase
     {
         private readonly DataContext _context;
@@ -59,7 +61,7 @@ namespace WebAPI.Controllers
 
 
             MealNameWDishes ret = meal.Adapt<MealNameWDishes>();
-          
+
             return Ok(ret);
         }
 
@@ -130,8 +132,8 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> PutAddDish(long mealId, long dishId)
         {
             var meal = (from m in _context.Meals
-                where m.Id == mealId
-                select m).Include(m => m.Dishes)
+                        where m.Id == mealId
+                        select m).Include(m => m.Dishes)
                 .FirstOrDefault();
 
             if (meal == null)
