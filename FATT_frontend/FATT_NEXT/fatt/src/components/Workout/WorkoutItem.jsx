@@ -36,6 +36,23 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
             </div>
           ) : null
         )}
+
+        {exerciseData?.data.map((exercise) =>
+          workoutData?.data?.exercisesIds?.includes(exercise.id) ? null : (
+            <div
+              key={exercise.id}
+              className="bg-white overflow-hidden shadow-lg mx-4 my-4"
+            >
+              <WorkoutItemThumbnail exercise={exercise} />
+              <MyButton
+                text={"Add"}
+                onClick={() => {
+                  handleRemoveButtonClick(exercise.id);
+                }}
+              />
+            </div>
+          )
+        )}
       </div>
     </>
   );
