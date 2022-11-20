@@ -9,35 +9,26 @@ import MyButton from "./SignUpButton";
 import type { AccountNoIdDto } from "../../interfaces/Account";
 import { useRouter } from "next/router";
 
-const SignUp = (props) => {
+export const SignUp = (props) => {
   const [UserName, setUserName] = useState("");
   const [Password, setPassword] = useState("");
-  const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
+  const [Name, setName] = useState("");
   const [Gender, setGender] = useState("");
   const [age, setage] = useState("");
   const [Weigth, setWeigth] = useState("");
-
+  const { mutate: postRegister } = usePostRegister();
   const handleForm = (e) => {
     e.preventDefault();
     const post = {
       Name,
       Password,
-      Name,
       Email,
-      Gender,
-      age,
-      Weigth,
+      // Name,
+      // Gender,
+      // age,
+      // Weigth,
     };
-    fetch("http://localhost:4000/Register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(post),
-    }).then(() => {
-      // console.log("post added");
-      // props.history.push("/");
-      window.location = "/login";
-    });
   };
 
   const handleSignUpClick = (e) => {
@@ -57,7 +48,7 @@ const SignUp = (props) => {
       <section>
         <h2> Sign Up</h2>
         <h3 className="italic">It’s free, quick and easy</h3>
-        <form onSubmit={handleForm} className="grid gap-4 grid-cols-2">
+        <form onSubmit={handleSignUpClick} className="grid gap-4 grid-cols-2">
           <div>
             <Label>Name :</Label>
             <TextInput
@@ -65,8 +56,59 @@ const SignUp = (props) => {
               placeholder="John Doe"
               onChange={(e) => setName(e.target.value)}
             />
+            <Label>Email :</Label>
+            <TextInput
+              type="Email"
+              placeholder="johndoe@mail.com"
+              required
+              value={Email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Label>Password :</Label>
+            <TextInput
+              type="Password"
+              placeholder="********"
+              required
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-            <Label>Age :</Label>
+          <MyButton
+            text={"Sign Up"}
+            // onClick={handleSignUpClick}
+            type={"submit"}
+            key={undefined}
+          />
+        </form>
+      </section>
+    </div>
+  );
+};
+
+export default SignUp;
+
+/* <Label>Username :</Label>
+            <TextInput
+              type="UserName"
+              placeholder="mxxxx"
+              required
+              value={UserName}
+              onChange={(e) => setUserName(e.target.value)}
+            /> */
+
+// className="mx-auto my-4 col-span-2"
+
+/*<div>
+            
+            <Label>Name :</Label>
+            <TextInput
+              type="Name"
+              placeholder="John Doe"
+              onChange={(e) => setName(e.target.value)}
+            /> */
+
+/* <Label>Age :</Label>
             <TextInput
               type="age"
               placeholder="69"
@@ -89,43 +131,5 @@ const SignUp = (props) => {
               <option value="Helicopter">Helicopter</option>
               <option value="Male">Male</option>
               <option value="Famale">Female</option>
-            </Select>
-          </div>
-
-          <div>
-            <Label>Username :</Label>
-            <TextInput
-              type="UserName"
-              placeholder="mxxxx"
-              required
-              value={UserName}
-              onChange={(e) => setUserName(e.target.value)}
-            />
-            <Label>Email :</Label>
-            <TextInput
-              type="Email"
-              placeholder="johndoe@mail.com"
-              required
-              value={Email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Label>Password :</Label>
-            <TextInput
-              type="Password"
-              placeholder="********"
-              required
-              value={Password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          {/* here we should change to use our custom button instead */}
-          <Button className="mx-auto my-4 col-span-2" type="submit">
-            Sign Up
-          </Button>
-        </form>
-      </section>
-    </div>
-  );
-};
-
-export default SignUp;
+            </Select> 
+          </div>*/

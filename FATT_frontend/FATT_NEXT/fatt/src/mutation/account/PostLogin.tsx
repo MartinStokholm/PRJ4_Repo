@@ -25,7 +25,6 @@ export const useLogin = () => {
     onSuccess: (newAccount) => {
       toast.success(`Login`);
       return Promise.resolve(router.push("/"));
-      // () => middleware();
     },
     onError: (_error, _account, context) => {
       toast.error("Creating Account Failed");

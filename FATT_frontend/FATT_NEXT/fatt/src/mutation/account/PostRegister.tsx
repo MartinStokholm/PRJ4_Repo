@@ -2,16 +2,19 @@ import { useMutation, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
-import { middleware } from "../../components/Redirect";
-import { NextRequest } from "next/server";
 import { useRouter } from "next/router";
 
 import type { AccountNoIdDto } from "../../../interfaces/Account";
 import { NextResponse } from "next/server";
 import { server } from "../../../config/config";
 
-export const addAccount = async (account: AccountNoIdDto) => {
-  return request({ url: `account`, method: "post", data: account });
+export const postRegister = async (account: AccountNoIdDto) => {
+  const response = await axios({
+    url: `${server}account/register`,
+    method: "post",
+    data: account,
+  });
+  //return request({ url: `account/register`, method: "post", data: account });
 };
 
 export const usePostRegister = () => {
@@ -21,13 +24,9 @@ export const usePostRegister = () => {
     onSuccess: (newAccount) => {
       toast.success(`Account Created "${newAccount.data.name}"`);
       router.push("/login");
-      // () => middleware();
     },
     onError: (_error, _account, context) => {
       toast.error("Creating Account Failed");
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries("accountsKey");
     },
   });
 };
