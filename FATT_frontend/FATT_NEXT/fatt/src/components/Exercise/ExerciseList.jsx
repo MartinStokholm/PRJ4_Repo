@@ -1,5 +1,7 @@
 import ExerciseItemThumbnail from "./ExerciseItemThumbnail";
 import Select from "react-select";
+import { TextInput } from "flowbite-react";
+import InputButton from "../Button/InputButton";
 const ExerciseList = ({ data }) => {
   return (
     <div>
@@ -11,6 +13,49 @@ const ExerciseList = ({ data }) => {
           isMulti
           placeholder="Filter by category"
         />
+        <form clasName="flex">
+          <TextInput
+            type="text"
+            placeholder="newExerciseName"
+            onChange={(e) => setWorkoutName(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="Category"
+            onChange={(e) => setDurantion(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="Intensity"
+            onChange={(e) => setDurantion(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="Equipment"
+            onChange={(e) => setDurantion(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="Repetitions"
+            onChange={(e) => setDurantion(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="Sets"
+            onChange={(e) => setDurantion(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="PicturePath"
+            onChange={(e) => setDurantion(e.target.value)}
+          />
+          <TextInput
+            type="text"
+            placeholder="VideoPath"
+            onChange={(e) => setDurantion(e.target.value)}
+          />
+          <InputButton type={"submit"} text={"Create"} key={undefined} />
+        </form>
       </div>
       <div className="flex flex-wrap">
         {data?.data?.map((exercise) => {
