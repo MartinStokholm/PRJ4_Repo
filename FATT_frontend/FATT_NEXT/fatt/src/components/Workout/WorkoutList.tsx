@@ -7,6 +7,7 @@ import { TextInput } from "flowbite-react";
 import { useAddWorkout } from "../../mutation/workout/PostWorkout";
 import { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
 import { useState } from "react";
+import Select from "react-select";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
   const [workoutName, setWorkoutName] = useState("");
@@ -26,21 +27,36 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
   const { mutate: deleteWorkout } = useDeleteWorkout();
 
   return (
-    <>
-      <form onSubmit={handleCreateButtonClick} className="flex">
+    <div>
+      <div className="border rounded p-4 mb-4">
+        <Select
+          getOptionLabel={(option) => `${(option as any).name}`}
+          options={workoutData?.data?.name}
+          instanceId="category"
+          isMulti
+          placeholder="Filter by name"
+        />
+      </div>
+      <h1 className="mb-2 font-bold">Create a workout</h1>
+      <form
+        onSubmit={handleCreateButtonClick}
+        className="flex flex-wrap border rounded bg-grey-200"
+      >
         <TextInput
+          className="mx-auto my-4"
           type="text"
-          placeholder="newWorkoutName"
+          placeholder="Workout Name"
           onChange={(e) => setWorkoutName(e.target.value)}
         />
         <TextInput
+          className="mx-auto my-4"
           type="text"
-          placeholder="workoutDuration"
+          placeholder="Duration"
           onChange={(e) => setDurantion(e.target.value)}
         />
         <InputButton type={"submit"} text={"Create"} key={undefined} />
       </form>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center">
         {/* This maps out all workouts with their exercise as names */}
         {workoutData.data?.map((workout) => (
           <div
@@ -76,7 +92,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
