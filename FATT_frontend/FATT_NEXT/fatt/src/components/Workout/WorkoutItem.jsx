@@ -1,7 +1,9 @@
 import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
-import MyButton from "../Button/Button";
+import Button from "../Button/Button";
+import DeleteButton from "../Button/DeleteButton";
 import { useUpdateWorkoutRemoveExercise } from "../../mutation/workout/PutWorkoutRemoveExercise";
 import { useRouter } from "next/router";
+import { useUpdateWorkoutAddExerciseData } from "../../mutation/workout/PutWorkoutAddExercise";
 
 const WorkoutItem = ({ workoutData, exerciseData }) => {
   // State for exercise id
@@ -13,6 +15,13 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
 
   const { mutate: updateWorkoutRemoveExercise } =
     useUpdateWorkoutRemoveExercise();
+
+  const handleAddButtonClick = (exerciseId) => {
+    updateWorkoutAddExercise({ workoutId, exerciseId });
+  };
+
+  const { mutate: updateWorkoutAddExercise } =
+    useUpdateWorkoutAddExerciseData();
 
   return (
     <>
@@ -28,7 +37,7 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
                 className="bg-white overflow-hidden shadow-lg mx-4 my-4"
               >
                 <WorkoutItemThumbnail exercise={exercise} />
-                <MyButton
+                <DeleteButton
                   text={"Remove"}
                   onClick={() => {
                     handleRemoveButtonClick(exercise.id);
@@ -49,10 +58,11 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
                 className="bg-white overflow-hidden shadow-lg mx-4 my-4"
               >
                 <WorkoutItemThumbnail exercise={exercise} />
-                <MyButton
+                {console.log("MIT ID ", exercise.id)}
+                <Button
                   text={"Add"}
                   onClick={() => {
-                    handleRemoveButtonClick(exercise.id);
+                    handleAddButtonClick(exercise.id);
                   }}
                 />
               </div>
