@@ -1,7 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
-import { EventEmitter2 } from "eventemitter2";
 import { toast } from "react-toastify";
 
 export const updateWorkoutRemoveExercise = async (workout) => {
@@ -13,12 +11,10 @@ export const updateWorkoutRemoveExercise = async (workout) => {
   });
 };
 
-const emitter = new EventEmitter2();
-
 export const useUpdateWorkoutRemoveExercise = () => {
   const queryClient = useQueryClient();
   return useMutation(updateWorkoutRemoveExercise, {
-    onSuccess: (data, context) => {
+    onSuccess: (data) => {
       toast.success(`Removed Exercise "${data.data.name}"`);
     },
     onError: () => {
