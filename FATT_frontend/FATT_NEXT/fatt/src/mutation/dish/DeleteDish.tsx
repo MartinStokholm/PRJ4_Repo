@@ -27,9 +27,3 @@ export const useDeleteDish = () => {
     },
   });
 };
-onSuccess: (data) => {
-  toast.success(`Add Exercise "${data.data.name}"`);
-},
-onError: () => {
-  toast.error("Failed");
-},

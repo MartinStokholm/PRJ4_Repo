@@ -12,12 +12,10 @@ export const postAddMealData = () => {
   const queryClient = useQueryClient();
   return useMutation(addMeal, {
     onSuccess: (data) => {
-      console.log(data);
-      const message = "sucess";
-      alert(message);
+      toast.success(`Created Meal "${data.data.name}"`);
     },
     onError: (_) => {
-      alert("there was an error");
+      toast.error("Creating Meal Failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries("mealKey");

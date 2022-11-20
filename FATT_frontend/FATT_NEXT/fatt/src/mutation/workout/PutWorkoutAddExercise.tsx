@@ -17,7 +17,7 @@ export const updateWorkoutAddExercise = async (workout) => {
 export const useUpdateWorkoutAddExerciseData = () => {
   const queryClient = useQueryClient();
   return useMutation(updateWorkoutAddExercise, {
-    onSuccess: (data, context) => {
+    onSuccess: (data) => {
       toast.success(`Add Exercise "${data.data.name}"`);
     },
     onError: () => {

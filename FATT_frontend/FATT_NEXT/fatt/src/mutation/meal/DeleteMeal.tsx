@@ -20,7 +20,7 @@ export const useDeleteMeal = () => {
       toast.success(`Deleted Meal "${data.data.name}"`);
     },
     onError: () => {
-      toast.error("Deleting Failed");
+      toast.error("Deleting Meal Failed");
     },
     onSettled: () => {
       queryClient.invalidateQueries("mealsKey");
