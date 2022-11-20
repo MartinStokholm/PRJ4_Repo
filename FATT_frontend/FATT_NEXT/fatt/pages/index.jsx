@@ -5,6 +5,7 @@ export default function HomePage() {
   return (
     <>
       <Link href="/calender"> My FATT Calender</Link>
+      <h1>Welcome userNameHere</h1>
     </>
   );
 }
