@@ -21,3 +21,20 @@ export type AccountLoginDto = {
   email: string;
   password: string;
 };
+
+export type AccountChangeEmailDto = {
+  email: string;
+  newEmail: string;
+  password: string;
+};
+
+export type AccountChangePasswordDto = {
+  email: string;
+  password: string;
+  newPassword: string;
+};
+
+export type AccountDeleteDto = {
+  email: string;
+  password: string;
+};
