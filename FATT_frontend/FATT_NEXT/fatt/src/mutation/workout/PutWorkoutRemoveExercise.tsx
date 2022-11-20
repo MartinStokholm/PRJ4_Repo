@@ -15,7 +15,7 @@ export const useUpdateWorkoutRemoveExercise = () => {
   const queryClient = useQueryClient();
   return useMutation(updateWorkoutRemoveExercise, {
     onSuccess: (data) => {
-      toast.success(`Removed Exercise "${data.data.name}"`);
+      toast.success(`Removed Exercise from "${data.data.name}"`);
     },
     onError: () => {
       toast.error("Failed to remove exercise");

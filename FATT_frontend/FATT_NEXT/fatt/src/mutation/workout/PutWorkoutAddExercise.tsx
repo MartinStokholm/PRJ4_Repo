@@ -18,7 +18,8 @@ export const useUpdateWorkoutAddExerciseData = () => {
   const queryClient = useQueryClient();
   return useMutation(updateWorkoutAddExercise, {
     onSuccess: (data) => {
-      toast.success(`Add Exercise "${data.data.name}"`);
+      console.log(data.data);
+      toast.success(`Add Exercise to "${data.data.name}"`);
     },
     onError: () => {
       toast.error("Failed");
