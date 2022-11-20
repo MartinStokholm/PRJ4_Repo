@@ -21,10 +21,10 @@ export type Exercises = {
 export type ExerciseNoIdDto = {
   Name: string;
   Category: string;
-  Durantion: number;
-  Intensity: number;
-  Repetitions: number;
-  Sets: number;
+  Intensity: string;
+  Equipment: string;
+  Repetitions: string;
+  Sets: string;
   PicturePath: string;
   VideoPath: string;
 };

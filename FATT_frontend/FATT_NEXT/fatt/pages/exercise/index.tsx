@@ -1,5 +1,5 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
-import ExerciseList from "../../src/components/exercise/ExerciseList";
+import ExerciseList from "../../src/components/Exercise/ExerciseList";
 import getExercisesList from "../../src/queries/Exercises";
 import Error from "next/error";
 import { Exercises } from "../../interfaces/Exercise";
