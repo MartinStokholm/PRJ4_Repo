@@ -3,8 +3,6 @@ import { server } from "../../config/config";
 import { redirect } from "next/dist/server/api-utils";
 import { middleware } from "../components/Redirect";
 import { useRouter } from "next/router";
-import { useHistory } from "react-router-dom";
-// export declare function redirect(res: NextApiResponse, statusOrUrl: string | number, url?: string): NextApiResponse<any>;
 
 const client = axios.create({ baseURL: server });
 
