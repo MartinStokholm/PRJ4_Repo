@@ -9,12 +9,12 @@ import { NextResponse } from "next/server";
 import { server } from "../../../config/config";
 
 export const postRegister = async (account: AccountNoIdDto) => {
-  const response = await axios({
-    url: `${server}account/register`,
-    method: "post",
-    data: account,
-  });
-  //return request({ url: `account/register`, method: "post", data: account });
+  // const response = await axios({
+  //   url: `${server}account/register`,
+  //   method: "post",
+  //   data: account,
+  // });
+  return request({ url: `account/register`, method: "post", data: account });
 };
 
 export const usePostRegister = () => {
@@ -23,9 +23,9 @@ export const usePostRegister = () => {
   return useMutation(postRegister, {
     onSuccess: (newAccount) => {
       toast.success(`Account Created "${newAccount.data.name}"`);
-      router.push("/login");
+      //router.push("/login");
     },
-    onError: (_error, _account, context) => {
+    onError: (_error, _account) => {
       toast.error("Creating Account Failed");
     },
   });

@@ -18,20 +18,20 @@ export const SignUp = (props) => {
   const [age, setage] = useState("");
   const [Weigth, setWeigth] = useState("");
   const { mutate: postRegister } = usePostRegister();
-  const handleForm = (e) => {
-    e.preventDefault();
-    const post = {
-      Name,
-      Password,
-      Email,
-      // Name,
-      // Gender,
-      // age,
-      // Weigth,
-    };
-  };
+  // const handleForm = (e) => {
+  //   e.preventDefault();
+  //   const post = {
+  //     Name,
+  //     Password,
+  //     Email,
+  //     // Name,
+  //     // Gender,
+  //     // age,
+  //     // Weigth,
+  //   };
+  // };
 
-  const handleSignUpClick = (e) => {
+  const handleSignUpClick = () => {
     //e.preventDefault();
     const account: AccountNoIdDto = {
       name: Name,
