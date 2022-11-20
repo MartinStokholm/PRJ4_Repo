@@ -1,6 +1,6 @@
 import ExerciseItemThumbnail from "./ExerciseItemThumbnail";
 import Select from "react-select";
-import { TextInput } from "flowbite-react";
+import InputField from "../InputField";
 import InputButton from "../Button/InputButton";
 import { usePostExercise } from "../../mutation/exercise/PostExercise";
 import { ExerciseNoIdDto } from "../../../interfaces/Exercise";
@@ -39,53 +39,61 @@ const ExerciseList = ({ data }) => {
           onSubmit={handleCreateButtonClick}
           className="flex flex-wrap border rounded bg-grey-200"
         >
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="Name"
             onChange={(e) => setExerciseName(e.target.value)}
+            value={undefined}
+            required
           />
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="Category"
             onChange={(e) => setCategory(e.target.value)}
+            value={undefined}
+            required
           />
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="Intensity"
             onChange={(e) => setIntensity(e.target.value)}
+            value={undefined}
+            required
           />
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="Equipment"
             onChange={(e) => setEquipment(e.target.value)}
+            value={undefined}
+            required
           />
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="Repetitions"
             onChange={(e) => setRepetitions(e.target.value)}
+            value={undefined}
+            required
           />
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="Sets"
             onChange={(e) => setSets(e.target.value)}
+            value={undefined}
+            required
           />
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="PicturePath"
             onChange={(e) => setPicturePath(e.target.value)}
+            value={undefined}
+            required
           />
-          <TextInput
+          <InputField
             type="text"
-            className="mx-auto my-4 md:mx-4"
             placeholder="VideoPath"
             onChange={(e) => setVideoPath(e.target.value)}
+            value={undefined}
+            required
           />
           <InputButton type={"submit"} text={"Create"} key={undefined} />
         </form>

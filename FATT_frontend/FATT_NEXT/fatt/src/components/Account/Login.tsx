@@ -4,6 +4,7 @@ import React from "react";
 import { useState } from "react";
 import { AccountLoginDto } from "../../../interfaces/Account";
 import { useLogin } from "../../mutation/account/PostLogin";
+import InputField from "../InputField";
 
 const Login = (props) => {
   const { mutate: login } = useLogin();
@@ -17,30 +18,28 @@ const Login = (props) => {
   };
 
   return (
-    <div className="grid place-items-center">
-      <img src="/fatt-logo.png" alt="Fattylee" width="25%" height="25%" />
-      <section className="w-1/3">
-        <h2>Log-in</h2>
-        <form onSubmit={handleForm}>
-          <Label>Email: </Label>
-          <TextInput
-            type="Email"
-            required
-            placeholder="johndoe@mail.com"
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Label>Password: </Label>
-          <TextInput
-            type="Password"
-            required
-            placeholder="********"
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <MyButton type={"submit"} text={"Log In"} key={undefined} />
-        </form>
-      </section>
+    <div className="flex flex-col justify-center w-1/3">
+      <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+      <h2>Log-in</h2>
+      <form onSubmit={handleForm} className="flex flex-col justify-center">
+        <Label className="mx-4">Email: </Label>
+        <InputField
+          type="Email"
+          required
+          placeholder="johndoe@mail.com"
+          value={Email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Label className="mx-4">Password: </Label>
+        <InputField
+          type="Password"
+          required
+          placeholder="********"
+          value={Password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <MyButton type={"submit"} text={"Log In"} key={undefined} />
+      </form>
     </div>
   );
 };

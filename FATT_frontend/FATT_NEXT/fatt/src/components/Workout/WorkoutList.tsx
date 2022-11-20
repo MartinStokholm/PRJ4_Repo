@@ -3,7 +3,7 @@ import Link from "next/link";
 import DeleteButton from "../Button/DeleteButton";
 import InputButton from "../Button/InputButton";
 import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
-import { TextInput } from "flowbite-react";
+import InputField from "../InputField";
 import { useAddWorkout } from "../../mutation/workout/PostWorkout";
 import { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
 import { useState } from "react";
@@ -13,6 +13,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
   const [workoutName, setWorkoutName] = useState("");
   const [duration, setDurantion] = useState("");
   const { mutate: workout } = useAddWorkout();
+
   const handleCreateButtonClick = () => {
     const workoutDto: WorkoutCreateNoIdDto = {
       name: workoutName,
@@ -33,17 +34,19 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
         onSubmit={handleCreateButtonClick}
         className="flex flex-wrap border rounded bg-grey-200 justify-center"
       >
-        <TextInput
-          className="mx-auto my-4 md:mx-4"
+        <InputField
           type="text"
           placeholder="Workout Name"
           onChange={(e) => setWorkoutName(e.target.value)}
+          value={undefined}
+          required
         />
-        <TextInput
-          className="mx-auto my-4 md:mx-4"
+        <InputField
           type="text"
           placeholder="Duration"
           onChange={(e) => setDurantion(e.target.value)}
+          value={undefined}
+          required
         />
         <InputButton type={"submit"} text={"Create"} key={undefined} />
       </form>

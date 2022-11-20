@@ -1,8 +1,9 @@
-import { Button, Label, Select, TextInput } from "flowbite-react";
+import { Label } from "flowbite-react";
+import InputField from "../InputField";
 import React from "react";
 import { useState } from "react";
 import { useRegister } from "../../mutation/account/PostRegister";
-import MyButton from "../Button/InputButton";
+import InputButton from "../Button/InputButton";
 import type { AccountNoIdDto } from "../../../interfaces/Account";
 import { useRouter } from "next/router";
 
@@ -23,45 +24,45 @@ export const SignUp = (props) => {
   };
 
   return (
-    <div className="grid place-items-center">
-      <img src="/fatt-logo.png" alt="Fattylee" width="25%" height="25%" />
-      <section>
-        <h2> Sign Up</h2>
-        <h3 className="italic">It’s free, quick and easy</h3>
-        <form onSubmit={handleSignUpClick} className="grid gap-4 grid-cols-2">
-          <div>
-            <Label>Name :</Label>
-            <TextInput
-              type="Name"
-              placeholder="John Doe"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <Label>Email :</Label>
-            <TextInput
-              type="Email"
-              placeholder="johndoe@mail.com"
-              required
-              value={Email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Label>Password :</Label>
-            <TextInput
-              type="Password"
-              placeholder="********"
-              required
-              value={Password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <MyButton
-            text={"Sign Up"}
-            // onClick={handleSignUpClick}
-            type={"submit"}
-            key={undefined}
-          />
-        </form>
-      </section>
+    <div className="flex flex-col justify-center w-1/3">
+      <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+      <h2> Sign Up</h2>
+      <h3 className="italic">It’s free, quick and easy</h3>
+      <form
+        onSubmit={handleSignUpClick}
+        className="flex flex-col justify-center"
+      >
+        <Label className="mx-4">Name :</Label>
+        <InputField
+          type="text"
+          placeholder="John Doe"
+          required
+          value={undefined}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Label className="mx-4">Email :</Label>
+        <InputField
+          type="Email"
+          placeholder="johndoe@mail.com"
+          required
+          value={Email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Label className="mx-4">Password :</Label>
+        <InputField
+          type="Password"
+          placeholder="********"
+          required
+          value={Password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <InputButton
+          text={"Sign Up"}
+          // onClick={handleSignUpClick}
+          type={"submit"}
+          key={undefined}
+        />
+      </form>
     </div>
   );
 };
