@@ -1,7 +1,22 @@
 import Link from "next/link";
+import DeleteButton from "../Button/DeleteButton";
+import { useDeleteExercise } from "../../mutation/exercise/DeleteExercise";
+
 const ExerciseItemThumbnail = ({ exercise }) => {
+  const { mutate: deleteExercise } = useDeleteExercise();
+
+  const handleDeleteButtonClick = (id) => {
+    deleteExercise(id);
+  };
+
   return (
     <div className="bg-white max-w-sm rounded overflow-hidden shadow-lg content-center h-200">
+      <DeleteButton
+        onClick={() => {
+          handleDeleteButtonClick(exercise.id);
+        }}
+        text={"Delete"}
+      />
       <Link
         className="w-full block p-2 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-green-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
         href={{ pathname: `/exercise/${exercise.id}` }}

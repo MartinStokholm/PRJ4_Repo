@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 
 import type { Exercise } from "../../../interfaces/Exercise";
 
-export const deleteExercise = async (exercise: Exercise) => {
+export const deleteExercise = async (id: number) => {
   return request({
-    url: `exercise/${exercise.Id}`,
+    url: `exercise/${id}`,
     method: "delete",
   });
 };
