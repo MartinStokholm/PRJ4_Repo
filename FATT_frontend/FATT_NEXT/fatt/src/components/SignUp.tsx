@@ -1,45 +1,25 @@
 import { Button, Label, Select, TextInput } from "flowbite-react";
 import React from "react";
 import { useState } from "react";
-import {
-  postRegister,
-  usePostRegister,
-} from "../mutation/account/PostRegister";
+import { useRegister } from "../mutation/account/PostRegister";
 import MyButton from "./SignUpButton";
 import type { AccountNoIdDto } from "../../interfaces/Account";
 import { useRouter } from "next/router";
 
 export const SignUp = (props) => {
-  const [UserName, setUserName] = useState("");
+  const { mutate: register } = useRegister();
   const [Password, setPassword] = useState("");
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
-  const [Gender, setGender] = useState("");
-  const [age, setage] = useState("");
-  const [Weigth, setWeigth] = useState("");
-  const { mutate: postRegister } = usePostRegister();
-  // const handleForm = (e) => {
-  //   e.preventDefault();
-  //   const post = {
-  //     Name,
-  //     Password,
-  //     Email,
-  //     // Name,
-  //     // Gender,
-  //     // age,
-  //     // Weigth,
-  //   };
-  // };
 
-  const handleSignUpClick = () => {
-    //e.preventDefault();
+  const handleSignUpClick = (e) => {
+    e.preventDefault();
     const account: AccountNoIdDto = {
       name: Name,
       email: Email,
       password: Password,
     };
-    postRegister(account);
-    //useRouter().push("/login");
+    register(account);
   };
 
   return (

@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<Account>> Register(AccountDto request)
+        public async Task<ActionResult<AccountGetDto>> Register(AccountDto request)
         {
             if (!IsVaildEmail(request.Email))
             {
@@ -56,7 +56,8 @@ namespace WebAPI.Controllers
 
             var id = await _context.SaveChangesAsync();
 
-            return Accepted(account);
+            return Accepted(account.Email);
+            //return CreatedAtAction(nameof(GetAccountEmail), new { email = account.Email }, account); ;
         }
 
         [AllowAnonymous]
@@ -163,13 +164,32 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(string id)
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Account>> GetAccount(string id)
+        //{
+        //    try
+        //    {
+        //        var dbAccount = await _context.Accounts.Where(x => x.Email == id).FirstOrDefaultAsync();
+        //        return Ok(dbAccount);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return BadRequest("Wrong Email");
+        //    }
+        //}
+
+        [HttpGet("{email}")]
+        public async Task<ActionResult<AccountGetDto>> GetAccountEmail(string email)
         {
             try
             {
-                var dbAccount = await _context.Accounts.Where(x => x.Email == id).FirstOrDefaultAsync();
-                return Ok(dbAccount);
+                var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+                if (dbAccount == null)
+                {
+                    return NotFound();
+                }
+                return Ok(dbAccount.Adapt<AccountGetDto>());
+
             }
             catch (Exception)
             {
