@@ -2,7 +2,7 @@ import { Button, Label, Select, TextInput } from "flowbite-react";
 import React from "react";
 import { useState } from "react";
 import { useRegister } from "../../mutation/account/PostRegister";
-import MyButton from "../Button/SignUpButton";
+import MyButton from "../Button/InputButton";
 import type { AccountNoIdDto } from "../../../interfaces/Account";
 import { useRouter } from "next/router";
 

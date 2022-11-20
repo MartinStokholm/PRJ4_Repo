@@ -15,6 +15,7 @@ const Button = ({ text, onClick, key }) => {
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  key: PropTypes.key,
 };
 
 export default Button;

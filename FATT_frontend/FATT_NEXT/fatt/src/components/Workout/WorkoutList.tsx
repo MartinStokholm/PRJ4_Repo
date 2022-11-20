@@ -22,6 +22,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
             onClick={() => {
               handleDeleteButtonClick(workout.id);
             }}
+            key={workout.name}
           />
           <Link
             href={{ pathname: `/workout/${workout.id}` }}

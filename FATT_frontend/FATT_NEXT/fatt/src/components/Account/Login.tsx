@@ -1,5 +1,5 @@
 import { Label, TextInput } from "flowbite-react";
-import MyButton from "../Button/SignUpButton";
+import MyButton from "../Button/InputButton";
 import React from "react";
 import { useState } from "react";
 import { AccountLoginDto } from "../../../interfaces/Account";
