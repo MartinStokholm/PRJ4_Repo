@@ -54,7 +54,10 @@ const Settings = () => {
       <h1 className="font-bold mb-4">Account settings</h1>
 
       <h2>Change email</h2>
-      <form onSubmit={handleUpdateEmailButtonClick} className="flex">
+      <form
+        onSubmit={handleUpdateEmailButtonClick}
+        className="flex border rounded border-gray-200"
+      >
         <TextInput
           className="m-4"
           type="email"
@@ -75,8 +78,12 @@ const Settings = () => {
         />
         <InputButton type={"submit"} text={"Update"} key={undefined} />
       </form>
+
       <h2>Change password</h2>
-      <form onSubmit={handleUpdatePasswordButtonClick} className="flex">
+      <form
+        onSubmit={handleUpdatePasswordButtonClick}
+        className="flex border rounded border-grey-200"
+      >
         <TextInput
           className="m-4"
           type="email"
@@ -97,8 +104,12 @@ const Settings = () => {
         />
         <InputButton type={"submit"} text={"Update"} key={undefined} />
       </form>
+
       <h2>Delete account</h2>
-      <form onSubmit={handleDeleteButtonClick} className="flex">
+      <form
+        onSubmit={handleDeleteButtonClick}
+        className="flex border rounded border-grey-200"
+      >
         <TextInput
           className="m-4"
           type="text"
