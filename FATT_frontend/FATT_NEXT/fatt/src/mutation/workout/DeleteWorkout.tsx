@@ -6,14 +6,14 @@ import { toast } from "react-toastify";
 
 import type { Workout } from "../../../interfaces/Workout";
 
-export const deleteWorkout = async (workout: Workout) => {
+export const deleteWorkout = async (workout) => {
   return request({
-    url: `workout/${workout.id}`,
+    url: `workout/${workout}`,
     method: "delete",
   });
 };
 
-export const useDeleteWorkoutData = () => {
+export const useDeleteWorkout = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteWorkout, {
     onSuccess: () => {
