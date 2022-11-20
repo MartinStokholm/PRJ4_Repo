@@ -1,5 +1,5 @@
 import { Button, Label, TextInput } from "flowbite-react";
-import MyButton from "./SignUpButton";
+import MyButton from "./Button/SignUpButton";
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
@@ -11,9 +11,9 @@ const Login = (props) => {
   const { mutate: login } = useLogin();
   const [Password, setPassword] = useState("");
   const [Email, setEmail] = useState("");
+
   const handleForm = (e) => {
     e.preventDefault();
-
     const account: AccountLoginDto = { email: Email, password: Password };
     login(account);
   };

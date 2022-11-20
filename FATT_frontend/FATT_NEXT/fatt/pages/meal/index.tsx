@@ -1,4 +1,4 @@
-import LoadingSpinner from "../../src/components/LoadingSpinner";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { getMealsList } from "../../src/queries/Meals";
 import { getDishsList } from "../../src/queries/Dishs";
 import MealList from "../../src/components/MealList";

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { getExercise } from "../../src/queries/Exercise";
-import ExerciseItem from "../../src/components/ExerciseItem";
-import LoadingSpinner from "../../src/components/LoadingSpinner";
+import ExerciseItem from "../../src/components/Exercise/ExerciseItem";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import Error from "next/error";
 
 const onSuccess = (data) => {

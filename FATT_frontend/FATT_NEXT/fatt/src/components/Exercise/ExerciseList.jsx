@@ -1,4 +1,4 @@
-import ExerciseItemThumbnail from "./ExerciseItemThumbnail";
+import ExerciseItemThumbnail from "./ExerciseItemTHumbnail";
 
 const ExerciseList = ({ data }) => {
   return (

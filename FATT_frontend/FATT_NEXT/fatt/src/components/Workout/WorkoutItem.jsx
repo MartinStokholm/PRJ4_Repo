@@ -1,11 +1,11 @@
 import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
 import { useState } from "react";
-import MyButton from "./Button";
+import MyButton from "../Button/Button";
 
 import {
   updateWorkoutRemoveExercise,
   useUpdateWorkoutRemoveExercise,
-} from "../../src/mutation/workout/PutWorkoutRemoveExercise";
+} from "../../mutation/workout/PutWorkoutRemoveExercise";
 
 const WorkoutItem = ({ workoutData, exerciseData }) => {
   // State for exercise id

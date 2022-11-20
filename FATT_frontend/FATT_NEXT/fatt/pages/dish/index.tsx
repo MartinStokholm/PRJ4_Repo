@@ -1,5 +1,5 @@
-import LoadingSpinner from "../../src/components/LoadingSpinner";
-import DishList from "../../src/components/DishList";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
+import DishList from "../../src/components/Dish/DishList";
 import { getDishsList } from "../../src/queries/Dishs";
 import Error from "next/error";
 const onSuccess = (data) => {

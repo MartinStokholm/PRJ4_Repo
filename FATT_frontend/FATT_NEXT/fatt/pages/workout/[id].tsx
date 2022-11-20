@@ -1,10 +1,10 @@
 import { getWorkout } from "../../src/queries/Workout";
 import getExercisesList from "../../src/queries/Exercises";
-import LoadingSpinner from "../../src/components/LoadingSpinner";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
 import { useRouter } from "next/router";
-import WorkoutItem from "../../src/components/WorkoutItem";
-import WorkoutSearchbar from "../../src/components/WorkoutSearchbar";
+import WorkoutItem from "../../src/components/Workout/WorkoutItem";
+import WorkoutSearchbar from "../../src/components/Workout/WorkoutSearchbar";
 import Error from "next/error";
 import { useEffect, useState } from "react";
 

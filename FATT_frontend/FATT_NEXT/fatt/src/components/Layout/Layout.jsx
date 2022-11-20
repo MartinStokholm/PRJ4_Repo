@@ -1,6 +1,6 @@
 import Meta from "./Meta";
 import Nav from "./Nav";
-import Footer from "./Footer";
+import Footer from "../Footer";
 const Layout = ({ children }) => {
   return (
     <div className="min-h-screen">

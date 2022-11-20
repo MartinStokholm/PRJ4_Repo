@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { getDish } from "../../src/queries/Dish";
-import DishItem from "../../src/components/DishItem";
-import LoadingSpinner from "../../src/components/LoadingSpinner";
+import DishItem from "../../src/components/Dish/DishItem";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import Error from "next/error";
 
 const onSuccess = (data) => {

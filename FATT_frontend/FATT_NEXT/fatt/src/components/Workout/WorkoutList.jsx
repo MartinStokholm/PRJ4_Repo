@@ -1,14 +1,15 @@
 import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
 import Link from "next/link";
+import DeleteButton from "../Button/Button";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
   return (
-    <div className="w-full md:flex md:flex-wrap md:justify-center">
+    <>
       {/* This maps out all workouts with their exercise as names */}
       {workoutData.data?.map((workout) => (
         <div
           key={workout.name}
-          className="hover:bg-green-50 rounded bg-white shadow-lg m-4"
+          className="hover:bg-green-50 rounded bg-white shadow-lg w-full md:w-1/3 m-4"
         >
           <Link
             href={{ pathname: `/workout/${workout.id}` }}
@@ -16,6 +17,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
             className="mt-4"
           >
             <h1 className="mt-4 font-bold">{workout.name}</h1>
+            <DeleteButton />
             <h2 className="italic">{workout.duration}</h2>
 
             {exerciseData?.data.map((exercise) =>
@@ -31,7 +33,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
           </Link>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
-import LoadingSpinner from "../../src/components/LoadingSpinner";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { getWorkoutsList } from "../../src/queries/Workouts";
 import getExercisesList from "../../src/queries/Exercises";
-import WorkoutList from "../../src/components/WorkoutList";
+import WorkoutList from "../../src/components/Workout/WorkoutList";
 import Error from "next/error";
 const onSuccess = (WorkoutData, ExerciseData) => {
   {

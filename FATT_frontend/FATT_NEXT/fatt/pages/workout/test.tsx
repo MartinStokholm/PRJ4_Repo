@@ -4,7 +4,7 @@ import {
   useAddWorkoutData,
 } from "../../src/mutation/workout/PostWorkout";
 import { useState } from "react";
-import Button from "../../src/components/Button";
+import Button from "../../src/components/Button/Button";
 import {
   updateWorkout,
   useUpdateWorkoutData,
@@ -16,7 +16,7 @@ import {
 } from "../../src/mutation/workout/PostWorkoutAddExerciseList";
 import getExercisesList from "../../src/queries/Exercises";
 import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
-import WorkoutSearchbar from "../../src/components/WorkoutSearchbar";
+import WorkoutSearchbar from "../../src/components/Workout/WorkoutSearchbar";
 
 const onSuccess = () => {
   {
