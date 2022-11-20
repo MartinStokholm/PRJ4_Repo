@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ExerciseSimpleDto>> PostExercise(ExerciseNoWorkoutsDto exerciseCreate)
+        public async Task<ActionResult<ExerciseSimpleDto>> PostExercise(ExerciseNoIdNoWorkoutsDto exerciseCreate)
         {
             var dbExercise = _context.Exercises.ToList().Find(e => e.Name == exerciseCreate.Name);
             if (dbExercise != null) { return Conflict($"Exercise with name {exerciseCreate.Name} already exists"); }
