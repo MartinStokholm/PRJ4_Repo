@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream:FATT_frontend/FATT_NEXT/fatt/src/components/Exercise/ExerciseList.jsx
-import ExerciseItemThumbnail from "./ExerciseItemTHumbnail";
-
-=======
 import ExerciseItemThumbnail from "./ExerciseItemThumbnail";
 import Select from "react-select";
->>>>>>> Stashed changes:FATT_frontend/FATT_NEXT/fatt/src/components/ExerciseList.jsx
 const ExerciseList = ({ data }) => {
   return (
     <div>
