@@ -25,7 +25,7 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
 
   return (
     <>
-      <div className="flex">
+      <div className="md:flex flex-cols">
         <div>
           <h1 className="mt-4 font-bold">{workoutData?.data?.name}</h1>
           <h2 className="italic">{workoutData?.data?.duration}</h2>
@@ -34,37 +34,39 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
             workoutData?.data?.exercisesIds?.includes(exercise.id) ? (
               <div
                 key={exercise.id}
-                className="bg-white overflow-hidden shadow-lg mx-4 my-4"
+                className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
               >
-                <WorkoutItemThumbnail exercise={exercise} />
                 <DeleteButton
                   text={"Remove"}
                   onClick={() => {
                     handleRemoveButtonClick(exercise.id);
                   }}
                 />
+                <WorkoutItemThumbnail exercise={exercise} />
               </div>
             ) : null
           )}
         </div>
+
         <div>
-          <h1 className="mt-4 font-bold">Exercise list</h1>
-          <h2 className="italic">Add exercise to workout</h2>
+          <h1 className="mt-4 font-bold">All exercises</h1>
+          <h2 className="italic">
+            That you can add too {workoutData.data.name}
+          </h2>
 
           {exerciseData?.data.map((exercise) =>
             workoutData?.data?.exercisesIds?.includes(exercise.id) ? null : (
               <div
                 key={exercise.id}
-                className="bg-white overflow-hidden shadow-lg mx-4 my-4"
+                className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
               >
-                <WorkoutItemThumbnail exercise={exercise} />
-                {console.log("MIT ID ", exercise.id)}
                 <Button
                   text={"Add"}
                   onClick={() => {
                     handleAddButtonClick(exercise.id);
                   }}
                 />
+                <WorkoutItemThumbnail exercise={exercise} />
               </div>
             )
           )}

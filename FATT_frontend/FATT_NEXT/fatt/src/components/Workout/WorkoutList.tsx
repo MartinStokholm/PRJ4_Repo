@@ -28,7 +28,27 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
 
   return (
     <div>
-      <div className="border rounded p-4 mb-4">
+      <h1 className="mb-2 font-bold">Create a workout</h1>
+      <form
+        onSubmit={handleCreateButtonClick}
+        className="flex flex-wrap border rounded bg-grey-200 justify-center"
+      >
+        <TextInput
+          className="mx-auto my-4 md:mx-4"
+          type="text"
+          placeholder="Workout Name"
+          onChange={(e) => setWorkoutName(e.target.value)}
+        />
+        <TextInput
+          className="mx-auto my-4 md:mx-4"
+          type="text"
+          placeholder="Duration"
+          onChange={(e) => setDurantion(e.target.value)}
+        />
+        <InputButton type={"submit"} text={"Create"} key={undefined} />
+      </form>
+
+      <div className="border rounded p-4 mt-4">
         <Select
           getOptionLabel={(option) => `${(option as any).name}`}
           options={workoutData?.data?.name}
@@ -37,47 +57,25 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
           placeholder="Filter by name"
         />
       </div>
-      <h1 className="mb-2 font-bold">Create a workout</h1>
-      <form
-        onSubmit={handleCreateButtonClick}
-        className="flex flex-wrap border rounded bg-grey-200"
-      >
-        <TextInput
-          className="mx-auto my-4"
-          type="text"
-          placeholder="Workout Name"
-          onChange={(e) => setWorkoutName(e.target.value)}
-        />
-        <TextInput
-          className="mx-auto my-4"
-          type="text"
-          placeholder="Duration"
-          onChange={(e) => setDurantion(e.target.value)}
-        />
-        <InputButton type={"submit"} text={"Create"} key={undefined} />
-      </form>
       <div className="flex flex-wrap justify-center">
         {/* This maps out all workouts with their exercise as names */}
         {workoutData.data?.map((workout) => (
           <div
             key={workout.name}
-            className="hover:bg-green-50 rounded bg-white shadow-lg w-full md:w-1/3 m-4"
+            className="rounded bg-white shadow-lg w-full md:w-1/3 m-4 flex flex-col justify-center"
           >
-            <DeleteButton
-              text={"Delete"}
-              onClick={() => {
-                handleDeleteButtonClick(workout.id);
-              }}
-            />
-            <Link
-              href={{ pathname: `/workout/${workout.id}` }}
-              key={workout.id}
-              className="mt-4"
-            >
-              <h1 className="mt-4 font-bold">{workout.name}</h1>
+            <div className="flex flex-col justify-center">
+              <Link
+                href={{ pathname: `/workout/${workout.id}` }}
+                key={workout.id}
+                className="hover:bg-green-50 hover:shadow-inner flex justify-center"
+              >
+                <h1 className="m-2 font-bold py-1">{workout.name}</h1>
 
-              <h2 className="italic">{workout.duration}</h2>
-
+                <h2 className="m-2 italic py-1">{workout.duration}</h2>
+              </Link>
+            </div>
+            <div>
               {exerciseData?.data.map((exercise) =>
                 workout?.exercisesIds?.includes(exercise.id) ? (
                   <div
@@ -88,7 +86,13 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
                   </div>
                 ) : null
               )}
-            </Link>
+            </div>
+            <DeleteButton
+              text={"Delete"}
+              onClick={() => {
+                handleDeleteButtonClick(workout.id);
+              }}
+            />
           </div>
         ))}
       </div>

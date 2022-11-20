@@ -39,7 +39,6 @@ export default function WorkoutPage() {
 
   return (
     <div>
-      <WorkoutSearchbar />
       <WorkoutItem workoutData={workoutData} exerciseData={exerciseData} />
     </div>
   );
