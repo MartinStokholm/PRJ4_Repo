@@ -140,15 +140,14 @@ namespace WebAPI.Controllers
 
         }
 
-        //WIP 
-        [HttpDelete("DeleteAccount/{id}")]
+        
+        [HttpDelete()]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
         {
             var dbAccount = await _context.Accounts.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
 
             try
             {
-
                 if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
                 {
                     return BadRequest("Can't delete account");
