@@ -235,5 +235,19 @@ namespace WebAPI.Controllers
 
             return Ok(dbWorkouts.Adapt<List<WorkoutSimpleDto>>());
         }
+
+        [HttpDelete("{workoutId}")]
+        public async Task<ActionResult<WorkoutSimpleDto>> DeleteWorkout(long workoutId)
+        {
+            {
+                var dbWorkout = await _context.Workouts.FindAsync(workoutId);
+                if (dbWorkout == null) { return NotFound($"Workout with id {workoutId} was not found"); }
+
+                _context.Workouts.Remove(dbWorkout);
+                await _context.SaveChangesAsync();
+
+                return Ok(dbWorkout.Adapt<WorkoutSimpleDto>());
+            }
+        }
     }
 }
