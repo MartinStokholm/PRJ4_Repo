@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AccountLoginDto } from "../../../interfaces/Account";
 import { useLogin } from "../../mutation/account/PostLogin";
 import InputField from "../InputField";
+import Link from "next/link";
 
 const Login = (props) => {
   const { mutate: login } = useLogin();
@@ -40,6 +41,12 @@ const Login = (props) => {
         />
         <MyButton type={"submit"} text={"Log In"} key={undefined} />
       </form>
+      <Link
+        href="/signUp"
+        className="mx-4 text-center hover:underline hover:font-semibold hover:text-green-500 md:hover:text-green-500"
+      >
+        Click here to sign up
+      </Link>
     </div>
   );
 };
