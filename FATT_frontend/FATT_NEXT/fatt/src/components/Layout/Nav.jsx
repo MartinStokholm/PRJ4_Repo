@@ -1,13 +1,22 @@
-import React from "react";
+import { useState } from "react";
 import { Navbar } from "flowbite-react";
 
 const Nav = () => {
+  const [ session, setSession ] = useState(false);
+  
+  if (typeof window !== 'undefined') {
+    if (localStorage.getItem('token')) {
+      setSession(true);
+    }
+  }
+
   return (
+   
     <Navbar
       fluid={true}
       rounded={false}
       className="sticky top-0 mx-auto shadow-md"
-    >
+    > 
       <Navbar.Brand href="/">
         <img
           src="/fatt-logo.png"
@@ -52,8 +61,25 @@ const Nav = () => {
         >
           Dishes
         </Navbar.Link>
+        { setSession == null ? (   
+           <Navbar.Link
+           className="hover:text-green-500 md:hover:text-green-500"
+           href="/signout"
+         >
+           Logout
+         </Navbar.Link>
+        ) : (
+           <Navbar.Link
+          className="hover:text-green-500 md:hover:text-green-500"
+          href="/login"
+
+        >
+          Login
+        </Navbar.Link>) 
+        }
       </Navbar.Collapse>
     </Navbar>
+
   );
 };
 
