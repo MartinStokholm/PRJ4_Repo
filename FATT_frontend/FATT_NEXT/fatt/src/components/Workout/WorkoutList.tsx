@@ -1,65 +1,27 @@
 import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
 import Link from "next/link";
 import DeleteButton from "../Button/DeleteButton";
-import InputButton from "../Button/InputButton";
-import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
-import InputField from "../InputField";
-import { useAddWorkout } from "../../mutation/workout/PostWorkout";
-import { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
+import WorkoutModal from "./WorkoutModal";
 import { useState } from "react";
-import Select from "react-select";
+import Button from "../Button/Button";
+import Modal from "../Setting/Modal";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
-  const [workoutName, setWorkoutName] = useState("");
-  const [duration, setDurantion] = useState("");
-  const { mutate: workout } = useAddWorkout();
-
-  const handleCreateButtonClick = () => {
-    const workoutDto: WorkoutCreateNoIdDto = {
-      name: workoutName,
-      duration: duration,
-    };
-    workout(workoutDto);
-  };
-
-  const handleDeleteButtonClick = (workoutId: number) => {
-    deleteWorkout(workoutId);
-  };
-  const { mutate: deleteWorkout } = useDeleteWorkout();
-
+  const [showModal, setShowModal] = useState(false);
   return (
-    <div>
-      <h1 className="mb-2 font-bold">Create a workout</h1>
-      <form
-        onSubmit={handleCreateButtonClick}
-        className="flex flex-wrap border rounded bg-grey-200 justify-center"
-      >
-        <InputField
-          type="text"
-          placeholder="Workout Name"
-          onChange={(e) => setWorkoutName(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Duration"
-          onChange={(e) => setDurantion(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputButton type={"submit"} text={"Create"} key={undefined} />
-      </form>
-
-      <div className="border rounded p-4 mt-4">
-        <Select
-          getOptionLabel={(option) => `${(option as any).name}`}
-          options={workoutData?.data?.name}
-          instanceId="category"
-          isMulti
-          placeholder="Filter by name"
+    <>
+      <div>
+        <Button
+          onClick={() => setShowModal(true)}
+          text={"Create Workout"}
+          key={undefined}
         />
       </div>
+
+      <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
+        <WorkoutModal />
+      </Modal>
+
       <div className="flex flex-wrap justify-center">
         {/* This maps out all workouts with their exercise as names */}
         {workoutData.data?.map((workout) => (
@@ -99,7 +61,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
