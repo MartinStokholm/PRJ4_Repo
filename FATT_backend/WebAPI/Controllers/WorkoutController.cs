@@ -1,6 +1,7 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Dto.Exercise;
 using WebAPI.Dto.Workout;
@@ -81,7 +82,7 @@ namespace WebAPI.Controllers
                 }
 
             }
-            
+
             await _context.Workouts.AddRangeAsync(workoutsToAdd);
             await _context.SaveChangesAsync();
             return Ok(workoutsToAdd.Adapt<List<WorkoutWithExerciseFullDto>>());
@@ -192,7 +193,7 @@ namespace WebAPI.Controllers
         {
             var dbWorkouts = _context.Workouts.ToList();
             var result = dbWorkouts.Adapt<List<WorkoutWithIdsWithExercisesIdsDto>>();
-            
+
             foreach (var workout in dbWorkouts)
             {
                 _context.Entry(workout)
@@ -236,6 +237,20 @@ namespace WebAPI.Controllers
 
             return Ok(dbWorkouts.Adapt<List<WorkoutSimpleDto>>());
         }
+
+        [HttpGet("account/{email}")]
+        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> GetWorkoutsByAccountEmail(string email)
+        {
+            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
+
+            var dbWorkout = await _context.Workouts.Where(w => w.AccountId == dbAccount.Id).Include(x => x.Exercises).ToListAsync();
+
+
+            return Ok(dbWorkout.Adapt<List<WorkoutWithExerciseFullDto>>());
+        }
+
 
         [HttpDelete("{workoutId}")]
         public async Task<ActionResult<WorkoutSimpleDto>> DeleteWorkout(long workoutId)
