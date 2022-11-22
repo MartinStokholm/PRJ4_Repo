@@ -1,5 +1,5 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
-import { getWorkoutsList } from "../../src/queries/Workouts";
+import { getWorkoutsList } from "../../src/queries/WorkoutsUserspecific";
 import getExercisesList from "../../src/queries/Exercises";
 import WorkoutList from "../../src/components/Workout/WorkoutList";
 import Error from "next/error";
