@@ -156,6 +156,18 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
+        [HttpPut("{email}/gender/{gender}")]
+        public async Task<ActionResult<AccountGetDto>> UpdateAccountGender(string email, string gender)
+        {
+            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+            if (dbAccount == null) { return NotFound(email); }
+            
+            dbAccount.Gender = gender;
+            await _context.SaveChangesAsync();
+
+            return Accepted(dbAccount.Adapt<AccountGetDto>());
+        }
+
         [HttpPut("{email}/weight/{weight}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountWeight(string email, int weight)
         {
