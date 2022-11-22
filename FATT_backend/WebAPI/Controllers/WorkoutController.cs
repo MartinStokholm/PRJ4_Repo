@@ -160,6 +160,21 @@ namespace WebAPI.Controllers
             return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
         }
 
+        [HttpPut("{workoutId}/AddToCalender/{day}/Account/{email}")]
+        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long workoutId, string day, string email ) 
+        {
+            var dbAccount = await _context.Accounts.Include(x => x.Calender).FirstOrDefaultAsync(a => a.Email == email);
+            if (dbAccount == null) { return NotFound($"Could not find account with email {email}"); }
+
+            var dbWorkout = await _context.Workouts.FindAsync(workoutId);
+            if (dbWorkout == null) { return NotFound($"Could not find workout with id {workoutId}"); }
+
+            dbAccount.Calender.WorkoutDays.Add(new WorkoutOnDay { WorkoutId = workoutId, Day = day });
+
+            await _context.SaveChangesAsync();
+            return Accepted(dbAccount.Calender);
+        }
+
         [HttpGet("WithExerciseFull")]
         public ActionResult<List<WorkoutWithExerciseFullDto>> GetWorkoutsWithExercisesFull()
         {

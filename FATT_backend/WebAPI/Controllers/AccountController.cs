@@ -220,6 +220,24 @@ namespace WebAPI.Controllers
                 return BadRequest("Wrong Email");
             }
         }
+        [HttpGet("{email}/calender")]
+        public async Task<ActionResult<Calender>> GetAccountCalender(string email)
+        {
+            var dbAccount = await _context.Accounts
+                .Include(a => a.Calender)
+                    .ThenInclude(c => c.WorkoutDays)
+                .Include(a => a.Calender)
+                    .ThenInclude(c => c.MealDays)
+                .Where(x => x.Email == email)
+                .FirstOrDefaultAsync();
+            
+            if (dbAccount == null)
+            {
+                return NotFound($"could not find account with email {email}");
+            }
+            return Ok(dbAccount.Calender);
+
+        }
 
         private string CreateToken(Account account)
         {
