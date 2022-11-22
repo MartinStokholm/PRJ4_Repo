@@ -99,8 +99,9 @@ namespace WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreateNoIdDto workoutCreate)
         {
-            var dbWorkout = _context.Workouts.ToList().Find(w => w.Name == workoutCreate.Name);
-            if (dbWorkout != null) { return Conflict($"Workout with name {workoutCreate.Name} already exists"); }
+            // no more unique workout names since accounts now take ownership of a workout
+            //var dbWorkout = _context.Workouts.ToList().Find(w => w.Name == workoutCreate.Name);
+            //if (dbWorkout != null) { return Conflict($"Workout with name {workoutCreate.Name} already exists"); }
 
             var newWorkout = workoutCreate.Adapt<Workout>();
             _context.Workouts.Add(newWorkout);
