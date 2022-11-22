@@ -4,8 +4,8 @@ import { Navbar } from "flowbite-react";
 const Nav = () => {
   const [session, setSession] = useState(false);
 
-  if (typeof window !== "undefined" && session == false) {
-    if (localStorage.getItem("token")) {
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("token") && session == false) {
       setSession(true);
     }
   }
@@ -60,7 +60,7 @@ const Nav = () => {
         >
           Dishes
         </Navbar.Link>
-        {setSession == null ? (
+        {setSession === false ? (
           <Navbar.Link
             className="hover:text-green-500 md:hover:text-green-500"
             href="/signout"
