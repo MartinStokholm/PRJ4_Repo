@@ -5,9 +5,14 @@ import { useState } from "react";
 import { AccountLoginDto } from "../../../interfaces/Account";
 import { useLogin } from "../../mutation/account/PostLogin";
 import InputField from "../InputField";
+import TextButton from "../Button/TextButton";
+import Modal from "../Setting/Modal";
+
+import SignUp from "./SignUp";
 import Link from "next/link";
 
 const Login = (props) => {
+  const [showModal, setShowModal] = useState(false);
   const { mutate: login } = useLogin();
   const [Password, setPassword] = useState("");
   const [Email, setEmail] = useState("");
@@ -41,6 +46,15 @@ const Login = (props) => {
         />
         <MyButton type={"submit"} text={"Log In"} key={undefined} />
       </form>
+
+      <TextButton
+        onClick={() => setShowModal(true)}
+        text={"Click here to sign up"}
+      />
+      <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
+        <SignUp />
+      </Modal>
+
       <Link
         href="/signUp"
         className="mx-4 text-center hover:underline hover:font-semibold hover:text-green-500 md:hover:text-green-500"
