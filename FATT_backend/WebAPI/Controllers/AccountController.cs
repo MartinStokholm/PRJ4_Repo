@@ -116,8 +116,7 @@ namespace WebAPI.Controllers
             try
             {
                 var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == request.Email);
-                if (dbAccount == null)
-                    return NotFound(request.Email);
+                if (dbAccount == null) { return NotFound(request.Email); }
 
                 if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
                 {
@@ -142,6 +141,29 @@ namespace WebAPI.Controllers
 
         }
 
+        [HttpPut("{email}/age/{age}")]
+        public async Task<ActionResult<AccountGetDto>> UpdateAccountAge(string email, int age) 
+        {
+            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+            if (dbAccount == null) { return NotFound(email); }
+
+            dbAccount.Age = age;
+            await _context.SaveChangesAsync();
+
+            return Accepted(dbAccount.Adapt<AccountGetDto>());
+        }
+
+        [HttpPut("{email}/weight/{weight}")]
+        public async Task<ActionResult<AccountGetDto>> UpdateAccountWeight(string email, int weight)
+        {
+            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+            if (dbAccount == null) { return NotFound(email); }
+
+            dbAccount.Weigth = weight;
+            await _context.SaveChangesAsync();
+
+            return Accepted(dbAccount.Adapt<AccountGetDto>());
+        }
 
         [HttpDelete()]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
