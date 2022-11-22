@@ -5,7 +5,7 @@ import type { AccountChangeEmailDto } from "../../../interfaces/Account";
 
 export const updateAge = async (age: number) => {
   return request({
-    url: `account/changeage`,
+    url: `account/age`,
     method: "put",
     data: age,
   });

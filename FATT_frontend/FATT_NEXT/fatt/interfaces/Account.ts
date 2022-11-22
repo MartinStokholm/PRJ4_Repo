@@ -38,3 +38,11 @@ export type AccountDeleteDto = {
   email: string;
   password: string;
 };
+
+export type AccountGetDto = {
+  email: string;
+  name: string;
+  weigth: number;
+  gender: string;
+  age: number;
+};
