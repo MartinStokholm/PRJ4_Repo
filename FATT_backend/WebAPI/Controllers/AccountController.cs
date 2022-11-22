@@ -144,7 +144,7 @@ namespace WebAPI.Controllers
 
         }
 
-        [HttpPut("{email}/age/{age}")]
+        [HttpPut("{email}/Age/{age}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountAge(string email, int age) 
         {
             var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
@@ -156,7 +156,7 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
-        [HttpPut("{email}/gender/{gender}")]
+        [HttpPut("{email}/Gender/{gender}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountGender(string email, string gender)
         {
             var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
@@ -168,7 +168,7 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
-        [HttpPut("{email}/weight/{weight}")]
+        [HttpPut("{email}/Weight/{weight}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountWeight(string email, int weight)
         {
             var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
