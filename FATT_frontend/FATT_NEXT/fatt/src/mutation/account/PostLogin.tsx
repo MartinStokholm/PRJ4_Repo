@@ -13,8 +13,10 @@ export const login = async (account: AccountLoginDto) => {
     method: "post",
     data: account,
   });
-  console.log(response.data);
-  localStorage.setItem("token", response.data);
+  console.log(response.data.token);
+  localStorage.setItem("token", response.data.token);
+  localStorage.setItem("email", response.data.email);
+  localStorage.setItem("name", response.data.name);
 };
 
 export const useLogin = () => {
