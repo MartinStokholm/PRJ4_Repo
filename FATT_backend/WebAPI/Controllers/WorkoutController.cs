@@ -98,13 +98,17 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreateNoIdDto workoutCreate)
+        public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreateNoIdDto workoutCreate, string email)
         {
             // no more unique workout names since accounts now take ownership of a workout
             //var dbWorkout = _context.Workouts.ToList().Find(w => w.Name == workoutCreate.Name);
             //if (dbWorkout != null) { return Conflict($"Workout with name {workoutCreate.Name} already exists"); }
+            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
 
             var newWorkout = workoutCreate.Adapt<Workout>();
+            newWorkout.AccountId = dbAccount.Id;
             _context.Workouts.Add(newWorkout);
             _context.SaveChanges();
 
@@ -263,7 +267,7 @@ namespace WebAPI.Controllers
             if (dbWorkout == null) { return NotFound($"Workout with id {workoutId} was not found"); }
 
             dbAccount.Workouts.Add(dbWorkout);
-            
+
             await _context.SaveChangesAsync();
 
             return Ok(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
