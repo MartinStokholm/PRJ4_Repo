@@ -3,7 +3,7 @@ import { request } from "../utils/axios";
 
 const fecthWorkouts = async () => {
   const response = await request({
-    url: `workout/account${localStorage.getItem("email")}`,
+    url: `workout/account/${localStorage.getItem("email")}`,
     method: "get",
   });
   console.log(response.status);
