@@ -11,6 +11,11 @@ const Footer = () => {
             </a>
           </li>
           <li>
+            <a href="/profile" className="mr-4 hover:underline md:mr-6">
+              Profile
+            </a>
+          </li>
+          <li>
             <a href="/settings" className="mr-4 hover:underline md:mr-6">
               Settings
             </a>

@@ -13,7 +13,6 @@ export default function profile() {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <div></div>
       <div>
         <Button
           onClick={() => setShowModal(true)}
@@ -25,6 +24,7 @@ export default function profile() {
         <ModalAge />
         <ModalWeight />
       </Modal>
+      <div></div>
     </>
   );
 }
