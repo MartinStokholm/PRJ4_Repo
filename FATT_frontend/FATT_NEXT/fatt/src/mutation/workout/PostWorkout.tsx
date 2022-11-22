@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 import type { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
 
 export const addWorkout = async (workout: WorkoutCreateNoIdDto) => {
-  return request({ url: `workout`, method: "post", data: workout });
+  return request({
+    url: `workou?${localStorage.getItem("email")}`,
+    method: "post",
+    data: workout,
+  });
 };
 
 export const useAddWorkout = () => {
