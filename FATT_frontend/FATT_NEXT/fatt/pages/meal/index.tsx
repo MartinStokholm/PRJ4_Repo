@@ -1,7 +1,7 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { getMealsList } from "../../src/queries/Meals";
 import { getDishsList } from "../../src/queries/Dishs";
-import MealList from "../../src/components/MealList";
+import MealList from "../../src/components/Meal/MealList";
 import Error from "next/error";
 const onSuccess = (mealData, dishData) => {
   {
