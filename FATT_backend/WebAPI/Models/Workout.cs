@@ -13,5 +13,7 @@ namespace WebAPI.Models
         public string Name { get; set; } = "";
         public string Duration { get; set; } = "";
         public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
+        public long? AccountId { get; set; }
+        public Account Account { get; set; }
     }
 }
