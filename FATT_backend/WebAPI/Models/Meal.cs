@@ -8,7 +8,5 @@ namespace WebAPI.Models
         public string? Name { get; set; }
 
         public List<Dish> Dishes { get; set; } = new List<Dish>();
-        public long AccountId { get; set; }
-        public Account Account { get; set; } = new Account();
     }
 }
