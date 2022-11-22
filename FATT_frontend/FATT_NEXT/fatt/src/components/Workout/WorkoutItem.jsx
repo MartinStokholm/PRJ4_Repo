@@ -29,7 +29,7 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
   return (
     <>
       <div className="md:flex flex-cols">
-        <div>
+        <div className="text-center">
           <h1 className="mt-4 font-bold">{workoutData?.data?.name}</h1>
           <h2 className="italic">{workoutData?.data?.duration}</h2>
           <Button onClick={() => setShowModal(true)} text={"Add exercise"} />
