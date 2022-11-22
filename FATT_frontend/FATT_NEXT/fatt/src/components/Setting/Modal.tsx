@@ -24,31 +24,3 @@ export default function Modal({ IsVisible, onClose, children }) {
     </div>
   );
 }
-
-// const [isBrowser, setIsBrowser] = useState(false);
-
-// const router = useRouter();
-
-// useEffect(() => {
-//   setIsBrowser(true);
-// }, []);
-
-// const modalContent = show ? (
-//   <div>
-//     <div>
-//       <div>
-//         <Button onClick={handleClose} key={undefined} />
-//       </div>
-//       <div>{children}</div>
-//     </div>
-//   </div>
-// ) : null;
-
-// if (isBrowser) {
-//   return ReactDOM.createPortal(
-//     modalContent,
-//     document.getElementById("modal-root")
-//   );
-// } else {
-//   return null;
-// }

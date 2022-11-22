@@ -1,4 +1,4 @@
-import { TextInput } from "flowbite-react";
+import NumberField from "../NumberField";
 import { useState } from "react";
 import { useUpdateWeight } from "../../mutation/account/PutWeight";
 import InputButton from "../Button/InputButton";
@@ -21,11 +21,12 @@ export default function ModalWeight() {
         onSubmit={handleOnClick}
         className="flex border rounded border-gray-200"
       >
-        <TextInput
+        <NumberField
           className="m-4"
-          type="text"
           placeholder="Weight"
           onChange={(e) => setWeight(e.target.value)}
+          min={40}
+          max={250}
         />
       </form>
       <InputButton type={"onSubmit"} text={"Update"} key={undefined} />

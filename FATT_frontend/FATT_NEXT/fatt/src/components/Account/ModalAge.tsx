@@ -1,4 +1,4 @@
-import { TextInput } from "flowbite-react";
+import NumberField from "../NumberField";
 import { useState } from "react";
 import { useUpdateAge } from "../../mutation/account/PutAge";
 import InputButton from "../Button/InputButton";
@@ -19,11 +19,12 @@ export default function ModalAge() {
         onSubmit={handleOnClick}
         className="flex border rounded border-gray-200"
       >
-        <TextInput
+        <NumberField
           className="m-4"
-          type="text"
           placeholder="age"
           onChange={(e) => setAge(e.target.value)}
+          min={14}
+          max={120}
         />
       </form>
       <InputButton type={"onSubmit"} text={"Update"} key={undefined} />
