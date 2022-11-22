@@ -15,5 +15,9 @@ namespace WebAPI.Models
         public Calender Calender { get; set; } = new Calender();
         public long CalenderId { get; set; }
 
+        public virtual ICollection<Workout> Workouts { get; set; } = new List<Workout>();
+        public virtual ICollection<Meal> Meals { get; set; } = new List<Meal>();
+
+
     }
 }
