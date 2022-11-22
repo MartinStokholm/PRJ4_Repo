@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CalenderController : ControllerBase
     {
         private readonly DataContext _context;
@@ -24,12 +26,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CalenderDto>> CreateTestCalender()
+        public async Task<ActionResult<Calender>> CreateTestCalender()
         {
             var newCalender = new Calender();
             _context.Calender.Add(newCalender);
             await _context.SaveChangesAsync();
-            return Ok(newCalender.Adapt<CalenderDto>());
+            return Ok(newCalender);
             
         }
         
@@ -43,13 +45,15 @@ namespace WebAPI.Controllers
                 return NotFound("Could not find calender");
             }
             
-            _context.Entry(dbCalender).Collection(c => c.WorkoutDates).Load();
-            
+            _context.Entry(dbCalender).Collection(c => c.WorkoutDays).Load();
+            _context.Entry(dbCalender).Collection(c => c.MealDays).Load();
+
+
             return dbCalender;
         }
 
         [HttpPut("{calenderId}/AddWorkout/{workoutId}/{day}")]
-        public async Task<ActionResult<CalenderDto>> AddWorkoutToCalender(long calenderId, long workoutId, string day)
+        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long calenderId, long workoutId, string day)
         {
             var dbCalender = await _context.Calender.FindAsync(calenderId);
             if (dbCalender == null) { return NotFound("Could not find calender"); }
@@ -62,7 +66,7 @@ namespace WebAPI.Controllers
                 .Load();
 
 
-            dbCalender.WorkoutDates.Add(new WorkoutOnDay
+            dbCalender.WorkoutDays.Add(new WorkoutOnDay
             {
                 WorkoutId = dbWorkout.Id,
                 Day = day
@@ -70,7 +74,7 @@ namespace WebAPI.Controllers
             
             await _context.SaveChangesAsync();
 
-            return Accepted(dbCalender.Adapt<CalenderDto>());
+            return Accepted(dbCalender.Adapt<Calender>());
         }
        
     }

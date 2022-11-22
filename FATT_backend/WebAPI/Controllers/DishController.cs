@@ -9,11 +9,13 @@ using WebAPI.Models;
 using Mapster;
 using WebAPI.Dto.Dish;
 using WebAPI.Dto.Meal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DishController : ControllerBase
     {
         private readonly DataContext _context;
@@ -62,7 +64,7 @@ namespace WebAPI.Controllers
             {
                 return NotFound("Couldn't find Dish with specified id");
             }
-            
+
             _context.Entry(found)
                 .CurrentValues
                 .SetValues(dish);
@@ -83,20 +85,29 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Accepted(found.Adapt<DishNoMealsDto>());
         }
 
         /* POST requests*/
 
         // POST: api/DishModels
         [HttpPost]
-        public async Task<ActionResult<DishNoIdDto>> PostDishModel(DishNoIdDto dishModel)
+        public async Task<ActionResult<DishNoMealsDto>> PostDishModel(DishNoIdDto newDish)
         {
-            Dish d = dishModel.Adapt<Dish>();
+            var d = newDish.Adapt<Dish>();
             _context.Dishes.Add(d);
             await _context.SaveChangesAsync();
 
-            return Accepted(d.Adapt<DishNoIdDto>());
+            return Accepted(d.Adapt<DishNoMealsDto>());
+        }
+        [HttpPost("list")]
+        public async Task<ActionResult<List<DishNoMealsDto>>> PostDishModel(List<DishNoIdDto> newDishes)
+        {
+            var dishes = newDishes.Adapt<List<Dish>>();
+            _context.Dishes.AddRange(dishes);
+            await _context.SaveChangesAsync();
+
+            return Accepted(dishes.Adapt<List<DishNoMealsDto>>());
         }
 
         /* DELETE requests */

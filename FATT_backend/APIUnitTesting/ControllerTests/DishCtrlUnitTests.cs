@@ -14,12 +14,12 @@ using WebAPI.Models;
 
 namespace APIUnitTesting.ControllerTests
 {
-    using Tools = TestUtils.TestUtils;
     // Note that for some reason ActionResult does not contain a getter for StatusCode
     // So to check StatusCodes we need to type convert into smth else
-    
+
     // All tests done using InMemory EFCore db. This way there is no need to mock
     // The DbContext. See Testing in EFCore 5 link in Docs
+    using Tools = TestUtils.TestUtils;
     public class DishCtrlUnitTests
     {
         private DataContext _context;
@@ -30,32 +30,27 @@ namespace APIUnitTesting.ControllerTests
         [SetUp]
         public void Setup()
         {
-            var options = new DbContextOptionsBuilder<DataContext>()
-                .UseInMemoryDatabase("TestDb")
-                .EnableDetailedErrors()
-                .EnableSensitiveDataLogging()
-                .Options;
 
-            _context = new DataContext(options);
+            _context = Tools.TestContextSetup();
             _controller = new DishController(_context);
             _correctData = new()
             {
-                Name = "Pierogi",
-                Category = "Dinner",
-                Ingredients = "2 flour 3 waters",
-                NutritionalValue = 400,
-                PicturePath = "mypic.jpg",
-                Recipe = "Dodis den dodat"
+                //Name = "Pierogi",
+                //Category = "Dinner",
+                //Ingredients = "2 flour 3 waters",
+                //NutritionalValue = 400,
+                //PicturePath = "mypic.jpg",
+                //Recipe = "Dodis den dodat"
             };
 
             // Incorrect data: Name is required
             _incorrectData = new DishNoIdDto()
             {
-                Category = "Dinner",
-                Ingredients = "2 flour 3 waters",
-                NutritionalValue = 400,
-                PicturePath = "mypic.jpg",
-                Recipe = "Dodis den dodat"
+                //Category = "Dinner",
+                //Ingredients = "2 flour 3 waters",
+                //NutritionalValue = 400,
+                //PicturePath = "mypic.jpg",
+                //Recipe = "Dodis den dodat"
             };
 
             SeedData();
@@ -65,12 +60,12 @@ namespace APIUnitTesting.ControllerTests
         {
             var data = new DishNoIdDto()
             {
-                Name = "Gulasch",
-                Category = "Dinner",
-                Ingredients = "2 meats, 5 sauces",
-                NutritionalValue = 600,
-                PicturePath = "mypic2.jpg",
-                Recipe = "Cook meat with sauce"
+                //Name = "Gulasch",
+                //Category = "Dinner",
+                //Ingredients = "2 meats, 5 sauces",
+                //NutritionalValue = 600,
+                //PicturePath = "mypic2.jpg",
+                //Recipe = "Cook meat with sauce"
             };
 
             var converted = data.Adapt<Dish>();
@@ -80,12 +75,12 @@ namespace APIUnitTesting.ControllerTests
 
             data = new DishNoIdDto()
             {
-                Name = "Caek",
-                Category = "Dessert",
-                Ingredients = "2 flour 4 waters",
-                NutritionalValue = 11000,
-                PicturePath = "mypic3.jpg",
-                Recipe = "Bake caek"
+                //Name = "Caek",
+                //Category = "Dessert",
+                //Ingredients = "2 flour 4 waters",
+                //NutritionalValue = 11000,
+                //PicturePath = "mypic3.jpg",
+                //Recipe = "Bake caek"
             };
 
             converted = data.Adapt<Dish>();
@@ -140,12 +135,12 @@ namespace APIUnitTesting.ControllerTests
             var data = _correctData;
             var result = await _controller.PostDishModel(data);
             var accepted = (AcceptedResult)result.Result;
-            var Id = ((Dish)accepted.Value).Id;
+            var Id = ((DishNoMealsDto)accepted.Value).Id;
 
-            var d = data.Adapt<Dish>();
+            var d = data.Adapt<DishNoMealsDto>();
             d.Id = Id;
 
-            Assert.IsTrue(Tools.CompareProperties(d, (Dish)accepted.Value, "Meals"));
+            Assert.IsTrue(Tools.CompareProperties(d, ((DishNoMealsDto)accepted.Value)));
         }
 
         /* GET tests with manually seeded data*/
@@ -155,7 +150,7 @@ namespace APIUnitTesting.ControllerTests
             foreach (var id in _dataId)
             {
                 var getResult = await _controller.GetDish(id);
-                var callResult = new Tools.TestCallResult<DishMealNames>(getResult);
+                var callResult = new Tools.TestCallResult<DishNoMealsDto>(getResult);
 
                 Assert.IsTrue(callResult.StatusCode == 200);
             }
@@ -165,14 +160,14 @@ namespace APIUnitTesting.ControllerTests
         public async Task Get_ReturnsCorrectObject()
         {
             var data = _correctData;
-            var postResult = new Tools.TestCallResult<Dish>(await _controller.PostDishModel(data));
+            var postResult = new Tools.TestCallResult<DishNoMealsDto>(await _controller.PostDishModel(data));
             var Id = postResult.Id;
-            var d = data.Adapt<DishMealNames>();
+            var d = data.Adapt<DishNoMealsDto>();
             if (Id != null)
             {
                 d.Id = (long)Id;
-                var getResult = new Tools.TestCallResult<DishMealNames>(await _controller.GetDish((long)Id));
-                DishMealNames? retDish = getResult.Value as DishMealNames;
+                var getResult = new Tools.TestCallResult<DishNoMealsDto>(await _controller.GetDish((long)Id));
+                DishNoMealsDto? retDish = getResult.Value as DishNoMealsDto;
                 Assert.IsTrue(Tools.CompareProperties(d, retDish, "Meals"));
             }
             else
@@ -201,7 +196,7 @@ namespace APIUnitTesting.ControllerTests
         public async Task DeleteExisting_Status204()
         {
             var result = await _controller.PostDishModel(_correctData);
-            var accepted = new Tools.TestCallResult<Dish>(result);
+            var accepted = new Tools.TestCallResult<DishNoMealsDto>(result);
             int? statusCode;
 
             if (accepted.Id != null)
@@ -221,10 +216,10 @@ namespace APIUnitTesting.ControllerTests
         {
             var result = await _controller.PostDishModel(_correctData);
             var accepted = (AcceptedResult)result.Result;
-            var Id = ((Dish)accepted.Value).Id;
+            var Id = ((DishNoMealsDto)accepted.Value).Id;
 
             await _controller.DeleteDishModel(Id);
-            var get = new Tools.TestCallResult<DishMealNames>(await _controller.GetDish(Id));
+            var get = new Tools.TestCallResult<DishNoMealsDto>(await _controller.GetDish(Id));
             Assert.IsTrue(get.StatusCode == 404);
         }
 
@@ -255,13 +250,13 @@ namespace APIUnitTesting.ControllerTests
             try
             {
                 long dataId = _dataId[index];
-                StatusCodeResult? putResult = await _controller.PutDishModel(dataId, d) as StatusCodeResult;
-                Assert.AreEqual(putResult.StatusCode, 204);
-                DishMealNames toCheck = d.Adapt<DishMealNames>();
+                ObjectResult? putResult = await _controller.PutDishModel(dataId, d) as ObjectResult;
+                Assert.AreEqual(putResult.StatusCode, 202);
+                DishNoMealsDto toCheck = d.Adapt<DishNoMealsDto>();
                 toCheck.Id = dataId;
                 var getResult = await _controller.GetDish(dataId);
-                var callResult = new Tools.TestCallResult<DishMealNames>(getResult);
-                Assert.IsTrue(Tools.CompareProperties(toCheck, callResult.Value as DishMealNames, "Meals"));
+                var callResult = new Tools.TestCallResult<DishNoMealsDto>(getResult);
+                Assert.IsTrue(Tools.CompareProperties(toCheck, callResult.Value as DishNoMealsDto, "Meals"));
             }
             catch (Exception e)
             {

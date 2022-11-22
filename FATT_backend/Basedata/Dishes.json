@@ -1,78 +1,26 @@
 [
   {
     "Name": "One-pot Creamy Garlic Chicken and Rice",
-    "Preptime": 30,
-    "Ingredients": [
-      "400 gram chicken breast",
-      "1 teaspoon garlic powder",
-      "1/2 teaspoon salt",
-      "1/2 teaspoon pepper",
-      "1 tablespoon olive oil",
-      "3 cloves garlic",
-      "3 dl white rice",
-      "6 dl chicken broth",
-      "1 handfull baby spinach",
-      "2 tablespoons heavy cream"
-    ],
-    "Recipe": [
-      "1) Slice the chicken breast into chunks, and mix it with garlic powder, salt, and pepper.",
-      "2) Heat olive oil in a skillet pan over medium heat. Add chicken breast and fry until browned, about 3 minutes.",
-      "3) Mince the garlic gloves, add it to the skillet pan, and fry for 30 more seconds.",
-      "4) Add rice and chicken broth. Bring to a boil, reduce to a simmer, and cover with lid. Cook for 20 minutes, stirring regularly.",
-      "5) Remove pan from heat and place baby spinach on top of the rice. Cover and let sit for 5 minutes.",
-      "6) Remove lid and stir well. Stir in cream and serve."
-    ],
-    "NutritionalValue": {
-      "Energy": 1540,
-      "Carbohydrates": 140,
-      "Protein": 132,
-      "Fat": 46
-    },
+    "Preptime": "30 min",
+    "Ingredients": "400 gram chicken breast, 1 teaspoon garlic powder, 1/2 teaspoon salt, 1/2 teaspoon pepper, 1 tablespoon olive oil, 3 cloves garlic, 3 dl white rice, 6 dl chicken broth, 1 handfull baby spinach, 2 tablespoons heavy cream",
+    "Recipe": "1) Slice the chicken breast into chunks, and mix it with garlic powder, salt, and pepper. 2) Heat olive oil in a skillet pan over medium heat. Add chicken breast and fry until browned, about 3 minutes. 3) Mince the garlic gloves, add it to the skillet pan, and fry for 30 more seconds. 4) Add rice and chicken broth. Bring to a boil, reduce to a simmer, and cover with lid. Cook for 20 minutes, stirring regularly. 5) Remove pan from heat and place baby spinach on top of the rice. Cover and let sit for 5 minutes. 6) Remove lid and stir well. Stir in cream and serve.",
+    "NutritionalValue": "Energy: 1540, Carbohydrates: 140, Protein: 132, Fat: 46",
     "PicturePath": "https://images-gmi-pmc.edge-generalmills.com/75a7343a-1520-4e95-a13f-e61b5fc5b741.jpg"
   },
   {
     "Name": "Greek Yoghurt with Berries and Granola",
-    "Preptime": 5,
-    "Ingredients": [
-      "200 gram Greek yoghurt",
-      "1 scoop chocolate protein powder",
-      "40 gram blueberries",
-      "40 gram strawberries",
-      "50 gram granola",
-      "1 tablespoon honey"
-    ],
-    "Recipe": [
-      "1) Pour Greek yogurt into a bowl, add protein powder and mix well.",
-      "2) Add granola, fresh blueberries and halved strawberries.",
-      "3) Drizzle over with honey."
-    ],
-    "NutritionalValue": {
-      "Energy": 480,
-      "Carbohydrates": 51,
-      "Protein": 44,
-      "Fat": 7
-    },
+    "Preptime": "5 min",
+    "Ingredients": "200 gram Greek yoghurt, 1 scoop chocolate protein powder, 40 gram blueberries, 40 gram strawberries, 50 gram granola, 1 tablespoon honey",
+    "Recipe": "1) Pour Greek yogurt into a bowl, add protein powder and mix well. 2) Add granola, fresh blueberries and halved strawberries. 3) Drizzle over with honey.",
+    "NutritionalValue": "Energy: 480, Carbohydrates: 51, Protein: 44, Fat: 7",
     "PicturePath": "https://www.mealgarden.com/media/recipe/2019/07/bbigstock-granola-with-yogurt-and-berrie-297815161.jpeg"
   },
   {
     "Name": "Rice Cakes with Peanut Butter and Chocolate",
-    "Preptime": 15,
-    "Ingredients": [
-      "4 rice cakes",
-      "4 tablespoons peanut butter",
-      "100 gram dark chocolate"
-    ],
-    "Recipe": [
-      "1) Spread peanut butter, either smooth or crunchy, on rice cakes.",
-      "2) Melt chocolate in a bowl in microwave oven.",
-      "3) Pour the melted chocolate over the rice cakes. Store in the freezer for 10 minutes."
-    ],
-    "NutritionalValue": {
-      "Energy": 1120,
-      "Carbohydrates": 85,
-      "Protein": 29,
-      "Fat": 72
-    },
+    "Preptime": "15 min",
+    "Ingredients": "4 rice cakes, 4 tablespoons peanut butter, 100 gram dark chocolate",
+    "Recipe": "1) Spread peanut butter, either smooth or crunchy, on rice cakes. 2) Melt chocolate in a bowl in microwave oven. 3) Pour the melted chocolate over the rice cakes. Store in the freezer for 10 minutes.",
+    "NutritionalValue": "Energy: 1120, Carbohydrates: 85, Protein: 29, Fat: 72",
     "PicturePath": "https://plantbasedfolk.com/wp-content/uploads/2022/05/Chocolate-pb-rice-cake.jpg"
   }
 ]

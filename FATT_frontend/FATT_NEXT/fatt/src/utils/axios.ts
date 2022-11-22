@@ -1,18 +1,36 @@
-import axios from 'axios'
-import { server } from "../../config/config"
+import axios from "axios";
+import { server } from "../../config/config";
+import { useRouter } from "next/router";
 
-const client = axios.create({ baseURL: server })
+const client = axios.create({ baseURL: server });
 
-export const request = ({...options}) => {
-    client.defaults.headers.common.Authorization = `Bearer token`
-    const onSuccess = response  => response
-    const onError = error => {
-        // Optionally catch errors and add addition logging here
-        return error
+const getToken = () => {
+  return localStorage.getItem("token");
+};
+
+export const SetupInterceptors = () => {
+  const router = useRouter();
+  client.interceptors.response.use(
+    function (response) {
+      return response;
+    },
+    (error) => {
+      var status = error.response.status;
+      if (status === 401) {
+        return router.push("/login");
+      }
+      return error;
     }
-        return client(options).then(onSuccess).catch(onError)
-    
-}
+  );
+};
 
-// Bearer token is just temporarily 
-// Need to find a way to implement the token from web api 
+export const request = ({ ...options }) => {
+  client.defaults.headers.common["Authorization"] = `Bearer ${getToken()}`;
+  const onSuccess = (response) => {
+    return response;
+  };
+  const onError = (error) => {
+    return error;
+  };
+  return client(options).then(onSuccess).catch(onError);
+};

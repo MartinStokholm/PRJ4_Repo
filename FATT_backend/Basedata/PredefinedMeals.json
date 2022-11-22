@@ -1,6 +1,10 @@
-[{
-    "Name" : "High Calorie Meal for Bulking",
-    "Appetizer" : "Greek Yoghurt with Berries and Granola",
-    "Main Course" : "One-pot Creamy Garlic Chicken and Rice",
-    "Desert" : "Rice Cakes with Peanut Butter and Chocolate"
-}]
+[
+  {
+    "Name": "High Calorie Meal for Bulking",
+    "DishNames": [
+      "Greek Yoghurt with Berries and Granola",
+      "One-pot Creamy Garlic Chicken and Rice",
+      "Rice Cakes with Peanut Butter and Chocolate"
+    ]
+  }
+]
