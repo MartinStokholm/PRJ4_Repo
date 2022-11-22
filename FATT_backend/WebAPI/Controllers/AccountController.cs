@@ -43,6 +43,7 @@ namespace WebAPI.Controllers
             _account.PasswordHash = passwordHash;
             _account.PasswordSalt = passwordSalt;
             _account.Weigth = request.Weigth;
+            _account.Age = request.Age;
             
             _account.Calender = new Calender();
             _account.CalenderId = _account.Calender.Id;
@@ -134,7 +135,7 @@ namespace WebAPI.Controllers
            
         }
 
-        //WIP 
+        
         [HttpDelete("DeleteAccount/{id}")]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
         {
@@ -163,12 +164,12 @@ namespace WebAPI.Controllers
             return NoContent();
         }
         
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(string id)
+        [HttpGet("GetEmail/{email}")]
+        public async Task<ActionResult<Account>> GetAccount(string email)
         {
             try
             {
-                var found =  await _context.Accounts.Where(x => x.Email == id).ToListAsync();
+                var found =  await _context.Accounts.Where(x => x.Email == email).ToListAsync();
                 
                 return found[0];
             }
@@ -181,6 +182,39 @@ namespace WebAPI.Controllers
             return Ok(_account);
         }
 
+        //WIP 
+        [HttpGet("GetAge/{Age}")]
+        public async Task<ActionResult<int>> GetAge(int age)
+        {
+            try
+            {
+                var found =  await _context.Accounts.Where(x => x.Age == age).ToListAsync();
+                
+                return found[0].Age;
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Wrong Age");
+            }
+        }
+
+
+        //WIP
+        [HttpGet("GetWeight/{weight}")]
+        public async Task<ActionResult<double>> GetWeight(double weight)
+        {
+            try
+            {
+                var found =  await _context.Accounts.Where(x => x.Weigth == weight).ToListAsync();
+                
+                return found[0].Weigth;;
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Wrong Weigth");
+            }
+        }
+        
         private string CreateToken(Account account)
         {
             List<Claim> claims = new List<Claim>
