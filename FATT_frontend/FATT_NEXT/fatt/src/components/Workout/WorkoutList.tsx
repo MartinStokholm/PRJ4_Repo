@@ -16,8 +16,8 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
   };
 
   return (
-    <>
-      <div>
+    <div>
+      <div className="text-center">
         <Button
           onClick={() => setShowModal(true)}
           text={"Create Workout"}
@@ -68,7 +68,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
