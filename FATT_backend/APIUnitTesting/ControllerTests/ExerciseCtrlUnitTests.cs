@@ -50,7 +50,7 @@ public class ExerciseCtrlUnitTests
     public async Task PostExercise_ReturnsStatus202()
     {
         //Arrange
-        var e = new ExerciseNoWorkoutsDto() { Name = "TestExercise" };
+        var e = new ExerciseNoIdNoWorkoutsDto() { Name = "TestExercise" };
         //Act
         var result = new Tools.TestCallResult<ExerciseSimpleDto>(await _controller.PostExercise(e));
         _dataId.Add((long)result.Id);
@@ -63,7 +63,7 @@ public class ExerciseCtrlUnitTests
     public async Task PutExercise_ReturnsStatus202()
     {
         //Arrange
-        var e = new ExerciseNoWorkoutsDto() { Name = "TestExercise" };
+        var e = new ExerciseNoIdNoWorkoutsDto() { Name = "TestExercise" };
         var result = new Tools.TestCallResult<ExerciseSimpleDto>(await _controller.PostExercise(e));
         _dataId.Add((long)result.Id);
         //Act
@@ -77,7 +77,7 @@ public class ExerciseCtrlUnitTests
     [Test]
     public async Task Post_AddsExerciseCorrectly()
     {
-        var e = new ExerciseNoWorkoutsDto() { Name = "TestExercise" };
+        var e = new ExerciseNoIdNoWorkoutsDto() { Name = "TestExercise" };
         var result = new Tools.TestCallResult<ExerciseSimpleDto>(await _controller.PostExercise(e));
         _dataId.Add((long)result.Id);
         var check = e.Adapt<Exercise>();
@@ -89,7 +89,7 @@ public class ExerciseCtrlUnitTests
     [Test]
     public async Task Post_DuplicateReturns409()
     {
-        var e = new ExerciseNoWorkoutsDto() { Name = "TestExercise" };
+        var e = new ExerciseNoIdNoWorkoutsDto() { Name = "TestExercise" };
         var result1 = new Tools.TestCallResult<ExerciseSimpleDto>(await _controller.PostExercise(e));
         _dataId.Add((long)result1.Id);
         var result2 = new Tools.TestCallResult<ExerciseSimpleDto>(await _controller.PostExercise(e));
@@ -104,7 +104,7 @@ public class ExerciseCtrlUnitTests
     public async Task PutExercise_ChangesCorrectly()
     {
         //Arrange
-        var e = new ExerciseNoWorkoutsDto() { Name = "TestExercise" };
+        var e = new ExerciseNoIdNoWorkoutsDto() { Name = "TestExercise" };
         var result = new Tools.TestCallResult<ExerciseSimpleDto>(await _controller.PostExercise(e));
         _dataId.Add((long)result.Id);
         //Act
