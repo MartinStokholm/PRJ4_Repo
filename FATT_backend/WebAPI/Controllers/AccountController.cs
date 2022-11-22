@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
             _account.Email = request.Email;
             _account.PasswordHash = passwordHash;
             _account.PasswordSalt = passwordSalt;
-            _account.Weigth = request.Weigth;
+            _account.Weigth = request.Weight;
             _account.Age = request.Age;
             
             _account.Calender = new Calender();
