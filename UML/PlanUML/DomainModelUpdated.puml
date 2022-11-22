@@ -1,0 +1,67 @@
+@startuml Domain Model
+!theme cerulean
+hide circle
+' hide members
+
+class Calender {
+    - I d
+    - WorkoutPlan (List<Workout, Date>)
+    - MealPlan (List<Meal, Date>)
+}
+
+class Account {
+    - I d
+    - Name
+    - Weight
+    - Gender
+    - Age
+    - Email 
+    - Password
+}
+
+Class Workout {
+    - I d
+    - Name 
+    - Duration
+    - Exercises (List<Exercise>)
+}
+
+class Exercise {
+    - I d
+    - Name
+    - Category
+    - Intensity
+    - Equipment
+    - Repetitions
+    - Sets
+    - Picture
+    - Video
+}
+
+class Meal {
+    - I d
+    - Name
+    - Dishes List<Dish>
+}
+
+class Dish {
+    - I d
+    - Name
+    - Preptime
+    - Ingredients
+    - Recipe
+    - NutritionalValue
+    - Picture
+}
+
+Account  -l- "0..*" Meal : Has 
+Account  -u- Calender : Has a
+Account  -r-  "0..*"Workout : Has 
+
+Meal -d- "1..*" Dish : Consists of 
+Workout -d- "1..*" Exercise : Consists of
+
+Calender -- "0..*" Workout : Shows
+Calender -- "0..*" Meal : Shows
+
+@enduml
