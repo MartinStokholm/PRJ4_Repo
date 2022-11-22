@@ -1,9 +1,15 @@
-import LoadingSpinner from "../../src/components/LoadingSpinner";
-import ExerciseList from "../../src/components/ExerciseList";
-import { useExercisesData } from "../../src/hooks/useExercisesData";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
+import ExerciseList from "../../src/components/Exercise/ExerciseList";
+import getExercisesList from "../../src/queries/Exercises";
 import Error from "next/error";
-const onSuccess = (data) => {
-  console.log("Perform side effect after data fetching", data);
+import { Exercises } from "../../interfaces/Exercise";
+
+const onSuccess = (ExerciseData) => {
+  {
+    /* Maybe we only should show data if success*/
+  }
+
+  console.log("Perform side effect after data fetching", ExerciseData);
 };
 
 const onError = (error) => {
@@ -12,7 +18,10 @@ const onError = (error) => {
 
 export default function ExercisePage() {
   const { isLoading, data, isError, error, isFetching, refetch } =
-    useExercisesData(onSuccess, onError);
+    getExercisesList(onSuccess, onError);
+  //convert to to of interface.
+  let exercises: Exercises = null;
+  exercises = data;
 
   if (isLoading || isFetching) {
     return <LoadingSpinner />;
@@ -21,13 +30,13 @@ export default function ExercisePage() {
   if (isError) {
     return (
       <>
-        <Error statusCode={error.message} />
+        <Error statusCode={(error as any).message} />
       </>
     );
   }
   return (
     <>
-      <ExerciseList data={data} />
+      <ExerciseList data={exercises} />
     </>
   );
 }

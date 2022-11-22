@@ -66,11 +66,12 @@ namespace WebAPI.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
@@ -80,10 +81,6 @@ namespace WebAPI.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Weigth")
                         .HasColumnType("float");
@@ -116,20 +113,19 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Ingredients")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("NutritionalValue")
-                        .HasColumnType("float");
+                    b.Property<string>("NutritionalValue")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PicturePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Preptime")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Recipe")
@@ -193,19 +189,37 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Meals");
+                });
+
+            modelBuilder.Entity("WebAPI.Models.MealOnDay", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<long?>("CalenderId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("MealId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CalenderId");
+
+                    b.ToTable("MealOnDay");
                 });
 
             modelBuilder.Entity("WebAPI.Models.Workout", b =>
@@ -295,16 +309,25 @@ namespace WebAPI.Migrations
                     b.Navigation("Calender");
                 });
 
+            modelBuilder.Entity("WebAPI.Models.MealOnDay", b =>
+                {
+                    b.HasOne("WebAPI.Models.Calender", null)
+                        .WithMany("MealDays")
+                        .HasForeignKey("CalenderId");
+                });
+
             modelBuilder.Entity("WebAPI.Models.WorkoutOnDay", b =>
                 {
                     b.HasOne("WebAPI.Models.Calender", null)
-                        .WithMany("WorkoutDates")
+                        .WithMany("WorkoutDays")
                         .HasForeignKey("CalenderId");
                 });
 
             modelBuilder.Entity("WebAPI.Models.Calender", b =>
                 {
-                    b.Navigation("WorkoutDates");
+                    b.Navigation("MealDays");
+
+                    b.Navigation("WorkoutDays");
                 });
 #pragma warning restore 612, 618
         }

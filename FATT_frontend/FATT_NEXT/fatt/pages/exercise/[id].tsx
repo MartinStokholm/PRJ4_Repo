@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
-import { useExerciseData } from "../../src/hooks/useExerciseData";
-import ExerciseItem from "../../src/components/ExerciseItem";
-import LoadingSpinner from "../../src/components/LoadingSpinner";
+import { getExercise } from "../../src/queries/Exercise";
+import ExerciseItem from "../../src/components/Exercise/ExerciseItem";
+import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import Error from "next/error";
+
 const onSuccess = (data) => {
   console.log("Perform side effect after data fetching", data);
 };
@@ -16,11 +17,9 @@ export default function ExercisePage() {
   const router = useRouter();
   const query = router.query;
   const id = parseInt(router.query.id as string, 10);
-  console.log(router);
-  console.log(id);
 
   // Get exercise
-  const { isLoading, data, isError, error } = useExerciseData(
+  const { isLoading, data, isError, error } = getExercise(
     id,
     onSuccess,
     onError
@@ -33,7 +32,7 @@ export default function ExercisePage() {
   if (isError) {
     return (
       <>
-        <Error statusCode={error.message} />
+        <Error statusCode={(error as any).message} />
       </>
     );
   }
