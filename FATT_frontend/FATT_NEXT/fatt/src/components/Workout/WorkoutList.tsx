@@ -1,13 +1,20 @@
 import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
 import Link from "next/link";
 import DeleteButton from "../Button/DeleteButton";
-import WorkoutModal from "./WorkoutModal";
+import WorkoutModal from "./CreateWorkoutModal";
 import { useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../Setting/Modal";
+import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
   const [showModal, setShowModal] = useState(false);
+  const { mutate: deleteWorkout } = useDeleteWorkout();
+
+  const handleDeleteButtonClick = (workoutId: number) => {
+    deleteWorkout(workoutId);
+  };
+
   return (
     <>
       <div>
