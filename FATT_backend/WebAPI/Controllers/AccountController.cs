@@ -206,49 +206,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("{email}/workouts")]
-        public async Task<ActionResult<AccountGetWithWorkoutsDto>> GetAccountWorkouts(string email)
-        {
-            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
-            if (dbAccount == null)
-            {
-                return NotFound();
-            }
-
-            _context.Entry(dbAccount).Collection(x => x.Workouts).Load();
-
-            foreach (var workout in dbAccount.Workouts)
-            {
-                _context.Entry(workout).Collection(x => x.Exercises).Load();
-            }
-
-            var result = dbAccount.Adapt<AccountGetWithWorkoutsDto>();
-
-            result.AccountEmail = email;
-
-            return Ok(result);
-        }
-        
-        [HttpPost("{email}/AddWorkout/{workoutId}")]
-        public async Task<ActionResult<AccountGetWithWorkoutsDto>> AddWorkoutToAccount(string email, long workoutId) 
-        {
-            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
-            if (dbAccount == null)
-            {
-                return NotFound();
-            }
-            
-            var dbWorkout = await _context.Workouts.Where(x => x.Id == workoutId).FirstOrDefaultAsync();
-            if (dbWorkout == null)
-            {
-                return NotFound();
-            }
-
-            dbAccount.Workouts.Add(dbWorkout);
-            await _context.SaveChangesAsync();
-            return Ok(dbAccount.Adapt<AccountGetWithWorkoutsDto>());
-        }
-
         private string CreateToken(Account account)
         {
             List<Claim> claims = new List<Claim>
