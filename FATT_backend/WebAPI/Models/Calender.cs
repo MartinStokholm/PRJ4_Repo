@@ -11,7 +11,7 @@ namespace WebAPI.Models
 
         public virtual ICollection<WorkoutOnDay> WorkoutDays { get; set; } = new List<WorkoutOnDay>();
         public virtual ICollection<MealOnDay> MealDays { get; set; } = new List<MealOnDay>();
-        
-        
+
+
     }
 }

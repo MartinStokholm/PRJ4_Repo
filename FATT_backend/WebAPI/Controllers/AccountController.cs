@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(AccountLoginDto request)
+        public async Task<ActionResult<AccountGetLoginDto>> Login(AccountLoginDto request)
         {
             try
             {
@@ -79,7 +79,10 @@ namespace WebAPI.Controllers
                     return BadRequest("Not a valid Password");
                 }
 
-                return Ok(CreateToken(dbAcccount));
+                var token = CreateToken(dbAcccount);
+                var account = dbAcccount.Adapt<AccountGetLoginDto>();
+                account.Token = token;
+                return Ok(account);
             }
             catch (Exception)
             {
