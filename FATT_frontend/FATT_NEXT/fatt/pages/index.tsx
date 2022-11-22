@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
+import Calender from "../src/components/Calendar/Calender";
 export default function HomePage() {
   const [name, setName] = useState("");
 
@@ -14,8 +14,8 @@ export default function HomePage() {
 
   return (
     <div>
-      <Link href="/calender"> My FATT Calender</Link>
-      <h1>Welcome {name}</h1>
+      <h1>{name}'s FATT Calender</h1>
+      <Calender />
     </div>
   );
 }
