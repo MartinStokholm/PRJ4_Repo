@@ -45,3 +45,9 @@ export type WorkoutWithExerciseIdDto = {
   duration: string;
   exercisesIds: number[];
 };
+
+export type WorkoutAddToCalendar = {
+  workoutId: number;
+  day: string;
+  email: string;
+};

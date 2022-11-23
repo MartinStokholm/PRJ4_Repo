@@ -6,14 +6,20 @@ import { useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../Setting/Modal";
 import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
+import AddWorkoutToCalendarModal from "./AddWorkoutToCalendarModal";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showAddToCalendarModal, setShowAddToCalendarModal] = useState(false);
+  const [idPassToModal, setIdPassToModal] = useState();
   const { mutate: deleteWorkout } = useDeleteWorkout();
 
   const handleDeleteButtonClick = (workoutId: number) => {
     deleteWorkout(workoutId);
   };
+  // const handleAddToCalendarModalClick = (workoutId: number) => {
+  //   deleteWorkout(workoutId);
+  // };
 
   return (
     <div>
@@ -27,6 +33,13 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
 
       <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
         <WorkoutModal />
+      </Modal>
+
+      <Modal
+        IsVisible={showAddToCalendarModal}
+        onClose={() => setShowAddToCalendarModal(false)}
+      >
+        <AddWorkoutToCalendarModal id={idPassToModal} />
       </Modal>
 
       <div className="flex flex-wrap justify-center">
@@ -64,6 +77,14 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
               onClick={() => {
                 handleDeleteButtonClick(workout.id);
               }}
+            />
+            <Button
+              text={"Add To Calendar"}
+              onClick={() => {
+                setShowAddToCalendarModal(true);
+                setIdPassToModal(workout.id);
+              }}
+              key={undefined}
             />
           </div>
         ))}
