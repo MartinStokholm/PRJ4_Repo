@@ -1,24 +1,23 @@
 import { useMutation, useQueryClient } from "react-query";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
-import type { AccountChangeEmailDto } from "../../../interfaces/Account";
 
-export const updateWeight = async (weight: number) => {
+export const updateGender = async (gender: string) => {
   return request({
-    url: `account/${localStorage.getItem("email")}/weight/${weight}`,
+    url: `account/${localStorage.getItem("email")}/gender/${gender}`,
     method: "put",
-    data: weight,
+    data: gender,
   });
 };
 
-export const useUpdateWeight = () => {
+export const useUpdateGender = () => {
   const queryClient = useQueryClient();
-  return useMutation(updateWeight, {
+  return useMutation(updateGender, {
     onSuccess: (data) => {
-      toast.success(`Updated Weight`);
+      toast.success(`Updated Gender`);
     },
     onError: () => {
-      toast.error("Updating Weight Failed");
+      toast.error("Updating Gender Failed");
     },
     onSettled: () => {
       //queryClient.invalidateQueries("accountKey");
