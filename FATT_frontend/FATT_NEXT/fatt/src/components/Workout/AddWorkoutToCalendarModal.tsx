@@ -1,17 +1,19 @@
 import InputButton from "../Button/InputButton";
-import InputField from "../InputField";
 import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
 import { useUpdateWorkoutToCalendar } from "../../mutation/workout/PutWorkoutToCalendar";
 import { WorkoutAddToCalendar } from "../../../interfaces/Workout";
 import { useState } from "react";
+import DropdownButton from "../Button/DropdownButton";
+import Dropdown from "../util/Dropdown";
+// import Dropdown from "react-dropdown";
 
 const AddWorkoutToCalendarModal = ({ id }) => {
   const [workoutId, setWorkoutId] = useState();
-  const [day, setDay] = useState("");
+  const [day, setDay] = useState("Select an option");
+  const [open, setOpen] = useState(false);
   const { mutate: updateWorkoutToCalendar } = useUpdateWorkoutToCalendar();
 
   const handleButtonClick = () => {
-    console.log(id);
     const workoutDto: WorkoutAddToCalendar = {
       workoutId: id,
       day: day,
@@ -21,6 +23,24 @@ const AddWorkoutToCalendarModal = ({ id }) => {
     updateWorkoutToCalendar(workoutDto);
   };
 
+  const handleMenu = (day: string) => {
+    console.log("day");
+    setDay(day);
+    setOpen(false);
+  };
+
+  const options = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  const defaultOption = options[0];
+
   //   const { mutate: deleteWorkout } = useDeleteWorkout();
   return (
     <div>
@@ -29,13 +49,17 @@ const AddWorkoutToCalendarModal = ({ id }) => {
         onSubmit={handleButtonClick}
         className="flex flex-wrap border rounded bg-grey-200 justify-center"
       >
-        <InputField
-          type="text"
-          placeholder="Day"
-          onChange={(e) => setDay(e.target.value)}
-          value={undefined}
-          required
+        <Dropdown
+          trigger={<button>{day}</button>}
+          menu={options.map((day, index) => (
+            <DropdownButton
+              onClick={() => handleMenu(day)}
+              text={day}
+              key={index}
+            />
+          ))}
         />
+
         <InputButton
           onClick={handleButtonClick}
           type={"submit"}
@@ -46,5 +70,7 @@ const AddWorkoutToCalendarModal = ({ id }) => {
     </div>
   );
 };
+
+//          onChange={}
 
 export default AddWorkoutToCalendarModal;
