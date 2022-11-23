@@ -13,14 +13,14 @@ export default function ModalWeight() {
   };
 
   return (
-    <div className="p-6">
-      <h3 className="text-xl font-semibold text-gray-900 mb-5">
-        Update Weight
-      </h3>
+    <div className="p-6 flex items-center">
       <form
         onSubmit={handleOnClick}
-        className="flex border rounded border-gray-200"
+        className="flex border rounded border-gray-200 items-center"
       >
+        <h3 className="text-xl font-semibold text-gray-900 m-4">
+          Update Weight
+        </h3>
         <NumberField
           className="m-4"
           placeholder="Weight"
