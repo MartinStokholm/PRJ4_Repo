@@ -25,11 +25,6 @@ const Footer = () => {
               Log-in
             </a>
           </li>
-          <li>
-            <a href="/signup" className="hover:underline">
-              Sign-up
-            </a>
-          </li>
         </ul>
       </div>
       <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">

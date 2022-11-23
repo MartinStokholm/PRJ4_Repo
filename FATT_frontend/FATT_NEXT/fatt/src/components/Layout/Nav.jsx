@@ -60,7 +60,7 @@ const Nav = () => {
         >
           Dishes
         </Navbar.Link>
-        {setSession === false ? (
+        {setSession ? (
           <Navbar.Link
             className="hover:text-green-500 md:hover:text-green-500"
             href="/signout"

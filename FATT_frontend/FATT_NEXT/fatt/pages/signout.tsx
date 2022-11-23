@@ -7,7 +7,7 @@ export default function signout() {
   }
 
   if (process.browser) {
-    router.push("/");
+    router.push("/login");
   }
   return (
     <>
