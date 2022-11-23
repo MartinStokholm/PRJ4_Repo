@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Calender from "../src/components/Calendar/Calender";
+import { getCalender } from "../src/queries/Calender";
+import { toast } from "react-toastify";
+
+const onError = (error) => {
+  toast.error(`${error}`);
+};
+
 export default function HomePage() {
   const [name, setName] = useState("");
+  const { data: calendarData, error } = getCalender(onError);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -15,7 +23,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>{name}'s FATT Calender</h1>
-      <Calender />
+      <Calender calendarData={calendarData?.data} />
     </div>
   );
 }

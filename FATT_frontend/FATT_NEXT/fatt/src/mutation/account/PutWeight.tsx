@@ -5,7 +5,7 @@ import type { AccountChangeEmailDto } from "../../../interfaces/Account";
 
 export const updateWeight = async (weight: number) => {
   return request({
-    url: `account/changeweight`,
+    url: `account/${localStorage.getItem("email")}/weight/${weight}`,
     method: "put",
     data: weight,
   });

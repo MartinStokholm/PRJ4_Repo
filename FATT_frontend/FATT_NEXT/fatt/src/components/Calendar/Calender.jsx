@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import CalenderColumn from "./CalenderColumn";
-export default function Calender() {
+export default function Calender({ calendarData }) {
+  console.log("Calendar Data: ", calendarData);
+  console.log("Id: ", calendarData?.id);
+  console.log("Workout day: ", calendarData?.workouDays);
+  console.log("Meal day: ", calendarData?.mealDay);
   return (
     <>
       <div className="flex flex-wrap justify-center border rounded border-green-500 pt-4">

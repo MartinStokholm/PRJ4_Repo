@@ -145,7 +145,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{email}/Age/{age}")]
-        public async Task<ActionResult<AccountGetDto>> UpdateAccountAge(string email, int age) 
+        public async Task<ActionResult<AccountGetDto>> UpdateAccountAge(string email, int age)
         {
             var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
             if (dbAccount == null) { return NotFound(email); }
@@ -161,7 +161,7 @@ namespace WebAPI.Controllers
         {
             var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
             if (dbAccount == null) { return NotFound(email); }
-            
+
             dbAccount.Gender = gender;
             await _context.SaveChangesAsync();
 
@@ -228,9 +228,8 @@ namespace WebAPI.Controllers
                     .ThenInclude(c => c.WorkoutDays)
                 .Include(a => a.Calender)
                     .ThenInclude(c => c.MealDays)
-                .Where(x => x.Email == email)
-                .FirstOrDefaultAsync();
-            
+                .FirstOrDefaultAsync(x => x.Email == email);
+
             if (dbAccount == null)
             {
                 return NotFound($"could not find account with email {email}");

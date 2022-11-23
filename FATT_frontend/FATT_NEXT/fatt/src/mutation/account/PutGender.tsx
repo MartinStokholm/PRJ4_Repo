@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 export const updateGender = async (gender: string) => {
   return request({
-    url: `account/gender`,
+    url: `account/${localStorage.getItem("email")}/gender/${gender}`,
     method: "put",
     data: gender,
   });
