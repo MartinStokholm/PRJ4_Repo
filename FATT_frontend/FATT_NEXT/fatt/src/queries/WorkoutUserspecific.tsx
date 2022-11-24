@@ -5,7 +5,10 @@ import { request } from "../utils/axios";
 const fetchWorkout = async ({ queryKey }) => {
   console.log(`Fetch from ${queryKey[1]}`);
   const id = queryKey[1];
-  const response = await request({ url: `workout/${id}/${localStorage.getItem("email")}`, method: "get" });
+  const response = await request({
+    url: `workout/${id}/${localStorage.getItem("email")}`,
+    method: "get",
+  });
   console.log(`Response code: ${response.status}`);
   if (response.status == 304) {
     throw new Error("Problem fetching data");
@@ -30,5 +33,6 @@ export const getWorkout = (id: string) => {
         return undefined;
       }
     },
+    refetchOnWindowFocus: false,
   });
 };

@@ -21,6 +21,7 @@ export const getWorkoutsList = (onSuccess, onError) => {
     refetchOnWindowFocus: true,
     onSuccess,
     onError,
+    refetchOnWindowFocus: false,
   });
 };
 
