@@ -6,7 +6,7 @@ import type { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
 
 export const addWorkout = async (workout: WorkoutCreateNoIdDto) => {
   return request({
-    url: `workou?${localStorage.getItem("email")}`,
+    url: `workout/${localStorage.getItem("email")}`,
     method: "post",
     data: workout,
   });

@@ -46,7 +46,7 @@ const AddWorkoutToCalendarModal = ({ id }) => {
       <form onSubmit={handleButtonClick} className="flex">
         <Dropdown
           trigger={
-            <button className="flex flex-inline justify-center min-h-fit m-4">
+            <button className="flex flex-inline md:justify-between min-h-fit m-4">
               {day}
               <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" />
             </button>
