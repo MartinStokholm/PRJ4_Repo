@@ -40,9 +40,6 @@ const AddWorkoutToCalendarModal = ({ id }) => {
     "Sunday",
   ];
 
-  const defaultOption = options[0];
-  //flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm
-  //   const { mutate: deleteWorkout } = useDeleteWorkout();
   return (
     <div>
       <h1 className="mb-2 font-bold">Add workout to calendar </h1>

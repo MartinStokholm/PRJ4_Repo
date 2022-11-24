@@ -18,9 +18,6 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
   const handleDeleteButtonClick = (workoutId: number) => {
     deleteWorkout(workoutId);
   };
-  // const handleAddToCalendarModalClick = (workoutId: number) => {
-  //   deleteWorkout(workoutId);
-  // };
 
   return (
     <div>
