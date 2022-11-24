@@ -15,6 +15,7 @@ export type Dishs = {
 
 export type DishNoIdDto = {
   name: string;
+  prepTime: string;
   ingredients: string;
   nutritionalValue: string;
   recipe: string;
