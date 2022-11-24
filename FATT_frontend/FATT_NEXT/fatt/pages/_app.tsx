@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { SetupInterceptors } from "../src/utils/axios";
 import "../styles/globals.css";
+import Login from "../src/components/Account/Login";
 
 const queryClient = new QueryClient();
 const dev = process.env.NODE_ENV !== "production";
@@ -16,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ToastContainer />
-
+      <Login/>
       <Layout>
         <Component {...pageProps} />
         

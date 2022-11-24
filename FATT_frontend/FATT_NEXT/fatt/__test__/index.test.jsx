@@ -7,6 +7,8 @@ describe('Nav', () => {
   it('renders a heading', () => {
     render(<Nav />)
 
-   screen.debug()
+   //screen.debug()
+   const myel = screen.getByText(/Dishes/);
+   expect(myel).toBeInTheDocument();
   })
 })
