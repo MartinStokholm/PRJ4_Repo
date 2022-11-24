@@ -1,5 +1,5 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
-import { getMealsList } from "../../src/queries/Meals";
+import { getMealsList } from "../../src/queries/MealsUserspecific";
 import { getDishsList } from "../../src/queries/Dishs";
 import MealList from "../../src/components/Meal/MealList";
 import Error from "next/error";
