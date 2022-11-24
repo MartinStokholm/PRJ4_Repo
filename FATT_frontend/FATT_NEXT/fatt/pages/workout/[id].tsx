@@ -4,7 +4,6 @@ import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
 import { useRouter } from "next/router";
 import WorkoutItem from "../../src/components/Workout/WorkoutItem";
-import WorkoutSearchbar from "../../src/components/Workout/WorkoutSearchbar";
 import Error from "next/error";
 import { useEffect, useState } from "react";
 
