@@ -97,13 +97,10 @@ namespace WebAPI.Controllers
             return workoutsToAdd.Adapt<List<Workout>>();
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Workout>> PostWorkout(WorkoutCreateNoIdDto workoutCreate, string email)
+        [HttpPost("{email}")]
+        public async Task<ActionResult<WorkoutCreateNoIdDto>> PostWorkout(WorkoutCreateNoIdDto workoutCreate, string email)
         {
-            // no more unique workout names since accounts now take ownership of a workout
-            //var dbWorkout = _context.Workouts.ToList().Find(w => w.Name == workoutCreate.Name);
-            //if (dbWorkout != null) { return Conflict($"Workout with name {workoutCreate.Name} already exists"); }
-            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == email);
 
             if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
 
@@ -112,7 +109,7 @@ namespace WebAPI.Controllers
             _context.Workouts.Add(newWorkout);
             _context.SaveChanges();
 
-            return Accepted(await _context.Workouts.FindAsync(newWorkout.Id));
+            return Accepted(newWorkout.Adapt<WorkoutCreateNoIdDto>());
         }
 
         // PUT {exerciseid} on Workout list of exercises
@@ -161,7 +158,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{workoutId}/AddToCalender/{day}/Account/{email}")]
-        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long workoutId, string day, string email ) 
+        public async Task<ActionResult<Calender>> AddWorkoutToCalender(long workoutId, string day, string email)
         {
             var dbAccount = await _context.Accounts.Include(x => x.Calender).FirstOrDefaultAsync(a => a.Email == email);
             if (dbAccount == null) { return NotFound($"Could not find account with email {email}"); }
@@ -249,12 +246,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("Simple")]
-        public ActionResult<List<WorkoutSimpleDto>> GetWorkoutsSimple()
+        public ActionResult<List<WorkoutCreateNoIdDto>> GetWorkoutsSimple()
         {
             var dbWorkouts = _context.Workouts;
             if (dbWorkouts == null) { return NotFound("No workouts found"); }
 
-            return Ok(dbWorkouts.Adapt<List<WorkoutSimpleDto>>());
+            return Ok(dbWorkouts.Adapt<List<WorkoutCreateNoIdDto>>());
         }
 
         [HttpGet("account/{email}")]
@@ -290,7 +287,7 @@ namespace WebAPI.Controllers
 
 
         [HttpDelete("{workoutId}")]
-        public async Task<ActionResult<WorkoutSimpleDto>> DeleteWorkout(long workoutId)
+        public async Task<ActionResult<WorkoutCreateNoIdDto>> DeleteWorkout(long workoutId)
         {
             var dbWorkout = await _context.Workouts.FindAsync(workoutId);
             if (dbWorkout == null) { return NotFound($"Workout with id {workoutId} was not found"); }
@@ -298,7 +295,7 @@ namespace WebAPI.Controllers
             _context.Workouts.Remove(dbWorkout);
             await _context.SaveChangesAsync();
 
-            return Ok(dbWorkout.Adapt<WorkoutSimpleDto>());
+            return Ok(dbWorkout.Adapt<WorkoutCreateNoIdDto>());
         }
     }
 }
