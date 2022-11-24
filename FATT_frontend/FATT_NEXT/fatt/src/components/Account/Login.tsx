@@ -6,7 +6,7 @@ import { AccountLoginDto } from "../../../interfaces/Account";
 import { useLogin } from "../../mutation/account/PostLogin";
 import InputField from "../InputField";
 import TextButton from "../Button/TextButton";
-import Modal from "../Setting/Modal";
+import Modal from "../util/Modal";
 
 import SignUp from "./SignUp";
 import Link from "next/link";

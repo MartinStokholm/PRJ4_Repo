@@ -4,7 +4,8 @@ import DeleteButton from "../Button/DeleteButton";
 import WorkoutModal from "./CreateWorkoutModal";
 import { useState } from "react";
 import Button from "../Button/Button";
-import Modal from "../Setting/Modal";
+import Modal from "../util/Modal";
+import ModalDropdown from "../util/ModalDropdown";
 import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
 import AddWorkoutToCalendarModal from "./AddWorkoutToCalendarModal";
 
@@ -35,12 +36,12 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
         <WorkoutModal />
       </Modal>
 
-      <Modal
+      <ModalDropdown
         IsVisible={showAddToCalendarModal}
         onClose={() => setShowAddToCalendarModal(false)}
       >
         <AddWorkoutToCalendarModal id={idPassToModal} />
-      </Modal>
+      </ModalDropdown>
 
       <div className="flex flex-wrap justify-center">
         {/* This maps out all workouts with their exercise as names */}

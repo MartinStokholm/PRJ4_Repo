@@ -7,17 +7,14 @@ const Dropdown = ({ trigger, menu }) => {
     setOpen(!open);
   };
   return (
-    <div className="flex flex-wrap border rounded bg-grey-200 justify-center">
+    <div className="rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
       {cloneElement(trigger, {
         onClick: handleOpen,
       })}
       {open ? (
-        <ul>
+        <ul className=" rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {menu.map((menuItem, index) => (
-            <li
-              key={index}
-              className="bg-transparent hover:bg-green-500 text-green-500 hover:text-white py-1 px-1 border border-green-500 hover:border-transparent rounded m-4"
-            >
+            <li key={index} className="bg-gray-100 text-gray-900'">
               {cloneElement(menuItem, {
                 onClick: () => {
                   menuItem.props.onClick();
@@ -30,6 +27,6 @@ const Dropdown = ({ trigger, menu }) => {
       ) : null}
     </div>
   );
-};
+}; //className="flex min rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
 
 export default Dropdown;

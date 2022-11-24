@@ -2,7 +2,7 @@ import ExerciseItemThumbnail from "./ExerciseItemThumbnail";
 import Select from "react-select";
 import { useState } from "react";
 import Button from "../Button/Button";
-import Modal from "../Setting/Modal";
+import Modal from "../util/Modal";
 import ExerciseModal from "./ExerciseModal";
 
 const ExerciseList = ({ data }) => {

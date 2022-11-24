@@ -41,23 +41,17 @@ const AddWorkoutToCalendarModal = ({ id }) => {
   ];
 
   const defaultOption = options[0];
-
+  //flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm
   //   const { mutate: deleteWorkout } = useDeleteWorkout();
   return (
     <div>
       <h1 className="mb-2 font-bold">Add workout to calendar </h1>
-      <form
-        onSubmit={handleButtonClick}
-        className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-      >
+      <form onSubmit={handleButtonClick} className="flex">
         <Dropdown
           trigger={
-            <button>
-              {day}{" "}
-              <ChevronDownIcon
-                className="-mr-1 ml-2 h-5 w-5"
-                aria-hidden="true"
-              />
+            <button className="flex flex-inline justify-center min-h-fit m-4">
+              {day}
+              <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" />
             </button>
           }
           menu={options.map((day, index) => (

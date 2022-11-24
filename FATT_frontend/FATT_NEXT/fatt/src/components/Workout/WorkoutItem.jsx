@@ -5,7 +5,7 @@ import { useUpdateWorkoutRemoveExercise } from "../../mutation/workout/PutWorkou
 import { useRouter } from "next/router";
 import { useUpdateWorkoutAddExerciseData } from "../../mutation/workout/PutWorkoutAddExercise";
 import { useState } from "react";
-import Modal from "../Setting/Modal";
+import Modal from "../util/Modal";
 
 const WorkoutItem = ({ workoutData, exerciseData }) => {
   const [showModal, setShowModal] = useState(false);

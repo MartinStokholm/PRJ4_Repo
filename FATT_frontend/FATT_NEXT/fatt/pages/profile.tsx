@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../src/components/Button/Button";
-import Modal from "../src/components/Setting/Modal";
+import Modal from "../src/components/util/Modal";
 import ModalAge from "../src/components/Account/ModalAge";
 import ModalWeight from "../src/components/Account/ModalWeigth";
 import ModalGender from "../src/components/Account/ModalGender";
