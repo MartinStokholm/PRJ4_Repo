@@ -1,8 +1,17 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "flowbite-react";
 
 const Nav = () => {
   const [session, setSession] = useState(false);
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (localStorage.getItem("name")) {
+        setName(localStorage.getItem("name") as string);
+      } else setName("User");
+    }
+  }, []);
 
   if (typeof window !== "undefined") {
     if (localStorage.getItem("token") && session == false) {
@@ -65,7 +74,7 @@ const Nav = () => {
             className="hover:text-green-500 md:hover:text-green-500"
             href="/signout"
           >
-            Logout
+            Logout {name}
           </Navbar.Link>
         ) : (
           <Navbar.Link
