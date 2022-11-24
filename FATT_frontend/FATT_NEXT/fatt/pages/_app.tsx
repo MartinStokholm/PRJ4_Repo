@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }) {
 
       <Layout>
         <Component {...pageProps} />
+        
       </Layout>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </QueryClientProvider>
