@@ -2,7 +2,7 @@
 
 namespace WebAPI.Dto.Meal;
 
-public class MealNameWDishes
+public class MealWithDishesFullDto
 {
     public long Id { get; set; }
     public string Name { get; set; } = "";
