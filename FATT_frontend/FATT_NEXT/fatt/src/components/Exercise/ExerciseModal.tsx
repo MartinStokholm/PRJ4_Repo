@@ -99,7 +99,12 @@ export default function ExerciseModal() {
           required
         />
       </form>
-      <InputButton type={"onSubmit"} text={"Create"} key={undefined} />
+      <InputButton
+        type={"onSubmit"}
+        onClick={handleCreateButtonClick}
+        text={"Create"}
+        key={undefined}
+      />
     </div>
   );
 }
