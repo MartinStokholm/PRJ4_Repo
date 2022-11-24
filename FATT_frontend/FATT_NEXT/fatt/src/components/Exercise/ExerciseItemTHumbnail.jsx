@@ -20,13 +20,6 @@ const ExerciseItemThumbnail = ({ exercise }) => {
         <h1>{exercise.name}</h1>
         <h2>{exercise.category}</h2>
       </Link>
-
-      <DeleteButton
-        onClick={() => {
-          handleDeleteButtonClick(exercise.id);
-        }}
-        text={"Delete"}
-      />
     </div>
   );
 };
