@@ -8,6 +8,7 @@ import Modal from "../util/Modal";
 import ModalDropdown from "../util/ModalDropdown";
 import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
 import AddWorkoutToCalendarModal from "./AddWorkoutToCalendarModal";
+import Heading from "../Layout/Heading";
 
 const WorkoutList = ({ workoutData, exerciseData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,7 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
 
   return (
     <div>
+      <Heading text="My Personal Workouts" />
       <div className="text-center">
         <Button
           onClick={() => setShowModal(true)}

@@ -8,6 +8,7 @@ import Modal from "../util/Modal";
 import ModalDropdown from "../util/ModalDropdown";
 import { useDeleteMeal } from "../../mutation/meal/DeleteMeal";
 import AddMealToCalendarModal from "./AddMealToCalendarModal";
+import Heading from "../Layout/Heading";
 
 const MealList = ({ mealData, dishData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,7 @@ const MealList = ({ mealData, dishData }) => {
 
   return (
     <div>
+      <Heading text="My Personal Meals" />
       <div className="text-center">
         <Button
           onClick={() => setShowModal(true)}

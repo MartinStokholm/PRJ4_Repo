@@ -1,15 +1,15 @@
 import ExerciseItemThumbnail from "./ExerciseItemThumbnail";
-import Select from "react-select";
 import { useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../util/Modal";
 import ExerciseModal from "./ExerciseModal";
-
+import Heading from "../Layout/Heading";
 const ExerciseList = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   return (
-    <>
-      <div>
+    <div>
+      <Heading text="The exercise collection" />
+      <div className="text-center">
         <Button
           onClick={() => setShowModal(true)}
           text={"Create Exercise"}
@@ -32,7 +32,7 @@ const ExerciseList = ({ data }) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 
