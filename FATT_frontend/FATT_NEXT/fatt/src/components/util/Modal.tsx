@@ -1,8 +1,4 @@
-import { useState, useEffect } from "react";
 import ModalButton from "../Button/ModalButton";
-import ReactDOM from "react-dom";
-import { useRouter } from "next/router";
-import e from "cors";
 
 export default function Modal({ IsVisible, onClose, children }) {
   if (!IsVisible) return null;
