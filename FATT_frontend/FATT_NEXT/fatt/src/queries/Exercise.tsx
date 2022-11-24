@@ -33,6 +33,7 @@ export const getExercise = (id, onSuccess, onError) => {
     },
     onSuccess,
     onError,
+    refetchOnWindowFocus: false,
   });
 };
 

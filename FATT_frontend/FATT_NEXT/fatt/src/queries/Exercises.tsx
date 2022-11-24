@@ -27,6 +27,7 @@ const getExercisesList = (onSuccess, onError) => {
   return useQuery("exercisesKey", fecthExercises, {
     onSuccess,
     onError,
+    refetchOnWindowFocus: false,
   });
 };
 
