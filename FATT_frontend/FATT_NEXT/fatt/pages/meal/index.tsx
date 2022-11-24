@@ -16,7 +16,12 @@ const onError = (error) => {
 };
 
 export default function MealPage() {
-  const { isLoading, data: mealData, isError, error } = getMealsList();
+  const {
+    isLoading,
+    data: mealData,
+    isError,
+    error,
+  } = getMealsList(onSuccess, onError);
 
   const { data: dishData } = getDishsList(onSuccess, onError);
 
@@ -25,7 +30,7 @@ export default function MealPage() {
   }
 
   if (isError) {
-    return <Error statusCode={error.message} />;
+    return <Error statusCode={(error as any).message} />;
   }
 
   return <MealList mealData={mealData} dishData={dishData} />;
