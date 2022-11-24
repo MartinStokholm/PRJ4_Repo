@@ -3,7 +3,7 @@ import getDishesList from "../../src/queries/Dishs";
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { useUpdateMealAddDishData } from "../../src/mutation/meal/PutMealAddDish";
 import { useRouter } from "next/router";
-import MealItem from "../../src/components/Meal/MealItem";
+import MealItem from "../../src/components/Meal/Mealtem";
 import Error from "next/error";
 import { useEffect, useState } from "react";
 
