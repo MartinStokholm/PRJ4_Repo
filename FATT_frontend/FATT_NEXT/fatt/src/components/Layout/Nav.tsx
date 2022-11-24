@@ -45,24 +45,28 @@ const Nav = () => {
         >
           Home
         </Navbar.Link>
+
         <Navbar.Link
           className="hover:text-green-500 md:hover:text-green-500"
           href="/workout"
         >
           Workouts
         </Navbar.Link>
-        <Navbar.Link
-          className="hover:text-green-500 md:hover:text-green-500"
-          href="/exercise"
-        >
-          Exercises
-        </Navbar.Link>
+
         <Navbar.Link
           className="hover:text-green-500 md:hover:text-green-500"
           href="/meal"
         >
           Meals
         </Navbar.Link>
+
+        <Navbar.Link
+          className="hover:text-green-500 md:hover:text-green-500"
+          href="/exercise"
+        >
+          Exercises
+        </Navbar.Link>
+
         <Navbar.Link
           className="hover:text-green-500 md:hover:text-green-500"
           href="/dish"
