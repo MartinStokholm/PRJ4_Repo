@@ -3,7 +3,6 @@ import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 import { AccountLoginDto } from "../../../interfaces/Account";
 import axios from "axios";
-import { NextResponse } from "next/server";
 import { server } from "../../../config/config";
 import { useRouter } from "next/router";
 
@@ -25,11 +24,11 @@ export const useLogin = () => {
   const queryClient = useQueryClient();
   return useMutation(login, {
     onSuccess: (newAccount) => {
-      toast.success(`Login`);
+      toast.success(`Login to Account Succes`);
       return Promise.resolve(router.push("/"));
     },
     onError: (_error, _account, context) => {
-      toast.error("Creating Account Failed");
+      toast.error("Login to Account Failed");
     },
   });
 };
