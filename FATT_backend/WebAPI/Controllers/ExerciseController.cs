@@ -20,16 +20,16 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("list")]
-        public async Task<ActionResult<List<ExerciseSimpleDto>>> PostExercises(List<ExerciseCreateNoIdDto> exercises)
+        public async Task<ActionResult<List<ExerciseCreateNoIdDto>>> PostExercises(List<ExerciseCreateNoIdDto> exercises)
         {
             var exercisesToAdd = exercises.Adapt<List<Exercise>>();
             await _context.Exercises.AddRangeAsync(exercisesToAdd);
             await _context.SaveChangesAsync();
-            return Accepted(exercisesToAdd.Adapt<List<ExerciseSimpleDto>>());
+            return Accepted(exercisesToAdd.Adapt<List<ExerciseCreateNoIdDto>>());
         }
 
         [HttpPost]
-        public async Task<ActionResult<ExerciseSimpleDto>> PostExercise(ExerciseNoIdNoWorkoutsDto exerciseCreate)
+        public async Task<ActionResult<ExerciseCreateNoIdDto>> PostExercise(ExerciseNoIdNoWorkoutsDto exerciseCreate)
         {
             var dbExercise = _context.Exercises.ToList().Find(e => e.Name == exerciseCreate.Name);
             if (dbExercise != null) { return Conflict($"Exercise with name {exerciseCreate.Name} already exists"); }
@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Accepted(exerciseToAdd.Adapt<ExerciseSimpleDto>());
+            return Accepted(exerciseToAdd.Adapt<ExerciseCreateNoIdDto>());
         }
 
         [HttpPut("{exerciseId}")]
@@ -58,22 +58,7 @@ namespace WebAPI.Controllers
             return Accepted(await _context.Exercises.FindAsync(exerciseId));
         }
 
-        [HttpGet("Thumbnail")]
-        public async Task<ActionResult<List<ExerciseThumbnailDto>>> GetExerciseThumbnail()
-        {
-            var dbExercise = await _context.Exercises.ToListAsync();
-
-            return Ok(dbExercise.Adapt<List<ExerciseThumbnailDto>>());
-        }
-
-        [HttpGet("Simple")]
-        public async Task<ActionResult<List<ExerciseSimpleDto>>> GetExerciseSimple()
-        {
-            var dbExercise = await _context.Exercises.ToListAsync();
-
-            return Ok(dbExercise.Adapt<List<ExerciseSimpleDto>>());
-        }
-
+      
         [HttpGet]
         public async Task<ActionResult<List<ExerciseNoWorkoutsDto>>> GetExerciseFull()
         {
@@ -95,7 +80,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{exerciseId}")]
-        public async Task<ActionResult<ExerciseSimpleDto>> DeleteExercise(long exerciseId)
+        public async Task<ActionResult<ExerciseCreateNoIdDto>> DeleteExercise(long exerciseId)
         {
 
             var dbExercise = await _context.Exercises.FindAsync(exerciseId);
@@ -107,7 +92,7 @@ namespace WebAPI.Controllers
             _context.Exercises.Remove(dbExercise);
             await _context.SaveChangesAsync();
 
-            return Ok(dbExercise.Adapt<ExerciseSimpleDto>());
+            return Ok(dbExercise.Adapt<ExerciseCreateNoIdDto>());
         }
 
     }
