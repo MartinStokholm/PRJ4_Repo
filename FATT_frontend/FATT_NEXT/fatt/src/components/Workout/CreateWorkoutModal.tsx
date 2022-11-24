@@ -11,6 +11,7 @@ const WorkoutModal = () => {
   const { mutate: workout } = useAddWorkout();
 
   const handleCreateButtonClick = () => {
+    console.log("Create workout");
     const workoutDto: WorkoutCreateNoIdDto = {
       name: workoutName,
       duration: duration,
@@ -18,9 +19,6 @@ const WorkoutModal = () => {
     workout(workoutDto);
   };
 
-  const handleDeleteButtonClick = (workoutId: number) => {
-    deleteWorkout(workoutId);
-  };
   const { mutate: deleteWorkout } = useDeleteWorkout();
   return (
     <div>
@@ -43,7 +41,12 @@ const WorkoutModal = () => {
           value={undefined}
           required
         />
-        <InputButton type={"submit"} text={"Create"} key={undefined} />
+        <InputButton
+          onClick={handleCreateButtonClick}
+          type={"submit"}
+          text={"Create"}
+          key={undefined}
+        />
       </form>
     </div>
   );
