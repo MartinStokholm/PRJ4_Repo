@@ -4,8 +4,8 @@ import { getMealsList } from "../../queries/MealsUserspecific";
 import WorkoutPlan from "../Calendar/WorkoutPlan";
 import MealPlan from "../Calendar/MealPlan";
 import SubHeading from "../Layout/SubHeading";
-
 import Error from "next/error";
+
 const onSuccess = (WorkoutData) => {
   console.log("Perform side effect after data fetching", WorkoutData?.data);
 };
@@ -43,7 +43,7 @@ export default function Calender({ calendarData }) {
   console.log({ mealDays });
 
   return (
-    <div className="flex flex-col border rounded border-grey-300  bg-white overflow-hidden shadow-lg ">
+    <div className="flex flex-col border rounded border-grey-300 bg-white overflow-hidden shadow-lg ">
       <div className="m-4">
         <SubHeading text="Workout Plan" />
         <WorkoutPlan workoutDays={workoutDays} workoutData={workoutData} />

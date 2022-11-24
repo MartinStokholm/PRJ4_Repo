@@ -10,6 +10,8 @@ import {
   AccountChangePasswordDto,
 } from "../../../interfaces/Account";
 import { useState } from "react";
+import Heading from "../Layout/Heading";
+import SubHeading from "../Layout/SubHeading";
 
 const Settings = () => {
   const [email, setEmail] = useState("");
@@ -51,12 +53,11 @@ const Settings = () => {
 
   return (
     <div>
-      <h1 className="font-bold mb-4">Account settings</h1>
-
-      <h2>Change email</h2>
+      <Heading text="Account settings" />
+      <SubHeading text="Change email" />
       <form
         onSubmit={handleUpdateEmailButtonClick}
-        className="flex border rounded border-gray-200"
+        className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
       >
         <TextInput
           className="m-4"
@@ -79,10 +80,10 @@ const Settings = () => {
         <InputButton type={"submit"} text={"Update"} key={undefined} />
       </form>
 
-      <h2>Change password</h2>
+      <SubHeading text="Change password" />
       <form
         onSubmit={handleUpdatePasswordButtonClick}
-        className="flex border rounded border-grey-200"
+        className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
       >
         <TextInput
           className="m-4"
@@ -105,10 +106,10 @@ const Settings = () => {
         <InputButton type={"submit"} text={"Update"} key={undefined} />
       </form>
 
-      <h2>Delete account</h2>
+      <SubHeading text="Delete Account" />
       <form
         onSubmit={handleDeleteButtonClick}
-        className="flex border rounded border-grey-200"
+        className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
       >
         <TextInput
           className="m-4"

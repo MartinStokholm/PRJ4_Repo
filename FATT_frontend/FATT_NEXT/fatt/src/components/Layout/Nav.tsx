@@ -23,7 +23,7 @@ const Nav = () => {
     <Navbar
       fluid={true}
       rounded={false}
-      className="sticky top-0 mx-auto shadow-md"
+      className="sticky top-0 mx-auto shadow-md bg-gradient-to-r from-white to-green-200"
     >
       <Navbar.Brand href="/">
         <img
