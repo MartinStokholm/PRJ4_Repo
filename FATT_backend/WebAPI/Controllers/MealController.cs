@@ -224,6 +224,19 @@ namespace WebAPI.Controllers
             return Ok(dishes);
         }
         
+        [HttpGet("Account/{email}")]
+        public async Task<ActionResult<List<MealWithDishesFullDto>>> GetMealsByAccountEmail(string email)
+        {
+            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == email);
+
+            if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
+
+            var dbMeals = await _context.Meals.Where(w => w.AccountId == dbAccount.Id).Include(x => x.Dishes).ToListAsync();
+
+            return Ok(dbMeals.Adapt<List<MealWithDishesFullDto>>());
+        }
+
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMeal(long id)
         {
