@@ -31,3 +31,13 @@ export type MealNoIdDto = {
   Category: string;
   Desciption: string;
 };
+
+export type MealAddToCalendar = {
+  mealId: number;
+  day: string;
+  email: string;
+};
+
+export type MealCreateNoIdDto = {
+  Name: string;
+};
