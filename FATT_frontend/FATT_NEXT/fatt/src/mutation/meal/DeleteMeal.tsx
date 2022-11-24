@@ -6,9 +6,9 @@ import { toast } from "react-toastify";
 
 import type { Meal } from "../../../interfaces/Meal";
 
-export const deleteMeal = async (meal: Meal) => {
+export const deleteMeal = async (meal) => {
   return request({
-    url: `meal/${meal.Id}`,
+    url: `meal/${meal}`,
     method: "delete",
   });
 };
@@ -17,7 +17,7 @@ export const useDeleteMeal = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteMeal, {
     onSuccess: (data) => {
-      toast.success(`Deleted Meal "${data.data.name}"`);
+      toast.success(`Deleted Meal `);
     },
     onError: () => {
       toast.error("Deleting Meal Failed");
