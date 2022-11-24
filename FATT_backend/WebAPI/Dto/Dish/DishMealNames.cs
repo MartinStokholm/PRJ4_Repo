@@ -13,5 +13,5 @@ public class DishMealNames
     public string? Ingredients { get; set; }
 
     public string? PicturePath { get; set; }
-    public List<MealJustName> Meals { get; set; } = new();
+    public List<MealCreateNoIdDto> Meals { get; set; } = new();
 }
