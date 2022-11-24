@@ -14,7 +14,6 @@ const NumberField = ({ required, value, onChange, placeholder, min, max }) => {
       min={min}
       max={max}
     />
-    <h1><div>Maher</div></h1>
   );
 };
 
