@@ -247,8 +247,6 @@ namespace WebAPI.Controllers
             return Ok(workout);
         }
 
-
-
         [HttpGet("Account/{email}")]
         public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> GetWorkoutsByAccountEmail(string email)
         {
