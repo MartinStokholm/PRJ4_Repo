@@ -10,6 +10,7 @@ using Mapster;
 using WebAPI.Dto.Dish;
 using WebAPI.Dto.Meal;
 using Microsoft.AspNetCore.Authorization;
+using WebAPI.Dto.Exercise;
 
 namespace WebAPI.Controllers
 {
@@ -24,46 +25,34 @@ namespace WebAPI.Controllers
         {
             _context = context;
         }
-
-        // GET: api/DishModels
-        [HttpGet]
-        public async Task<ActionResult<List<DishNoMealsDto>>> GetDishModel()
+        
+        [HttpPost]
+        public async Task<ActionResult<DishNoMealsDto>> PostDishModel(DishNoIdDto newDish)
         {
-            var dbDishes = await _context.Dishes.ToListAsync();
-            return dbDishes.Adapt<List<DishNoMealsDto>>();
+            var d = newDish.Adapt<Dish>();
+            _context.Dishes.Add(d);
+            await _context.SaveChangesAsync();
+
+            return Accepted(d.Adapt<DishNoMealsDto>());
         }
 
-        // GET: api/DishModels/5
-        [HttpGet("{dishId}")]
-        public async Task<ActionResult<DishNoMealsDto>> GetDish(long dishId)
+        [HttpPost("list")]
+        public async Task<ActionResult<List<DishNoMealsDto>>> PostDishModel(List<DishNoIdDto> newDishes)
         {
-            var dish = await _context.Dishes.FindAsync(dishId);
+            var dishes = newDishes.Adapt<List<Dish>>();
+            _context.Dishes.AddRange(dishes);
+            await _context.SaveChangesAsync();
 
-
-            if (dish == null)
-            {
-                return NotFound();
-            }
-
-            _context.Entry(dish)
-                .Collection(d => d.Meals)
-                .Load();
-
-            var ret = dish.Adapt<DishNoMealsDto>();
-
-            return Ok(ret);
+            return Accepted(dishes.Adapt<List<DishNoMealsDto>>());
         }
 
         [HttpPut("{dishId}")]
         public async Task<IActionResult> PutDishModel(long dishId, DishNoIdDto dish)
         {
-            var found = await _context.Dishes.FindAsync(dishId);
-            if (found == null)
-            {
-                return NotFound("Couldn't find Dish with specified id");
-            }
+            var dbDish = await _context.Dishes.FindAsync(dishId);
+            if (dbDish == null) { return NotFound($"Could not find dish with id {dishId}"); }
 
-            _context.Entry(found)
+            _context.Entry(dbDish)
                 .CurrentValues
                 .SetValues(dish);
 
@@ -83,43 +72,41 @@ namespace WebAPI.Controllers
                 }
             }
 
-            return Accepted(found.Adapt<DishNoMealsDto>());
+            return Accepted(dbDish.Adapt<DishNoMealsDto>());
         }
 
-        [HttpPost]
-        public async Task<ActionResult<DishNoMealsDto>> PostDishModel(DishNoIdDto newDish)
+        [HttpGet]
+        public async Task<ActionResult<List<DishNoMealsDto>>> GetDishes()
         {
-            var d = newDish.Adapt<Dish>();
-            _context.Dishes.Add(d);
-            await _context.SaveChangesAsync();
-
-            return Accepted(d.Adapt<DishNoMealsDto>());
+            var dbDishes = await _context.Dishes.ToListAsync();
+            return dbDishes.Adapt<List<DishNoMealsDto>>();
         }
-        [HttpPost("list")]
-        public async Task<ActionResult<List<DishNoMealsDto>>> PostDishModel(List<DishNoIdDto> newDishes)
+
+        [HttpGet("{dishId}")]
+        public async Task<ActionResult<DishNoMealsDto>> GetDish(long dishId)
         {
-            var dishes = newDishes.Adapt<List<Dish>>();
-            _context.Dishes.AddRange(dishes);
-            await _context.SaveChangesAsync();
+            var dbDish = await _context.Dishes.FindAsync(dishId);
 
-            return Accepted(dishes.Adapt<List<DishNoMealsDto>>());
+            if (dbDish == null) { return NotFound($"Could not find dish with id {dishId}"); }
+
+            _context.Entry(dbDish)
+                .Collection(d => d.Meals)
+                .Load();
+
+            var ret = dbDish.Adapt<DishNoMealsDto>();
+
+            return Ok(ret);
         }
 
-        /* DELETE requests */
-
-        // DELETE: api/DishModels/5
         [HttpDelete("{dishId}")]
-        public async Task<IActionResult> DeleteDishModel(long dishId)
+        public async Task<IActionResult> DeleteDish(long dishId)
         {
 
-            var dishModel = await _context.Dishes.FindAsync(dishId);
+            var dbDish = await _context.Dishes.FindAsync(dishId);
 
-            if (dishModel == null)
-            {
-                return NotFound();
-            }
+            if (dbDish == null) { return NotFound($"Could not find dish with id {dishId}"); }
 
-            _context.Dishes.Remove(dishModel);
+            _context.Dishes.Remove(dbDish);
             await _context.SaveChangesAsync();
 
             return NoContent();
