@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Calender from "../src/components/Calendar/Calender";
 import { getCalender } from "../src/queries/Calender";
 import { toast } from "react-toastify";
