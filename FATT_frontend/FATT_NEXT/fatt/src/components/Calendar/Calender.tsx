@@ -3,6 +3,7 @@ import { getWorkoutsList } from "../../queries/WorkoutsUserspecific";
 import { getMealsList } from "../../queries/MealsUserspecific";
 import WorkoutPlan from "../Calendar/WorkoutPlan";
 import MealPlan from "../Calendar/MealPlan";
+import SubHeading from "../Layout/SubHeading";
 
 import Error from "next/error";
 const onSuccess = (WorkoutData) => {
@@ -15,24 +16,19 @@ const onError = (error) => {
 
 export default function Calender({ calendarData }) {
   const {
-    isLoadingWorkout,
+    isLoading,
     data: workoutData,
-    isErrorWorkout,
-    errorWorkout,
+    isError,
+    error,
   } = getWorkoutsList(onSuccess, onError);
 
-  const {
-    isLoadingMeal,
-    data: mealData,
-    isErrorMeal,
-    errorMeal,
-  } = getMealsList(onSuccess, onError);
+  const { data: mealData } = getMealsList(onSuccess, onError);
 
-  if (isLoadingWorkout || isLoadingMeal) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (isErrorWorkout || isErrorMeal) {
+  if (isError) {
     return <Error statusCode={(error as any).message} />;
   }
 
@@ -47,13 +43,16 @@ export default function Calender({ calendarData }) {
   console.log({ mealDays });
 
   return (
-    <>
-      <div className="border rounded border-green-500 p-4">
-        <h1>Workout plan</h1>
+    <div className="flex flex-col border rounded border-grey-300  bg-white overflow-hidden shadow-lg ">
+      <div className="m-4">
+        <SubHeading text="Workout Plan" />
         <WorkoutPlan workoutDays={workoutDays} workoutData={workoutData} />
-        <h1>Meal plan</h1>
+      </div>
+
+      <div className="m-4">
+        <SubHeading text="Meal Plan" />
         <MealPlan mealDays={mealDays} mealData={mealData} />
       </div>
-    </>
+    </div>
   );
 }

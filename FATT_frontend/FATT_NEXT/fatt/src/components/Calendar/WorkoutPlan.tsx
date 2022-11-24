@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const WorkoutPlan = ({ workoutDays, workoutData }) => {
   return (
-    <div className="flex flex-wrap justify-center border rounded border-green-500 pt-4">
+    <div className="flex flex-wrap justify-center bg-white overflow-hidden shadow-lg p-2">
       {workoutDays?.map((workoutDay) => (
         <div key={workoutDay.id} className="border rounded m-2">
           <h1>{workoutDay.day}</h1>

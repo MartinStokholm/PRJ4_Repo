@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const MealPlan = ({ mealDays, mealData }) => {
   return (
-    <div className="flex flex-wrap justify-center border rounded border-green-500 pt-4">
+    <div className="flex flex-wrap justify-center bg-white overflow-hidden shadow-lg p-2">
       {mealDays?.map((mealDay) => (
         <div key={mealDay.id} className="border rounded m-2">
           <h1>{mealDay.day}</h1>
