@@ -167,7 +167,7 @@ namespace WebAPI.Controllers
             await _context.SaveChangesAsync();
             return Accepted(dbAccount.Calender);
         }
-        
+
         [HttpPut("{workoutId}/Account/{email}")]
         public async Task<ActionResult<WorkoutWithExerciseFullDto>> AddWorkoutToAccount(string email, long workoutId)
         {
@@ -254,7 +254,7 @@ namespace WebAPI.Controllers
 
             if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
 
-            var dbWorkout = await _context.Workouts.Where(w => w.AccountId == dbAccount.Id).Include(x => x.Exercises).ToListAsync();
+            var dbWorkout = await _context.Workouts.Include(x => x.Exercises).Where(w => w.AccountId == dbAccount.Id).ToListAsync();
 
 
             return Ok(dbWorkout.Adapt<List<WorkoutWithExerciseFullDto>>());
