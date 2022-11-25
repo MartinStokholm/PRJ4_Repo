@@ -1,11 +1,17 @@
 import { getWorkout } from "../../src/queries/Workout";
 import getExercisesList from "../../src/queries/Exercises";
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
-import { useUpdateWorkoutAddExerciseData } from "../../src/mutation/workout/PutWorkoutAddExercise";
 import { useRouter } from "next/router";
-import WorkoutItem from "../../src/components/Workout/WorkoutItem";
+import WorkoutItem from "../../src/components/Workout/id/WorkoutItem";
 import Error from "next/error";
-import { useEffect, useState } from "react";
+
+const onSuccess = () => {
+  console.log("Perform side effect after data fetching");
+};
+
+const onError = (error) => {
+  console.log(`Perform side effect after encountered error\n ${error}`);
+};
 
 export default function WorkoutPage() {
   // Get Exercises and workout
@@ -15,18 +21,7 @@ export default function WorkoutPage() {
     isError,
     error,
   } = getWorkout(useRouter().query.id as string);
-  const { data: exerciseData } = getExercisesList();
-
-  // Handler for when button is clicked. We send a request to add or remove a specific exercise to/from workout
-  const handleAddButtonClick = (exerciseId) => {
-    const data = { workoutId, exerciseId };
-    console.log(data);
-    updateWorkoutAddExercise(data);
-  };
-
-  // Function call need to mutate date (PUT)
-  const { mutate: updateWorkoutAddExercise } =
-    useUpdateWorkoutAddExerciseData();
+  const { data: exerciseData } = getExercisesList(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;

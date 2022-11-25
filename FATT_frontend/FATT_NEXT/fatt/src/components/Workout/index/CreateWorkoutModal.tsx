@@ -1,8 +1,8 @@
-import InputButton from "../Button/InputButton";
-import InputField from "../InputField";
-import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
-import { useAddWorkout } from "../../mutation/workout/PostWorkout";
-import { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
+import InputButton from "../../Button/InputButton";
+import InputField from "../../InputField";
+import { useDeleteWorkout } from "../../../mutation/workout/DeleteWorkout";
+import { useAddWorkout } from "../../../mutation/workout/PostWorkout";
+import { WorkoutCreateNoIdDto } from "../../../../interfaces/Workout";
 import { useState } from "react";
 
 const WorkoutModal = () => {

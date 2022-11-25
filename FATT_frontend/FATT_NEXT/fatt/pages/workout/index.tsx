@@ -1,14 +1,9 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { getWorkoutsList } from "../../src/queries/WorkoutsUserspecific";
-import getExercisesList from "../../src/queries/Exercises";
-import WorkoutList from "../../src/components/Workout/WorkoutList";
+import WorkoutList from "../../src/components/Workout/index/WorkoutList";
 import Error from "next/error";
-const onSuccess = (WorkoutData, ExerciseData) => {
-  {
-    /* Maybe we only should show data if success*/
-  }
-
-  console.log("Perform side effect after data fetching", ExerciseData);
+const onSuccess = () => {
+  console.log("Perform side effect after data fetching");
 };
 
 const onError = (error) => {
@@ -23,8 +18,6 @@ export default function WorkoutPage() {
     error,
   } = getWorkoutsList(onSuccess, onError);
 
-  const { data: exerciseData } = getExercisesList(onSuccess, onError);
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -33,5 +26,5 @@ export default function WorkoutPage() {
     return <Error statusCode={(error as any).message} />;
   }
 
-  return <WorkoutList workoutData={workoutData} exerciseData={exerciseData} />;
+  return <WorkoutList workoutData={workoutData} />;
 }

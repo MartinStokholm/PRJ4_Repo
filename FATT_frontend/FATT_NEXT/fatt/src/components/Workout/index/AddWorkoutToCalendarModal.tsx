@@ -1,12 +1,11 @@
-import InputButton from "../Button/InputButton";
-import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
-import { useUpdateWorkoutToCalendar } from "../../mutation/workout/PutWorkoutToCalendar";
-import { WorkoutAddToCalendar } from "../../../interfaces/Workout";
+import InputButton from "../../Button/InputButton";
+import { useDeleteWorkout } from "../../../mutation/workout/DeleteWorkout";
+import { useUpdateWorkoutToCalendar } from "../../../mutation/workout/PutWorkoutToCalendar";
+import { WorkoutAddToCalendar } from "../../../../interfaces/Workout";
 import { useState } from "react";
-import DropdownButton from "../Button/DropdownButton";
-import Dropdown from "../util/Dropdown";
+import DropdownButton from "../../Button/DropdownButton";
+import Dropdown from "../../util/Dropdown";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-// import Dropdown from "react-dropdown";
 
 const AddWorkoutToCalendarModal = ({ id }) => {
   const [workoutId, setWorkoutId] = useState();
@@ -70,7 +69,5 @@ const AddWorkoutToCalendarModal = ({ id }) => {
     </div>
   );
 };
-
-//          onChange={}
 
 export default AddWorkoutToCalendarModal;

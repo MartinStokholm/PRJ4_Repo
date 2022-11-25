@@ -1,8 +1,8 @@
-import Modal from "../util/Modal";
+import Modal from "../../util/Modal";
 import AddExercise from "./AddExercise";
 import RemoveExercise from "./RemoveExercise";
 import { useState } from "react";
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 
 const WorkoutItem = ({ workoutData, exerciseData }) => {
   const [showModal, setShowModal] = useState(false);

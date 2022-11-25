@@ -1,7 +1,7 @@
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
 import { useRouter } from "next/router";
-import { useUpdateWorkoutAddExerciseData } from "../../mutation/workout/PutWorkoutAddExercise";
+import { useUpdateWorkoutAddExerciseData } from "../../../mutation/workout/PutWorkoutAddExercise";
 
 const AddExercise = ({ workoutData, exerciseData }) => {
   const workoutId = useRouter().query.id;

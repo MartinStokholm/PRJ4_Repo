@@ -1,7 +1,7 @@
 import WorkoutItemThumbnail from "./WorkoutItemThumbnail";
 import { useRouter } from "next/router";
-import DeleteButton from "../Button/DeleteButton";
-import { useUpdateWorkoutRemoveExercise } from "../../mutation/workout/PutWorkoutRemoveExercise";
+import DeleteButton from "../../Button/DeleteButton";
+import { useUpdateWorkoutRemoveExercise } from "../../../mutation/workout/PutWorkoutRemoveExercise";
 
 const RemoveExercise = ({ exerciseData, workoutData }) => {
   const workoutId = useRouter().query.id;
