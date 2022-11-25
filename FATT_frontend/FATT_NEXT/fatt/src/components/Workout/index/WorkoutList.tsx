@@ -7,7 +7,7 @@ import ModalDropdown from "../../util/ModalDropdown";
 import { useDeleteWorkout } from "../../../mutation/workout/DeleteWorkout";
 import AddWorkoutToCalendarModal from "./AddWorkoutToCalendarModal";
 import Heading from "../../Layout/Heading";
-import WorkoutElement from "./WorkoutElement";
+import WorkoutHeader from "./WorkoutHeader";
 
 const WorkoutList = ({ workoutData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -35,7 +35,10 @@ const WorkoutList = ({ workoutData }) => {
           IsVisible={showAddToCalendarModal}
           onClose={() => setShowAddToCalendarModal(false)}
         >
-          <AddWorkoutToCalendarModal id={idPassToModal} />
+          <AddWorkoutToCalendarModal
+            id={idPassToModal}
+            onClose={() => setShowAddToCalendarModal(false)}
+          />
         </ModalDropdown>
 
         <div className="flex flex-wrap justify-center">
@@ -45,7 +48,7 @@ const WorkoutList = ({ workoutData }) => {
               key={workout.name}
               className="rounded bg-white shadow-lg w-full md:w-1/3 m-4 flex flex-col justify-center"
             >
-              <WorkoutElement workout={workout} />
+              <WorkoutHeader workout={workout} />
               <Button
                 text={"Add To Calendar"}
                 onClick={() => {
