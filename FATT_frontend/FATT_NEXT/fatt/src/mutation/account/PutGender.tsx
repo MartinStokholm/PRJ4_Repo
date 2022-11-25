@@ -20,7 +20,7 @@ export const useUpdateGender = () => {
       toast.error("Updating Gender Failed");
     },
     onSettled: () => {
-      //queryClient.invalidateQueries("accountKey");
+      queryClient.invalidateQueries("accountKey");
     },
   });
 };

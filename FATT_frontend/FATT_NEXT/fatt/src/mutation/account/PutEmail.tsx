@@ -21,7 +21,7 @@ export const useUpdateEmail = () => {
       toast.error("Updating Email Failed");
     },
     onSettled: () => {
-      //queryClient.invalidateQueries("accountKey");
+      queryClient.invalidateQueries("accountKey");
     },
   });
 };
