@@ -31,26 +31,27 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
       <div className="md:flex flex-cols">
         <div className="text-center">
           <h1 className="mt-4 font-bold">{workoutData?.data?.name}</h1>
-          <h2 className="italic">{workoutData?.data?.duration}</h2>
-          <Button onClick={() => setShowModal(true)} text={"Add exercise"} />
-          {exerciseData?.data.map((exercise) =>
-            workoutData?.data?.exercisesIds?.includes(exercise.id) ? (
-              <div
-                key={exercise.id}
-                className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
-              >
-                <DeleteButton
-                  text={"Remove"}
-                  onClick={() => {
-                    handleRemoveButtonClick(exercise.id);
-                  }}
-                />
-                <WorkoutItemThumbnail exercise={exercise} />
-              </div>
-            ) : null
-          )}
+          <h2 className="italic mb-2">{workoutData?.data?.duration}</h2>
+          <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
+            <Button onClick={() => setShowModal(true)} text={"Add exercise"} />
+            {exerciseData?.data.map((exercise) =>
+              workoutData?.data?.exercisesIds?.includes(exercise.id) ? (
+                <div
+                  key={exercise.id}
+                  className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
+                >
+                  <DeleteButton
+                    text={"Remove"}
+                    onClick={() => {
+                      handleRemoveButtonClick(exercise.id);
+                    }}
+                  />
+                  <WorkoutItemThumbnail exercise={exercise} />
+                </div>
+              ) : null
+            )}
+          </div>
         </div>
-
         <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
           <div>
             <h1 className="mt-4 font-bold">All exercises</h1>
