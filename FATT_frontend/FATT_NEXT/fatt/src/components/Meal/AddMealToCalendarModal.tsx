@@ -5,9 +5,10 @@ import { useState } from "react";
 import DropdownButton from "../Button/DropdownButton";
 import Dropdown from "../util/Dropdown";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import MealItem from "./MealItem";
 // import Dropdown from "react-dropdown";
 
-const AddMealToCalendarModal = ({ id }) => {
+const AddMealToCalendarModal = ({ id, onClose }) => {
   const [mealId, setMealId] = useState();
   const [day, setDay] = useState("Select an option");
   const [open, setOpen] = useState(false);
@@ -21,6 +22,7 @@ const AddMealToCalendarModal = ({ id }) => {
     };
 
     updateMealToCalendar(mealDto);
+    onClose();
   };
 
   const handleMenu = (day: string) => {
@@ -59,12 +61,7 @@ const AddMealToCalendarModal = ({ id }) => {
           ))}
         />
 
-        <InputButton
-          onClick={handleButtonClick}
-          type={"submit"}
-          text={"Add"}
-          key={undefined}
-        />
+        <InputButton onClick={handleButtonClick} text={"Add"} />
       </form>
     </div>
   );

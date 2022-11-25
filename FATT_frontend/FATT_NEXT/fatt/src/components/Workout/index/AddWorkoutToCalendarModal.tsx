@@ -7,8 +7,7 @@ import DropdownButton from "../../Button/DropdownButton";
 import Dropdown from "../../util/Dropdown";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-const AddWorkoutToCalendarModal = ({ id }) => {
-  const [workoutId, setWorkoutId] = useState();
+const AddWorkoutToCalendarModal = ({ id, onClose }) => {
   const [day, setDay] = useState("Select an option");
   const [open, setOpen] = useState(false);
   const { mutate: updateWorkoutToCalendar } = useUpdateWorkoutToCalendar();
@@ -21,12 +20,12 @@ const AddWorkoutToCalendarModal = ({ id }) => {
     };
 
     updateWorkoutToCalendar(workoutDto);
+    onClose();
   };
 
   const handleMenu = (day: string) => {
     console.log("day");
     setDay(day);
-    setOpen(false);
   };
 
   const options = [
