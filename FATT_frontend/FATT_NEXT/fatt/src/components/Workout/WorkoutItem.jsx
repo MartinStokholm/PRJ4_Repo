@@ -56,7 +56,7 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
           <div>
             <h1 className="mt-4 font-bold">All exercises</h1>
             <h2 className="italic">
-              That you can add too {workoutData?.data?.name}
+              That you can add to the workout: {workoutData?.data?.name}
             </h2>
 
             {exerciseData?.data.map((exercise) =>
