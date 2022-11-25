@@ -21,7 +21,7 @@ export const useUpdateAge = () => {
       toast.error("Updating Age Failed");
     },
     onSettled: () => {
-      //queryClient.invalidateQueries("accountKey");
+      queryClient.invalidateQueries("accountKey");
     },
   });
 };

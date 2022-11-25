@@ -8,13 +8,13 @@ const ExerciseItem = ({ exercise }) => {
     <div className="bg-white max-w-m rounded overflow-hidden shadow-lg content-center h-200">
       <h1 className="bg-green-50"> {exercise?.data.name}</h1>
       <h2>Category: {exercise?.data.category}</h2>
-      <h3>Intenisty: {exercise?.data.intensity}</h3>
+      <h3>Intensity: {exercise?.data.intensity}</h3>
 
       <img src={exercise?.data.picturePath} width="500px" />
 
       <div>
         <p>Equipment: {exercise?.data.equipment}</p>
-        <p>Repetities: {exercise?.data.repetitions}</p>
+        <p>Repetitions: {exercise?.data.repetitions}</p>
         <p>Sets: {exercise?.data.sets}</p>
       </div>
 
