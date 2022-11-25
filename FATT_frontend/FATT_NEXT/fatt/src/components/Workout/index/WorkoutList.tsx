@@ -24,11 +24,7 @@ const WorkoutList = ({ workoutData }) => {
       <Heading text="My Personal Workouts" />
       <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
         <div className="text-center">
-          <Button
-            onClick={() => setShowModal(true)}
-            text={"Create Workout"}
-            key={undefined}
-          />
+          <Button onClick={() => setShowModal(true)} text={"Create Workout"} />
         </div>
 
         <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
@@ -56,7 +52,6 @@ const WorkoutList = ({ workoutData }) => {
                   setShowAddToCalendarModal(true);
                   setIdPassToModal(workout.id);
                 }}
-                key={undefined}
               />
               <DeleteButton
                 text={"Delete"}

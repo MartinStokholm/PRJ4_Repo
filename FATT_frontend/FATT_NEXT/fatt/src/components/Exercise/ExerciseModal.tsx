@@ -103,7 +103,6 @@ export default function ExerciseModal() {
         type={"onSubmit"}
         onClick={handleCreateButtonClick}
         text={"Create"}
-        key={undefined}
       />
     </div>
   );
