@@ -12,22 +12,20 @@ export const register = async (account: AccountNoIdDto) => {
   });
 };
 
-export const useRegister = (onSettled) => {
+export const useRegister = () => {
   const router = useRouter();
 
   const queryClient = useQueryClient();
   return useMutation(register, {
     onSuccess: (newAccount) => {
-      console.log(newAccount);
       toast.success(`Account Created "${newAccount.data}"`);
     },
     onError: (_error, _account) => {
-      console.log("me here in error");
       toast.error("Creating Account Failed");
     },
-    onSettled: (newAccount) => {
-      console.log("me here in settled");
-      return Promise.resolve(router.push("/login"));
+    onSettled: () => {
+      // Can push them to other site thats not auht then we cast back to this site... lol
+      return Promise.resolve(router.push("/"));
     },
   });
 };
