@@ -27,7 +27,12 @@ export default function ModalGender() {
           onChange={(e) => setGender(e.target.value)}
         />
       </form>
-      <InputButton type={"onSubmit"} text={"Update"} key={undefined} />
+      <InputButton
+        onClick={handleOnClick}
+        type={"onSubmit"}
+        text={"Update"}
+        key={undefined}
+      />
     </div>
   );
 }

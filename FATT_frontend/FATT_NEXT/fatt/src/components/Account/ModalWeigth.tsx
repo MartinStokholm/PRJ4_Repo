@@ -29,7 +29,12 @@ export default function ModalWeight() {
           max={250}
         />
       </form>
-      <InputButton type={"onSubmit"} text={"Update"} key={undefined} />
+      <InputButton
+        onClick={handleOnClick}
+        type={"onSubmit"}
+        text={"Update"}
+        key={undefined}
+      />
     </div>
   );
 }
