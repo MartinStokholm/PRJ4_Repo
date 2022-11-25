@@ -54,77 +54,79 @@ const Settings = () => {
   return (
     <div>
       <Heading text="Account settings" />
-      <SubHeading text="Change email" />
-      <form
-        onSubmit={handleUpdateEmailButtonClick}
-        className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
-      >
-        <TextInput
-          className="m-4"
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextInput
-          className="m-4"
-          type="email"
-          placeholder="New email"
-          onChange={(e) => setNewEmail(e.target.value)}
-        />
-        <TextInput
-          className="m-4"
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <InputButton type={"submit"} text={"Update"} key={undefined} />
-      </form>
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
+        <SubHeading text="Change email" />
+        <form
+          onSubmit={handleUpdateEmailButtonClick}
+          className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
+        >
+          <TextInput
+            className="m-4"
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextInput
+            className="m-4"
+            type="email"
+            placeholder="New email"
+            onChange={(e) => setNewEmail(e.target.value)}
+          />
+          <TextInput
+            className="m-4"
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <InputButton type={"submit"} text={"Update"} key={undefined} />
+        </form>
 
-      <SubHeading text="Change password" />
-      <form
-        onSubmit={handleUpdatePasswordButtonClick}
-        className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
-      >
-        <TextInput
-          className="m-4"
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextInput
-          className="m-4"
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <TextInput
-          className="m-4"
-          type="password"
-          placeholder="New Password"
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
-        <InputButton type={"submit"} text={"Update"} key={undefined} />
-      </form>
+        <SubHeading text="Change password" />
+        <form
+          onSubmit={handleUpdatePasswordButtonClick}
+          className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
+        >
+          <TextInput
+            className="m-4"
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextInput
+            className="m-4"
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <TextInput
+            className="m-4"
+            type="password"
+            placeholder="New Password"
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+          <InputButton type={"submit"} text={"Update"} key={undefined} />
+        </form>
 
-      <SubHeading text="Delete Account" />
-      <form
-        onSubmit={handleDeleteButtonClick}
-        className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
-      >
-        <TextInput
-          className="m-4"
-          type="text"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextInput
-          className="m-4"
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <DeleteButton text={"Delete"} key={undefined} />
-      </form>
+        <SubHeading text="Delete Account" />
+        <form
+          onSubmit={handleDeleteButtonClick}
+          className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
+        >
+          <TextInput
+            className="m-4"
+            type="text"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextInput
+            className="m-4"
+            type="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <DeleteButton text={"Delete"} key={undefined} />
+        </form>
+      </div>
     </div>
   );
 };

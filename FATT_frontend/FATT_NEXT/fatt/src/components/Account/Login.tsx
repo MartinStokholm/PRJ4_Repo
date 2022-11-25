@@ -7,7 +7,7 @@ import { useLogin } from "../../mutation/account/PostLogin";
 import InputField from "../InputField";
 import TextButton from "../Button/TextButton";
 import Modal from "../util/Modal";
-
+import Heading from "../Layout/Heading";
 import SignUp from "./SignUp";
 import Link from "next/link";
 
@@ -24,37 +24,41 @@ const Login = (props) => {
   };
 
   return (
-    <div className="flex flex-col justify-center w-1/3">
-      <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
-      <h2>Log-in</h2>
-      <form onSubmit={handleForm} className="flex flex-col justify-center">
-        <Label className="mx-4">Email: </Label>
-        <InputField
-          type="Email"
-          required
-          placeholder="johndoe@mail.com"
-          value={Email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Label className="mx-4">Password: </Label>
-        <InputField
-          type="Password"
-          required
-          placeholder="********"
-          value={Password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <MyButton type={"submit"} text={"Log In"} key={undefined} />
-      </form>
+    <>
+      <Heading text="Log-in" />
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex p-4 justify-center">
+        <div className="flex flex-col w-1/3">
+          <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+          <form onSubmit={handleForm} className="flex flex-col justify-center">
+            <Label className="mx-4">Email: </Label>
+            <InputField
+              type="Email"
+              required
+              placeholder="johndoe@mail.com"
+              value={Email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Label className="mx-4">Password: </Label>
+            <InputField
+              type="Password"
+              required
+              placeholder="********"
+              value={Password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <MyButton type={"submit"} text={"Log In"} key={undefined} />
+          </form>
 
-      <TextButton
-        onClick={() => setShowModal(true)}
-        text={"Click here to sign up"}
-      />
-      <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
-        <SignUp />
-      </Modal>
-    </div>
+          <TextButton
+            onClick={() => setShowModal(true)}
+            text={"Click here to sign up"}
+          />
+          <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
+            <SignUp />
+          </Modal>
+        </div>
+      </div>
+    </>
   );
 };
 

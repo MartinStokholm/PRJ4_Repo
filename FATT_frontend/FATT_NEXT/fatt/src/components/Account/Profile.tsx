@@ -26,15 +26,31 @@ const Profile = () => {
     return <Error statusCode={(error as any).message} />;
   }
 
-  const { age, email, gender, name, weight } = profileData?.data;
+  const { age, email, gender, name, weigth } = profileData?.data;
 
   return (
-    <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg ">
-      <h3>My Email: {email}</h3>
-      <h3>My Name: {name}</h3>
-      <h3>My Age: {age}</h3>
-      <h3>My Gender: {gender}</h3>
-      <h3>My Weight: {weight}</h3>
+    <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex">
+        <h1 className="m-2">Email:</h1>
+        <h1 className="m-2">{email}</h1>
+      </div>
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex">
+        <h1 className="m-2">Name:</h1>
+        <h1 className="m-2">{name}</h1>
+      </div>
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex">
+        <h1 className="m-2">Gender:</h1>
+        <h1 className="m-2">{gender}</h1>
+      </div>
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex">
+        <h1 className="m-2">Age:</h1>
+        <h1 className="m-2">{age}</h1>
+      </div>
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex">
+        <h1 className="m-2">Weigth:</h1>
+        <h1 className="m-2">{weigth}</h1>
+        <h1 className="m-2">kg</h1>
+      </div>
     </div>
   );
 };

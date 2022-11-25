@@ -23,71 +23,73 @@ const WorkoutList = ({ workoutData, exerciseData }) => {
   return (
     <div>
       <Heading text="My Personal Workouts" />
-      <div className="text-center">
-        <Button
-          onClick={() => setShowModal(true)}
-          text={"Create Workout"}
-          key={undefined}
-        />
-      </div>
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
+        <div className="text-center">
+          <Button
+            onClick={() => setShowModal(true)}
+            text={"Create Workout"}
+            key={undefined}
+          />
+        </div>
 
-      <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
-        <WorkoutModal />
-      </Modal>
+        <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
+          <WorkoutModal />
+        </Modal>
 
-      <ModalDropdown
-        IsVisible={showAddToCalendarModal}
-        onClose={() => setShowAddToCalendarModal(false)}
-      >
-        <AddWorkoutToCalendarModal id={idPassToModal} />
-      </ModalDropdown>
+        <ModalDropdown
+          IsVisible={showAddToCalendarModal}
+          onClose={() => setShowAddToCalendarModal(false)}
+        >
+          <AddWorkoutToCalendarModal id={idPassToModal} />
+        </ModalDropdown>
 
-      <div className="flex flex-wrap justify-center">
-        {/* This maps out all workouts with their exercise as names */}
-        {workoutData.data?.map((workout) => (
-          <div
-            key={workout.name}
-            className="rounded bg-white shadow-lg w-full md:w-1/3 m-4 flex flex-col justify-center"
-          >
-            <div className="flex flex-col justify-center">
-              <Link
-                href={{ pathname: `/workout/${workout.id}` }}
-                key={workout.id}
-                className="hover:bg-green-50 hover:shadow-inner flex justify-center"
-              >
-                <h1 className="m-2 font-bold py-1">{workout.name}</h1>
+        <div className="flex flex-wrap justify-center">
+          {/* This maps out all workouts with their exercise as names */}
+          {workoutData.data?.map((workout) => (
+            <div
+              key={workout.name}
+              className="rounded bg-white shadow-lg w-full md:w-1/3 m-4 flex flex-col justify-center"
+            >
+              <div className="flex flex-col justify-center">
+                <Link
+                  href={{ pathname: `/workout/${workout.id}` }}
+                  key={workout.id}
+                  className="hover:bg-green-50 hover:shadow-inner flex justify-center"
+                >
+                  <h1 className="m-2 font-bold py-1">{workout.name}</h1>
 
-                <h2 className="m-2 italic py-1">{workout.duration}</h2>
-              </Link>
+                  <h2 className="m-2 italic py-1">{workout.duration}</h2>
+                </Link>
+              </div>
+              <div>
+                {exerciseData?.data.map((exercise) =>
+                  workout?.exercisesIds?.includes(exercise.id) ? (
+                    <div
+                      key={exercise.id}
+                      className="bg-white overflow-hidden shadow-lg mx-4 my-4"
+                    >
+                      <WorkoutItemThumbnail exercise={exercise} />
+                    </div>
+                  ) : null
+                )}
+              </div>
+              <DeleteButton
+                text={"Delete"}
+                onClick={() => {
+                  handleDeleteButtonClick(workout.id);
+                }}
+              />
+              <Button
+                text={"Add To Calendar"}
+                onClick={() => {
+                  setShowAddToCalendarModal(true);
+                  setIdPassToModal(workout.id);
+                }}
+                key={undefined}
+              />
             </div>
-            <div>
-              {exerciseData?.data.map((exercise) =>
-                workout?.exercisesIds?.includes(exercise.id) ? (
-                  <div
-                    key={exercise.id}
-                    className="bg-white overflow-hidden shadow-lg mx-4 my-4"
-                  >
-                    <WorkoutItemThumbnail exercise={exercise} />
-                  </div>
-                ) : null
-              )}
-            </div>
-            <DeleteButton
-              text={"Delete"}
-              onClick={() => {
-                handleDeleteButtonClick(workout.id);
-              }}
-            />
-            <Button
-              text={"Add To Calendar"}
-              onClick={() => {
-                setShowAddToCalendarModal(true);
-                setIdPassToModal(workout.id);
-              }}
-              key={undefined}
-            />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
