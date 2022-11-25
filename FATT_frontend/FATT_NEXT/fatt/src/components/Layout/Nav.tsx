@@ -7,17 +7,15 @@ const Nav = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (localStorage.getItem("name")) {
+      if (localStorage.getItem("name") && session == false) {
         setName(localStorage.getItem("name") as string);
       } else setName("User");
+
+      if (localStorage.getItem("token") && session == false) {
+        setSession(true);
+      }
     }
   }, []);
-
-  if (typeof window !== "undefined") {
-    if (localStorage.getItem("token") && session == false) {
-      setSession(true);
-    }
-  }
 
   return (
     <Navbar
