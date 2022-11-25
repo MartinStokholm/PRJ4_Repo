@@ -20,7 +20,7 @@ export const useUpdateName = () => {
       toast.error("Updating Name Failed");
     },
     onSettled: () => {
-      //queryClient.invalidateQueries("accountKey");
+      queryClient.invalidateQueries("accountKey");
     },
   });
 };
