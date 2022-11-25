@@ -60,7 +60,7 @@ export const SignUp = (props) => {
           />
           <InputButton
             text={"Sign Up"}
-            // onClick={handleSignUpClick}
+            onClick={handleSignUpClick}
             type={"submit"}
             key={undefined}
           />
