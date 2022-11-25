@@ -251,26 +251,6 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-
-        [HttpGet("noId")]
-        public async Task<ActionResult<List<MealCreateWithDishesIdsDto>>> GetMealsWithDishesId()
-        {
-            var dbMeals = await _context.Meals.Include(w => w.Dishes).ToListAsync();
-
-            
-            if (dbMeals == null) { return NotFound("No Meal found"); }
-
-            var meals = dbMeals.Adapt<List<MealCreateWithDishesIdsDto>>();
-            
-            foreach (var meal in dbMeals)
-            {
-                meals.Find(w => w.Name == meal.Name).DishesIds = meal.Dishes.Select(e => e.Id).ToList();
-            }
-            
-            return Ok(meals);
-        }
-
-
         private bool MealModelExists(long id)
         {
             return _context.Meals.Any(e => e.Id == id);
