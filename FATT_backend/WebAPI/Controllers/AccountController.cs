@@ -144,6 +144,18 @@ namespace WebAPI.Controllers
 
         }
 
+        [HttpPut("{email}/Name/{name}")]
+        public async Task<ActionResult<AccountGetDto>> UpdateAccountName(string email, string name)
+        {
+            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+            if (dbAccount == null) { return NotFound(email); }
+
+            dbAccount.Name = name;
+            await _context.SaveChangesAsync();
+
+            return Accepted(dbAccount.Adapt<AccountGetDto>());
+        }
+
         [HttpPut("{email}/Age/{age}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountAge(string email, int age)
         {
