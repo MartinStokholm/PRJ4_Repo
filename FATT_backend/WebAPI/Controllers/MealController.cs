@@ -186,20 +186,19 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("{mealId}")]
-        public async Task<ActionResult<MealWithDishesFullDto>> GetMeal(long mealId)
+        public async Task<ActionResult<MealCreateWithDishesIdsDto>> GetMeal(long mealId)
         {
-            var dbMeal = await _context.Meals.FindAsync(mealId);
+            var dbMeal = await _context.Meals.Include(w => w.Dishes).FirstOrDefaultAsync(w => w.Id == mealId);
+            if (dbMeal == null)
+            {
+                return NotFound($"Meal with id {mealId} was not found");
+            }
 
-            if (dbMeal == null) { return NotFound($"Could not find meal with id {mealId}"); }
+            var meal = dbMeal.Adapt<MealCreateWithDishesIdsDto>();
 
-            _context.Entry(dbMeal)
-                .Collection(m => m.Dishes)
-                .Load();
+            meal.DishesIds = dbMeal.Dishes.Select(e => e.Id).ToList();
 
-
-            MealWithDishesFullDto result = dbMeal.Adapt<MealWithDishesFullDto>();
-
-            return Ok(result);
+            return Ok(meal);
         }
 
         [HttpGet("{mealId}/Dishes")]
@@ -237,10 +236,10 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMeal(long id)
+        [HttpDelete("{mealId}")]
+        public async Task<IActionResult> DeleteMeal(long mealId)
         {
-            var mealModel = await _context.Meals.FindAsync(id);
+            var mealModel = await _context.Meals.FindAsync(mealId);
             if (mealModel == null)
             {
                 return NotFound();
