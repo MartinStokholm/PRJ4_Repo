@@ -40,7 +40,7 @@ namespace WebAPI.Services
             return jwt;
         }
 
-        public static bool IsVaildEmail(string email)
+        public  bool IsVaildEmail(string email)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace WebAPI.Services
             passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 
         }
-        public static bool TryVerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        public  bool TryVerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using var hmac = new HMACSHA512(passwordSalt);
             var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
