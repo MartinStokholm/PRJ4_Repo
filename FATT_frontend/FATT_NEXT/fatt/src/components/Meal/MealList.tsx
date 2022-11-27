@@ -1,5 +1,3 @@
-import MealItemThumbnail from "./MealItemThumbnail";
-import Link from "next/link";
 import DeleteButton from "../Button/DeleteButton";
 import MealModal from "./CreateMealModal";
 import { useState } from "react";
@@ -48,10 +46,9 @@ const MealList = ({ mealData }) => {
           {mealData.data?.map((meal) => (
             <div
               key={meal.name}
-              className="rounded bg-white shadow-lg w-full md:w-1/3 m-4 flex flex-col justify-center"
+              className="rounded bg-white shadow-lg md:w-1/3 m-4 flex flex-col justify-center"
             >
               <MealHeader meal={meal} />
-
               <Button
                 text={"Add To Calendar"}
                 onClick={() => {

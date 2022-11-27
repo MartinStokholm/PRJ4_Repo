@@ -46,7 +46,7 @@ const WorkoutList = ({ workoutData }) => {
           {workoutData.data?.map((workout) => (
             <div
               key={workout.name}
-              className="rounded bg-white shadow-lg w-full md:w-1/3 m-4 flex flex-col justify-center"
+              className="rounded bg-white shadow-lg md:w-1/3 m-4 flex flex-col justify-center"
             >
               <WorkoutHeader workout={workout} />
               <Button
