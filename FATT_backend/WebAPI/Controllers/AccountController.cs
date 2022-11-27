@@ -12,6 +12,7 @@ using System.Security.Principal;
 using Microsoft.AspNetCore.Authorization;
 using WebAPI.Dto.Workout;
 using System.Collections.Generic;
+using WebAPI.Dto.Calender;
 
 namespace WebAPI.Controllers
 {
@@ -193,13 +194,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete()]
-        public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto request)
+        public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto account)
         {
-            var dbAccount = await _context.Accounts.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
-
+            var dbAccount = await _context.Accounts.Include(a => a.Calender).FirstOrDefaultAsync(x => x.Email == account.Email);
+            if (dbAccount == null) { return NotFound(account.Email); }
+            
             try
             {
-                if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
+                if (!TryVerifyPasswordHash(account.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
                 {
                     return BadRequest("Can't delete account");
                 }
@@ -217,23 +219,14 @@ namespace WebAPI.Controllers
         [HttpGet("{email}")]
         public async Task<ActionResult<AccountGetDto>> GetAccountEmail(string email)
         {
-            try
-            {
-                var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
-                if (dbAccount == null)
-                {
-                    return NotFound();
-                }
-                return Ok(dbAccount.Adapt<AccountGetDto>());
-
-            }
-            catch (Exception)
-            {
-                return BadRequest("Wrong Email");
-            }
+            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == email);
+            if (dbAccount == null) { return NotFound($"Could not find account with email {email}"); }
+               
+            return Ok(dbAccount.Adapt<AccountGetDto>());      
         }
+        
         [HttpGet("{email}/calender")]
-        public async Task<ActionResult<Calender>> GetAccountCalender(string email)
+        public async Task<ActionResult<CalenderGetDto>> GetAccountCalender(string email)
         {
             var dbAccount = await _context.Accounts
                 .Include(a => a.Calender)
@@ -242,11 +235,72 @@ namespace WebAPI.Controllers
                     .ThenInclude(c => c.MealDays)
                 .FirstOrDefaultAsync(x => x.Email == email);
 
-            if (dbAccount == null)
+            if (dbAccount == null) { return NotFound($"could not find account with email {email}"); }
+
+            var result = dbAccount.Calender.Adapt<CalenderGetDto>();
+
+            foreach (var workoutDay in dbAccount.Calender.WorkoutDays)
             {
-                return NotFound($"could not find account with email {email}");
+                switch (workoutDay.Day)
+                {
+                    case "Monday":
+                        result.WorkoutDays.Monday.Add(workoutDay.WorkoutId);
+                        break;
+                    case "Tuesday":
+                        result.WorkoutDays.Tuesday.Add(workoutDay.WorkoutId);
+                        break;
+                    case "Wednesday":
+                        result.WorkoutDays.Wednesday.Add(workoutDay.WorkoutId);
+                        break;
+                    case "Thursday":
+                        result.WorkoutDays.Thursday.Add(workoutDay.WorkoutId);
+                        break;
+                    case "Friday":
+                        result.WorkoutDays.Friday.Add(workoutDay.WorkoutId);
+                        break;
+                    case "Saturday":
+                        result.WorkoutDays.Saturday.Add(workoutDay.WorkoutId);
+                        break;
+                    case "Sunday":
+                        result.WorkoutDays.Sunday.Add(workoutDay.WorkoutId);
+                        break;
+                    default:
+                        break;
+                }
             }
-            return Ok(dbAccount.Calender);
+
+            foreach (var mealDay in dbAccount.Calender.MealDays)
+            {
+                switch (mealDay.Day)
+                {
+                    case "Monday":
+                        result.MealDays.Monday.Add(mealDay.MealId);
+                        break;
+                    case "Tuesday":
+                        result.MealDays.Tuesday.Add(mealDay.MealId);
+                        break;
+                    case "Wednesday":
+                        result.MealDays.Wednesday.Add(mealDay.MealId);
+                        break;
+                    case "Thursday":
+                        result.MealDays.Thursday.Add(mealDay.MealId);
+                        break;
+                    case "Friday":
+                        result.MealDays.Friday.Add(mealDay.MealId);
+                        break;
+                    case "Saturday":
+                        result.MealDays.Saturday.Add(mealDay.MealId);
+                        break;
+                    case "Sunday":
+                        result.MealDays.Sunday.Add(mealDay.MealId);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return Ok(result);
+
 
         }
 
