@@ -38,10 +38,6 @@ export default function Calender({ calendarData }) {
   const workoutDays = calendarData?.workoutDays;
   const mealDays = calendarData?.mealDays;
 
-  console.log(calendarData);
-  console.log({ workoutDays });
-  console.log({ mealDays });
-
   return (
     <div className="flex flex-col border rounded border-grey-300 bg-white overflow-hidden shadow-lg ">
       <div className="m-4">

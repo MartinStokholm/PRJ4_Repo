@@ -1,34 +1,23 @@
 import React from "react";
 import Link from "next/link";
+import MealPlanColoumn from "./MealPlanColoumn";
 
 const MealPlan = ({ mealDays, mealData }) => {
+  console.log({ mealDays });
+  console.log({ mealData });
   return (
     <div className="flex flex-wrap justify-center bg-white overflow-hidden shadow-lg p-2">
-      {mealDays?.map((mealDay) => (
-        <div key={mealDay.id} className="border rounded m-2">
-          <h1>{mealDay.day}</h1>
-          {mealData?.data?.map((meal) => {
-            {
-              /*match mealDays.mealId with meal id from users meals*/
-            }
-            if (meal.id === mealDay.mealId) {
-              return (
-                <div key={meal.id}>
-                  <div className="flex flex-col justify-center ">
-                    <Link
-                      href={{ pathname: `/meal/${meal.id}` }}
-                      key={meal.id}
-                      className="hover:bg-green-50 hover:shadow-inner flex justify-center"
-                    >
-                      <h1 className="m-2 font-bold py-1">{meal.name}</h1>
-                    </Link>
-                  </div>
-                </div>
-              );
-            }
-          })}
-        </div>
-      ))}
+      <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Monday" />
+      <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Tuesday" />
+      <MealPlanColoumn
+        mealDays={mealDays}
+        mealData={mealData}
+        day="Wednesday"
+      />
+      <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Thursday" />
+      <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Friday" />
+      <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Saturday" />
+      <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Sunday" />
     </div>
   );
 };

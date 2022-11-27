@@ -1,36 +1,47 @@
 import React from "react";
 import Link from "next/link";
+import WorkoutPlanColoumn from "./WorkoutPlanColoumn";
 
 const WorkoutPlan = ({ workoutDays, workoutData }) => {
+  console.log({ workoutDays });
+  console.log({ workoutData });
   return (
     <div className="flex flex-wrap justify-center bg-white overflow-hidden shadow-lg p-2">
-      {workoutDays?.map((workoutDay) => (
-        <div key={workoutDay.id} className="border rounded m-2">
-          <h1>{workoutDay.day}</h1>
-          {workoutData?.data?.map((workout) => {
-            {
-              /*match workoutDays.workoutId with workout id from users workouts*/
-            }
-            if (workout.id === workoutDay.workoutId) {
-              return (
-                <div key={workout.id}>
-                  <div className="flex flex-col justify-center ">
-                    <Link
-                      href={{ pathname: `/workout/${workout.id}` }}
-                      key={workout.id}
-                      className="hover:bg-green-50 hover:shadow-inner flex justify-center"
-                    >
-                      <h1 className="m-2 font-bold py-1">{workout.name}</h1>
-
-                      <h2 className="m-2 italic py-1">{workout.duration}</h2>
-                    </Link>
-                  </div>
-                </div>
-              );
-            }
-          })}
-        </div>
-      ))}
+      <WorkoutPlanColoumn
+        workoutDays={workoutDays}
+        workoutData={workoutData}
+        day="Monday"
+      />
+      <WorkoutPlanColoumn
+        workoutDays={workoutDays}
+        workoutData={workoutData}
+        day="Tuesday"
+      />
+      <WorkoutPlanColoumn
+        workoutDays={workoutDays}
+        workoutData={workoutData}
+        day="Wednesday"
+      />
+      <WorkoutPlanColoumn
+        workoutDays={workoutDays}
+        workoutData={workoutData}
+        day="Thursday"
+      />
+      <WorkoutPlanColoumn
+        workoutDays={workoutDays}
+        workoutData={workoutData}
+        day="Friday"
+      />
+      <WorkoutPlanColoumn
+        workoutDays={workoutDays}
+        workoutData={workoutData}
+        day="Saturday"
+      />
+      <WorkoutPlanColoumn
+        workoutDays={workoutDays}
+        workoutData={workoutData}
+        day="Sunday"
+      />
     </div>
   );
 };
