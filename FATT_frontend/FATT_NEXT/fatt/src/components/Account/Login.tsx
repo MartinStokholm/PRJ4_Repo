@@ -24,7 +24,7 @@ const Login = (props) => {
   };
 
   return (
-    <>
+    <div>
       <Heading text="Log-in" />
       <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex p-4 justify-center">
         <div className="flex flex-col w-1/3">
@@ -58,7 +58,7 @@ const Login = (props) => {
           </Modal>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
