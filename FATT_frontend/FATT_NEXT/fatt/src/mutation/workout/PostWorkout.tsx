@@ -31,6 +31,9 @@ export const useAddWorkout = () => {
         previouesWorkoutData,
       };
     },
+    onSuccess: (newAccount) => {
+      toast.success(`Account Created "${newAccount.data.name}"`);
+    },
     onError: (_error, _workout, context) => {
       queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);
       alert("there was an error");

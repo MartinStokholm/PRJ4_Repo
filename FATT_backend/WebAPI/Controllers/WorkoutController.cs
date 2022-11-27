@@ -206,6 +206,7 @@ namespace WebAPI.Controllers
             foreach (var workout in dbWorkouts)
             {
                 workouts.Find(w => w.Name == workout.Name).ExercisesIds = workout.Exercises.Select(e => e.Id).ToList();
+
             }
 
             return Ok(workouts);
@@ -235,10 +236,17 @@ namespace WebAPI.Controllers
 
             if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
 
-            var dbWorkout = await _context.Workouts.Include(x => x.Exercises).Where(w => w.AccountId == dbAccount.Id).ToListAsync();
+            var dbWorkouts = await _context.Workouts.Include(x => x.Exercises).Where(w => w.AccountId == dbAccount.Id).ToListAsync();
 
+            var workouts = dbWorkouts.Adapt<List<WorkoutWithIdsWithExercisesIdsDto>>();
 
-            return Ok(dbWorkout.Adapt<List<WorkoutWithExerciseFullDto>>());
+            foreach (var workout in dbWorkouts)
+            {
+                workouts.Find(w => w.Name == workout.Name).ExercisesIds = workout.Exercises.Select(e => e.Id).ToList();
+
+            }
+
+            return Ok(workouts);
         }
 
         [HttpDelete("{workoutId}")]

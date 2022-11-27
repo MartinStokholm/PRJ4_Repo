@@ -5,14 +5,14 @@ import { useState } from "react";
 import { useRegister } from "../../mutation/account/PostRegister";
 import InputButton from "../Button/InputButton";
 import type { AccountNoIdDto } from "../../../interfaces/Account";
-import { useRouter } from "next/router";
 import Heading from "../Layout/Heading";
 
-export const SignUp = (props) => {
-  const { mutate: register } = useRegister();
+export const SignUp = () => {
   const [Password, setPassword] = useState("");
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
+
+  const { mutate: register } = useRegister();
 
   const handleSignUpClick = (e) => {
     e.preventDefault();

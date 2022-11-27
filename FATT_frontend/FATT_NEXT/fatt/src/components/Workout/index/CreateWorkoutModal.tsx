@@ -1,8 +1,7 @@
-import InputButton from "../Button/InputButton";
-import InputField from "../InputField";
-import { useDeleteWorkout } from "../../mutation/workout/DeleteWorkout";
-import { useAddWorkout } from "../../mutation/workout/PostWorkout";
-import { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";
+import InputButton from "../../Button/InputButton";
+import InputField from "../../InputField";
+import { useAddWorkout } from "../../../mutation/workout/PostWorkout";
+import { WorkoutCreateNoIdDto } from "../../../../interfaces/Workout";
 import { useState } from "react";
 
 const WorkoutModal = () => {
@@ -19,7 +18,6 @@ const WorkoutModal = () => {
     workout(workoutDto);
   };
 
-  const { mutate: deleteWorkout } = useDeleteWorkout();
   return (
     <div>
       <h1 className="mb-2 font-bold">Create a workout</h1>
@@ -41,12 +39,7 @@ const WorkoutModal = () => {
           value={undefined}
           required
         />
-        <InputButton
-          onClick={handleCreateButtonClick}
-          type={"submit"}
-          text={"Create"}
-          key={undefined}
-        />
+        <InputButton onClick={handleCreateButtonClick} text={"Create"} />
       </form>
     </div>
   );

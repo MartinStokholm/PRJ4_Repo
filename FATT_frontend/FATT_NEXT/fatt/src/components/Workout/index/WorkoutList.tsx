@@ -1,70 +1,65 @@
-import MealItemThumbnail from "./MealItemThumbnail";
-import Link from "next/link";
-import DeleteButton from "../Button/DeleteButton";
-import MealModal from "./CreateMealModal";
+import DeleteButton from "../../Button/DeleteButton";
+import WorkoutModal from "./CreateWorkoutModal";
 import { useState } from "react";
-import Button from "../Button/Button";
-import Modal from "../util/Modal";
-import ModalDropdown from "../util/ModalDropdown";
-import { useDeleteMeal } from "../../mutation/meal/DeleteMeal";
-import AddMealToCalendarModal from "./AddMealToCalendarModal";
-import Heading from "../Layout/Heading";
-import MealHeader from "./MealHeader";
+import Button from "../../Button/Button";
+import Modal from "../../util/Modal";
+import ModalDropdown from "../../util/ModalDropdown";
+import { useDeleteWorkout } from "../../../mutation/workout/DeleteWorkout";
+import AddWorkoutToCalendarModal from "./AddWorkoutToCalendarModal";
+import Heading from "../../Layout/Heading";
+import WorkoutHeader from "./WorkoutHeader";
 
-const MealList = ({ mealData }) => {
+const WorkoutList = ({ workoutData }) => {
   const [showModal, setShowModal] = useState(false);
   const [showAddToCalendarModal, setShowAddToCalendarModal] = useState(false);
   const [idPassToModal, setIdPassToModal] = useState();
-  const { mutate: deleteMeal } = useDeleteMeal();
+  const { mutate: deleteWorkout } = useDeleteWorkout();
 
-  const handleDeleteButtonClick = (mealId: number) => {
-    deleteMeal(mealId);
+  const handleDeleteButtonClick = (workoutId: number) => {
+    deleteWorkout(workoutId);
   };
 
   return (
     <div>
-      <Heading text="My Personal Meals" />
+      <Heading text="My Personal Workouts" />
       <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
         <div className="text-center">
-          <Button onClick={() => setShowModal(true)} text={"Create Meal"} />
+          <Button onClick={() => setShowModal(true)} text={"Create Workout"} />
         </div>
 
         <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
-          <MealModal />
+          <WorkoutModal />
         </Modal>
 
         <ModalDropdown
           IsVisible={showAddToCalendarModal}
           onClose={() => setShowAddToCalendarModal(false)}
         >
-          <AddMealToCalendarModal
+          <AddWorkoutToCalendarModal
             id={idPassToModal}
-            onClose={() => setShowModal(false)}
+            onClose={() => setShowAddToCalendarModal(false)}
           />
         </ModalDropdown>
 
         <div className="flex flex-wrap justify-center">
           {/* This maps out all workouts with their exercise as names */}
-          {mealData.data?.map((meal) => (
+          {workoutData.data?.map((workout) => (
             <div
-              key={meal.name}
+              key={workout.name}
               className="rounded bg-white shadow-lg w-full md:w-1/3 m-4 flex flex-col justify-center"
             >
-              <MealHeader meal={meal} />
-
+              <WorkoutHeader workout={workout} />
               <Button
                 text={"Add To Calendar"}
                 onClick={() => {
                   setShowAddToCalendarModal(true);
-                  setIdPassToModal(meal.id);
+                  setIdPassToModal(workout.id);
                 }}
-                key={undefined}
               />
-
               <DeleteButton
                 text={"Delete"}
                 onClick={() => {
-                  handleDeleteButtonClick(meal.id);
+                  handleDeleteButtonClick(workout.id);
                 }}
               />
             </div>
@@ -75,4 +70,4 @@ const MealList = ({ mealData }) => {
   );
 };
 
-export default MealList;
+export default WorkoutList;

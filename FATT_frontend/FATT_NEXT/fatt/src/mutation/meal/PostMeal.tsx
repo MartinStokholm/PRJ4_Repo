@@ -31,6 +31,9 @@ export const useAddMeal = () => {
         previouesMealData,
       };
     },
+    onSuccess: (newMeal) => {
+      toast.success(`Meal Created "${newMeal.data.name}"`);
+    },
     onError: (_error, _meal, context) => {
       queryClient.setQueryData("mealsKey", context.previouesMealData);
       alert("there was an error");
