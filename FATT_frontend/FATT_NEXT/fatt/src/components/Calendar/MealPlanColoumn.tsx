@@ -1,38 +1,15 @@
 import React from "react";
 import Link from "next/link";
+import { Sorting } from "./Sorting.js";
 
 const MealPlanColoumn = ({ mealDays, mealData, day }) => {
-  switch (day) {
-    case "Monday":
-      var Day = mealDays?.monday;
-      break;
-    case "Tuesday":
-      var Day = mealDays?.tuesday;
-      break;
-    case "Wednesday":
-      var Day = mealDays?.wednesday;
-      break;
-    case "Thursday":
-      var Day = mealDays?.thursday;
-      break;
-    case "Friday":
-      var Day = mealDays?.friday;
-      break;
-    case "Saturday":
-      var Day = mealDays?.saturday;
-      break;
-    case "Sunday":
-      var Day = mealDays?.sunday;
-      break;
-    default:
-      break;
-  }
+  var Day = Sorting(mealDays, day);
 
   return (
-    <div className="m-4 border-t-2 border-b-2 rounded border-green-200 p-2">
-      <h1>{day}</h1>
+    <div className="m-4 border-t-2 border-b-2 rounded border-green-200 ">
+      <h1 className="p-2 border-b-2 border-green-100">{day}</h1>
       {Day?.map((mealId) => {
-        const meal = mealData?.data.find((meal) => meal.id === mealId);
+        const meal = mealData?.data?.find((meal) => meal.id === mealId);
         return (
           <div key={mealId} className="flex flex-col">
             <Link href={`/meal/${mealId}`}>

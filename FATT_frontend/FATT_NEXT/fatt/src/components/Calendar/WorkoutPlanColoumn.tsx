@@ -1,38 +1,15 @@
 import React from "react";
 import Link from "next/link";
+import { Sorting } from "./Sorting.js";
 
 const WorkoutPlanColoumn = ({ workoutDays, workoutData, day }) => {
-  switch (day) {
-    case "Monday":
-      var Day = workoutDays?.monday;
-      break;
-    case "Tuesday":
-      var Day = workoutDays?.tuesday;
-      break;
-    case "Wednesday":
-      var Day = workoutDays?.wednesday;
-      break;
-    case "Thursday":
-      var Day = workoutDays?.thursday;
-      break;
-    case "Friday":
-      var Day = workoutDays?.friday;
-      break;
-    case "Saturday":
-      var Day = workoutDays?.saturday;
-      break;
-    case "Sunday":
-      var Day = workoutDays?.sunday;
-      break;
-    default:
-      break;
-  }
+  var Day = Sorting(workoutDays, day);
 
   return (
-    <div className="m-4 border-t-2 border-b-2 rounded border-green-200 p-2">
-      <h1>{day}</h1>
+    <div className="m-4 border-t-2 border-b-2 rounded border-green-200">
+      <h1 className="p-2 border-b-2 border-green-100">{day}</h1>
       {Day?.map((workoutId) => {
-        const workout = workoutData?.data.find(
+        const workout = workoutData?.data?.find(
           (workout) => workout.id === workoutId
         );
         return (
