@@ -47,12 +47,28 @@ describe('Login test debug', () => {
             
       )
 
-    
+    screen.debug();
       screen.getByTestId("Email")
       screen.getByTestId("Password")
-  //await waitFor(()=> fireEvent.change(screen.getByRole("button")))
-     //fireEvent.change(getByLabelText(/Password/i),{target: {value:'a'}})
-     //screen.getByRole('button')
+
+    })
+    
+  })
+
+  describe('test change for Email ', () => {
+    it('Email and Password',  () => {
+      render(
+        <QueryClientProvider client={queryClient}> 
+          <Login />
+        </QueryClientProvider>
+            
+      )
+
+   
+     fireEvent.change(screen.getByTestId("Email"),{target: {value:'naer@gmail.com'}})
+    // expect(screen.getByRole('button')).not.toBeDisabled()
+    expect(screen.getByTestId("Email")).toHaveAttribute('value','naer@gmail.com')
+    
     })
     
   })
