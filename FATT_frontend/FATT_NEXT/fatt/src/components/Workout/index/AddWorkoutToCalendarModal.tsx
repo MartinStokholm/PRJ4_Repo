@@ -39,14 +39,14 @@ const AddWorkoutToCalendarModal = ({ id, onClose }) => {
   ];
 
   return (
-    <div>
-      <h1 className="mb-2 font-bold">Add workout to calendar </h1>
-      <form onSubmit={handleButtonClick} className="flex">
+    <div className="bg-gradient-to-b from-green-200 ">
+      <h1 className="py-2 px-10 font-bold">Add workout to calendar </h1>
+      <form onSubmit={handleButtonClick} className="flex flex-col bg-white">
         <Dropdown
           trigger={
-            <button className="flex flex-inline md:justify-between min-h-fit m-4">
+            <button className="m-2 flex justify-center items-center">
               {day}
-              <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" />
+              <ChevronDownIcon className="m-2 h-10 w-10" />
             </button>
           }
           menu={options.map((day, index) => (
@@ -57,8 +57,9 @@ const AddWorkoutToCalendarModal = ({ id, onClose }) => {
             />
           ))}
         />
-
-        <InputButton onClick={handleButtonClick} text={"Add"} />
+        <div>
+          <InputButton onClick={handleButtonClick} text={"Add"} />
+        </div>
       </form>
     </div>
   );

@@ -14,9 +14,9 @@ export default function Modal({ IsVisible, onClose, children }) {
       onClick={handleClose}
       id="wrapper"
     >
-      <div className="w-[600px flex flex-col max-h-screen overflow-auto scrollbar-hide md:scrollbar-default">
-        <ModalButton text={"X"} onClick={() => onClose()} />
-        <div className="bg-white p-2 rounded ">{children}</div>
+      <div className="scrollbar-hide md:scrollbar-default">
+        <ModalButton text={"Cancel"} onClick={() => onClose()} />
+        <div className="bg-white p-2 rounded-b ">{children}</div>
       </div>
     </div>
   );

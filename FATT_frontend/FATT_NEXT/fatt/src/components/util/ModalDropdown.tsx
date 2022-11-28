@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import DropdownButton from "../Button/DropdownButton";
+import ModalButton from "../Button/ModalButton";
 import ReactDOM from "react-dom";
 import { useRouter } from "next/router";
 import e from "cors";
@@ -14,13 +14,13 @@ export default function Modal({ IsVisible, onClose, children }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center  "
+      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex flex-col justify-center items-center   "
       onClick={handleClose}
       id="wrapper"
     >
-      <div className=" overflow-auto scrollbar-hide md:scrollbar-default ">
-        <DropdownButton text={"X"} onClick={() => onClose()} key={undefined} />
-        <div className="bg-white p-2 rounded min-h-[18rem] ">{children}</div>
+      <div className="scrollbar-hide md:scrollbar-default">
+        <ModalButton text={"Close"} onClick={() => onClose()} key={undefined} />
+        <div className="bg-white p-2 rounded-b ">{children}</div>
       </div>
     </div>
   );
