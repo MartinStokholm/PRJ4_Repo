@@ -184,7 +184,7 @@ namespace WebAPI.Controllers
         [HttpPut("{email}/Weight/{weight}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountWeight(string email, int weight)
         {
-            var dbAccount = await _context.Accounts.Where(x => x.Email == email).FirstOrDefaultAsync();
+            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == email);
             if (dbAccount == null) { return NotFound(email); }
 
             dbAccount.Weigth = weight;
@@ -300,7 +300,6 @@ namespace WebAPI.Controllers
             }
 
             return Ok(result);
-
 
         }
 
