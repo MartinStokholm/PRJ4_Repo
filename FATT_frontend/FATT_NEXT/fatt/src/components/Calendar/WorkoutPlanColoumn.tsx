@@ -31,7 +31,7 @@ const WorkoutPlanColoumn = ({ workoutDays, workoutData, day }) => {
   return (
     <div className="m-4 border-t-2 border-b-2 rounded border-green-200 p-2">
       <h1>{day}</h1>
-      {Day.map((workoutId) => {
+      {Day?.map((workoutId) => {
         const workout = workoutData?.data.find(
           (workout) => workout.id === workoutId
         );

@@ -31,7 +31,7 @@ const MealPlanColoumn = ({ mealDays, mealData, day }) => {
   return (
     <div className="m-4 border-t-2 border-b-2 rounded border-green-200 p-2">
       <h1>{day}</h1>
-      {Day.map((mealId) => {
+      {Day?.map((mealId) => {
         const meal = mealData?.data.find((meal) => meal.id === mealId);
         return (
           <div key={mealId} className="flex flex-col">
