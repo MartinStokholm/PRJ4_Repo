@@ -19,25 +19,27 @@ const MealModal = () => {
 
   const { mutate: deleteMeal } = useDeleteMeal();
   return (
-    <div>
-      <h1 className="mb-2 font-bold">Create a meal</h1>
+    <div className="bg-gradient-to-b from-green-200 ">
+      <h1 className="p-2 font-bold">Create a meal</h1>
       <form
         onSubmit={handleCreateButtonClick}
-        className="flex flex-wrap border rounded bg-grey-200 justify-center"
+        className="flex flex-wrap justify-center"
       >
-        <InputField
-          type="text"
-          placeholder="Meal Name"
-          onChange={(e) => setMealName(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputButton
-          onClick={handleCreateButtonClick}
-          type={"submit"}
-          text={"Create"}
-          key={undefined}
-        />
+        <div className="bg-white">
+          <InputField
+            type="text"
+            placeholder="Meal Name"
+            onChange={(e) => setMealName(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputButton
+            onClick={handleCreateButtonClick}
+            type={"submit"}
+            text={"Create"}
+            key={undefined}
+          />
+        </div>
       </form>
     </div>
   );
