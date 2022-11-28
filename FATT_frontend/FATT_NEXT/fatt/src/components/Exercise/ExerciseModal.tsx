@@ -34,13 +34,13 @@ export default function ExerciseModal() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-4 bg-gradient-to-b from-green-200">
       <h3 className="text-xl font-semibold text-gray-900 mb-5">
         Create exercise
       </h3>
       <form
         onSubmit={handleCreateButtonClick}
-        className="flex flex-wrap border rounded bg-grey-200"
+        className="flex flex-wrap bg-white "
       >
         <InputField
           type="text"

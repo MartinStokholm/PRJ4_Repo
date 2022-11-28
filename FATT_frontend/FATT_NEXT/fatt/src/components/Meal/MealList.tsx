@@ -1,5 +1,5 @@
 import DeleteButton from "../Button/DeleteButton";
-import MealModal from "./CreateMealModal";
+import CreateMealModal from "./CreateMealModal";
 import { useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../util/Modal";
@@ -28,7 +28,7 @@ const MealList = ({ mealData }) => {
         </div>
 
         <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
-          <MealModal />
+          <CreateMealModal />
         </Modal>
 
         <ModalDropdown

@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import Modal from "../util/Modal";
 import ExerciseModal from "./ExerciseModal";
 import Heading from "../Layout/Heading";
+
 const ExerciseList = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
   return (
@@ -17,9 +18,11 @@ const ExerciseList = ({ data }) => {
             key={undefined}
           />
         </div>
+
         <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
           <ExerciseModal />
         </Modal>
+
         <div className="flex flex-wrap">
           {data?.data?.map((exercise) => {
             return (

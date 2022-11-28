@@ -60,9 +60,7 @@ const AddWorkoutToCalendarModal = ({ id, onClose }) => {
             />
           ))}
         />
-        <div>
-          <InputButton onClick={handleButtonClick} text={"Add"} />
-        </div>
+        <InputButton onClick={handleButtonClick} text={"Add"} />
       </form>
     </div>
   );

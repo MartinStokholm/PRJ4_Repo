@@ -20,28 +20,26 @@ const WorkoutModal = () => {
 
   return (
     <div className="bg-gradient-to-b from-green-200 ">
-      <h1 className="p-2 font-bold">Create a workout</h1>
+      <h1 className="py-2 px-10 font-bold">Create a workout</h1>
       <form
         onSubmit={handleCreateButtonClick}
-        className="flex flex-wrap justify-center"
+        className="flex flex-col justify-center bg-white"
       >
-        <div className="bg-white">
-          <InputField
-            type="text"
-            placeholder="Workout Name"
-            onChange={(e) => setWorkoutName(e.target.value)}
-            value={undefined}
-            required
-          />
-          <InputField
-            type="text"
-            placeholder="Duration"
-            onChange={(e) => setDurantion(e.target.value)}
-            value={undefined}
-            required
-          />
-          <InputButton onClick={handleCreateButtonClick} text={"Create"} />
-        </div>
+        <InputField
+          type="text"
+          placeholder="Workout Name"
+          onChange={(e) => setWorkoutName(e.target.value)}
+          value={undefined}
+          required
+        />
+        <InputField
+          type="text"
+          placeholder="Duration"
+          onChange={(e) => setDurantion(e.target.value)}
+          value={undefined}
+          required
+        />
+        <InputButton onClick={handleCreateButtonClick} text={"Create"} />
       </form>
     </div>
   );
