@@ -13,6 +13,8 @@ const NumberField = ({ required, value, onChange, placeholder, min, max }) => {
       required={required}
       min={min}
       max={max}
+      data-testid={number}
+
     />
   );
 };
