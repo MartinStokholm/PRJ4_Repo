@@ -30,21 +30,20 @@ const WorkoutModal = () => {
         className="flex flex-wrap border rounded bg-grey-200 justify-center"
       >
         <InputField
-          type="workoutName"
+          type="text"
           placeholder="Workout Name"
-          data-testid="workoutName"
           onChange={(e) => setWorkoutName(e.target.value)}
-          value={workoutName}
+          value={undefined}
           
           required
         />
         <InputField
-          type="duration"
-          data-testid="duration"
+          type="text"
           placeholder="Duration"
           onChange={(e) => setDurantion(e.target.value)}
-          value={duration}
+          value={undefined}
           required
+          
         />
         <InputButton type={"submit"} text={"Create"} key={undefined} />
       </form>

@@ -2,11 +2,14 @@ import { render, screen, fireEvent,waitFor, getByLabelText } from '@testing-libr
 import { QueryClient, QueryClientProvider } from 'react-query'
 import CreateWorkoutModal from '../src/components/Workout/CreateWorkoutModal'
 const queryClient = new QueryClient();
+const mockedSetDurantion = jest.fn();
 describe('CreateWorkoutModal test debug', () => {
     it('Debug',  () => {
       render(
         <QueryClientProvider client={queryClient}> 
-          <CreateWorkoutModal />
+          <CreateWorkoutModal 
+      
+          />
         </QueryClientProvider>
 
        
@@ -24,10 +27,13 @@ describe('Test for create new Workout, duration  ', () => {
       </QueryClientProvider>
           
     )  
-   fireEvent.change(screen.getByTestId("workoutName"),{target: {value:'Ninja'}})
-  expect(screen.getByTestId("workoutName")).toHaveAttribute('value','Ninja')
-  fireEvent.change(screen.getByTestId("duration"),{target: {value:'10'}})
-  expect(screen.getByTestId("duration")).toHaveAttribute('value','10')
+    const inputDuration = screen.getByPlaceholderText(/Duration/i);
+    fireEvent.change(inputDuration,{target: {value:"10"}})
+  expect(inputDuration.value).toBe("10");
+  
+  const inputWorkout = screen.getByPlaceholderText(/Workout Name/i);
+  fireEvent.change(inputWorkout,{target: {value:"Ninja"}})
+  expect(inputWorkout.value).toBe("Ninja");
   })  })
 
   describe('CreateWorkoutModal test button', () => {
