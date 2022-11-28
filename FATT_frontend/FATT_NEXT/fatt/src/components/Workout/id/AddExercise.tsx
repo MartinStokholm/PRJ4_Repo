@@ -14,12 +14,12 @@ const AddExercise = ({ workoutData, exerciseData }) => {
     useUpdateWorkoutAddExerciseData();
 
   return (
-    <div>
+    <div className="bg-gradient-to-b from-green-200 ">
       <h1 className="mt-4 font-bold">All exercises</h1>
-      <h2 className="italic">
+      <h2 className="italic pb-4 px-2">
         That you can add to the workout: {workoutData?.data?.name}
       </h2>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap bg-white">
         {exerciseData?.data.map((exercise) =>
           workoutData?.data?.exercisesIds?.includes(exercise.id) ? null : (
             <div
