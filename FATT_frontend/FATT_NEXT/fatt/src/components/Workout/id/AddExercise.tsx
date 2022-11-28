@@ -19,24 +19,25 @@ const AddExercise = ({ workoutData, exerciseData }) => {
       <h2 className="italic">
         That you can add to the workout: {workoutData?.data?.name}
       </h2>
-
-      {exerciseData?.data.map((exercise) =>
-        workoutData?.data?.exercisesIds?.includes(exercise.id) ? null : (
-          <div
-            key={exercise.id}
-            className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
-          >
-            <Button
-              text={"Add"}
-              onClick={() => {
-                handleAddButtonClick(exercise.id);
-              }}
-              key={undefined}
-            />
-            <WorkoutItemThumbnail exercise={exercise} />
-          </div>
-        )
-      )}
+      <div className="flex flex-wrap">
+        {exerciseData?.data.map((exercise) =>
+          workoutData?.data?.exercisesIds?.includes(exercise.id) ? null : (
+            <div
+              key={exercise.id}
+              className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
+            >
+              <Button
+                text={"Add"}
+                onClick={() => {
+                  handleAddButtonClick(exercise.id);
+                }}
+                key={undefined}
+              />
+              <WorkoutItemThumbnail exercise={exercise} />
+            </div>
+          )
+        )}
+      </div>
     </div>
   );
 };
