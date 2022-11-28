@@ -31,14 +31,18 @@ const Login = (props) => {
         <Label className="mx-4">Email: </Label>
         <InputField
           type="Email"
+          data-testid="Email" 
+          
           required
           placeholder="johndoe@mail.com"
           value={Email}
+                   
           onChange={(e) => setEmail(e.target.value)}
         />
         <Label className="mx-4">Password: </Label>
         <InputField
           type="Password"
+          data-testid="Password" 
           required
           placeholder="********"
           value={Password}

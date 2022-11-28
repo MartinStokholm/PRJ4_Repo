@@ -9,6 +9,8 @@ const InputField = ({ required, value, onChange, type, placeholder }) => {
       onChange={onChange}
       value={value}
       required={required}
+      data-testid={type}
+
     />
   );
 };
