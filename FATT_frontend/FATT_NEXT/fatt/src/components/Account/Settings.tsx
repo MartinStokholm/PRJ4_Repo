@@ -66,9 +66,8 @@ const Settings = () => {
         />
         <TextInput
           className="m-4"
-          type="newEmail"
+          type="email"
           placeholder="New email"
-          data-testid="newEmail"
           value={newEmail}
           onChange={(e) => setNewEmail(e.target.value)}
         />
@@ -89,7 +88,6 @@ const Settings = () => {
         <TextInput
           className="m-4"
           type="email"
-          data-testid="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -102,9 +100,8 @@ const Settings = () => {
         />
         <TextInput
           className="m-4"
-          type="newPassword"
+          type="password"
           placeholder="New Password"
-          data-testid="newPassword"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />

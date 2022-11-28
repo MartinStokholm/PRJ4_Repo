@@ -7,13 +7,8 @@ describe('CreateWorkoutModal test debug', () => {
     it('Debug',  () => {
       render(
         <QueryClientProvider client={queryClient}> 
-          <CreateWorkoutModal 
-      
-          />
-        </QueryClientProvider>
-
-       
-
+          <CreateWorkoutModal />
+        </QueryClientProvider>    
       )
      screen.debug();
     })
@@ -57,9 +52,7 @@ describe('Button should be not disabled', () => {
       <QueryClientProvider client={queryClient}> 
         <CreateWorkoutModal />
       </QueryClientProvider>
-
-     
-
+    
     )
    screen.debug();
    const buttenW= screen.getByRole("button");

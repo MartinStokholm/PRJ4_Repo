@@ -8,10 +8,7 @@ describe('Settings test debug', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <Settings />
-        </QueryClientProvider>
-
-       
-
+        </QueryClientProvider>    
       )
      screen.debug();
     })
@@ -24,8 +21,11 @@ describe('test set new email ', () => {
         </QueryClientProvider>
             
       )  
-     fireEvent.change(screen.getByTestId("newEmail"),{target: {value:'mar@gmail.com'}})
-    expect(screen.getByTestId("newEmail")).toHaveAttribute('value','mar@gmail.com')
+     //fireEvent.change(screen.getByTestId("newEmail"),{target: {value:'mar@gmail.com'}})
+   // expect(screen.getByTestId("newEmail")).toHaveAttribute('value','mar@gmail.com')
+    const newEmail = screen.getByPlaceholderText(/New email/i);
+    fireEvent.change(newEmail,{target: {value:"mar@gmail.com"}})
+  expect(newEmail.value).toBe("mar@gmail.com");
     
     })  })
 
@@ -39,43 +39,13 @@ describe('test set new email ', () => {
           )
     
        
-         fireEvent.change(screen.getByTestId("newPassword"),{target: {value:'klasd5666'}})
-        expect(screen.getByTestId("newPassword")).toHaveAttribute('value','klasd5666')
+        // fireEvent.change(screen.getByTestId("newPassword"),{target: {value:'klasd5666'}})
+      //  expect(screen.getByTestId("newPassword")).toHaveAttribute('value','klasd5666')
+
+        const newPassword = screen.getByPlaceholderText(/New Password/i);
+        fireEvent.change(newPassword,{target: {value:"klasd5666"}})
+      expect(newPassword.value).toBe("klasd5666");
         
         })  })
-describe('value for newEmail ,newPassword by ID ', () => {
-    it('Name, Email , Password',  () => {
-      render(
-        <QueryClientProvider client={queryClient}> 
-          <Settings />
-        </QueryClientProvider>
-            
-      )
 
-   // screen.debug();
-     
-      screen.getByTestId("newPassword")
-      screen.getByTestId("newEmail")
-
-    })
-
-})
-
-describe('value for Name ,Email , Password by ID ', () => {
-    it('Name, Email , Password',  () => {
-      render(
-        <QueryClientProvider client={queryClient}> 
-          <Settings />
-        </QueryClientProvider>
-            
-      )
-
-    screen.debug();
-      screen.getByTestId("email")
-      screen.getByTestId("password")
-    //  screen.getByTestId("newEmail")
-
-    })
-
-})
 
