@@ -36,13 +36,15 @@ export const SignUp = (props) => {
         <InputField
           type="text"
           placeholder="John Doe"
+          data-testid="text"
           required
-          value={undefined}
+          value={Name}
           onChange={(e) => setName(e.target.value)}
         />
         <Label className="mx-4">Email :</Label>
         <InputField
           type="Email"
+          data-testid="Email" 
           placeholder="johndoe@mail.com"
           required
           value={Email}
@@ -51,6 +53,7 @@ export const SignUp = (props) => {
         <Label className="mx-4">Password :</Label>
         <InputField
           type="Password"
+          data-testid="Password" 
           placeholder="********"
           required
           value={Password}

@@ -72,3 +72,20 @@ describe('Login test debug', () => {
     })
     
   })
+
+  describe('test change for Password ', () => {
+    it(' Password',  () => {
+      render(
+        <QueryClientProvider client={queryClient}> 
+          <Login />
+        </QueryClientProvider>
+            
+      )
+
+   
+     fireEvent.change(screen.getByTestId("Password"),{target: {value:'klasd5666'}})
+    expect(screen.getByTestId("Password")).toHaveAttribute('value','klasd5666')
+    
+    })
+    
+  })
