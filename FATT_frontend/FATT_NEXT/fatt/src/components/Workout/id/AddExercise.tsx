@@ -19,7 +19,7 @@ const AddExercise = ({ workoutData, exerciseData }) => {
       <h2 className="italic pb-4 px-2">
         That you can add to the workout: {workoutData?.data?.name}
       </h2>
-      <div className="flex flex-wrap bg-white">
+      <div className="bg-white pt-2">
         {exerciseData?.data.map((exercise) =>
           workoutData?.data?.exercisesIds?.includes(exercise.id) ? null : (
             <div
