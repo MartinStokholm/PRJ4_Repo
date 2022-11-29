@@ -34,76 +34,78 @@ export default function ExerciseModal() {
   };
 
   return (
-    <div className="p-4 bg-gradient-to-b from-green-200">
-      <h3 className="text-xl font-semibold text-gray-900 mb-5">
+    <div className="bg-gradient-to-b from-green-200">
+      <h3 className="text-xl font-semibold text-gray-900 m-4">
         Create exercise
       </h3>
       <form
         onSubmit={handleCreateButtonClick}
-        className="flex flex-wrap bg-white "
+        className="flex flex-col justify-center bg-white "
       >
-        <InputField
-          type="text"
-          placeholder="Name"
-          onChange={(e) => setExerciseName(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Category"
-          onChange={(e) => setCategory(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Intensity"
-          onChange={(e) => setIntensity(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Equipment"
-          onChange={(e) => setEquipment(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Repetitions"
-          onChange={(e) => setRepetitions(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Sets"
-          onChange={(e) => setSets(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="PicturePath"
-          onChange={(e) => setPicturePath(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="VideoPath"
-          onChange={(e) => setVideoPath(e.target.value)}
-          value={undefined}
-          required
-        />
+        <div className="flex flex-col justify-center bg-white">
+          <InputField
+            type="text"
+            placeholder="Name"
+            onChange={(e) => setExerciseName(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Category"
+            onChange={(e) => setCategory(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Intensity"
+            onChange={(e) => setIntensity(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Equipment"
+            onChange={(e) => setEquipment(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Repetitions"
+            onChange={(e) => setRepetitions(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Sets"
+            onChange={(e) => setSets(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="PicturePath"
+            onChange={(e) => setPicturePath(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="VideoPath"
+            onChange={(e) => setVideoPath(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputButton
+            type={"onSubmit"}
+            onClick={handleCreateButtonClick}
+            text={"Create"}
+          />
+        </div>
       </form>
-      <InputButton
-        type={"onSubmit"}
-        onClick={handleCreateButtonClick}
-        text={"Create"}
-      />
     </div>
   );
 }

@@ -27,61 +27,63 @@ export default function DishModal() {
   };
 
   return (
-    <div className="p-6">
-      <h3 className="text-xl font-semibold text-gray-900 mb-5">Create dish</h3>
+    <div className="bg-gradient-to-b from-green-200">
+      <h3 className="text-xl font-semibold text-gray-900 m-4">Create dish</h3>
       <form
         onSubmit={handleCreateButtonClick}
-        className="flex flex-wrap border rounded bg-grey-200"
+        className="flex flex-col justify-center bg-white"
       >
-        <InputField
-          type="text"
-          placeholder="Name"
-          onChange={(e) => setDishName(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Prep Time"
-          onChange={(e) => setPrepTime(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Ingredients"
-          onChange={(e) => setIngredients(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Nutritional Value"
-          onChange={(e) => setNutritionalValue(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="Recipe"
-          onChange={(e) => setRecipe(e.target.value)}
-          value={undefined}
-          required
-        />
-        <InputField
-          type="text"
-          placeholder="PicturePath"
-          onChange={(e) => setPicturePath(e.target.value)}
-          value={undefined}
-          required
-        />
+        <div className="flex flex-col justify-center bg-white">
+          <InputField
+            type="text"
+            placeholder="Name"
+            onChange={(e) => setDishName(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Prep Time"
+            onChange={(e) => setPrepTime(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Ingredients"
+            onChange={(e) => setIngredients(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Nutritional Value"
+            onChange={(e) => setNutritionalValue(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="Recipe"
+            onChange={(e) => setRecipe(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputField
+            type="text"
+            placeholder="PicturePath"
+            onChange={(e) => setPicturePath(e.target.value)}
+            value={undefined}
+            required
+          />
+          <InputButton
+            type={"onSubmit"}
+            onClick={handleCreateButtonClick}
+            text={"Create"}
+            key={undefined}
+          />
+        </div>
       </form>
-      <InputButton
-        type={"onSubmit"}
-        onClick={handleCreateButtonClick}
-        text={"Create"}
-        key={undefined}
-      />
     </div>
   );
 }
