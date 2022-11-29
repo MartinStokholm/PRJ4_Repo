@@ -1,0 +1,69 @@
+@startuml C3_Backend
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/react.puml
+!include DEVICONS/java.puml
+!include FONTAWESOME/users.puml
+
+AddContainerTag("webApp", $sprite="application_server", $legendText="web app container")
+AddContainerTag("db", $sprite="database_server", $legendText="database container")
+AddContainerTag("files", $sprite="file_server", $legendText="file server container")
+AddContainerTag("conApp", $sprite="service_application", $legendText="console app container")
+
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
+
+Person(user, "Users", "A person who has an account in the system. The user is a novice fitness gym-member", $sprite="users")
+
+System_Boundary(c2, "Web API") {
+    Container(c_account, "Account Controller", "Endpoint for account data")
+    Container(c_workout, "Workout Controller", "Endpoints for workout data")
+    Container(c_meal, "Meal Controller", "Endpoints for meal data")
+    Container(c_exercise, "Exercise Controller", "Endpoints for exercise data")
+    Container(c_dish, "Dish Controller", "Endpoints for dish data")
+    Container(c_account_service, "Account Services", "Logic for account data")
+    Container(c_workout_service, "Workout Services", "Logic for workout data")
+    Container(c_meal_service, "Meal Services", "Logic for meal data")
+    Container(c_exercise_service, "Exercise Services", "C#, Logic for exercise data")
+    Container(c_dish_service, "Dish Services", "Logic for dish data")
+    Container(c_databaseContext, "DatabaseContext Service", "Logic for database access")
+    
+}
+
+ContainerDb(Database, "Database", "msSql, SQL", "Store user registration, exercises and the registration information, hashed authentication credentials, access log.")
+
+Container(Web_app, "Web Application", "Next.Js, React.js, Client", "Delivers the static content for the web application", $sprite="react")
+
+System_Ext(mails, "E-Mail System", "Mail-Chimp" )
+
+Rel(user, Web_app, "Interract", "HTTPS")
+
+Rel_Down(Web_app, c_workout, "Make API calls to", "JSON")
+Rel_Down(Web_app, c_meal, "Make API calls to", "JSON")
+Rel_Down(Web_app, c_dish, "Make API calls to", "JSON")
+Rel_Down(Web_app, c_exercise, "Make API calls to", "JSON")
+Rel_Down(Web_app, c_account, "Make API calls to", "JSON")
+
+Rel_Down(c_account, c_account_service, "uses", "")
+Rel_Down(c_workout, c_workout_service, "uses", "")
+Rel_Down(c_meal, c_meal_service, "uses", "")
+Rel_Down(c_exercise, c_exercise_service, "uses", "")
+Rel_Down(c_dish, c_dish_service, "uses", "")
+
+Rel_Down(c_account_service, c_databaseContext, "uses", "")
+Rel_Down(c_workout_service, c_databaseContext, "uses", "")
+Rel_Down(c_meal_service, c_databaseContext, "uses", "")
+Rel_Down(c_dish_service, c_databaseContext, "uses", "")
+Rel_Down(c_exercise_service, c_databaseContext, "uses", "")
+
+Rel_Up(c_account, mails,"Sends notification using","SMTP")
+Rel_Left(mails, user,"Sends notification to","SMTP")
+Rel_Down(c_databaseContext, Database, "Reads/Writes", "msSQL")
+
+SHOW_LEGEND()
+
+@enduml
+

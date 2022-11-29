@@ -1,0 +1,56 @@
+@startuml C3_Frontend
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/react.puml
+!include DEVICONS/java.puml
+!include FONTAWESOME/users.puml
+
+AddContainerTag("web API", $sprite="application_server", $legendText="web app container")
+AddContainerTag("db", $sprite="database_server", $legendText="database container")
+AddContainerTag("files", $sprite="file_server", $legendText="file server container")
+AddContainerTag("conApp", $sprite="service_application", $legendText="console app container")
+
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
+
+Person(user, "Users", "A person who has an account in the system. The user is a novice fitness gym-member", $sprite="users")
+
+System_Boundary(c2, "Web Application") {
+    Container(next_app, "Next.Js", "Next.Js web application", "Next.Js main application") 
+    Container(homepage, "Homepage", "Homepage web application", "Next.Js page")
+    Container(workoutpage, "WorkoutPage", "WorkoutPage web application", "Next.Js page")
+    Container(mealpage, "MealPage", "MealPage web application", "Next.Js page")
+    Container(exercisepage, "ExercisePage", "ExercisePage web application", "Next.Js page")
+    Container(dishpage, "DishPage", "DishPage web application", "Next.Js page")
+    Container(signuppage, "SignUpPage", "SignUpPage web application", "Next.Js page")
+    Container(loginpage, "LoginPage", "LoginPage web application", "Next.Js page")
+}
+
+ContainerDb(Database, "Database", "msSql, SQL", "Store user registration, exercises and the registration information, hashed authentication credentials, access log.")
+
+Container(Web_API, "Web API", ".NET 6 Web API", "REST API for the web application")
+
+System_Ext(mails, "E-Mail System", "Mail-Chimp" )
+
+Rel(user, next_app, "Interract", "HTTPS")
+
+Rel_Right(next_app, Web_API, "Makes API calls", "JSON/HTTPS")
+Rel_Right(Web_API, mails,"Sends notification using","SMTP")
+Rel_Left(Web_API, Database, "Reads/Writes", "SQL")
+Rel_Right(mails, user,"Sends notification to","SMTP")
+
+Rel_Down(next_app, homepage, "Has a")
+Rel_Down(next_app, workoutpage, "Has a")
+Rel_Down(next_app, mealpage, "Has a")
+Rel_Down(next_app, exercisepage, "Has a")
+Rel_Down(next_app, dishpage, "Has a")
+Rel_Down(next_app, signuppage, "Has a")
+Rel_Down(next_app, loginpage, "Has a")
+
+SHOW_LEGEND()
+
+@enduml
+
