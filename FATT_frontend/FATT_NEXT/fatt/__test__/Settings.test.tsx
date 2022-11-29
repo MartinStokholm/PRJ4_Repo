@@ -21,8 +21,6 @@ describe('test set new email ', () => {
         </QueryClientProvider>
             
       )  
-     //fireEvent.change(screen.getByTestId("newEmail"),{target: {value:'mar@gmail.com'}})
-   // expect(screen.getByTestId("newEmail")).toHaveAttribute('value','mar@gmail.com')
     const newEmail = screen.getByPlaceholderText(/New email/i);
     fireEvent.change(newEmail,{target: {value:"mar@gmail.com"}})
   expect(newEmail.value).toBe("mar@gmail.com");
@@ -36,11 +34,7 @@ describe('test set new email ', () => {
               <Settings />
             </QueryClientProvider>
                 
-          )
-    
-       
-        // fireEvent.change(screen.getByTestId("newPassword"),{target: {value:'klasd5666'}})
-      //  expect(screen.getByTestId("newPassword")).toHaveAttribute('value','klasd5666')
+          )            
 
         const newPassword = screen.getByPlaceholderText(/New Password/i);
         fireEvent.change(newPassword,{target: {value:"klasd5666"}})

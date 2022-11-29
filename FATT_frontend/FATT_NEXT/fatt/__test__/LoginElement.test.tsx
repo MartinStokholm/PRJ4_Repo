@@ -13,9 +13,6 @@ describe('Login test debug', () => {
         <QueryClientProvider client={queryClient}> 
           <Login />
         </QueryClientProvider>
-
-       
-      
       )
      screen.debug();
     })
@@ -66,8 +63,7 @@ describe('Login test debug', () => {
 
    
      fireEvent.change(screen.getByTestId("Email"),{target: {value:'naer@gmail.com'}})
-    // expect(screen.getByRole('button')).not.toBeDisabled()
-    expect(screen.getByTestId("Email")).toHaveAttribute('value','naer@gmail.com')
+     expect(screen.getByTestId("Email")).toHaveAttribute('value','naer@gmail.com')
     
     })
     
