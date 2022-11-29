@@ -14,7 +14,7 @@ const AddExercise = ({ workoutData, exerciseData }) => {
     useUpdateWorkoutAddExerciseData();
 
   return (
-    <div className="bg-gradient-to-b from-green-200 ">
+    <div className="bg-gradient-to-b from-green-200">
       <h1 className="mt-4 font-bold">All exercises</h1>
       <h2 className="italic pb-4 px-2">
         That you can add to the workout: {workoutData?.data?.name}
