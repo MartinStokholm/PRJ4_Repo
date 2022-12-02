@@ -1,18 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 using WebAPI.Dto.Account;
-using System.Security.Cryptography;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.Mail;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Principal;
 using Microsoft.AspNetCore.Authorization;
 using WebAPI.Dto.Workout;
 using System.Collections.Generic;
 using WebAPI.Dto.Calender;
+using WebAPI.Services;
+
 
 namespace WebAPI.Controllers
 {
@@ -22,19 +18,20 @@ namespace WebAPI.Controllers
     public class AccountController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly IConfiguration _configuration;
+        private readonly  AccountServices _accountServices;
 
         public AccountController(IConfiguration configuration, DataContext context)
         {
-            _configuration = configuration;
+            
             _context = context;
+            _accountServices = new AccountServices(configuration);
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<AccountGetDto>> Register(AccountDto request)
         {
-            if (!IsVaildEmail(request.Email))
+            if (!_accountServices.IsVaildEmail(request.Email))
             {
                 return BadRequest("Email is not valid");
             }
@@ -42,7 +39,7 @@ namespace WebAPI.Controllers
             if (await _context.Accounts.AnyAsync(x => x.Email == request.Email))
                 return BadRequest("Email is already taken");
 
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            _accountServices.CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
             var account = new Account
             {
@@ -50,45 +47,36 @@ namespace WebAPI.Controllers
                 Email = request.Email,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Age = 0,
-                Weigth = 0,
-                Gender = ""
             };
             //_context.Calender.Add(Calender);
             _context.Accounts.Add(account);
 
-            var id = await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-            return Accepted(account.Email);
-            //return CreatedAtAction(nameof(GetAccountEmail), new { email = account.Email }, account); ;
+            return Accepted(request.Email);
         }
 
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<AccountGetLoginDto>> Login(AccountLoginDto request)
         {
-            try
+           
+            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == request.Email);
+            if (dbAccount == null)
             {
-                var dbAcccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == request.Email);
-                if (dbAcccount == null)
-                {
-                    return NotFound(request.Email);
-                }
-
-                if (!TryVerifyPasswordHash(request.Password, dbAcccount.PasswordHash, dbAcccount.PasswordSalt))
-                {
-                    return BadRequest("Not a valid Password");
-                }
-
-                var token = CreateToken(dbAcccount);
-                var account = dbAcccount.Adapt<AccountGetLoginDto>();
-                account.Token = token;
-                return Ok(account);
+                return NotFound(request.Email);
             }
-            catch (Exception)
+
+            if (!_accountServices.TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
             {
-                return BadRequest("Not a valid login");
+                return BadRequest("Not a valid Password");
             }
+
+            var token = _accountServices.CreateToken(dbAccount);
+            var account = dbAccount.Adapt<AccountGetLoginDto>();
+            account.Token = token;
+            return Ok(account);
+            
         }
 
 
@@ -96,52 +84,50 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<string>> ChangeEmail(AccountChangeEmailDto request)
         {
             var dbAccount = await _context.Accounts.Where(x => x.Email == request.Email).FirstOrDefaultAsync();
-            try
-            {
-                if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
-                {
-                    return BadRequest("Not a valid Password");
-                }
 
-                dbAccount.Email = request.NewEmail;
-
-                await _context.SaveChangesAsync();
-                return Accepted(dbAccount);
-            }
-            catch (Exception)
+            if (dbAccount == null)
             {
-                return BadRequest("Not a valid login");
+                return NotFound(request);
             }
+        
+            if (!_accountServices.TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
+            {
+                return BadRequest("Not a valid Password");
+            }
+
+            dbAccount.Email = request.NewEmail;
+
+            await _context.SaveChangesAsync();
+            return Accepted(dbAccount);
+        
+            
         }
 
         [HttpPut("ChangePassword")]
         public async Task<ActionResult<string>> ChangePassword(AccountChangePasswordDto request)
         {
-            try
+            
+            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == request.Email);
+            if (dbAccount == null)
             {
-                var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == request.Email);
-                if (dbAccount == null) { return NotFound(request.Email); }
-
-                if (!TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
-                {
-                    return BadRequest("Wrong password");
-                }
-
-                CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
-
-                dbAccount.PasswordHash = passwordHash;
-                dbAccount.PasswordSalt = passwordSalt;
-
-                dbAccount.Adapt(dbAccount);
-                await _context.SaveChangesAsync();
-
-                //string token = CreateToken(dbAccount);
-                return Ok(CreateToken(dbAccount));
+                return NotFound(request.Email);
             }
-            catch (Exception)
+
+            if (!_accountServices.TryVerifyPasswordHash(request.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
             {
-                return BadRequest("Error in changing password");
+                return BadRequest("Wrong password");
             }
+
+            _accountServices.CreatePasswordHash(request.NewPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+            dbAccount.PasswordHash = passwordHash;
+            dbAccount.PasswordSalt = passwordSalt;
+
+            dbAccount.Adapt(dbAccount);
+            await _context.SaveChangesAsync();
+
+            //string token = CreateToken(dbAccount);
+            return Ok(_accountServices.CreateToken(dbAccount));
 
         }
 
@@ -193,27 +179,21 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
-        [HttpDelete()]
+        [HttpDelete]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto account)
         {
             var dbAccount = await _context.Accounts.Include(a => a.Calender).FirstOrDefaultAsync(x => x.Email == account.Email);
             if (dbAccount == null) { return NotFound(account.Email); }
             
-            try
+            if (!_accountServices.TryVerifyPasswordHash(account.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
             {
-                if (!TryVerifyPasswordHash(account.Password, dbAccount.PasswordHash, dbAccount.PasswordSalt))
-                {
-                    return BadRequest("Can't delete account");
-                }
+                return BadRequest("Can't delete account");
+            }
 
-                _context.Accounts.Remove(dbAccount);
-                await _context.SaveChangesAsync();
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return BadRequest("Not a valid login");
-            }
+            _context.Accounts.Remove(dbAccount);
+            await _context.SaveChangesAsync();
+            return Ok();
+            
         }
 
         [HttpGet("{email}")]
@@ -301,55 +281,6 @@ namespace WebAPI.Controllers
 
             return Ok(result);
 
-        }
-
-        private string CreateToken(Account account)
-        {
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, account.Name),
-                new Claim(ClaimTypes.Role, "Admin")
-
-            };
-
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds);
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
-        }
-
-        private static bool IsVaildEmail(string email)
-        {
-            try
-            {
-                _ = new MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-
-        }
-        private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        {
-            using var hmac = new HMACSHA512();
-            passwordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-
-        }
-        private static bool TryVerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using var hmac = new HMACSHA512(passwordSalt);
-            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            return computedHash.SequenceEqual(passwordHash);
         }
 
     }
