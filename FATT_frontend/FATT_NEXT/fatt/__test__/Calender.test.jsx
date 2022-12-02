@@ -26,8 +26,8 @@ describe('Calender test debug', () => {
                 
           )
     
-          const myPassword = screen.getByText(/Monday/);
-          expect(myPassword).toBeInTheDocument();
+          const myCalender = screen.getByText(/Monday/);
+          expect(myCalender).toBeInTheDocument();
             
         })
         
