@@ -20,6 +20,7 @@ Person(user, "Users", "A person who has an account in the system. The user is a 
 
 System_Boundary(c2, "Web Application") {
     Container(next_app, "Next.Js", "Next.Js web application", "Next.Js main application") 
+    Container(queryCP, "QueryClientProvider", "Handles the caching of data")
     Container(homepage, "Homepage", "Homepage web application", "Next.Js page")
     Container(workoutpage, "WorkoutPage", "WorkoutPage web application", "Next.Js page")
     Container(mealpage, "MealPage", "MealPage web application", "Next.Js page")
@@ -35,12 +36,14 @@ Container(Web_API, "Web API", ".NET 6 Web API", "REST API for the web applicatio
 
 System_Ext(mails, "E-Mail System", "Mail-Chimp" )
 
-Rel(user, next_app, "Interract", "HTTPS")
+Rel(user, next_app, "Uses")
+Rel_Left(next_app, queryCP, "Interract", "HTTPS")
 
 Rel_Right(next_app, Web_API, "Makes API calls", "JSON/HTTPS")
 Rel_Right(Web_API, mails,"Sends notification using","SMTP")
 Rel_Left(Web_API, Database, "Reads/Writes", "SQL")
 Rel_Right(mails, user,"Sends notification to","SMTP")
+
 
 Rel_Down(next_app, homepage, "Has a")
 Rel_Down(next_app, workoutpage, "Has a")
