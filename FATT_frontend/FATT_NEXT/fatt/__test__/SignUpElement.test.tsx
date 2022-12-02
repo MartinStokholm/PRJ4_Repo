@@ -8,11 +8,8 @@ describe('Login test debug', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <SignUp />
-        </QueryClientProvider>
-
-       
-      
-      )
+        </QueryClientProvider>     
+            )
      screen.debug();
     })
 })
@@ -75,8 +72,7 @@ describe('Test change for Name Sign Up', () => {
         <QueryClientProvider client={queryClient}> 
           <SignUp />
         </QueryClientProvider>
-            
-      )
+                 )
 
     screen.debug();
       screen.getByTestId("Email")

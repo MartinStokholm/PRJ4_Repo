@@ -11,9 +11,7 @@ describe('Layout test', () => {
           <Layout />
         </QueryClientProvider>      
       
-      )
-     
-     // expect(screen.getByText(/Meta/)).toBeInTheDocument();
+      )     
       screen.debug();
     }) })
  

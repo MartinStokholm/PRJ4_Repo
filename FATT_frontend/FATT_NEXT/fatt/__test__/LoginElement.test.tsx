@@ -8,7 +8,7 @@ import Login from '../src/components/Account/Login'
 const queryClient = new QueryClient();
 
 describe('Login test debug', () => {
-    it('renders a heading', async () => {
+    it('renders a heading', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <Login />
@@ -19,7 +19,7 @@ describe('Login test debug', () => {
     
   })
   describe('Login test display Email and Password ', () => {
-    it('Email and Password', async () => {
+    it('Email and Password', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <Login />
@@ -36,7 +36,7 @@ describe('Login test debug', () => {
     
   })
   describe('value for Email and Password by ID ', () => {
-    it('Email and Password', async () => {
+    it('Email and Password', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <Login />

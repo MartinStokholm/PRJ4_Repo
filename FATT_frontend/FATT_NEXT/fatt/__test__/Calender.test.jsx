@@ -7,7 +7,7 @@ import Calender from '../src/components/Calendar/Calender'
 const queryClient = new QueryClient();
 
 describe('Calender test debug', () => {
-    it('renders a heading', async () => {
+    it('Calender',  () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <Calender />
@@ -18,7 +18,7 @@ describe('Calender test debug', () => {
     }) })
 
     describe('Calender ', () => {
-        it('renders Calender component', async () => {
+        it('renders Calender component', () => {
           render(
             <QueryClientProvider client={queryClient}> 
               <Calender />

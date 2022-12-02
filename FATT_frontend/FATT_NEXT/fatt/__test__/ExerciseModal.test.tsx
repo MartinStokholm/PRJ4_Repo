@@ -11,8 +11,7 @@ describe('ExerciseModal test debug', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <ExerciseModal />
-        </QueryClientProvider>      
-      
+        </QueryClientProvider>           
       )
      
       expect(screen.getByText(/Create exercise/)).toBeInTheDocument();
@@ -32,7 +31,6 @@ describe('ExerciseModal test debug', () => {
            
     
           )
-         //screen.debug();
          const buttenW= screen.getByRole("button");
          expect(buttenW).toBeInTheDocument();
         })
@@ -45,7 +43,6 @@ describe('ExerciseModal test debug', () => {
             </QueryClientProvider>
           
           )
-         //screen.debug();
          const buttenW= screen.getByRole("button");
          expect(buttenW).not.toBeDisabled();
         })
@@ -60,9 +57,7 @@ describe('ExerciseModal test debug', () => {
               )  
               const inputCategory = screen.getByPlaceholderText(/Category/i);
               fireEvent.change(inputCategory,{target: {value:"Endurance"}})
-            expect(inputCategory.value).toBe("Endurance");
-           // expect(screen.queryByText(/Searches for JavaScript/)).toBeNull();
-          //  screen.logTestingPlaygroundURL()
+            expect(inputCategory.value).toBe("Endurance");     
           const inputPicturePath = screen.getByPlaceholderText(/PicturePath/i);
           fireEvent.change(inputPicturePath,{target: {value:"https://www.verywellfit.com/thmb/dAjxGFh3F4U4uiakraA1wTYn26M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-157284836-56da7e615f9b5854a9df3c28.jpg"}})
         expect(inputPicturePath.value).toBe("https://www.verywellfit.com/thmb/dAjxGFh3F4U4uiakraA1wTYn26M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-157284836-56da7e615f9b5854a9df3c28.jpg");

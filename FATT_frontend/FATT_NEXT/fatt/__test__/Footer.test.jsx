@@ -11,16 +11,12 @@ describe('Footer test', () => {
           <Footer />
         </QueryClientProvider>      
       
-      )
-     
+      )     
       expect(screen.getByText(/About/)).toBeInTheDocument();
       expect(screen.getByText(/Profile/)).toBeInTheDocument();
       expect(screen.getByText(/Settings/)).toBeInTheDocument();
       expect(screen.getByText(/Log-in/)).toBeInTheDocument();
       expect(screen.getByText(/© 2022 All Rights Reserved./)).toBeInTheDocument();
-
-
-
      screen.debug();
     }) })
  
