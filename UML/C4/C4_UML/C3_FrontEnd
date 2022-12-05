@@ -20,14 +20,28 @@ Person(user, "Users", "A person who has an account in the system. The user is a 
 
 System_Boundary(c2, "Web Application") {
     Container(next_app, "Next.Js", "Next.Js web application", "Next.Js main application") 
-    Container(queryCP, "QueryClientProvider", "Handles the caching of data")
-    Container(homepage, "Homepage", "Homepage web application", "Next.Js page")
-    Container(workoutpage, "WorkoutPage", "WorkoutPage web application", "Next.Js page")
-    Container(mealpage, "MealPage", "MealPage web application", "Next.Js page")
-    Container(exercisepage, "ExercisePage", "ExercisePage web application", "Next.Js page")
-    Container(dishpage, "DishPage", "DishPage web application", "Next.Js page")
-    Container(signuppage, "SignUpPage", "SignUpPage web application", "Next.Js page")
-    Container(loginpage, "LoginPage", "LoginPage web application", "Next.Js page")
+    
+    Container(queryCP, "QueryClientProvider", "Handles the caching of data", "Component")
+    Container(meta , "Meta", "Component for SEO", "Component")
+    Container(navbar, "Navigation menu", "Links to pages", "Component")
+    Container(footer, "Footer", "Component for other links", "Component")
+    
+    Container(children, "Children page component", "Children are based on routing handled by Next.Js", "Next.Js page")
+
+    Container(layout, "Layout", "Overall layout component for the web application", "Component")
+    
+    Container(signuppage, "Sign up page", "For sigining up to the application, consists of multiple components", "Next.Js page")
+    Container(loginpage, "Login page", "For logining in to the application, consists of multiple components", "Next.Js page")
+    Container(profilepage, "Profile page", "For user account settings, consists of multiple components ", "Next.Js page")
+    
+    Container(homepage, "Home page", "Shows personal calendar, consists of multiple components", "Next.Js page")
+    Container(workoutpage, "Workout page", "For personal workouts, consists of multiple components", "Next.Js page")
+    Container(mealpage, "Meal page", "For personal meals consists of multiple components", "Next.Js page")
+    Container(exercisepage, "Exercise page", "For displaying exercise collection, consists of multiple components", "Next.Js page")
+    Container(dishpage, "Dish page", "For displaying dish collection, consists of multiple components", "Next.Js page")
+
+    Container(mutations, "Mutations", "Handles network calls that mutate data in the database", "Multiple component")
+    Container(queries, "Queries", "Handles network calls that fetches data from the database", "Multiple component")
 }
 
 ContainerDb(Database, "Database", "msSql, SQL", "Store user registration, exercises and the registration information, hashed authentication credentials, access log.")
@@ -37,21 +51,35 @@ Container(Web_API, "Web API", ".NET 6 Web API", "REST API for the web applicatio
 System_Ext(mails, "E-Mail System", "Mail-Chimp" )
 
 Rel(user, next_app, "Uses")
-Rel_Left(next_app, queryCP, "Interract", "HTTPS")
+Rel_Left(next_app, queryCP, "Has a", "Component")
 
-Rel_Right(next_app, Web_API, "Makes API calls", "JSON/HTTPS")
+Rel_Up(queryCP, mutations, "Uses")
+Rel_Up(queryCP, queries, "Uses")
+
+Rel_Up(mutations, Web_API, "Makes API calls", "JSON/HTTPS")
+Rel_Up(queries, Web_API, "Makes API calls", "JSON/HTTPS")
+
 Rel_Right(Web_API, mails,"Sends notification using","SMTP")
 Rel_Left(Web_API, Database, "Reads/Writes", "SQL")
+
 Rel_Right(mails, user,"Sends notification to","SMTP")
 
+Rel_Down(queryCP, layout, "Wraps around")
+Rel_Down(layout, children, "Wraps around")
 
-Rel_Down(next_app, homepage, "Has a")
-Rel_Down(next_app, workoutpage, "Has a")
-Rel_Down(next_app, mealpage, "Has a")
-Rel_Down(next_app, exercisepage, "Has a")
-Rel_Down(next_app, dishpage, "Has a")
-Rel_Down(next_app, signuppage, "Has a")
-Rel_Down(next_app, loginpage, "Has a")
+Rel_Right(layout, meta, "Consists of")
+Rel_Left(layout, navbar, "Consists of")
+Rel_Left(layout, footer, "Consists of")
+
+Rel_Left(children, profilepage, "Can be a")
+Rel_Right(children, homepage, "Can be a")
+
+Rel_Down(children, mealpage, "Can be a")
+Rel_Down(children, workoutpage, "Can be a")
+Rel_Down(children, exercisepage, "Can be a")
+Rel_Down(children, dishpage, "Can be a")
+Rel_Down(children, signuppage, "Can be a")
+Rel_Down(children, loginpage, "Can be a")
 
 SHOW_LEGEND()
 
