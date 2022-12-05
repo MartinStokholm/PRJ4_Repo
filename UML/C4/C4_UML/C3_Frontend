@@ -19,7 +19,7 @@ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fon
 Person(user, "Users", "A person who has an account in the system. The user is a novice fitness gym-member", $sprite="users")
 
 System_Boundary(c2, "Web Application") {
-    Container(next_app, "Next.Js", "Next.Js web application", "Next.Js main application") 
+    Container(next_app, "Next.Js", "Next.Js web application, handles creation of routes", "Next.Js main application") 
     
     Container(queryCP, "QueryClientProvider", "Handles the caching of data", "Component")
     Container(meta , "Meta", "Component for SEO", "Component")
