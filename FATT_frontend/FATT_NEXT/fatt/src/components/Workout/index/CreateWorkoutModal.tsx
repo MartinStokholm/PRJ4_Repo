@@ -30,6 +30,7 @@ const WorkoutModal = () => {
           placeholder="Workout Name"
           onChange={(e) => setWorkoutName(e.target.value)}
           value={undefined}
+          
           required
         />
         <InputField
@@ -38,6 +39,7 @@ const WorkoutModal = () => {
           onChange={(e) => setDurantion(e.target.value)}
           value={undefined}
           required
+          
         />
         <InputButton onClick={handleCreateButtonClick} text={"Create"} />
       </form>

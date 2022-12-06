@@ -44,7 +44,7 @@ export const SignUp = () => {
           />
           <Label className="mx-4">Email :</Label>
           <InputField
-            type="Email"
+            type="email"
             placeholder="johndoe@mail.com"
             required
             value={Email}
@@ -52,7 +52,7 @@ export const SignUp = () => {
           />
           <Label className="mx-4">Password :</Label>
           <InputField
-            type="Password"
+            type="password"
             placeholder="********"
             required
             value={Password}
