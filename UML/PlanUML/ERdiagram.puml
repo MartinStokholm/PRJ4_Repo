@@ -1,0 +1,90 @@
+@startuml
+!theme cerulean
+
+entity Calendar{
+    id: Long
+    workoutDays: List<WorkoutDay>
+    mealDays: List<MealDay>
+}
+entity Account{
+    id: Long
+    name: String
+    weight: Double
+    gender: String
+    age: Int
+    email: String
+    passwordHash: Byte 
+    passwordSalt: Byte
+    calendar: Calendar
+    
+} 
+entity Workout{
+    id: Long
+    name: String
+    duration: String
+    exercises: List<Exercise>
+    account: Account
+}
+entity Meal {
+    id: Long
+    name: String
+    dish: list<Dish>
+    account: Account
+}
+entity Dish {
+    id: Long
+    name: String
+    prepTime: String
+    ingredients: String
+    nutritionalValue: String
+    recipe: String
+    picturePath: String
+    meals: List<Meal>
+}
+entity Exercise{
+    id: Long
+    name: String
+    category: String
+    intensity: String
+    equipment: String
+    repititions: String
+    sets: String
+    picturePath: String
+    videoPath: String
+    workouts: List<Workout>
+}
+
+entity Milestone{
+    id: Long
+    category: String
+    goal: String
+    startTime: DateTime 
+    endDate: DateTime
+}
+
+entity WorkoutOnDay{
+    id: Long
+    workoutId: Long
+    day: String
+    }
+
+entity MealOnDay{
+    id: Long
+    mealId: Long
+    day: String
+    }
+
+
+Calendar "1" -- "1" Account
+Account "1" -- "1..*" Workout
+Account "1" -- "1..*" Meal
+Meal "1" -- "1..*" Dish
+Workout "1" -- "1..*" Exercise
+Account "1" -- "1..*" Milestone
+Calendar "1" -- "1..*" WorkoutOnDay
+Calendar "1" -- "1..*" MealOnDay
+Meal "1..*" -- "1..*" MealOnDay
+Workout "1..*" -- "1..*" WorkoutOnDay
+
+
+@enduml
