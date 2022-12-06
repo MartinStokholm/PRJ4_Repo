@@ -17,10 +17,8 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ToastContainer />
-      <Login/>
       <Layout>
         <Component {...pageProps} />
-        
       </Layout>
 
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
