@@ -5,7 +5,9 @@ Actor "User" as U
 participant "Frontend" as F
 participant "Account" as A
 participant "AccountService" as S
-participant "DataContex" as D
+participant "DataContext" as D
+mainframe **Epic 1, US4:** Ændre Email 
+
 
 U -> F : ChangeEmail
 activate F
@@ -16,23 +18,23 @@ A -> S : Where(x => x.Email == request.Email)
 activate S
 S -> D : Where(x => x.Email == request.Email)
 activate D
-D --> S : Account
+D -->> S : Account
 deactivate D
-S --> A : Account
+S -->> A : Account
 deactivate S
 A -> S : TryVerifyPassword(Password,PasswordHash,PasswordSalt)
 activate S
-S --> A : true 
+S -->> A : true 
 deactivate S
 A -> S : SaveChangesAsync()
 activate S 
 S -> D : SaveChangesAsync()
 activate D
-D --> S : ok
+D -->> S : ok
 deactivate D
-S --> A : ok
+S -->> A : ok
 deactivate S
-A --> F : Accepted
+A -->> F : Accepted(Account)
 deactivate A 
 
 
