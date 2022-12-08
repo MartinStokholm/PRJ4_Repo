@@ -1,0 +1,43 @@
+@startuml AccountLoginSequenceDiagram
+
+
+Actor "User" as U
+participant "Frontend" as F
+participant "Account" as A
+participant "AccountService" as S
+participant "DataContex" as D
+
+U -> F : login
+activate F 
+F -> A : Login(AccountLoginDto)
+deactivate F 
+activate A
+A -> S : Where(x => x.Email == request.Email)
+activate S
+S -> D : Where(x => x.Email == request.Email)
+activate D
+D --> S : Account
+deactivate D
+S --> A : Account
+deactivate S
+A -> S : TryVerifyPasswordHash(Password,PasswordHash,PasswordSalt)
+activate S
+S --> A : true
+deactivate S
+A -> S : CreateToken(Account)
+activate S
+S --> A : JWT Token
+deactivate S
+A -> S : UpdateAccount(Account)
+activate S
+S -> D : Adapt<AccountGetLoginDto>(Account)
+activate D
+D --> S : ok
+deactivate D
+S --> A : ok
+deactivate S 
+A --> F : JWT Token
+deactivate A
+
+
+@enduml

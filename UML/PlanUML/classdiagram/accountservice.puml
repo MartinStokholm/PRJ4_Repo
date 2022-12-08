@@ -1,0 +1,13 @@
+@startuml AccountServiceClass
+!theme cerulean
+class AccountServices {
+    + AccountServices(IConfiguration)
+    + CreateToken(Account)
+    + IsValidEmail(string)
+    + CreatePasswordHash(string, out byte[], out byte[])
+    + TryVerifyPasswordHash(string, byte[], byte[])
+
+    }
+
+
+@enduml

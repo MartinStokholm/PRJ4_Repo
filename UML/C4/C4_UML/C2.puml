@@ -25,7 +25,7 @@ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fon
 Person(user, "Users", "A person who has an account in the system. The user is a novice fitness gym-member", $sprite="users")
 System_Boundary(c1, "FATT") {
     Container(Web_api, "Web Api", "Container: C#, ASP.NET Core 6 Web API", "Provides user access, notifications and exercises functionality via a JSON/HTTPS API.")
-    ContainerDb(db, "Database", "Container: MongoDB, NoSQL", "Store user registration, exercises and the combustion registration information, hashed authentication credentials, access log.", $sprite="mongodb")
+    ContainerDb(db, "Database", "Container: SQL", "Store user registration, exercises and the combustion registration information, hashed authentication credentials, access log.", $sprite="database")
     Container(Web_app, "Web application", "Container: React, Javascript, Client", "Delivers the static content and the training (single) page application", $sprite="react")
     
 }
@@ -33,9 +33,9 @@ System_Boundary(c1, "FATT") {
 System_Ext(mails, "E-Mail System", "Not yet know" )
 
 Rel_Down(user, Web_app, "Visits fatt.dk", "HTTPS")
-Rel_Up(Web_api, mails,"Sends notification using","SMTP")
+Rel_Right(Web_api, mails,"Sends notification using","SMTP")
 Rel_Left(mails, user,"Sends notification to","SMTP")
-Rel(Web_api, db, "Reads from and writes to", "JSON/HTTPS")
+Rel_Up(Web_api, db, "Reads from and writes to", "JSON/HTTPS")
 Rel(Web_app, Web_api, "Make API calls to", "JSON/HTTPS")
 
 SHOW_LEGEND()

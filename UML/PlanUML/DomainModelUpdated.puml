@@ -23,7 +23,6 @@ Class Workout {
     - I d
     - Name 
     - Duration
-    - Exercises (List<Exercise>)
 }
 
 class Exercise {
@@ -41,7 +40,6 @@ class Exercise {
 class Meal {
     - I d
     - Name
-    - Dishes List<Dish>
 }
 
 class Dish {
@@ -54,9 +52,19 @@ class Dish {
     - Picture
 }
 
+class Milestone {
+    - I d
+    - Category
+    - Goal
+    - Progress List<Improvement, Date>
+    - StartDate
+    - EndDate 
+}
+
 Account  -l- "0..*" Meal : Has 
 Account  -u- Calender : Has a
 Account  -r-  "0..*"Workout : Has 
+Account  -d- "0.-*" Milestone : Has 
 
 Meal -d- "1..*" Dish : Consists of 
 Workout -d- "1..*" Exercise : Consists of
