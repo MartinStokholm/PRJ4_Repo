@@ -1,0 +1,43 @@
+@startuml AccountRegistreSequenceDiagram
+
+Actor "User" as U
+participant "Frontend" as F
+participant "Account" as A
+participant "AccountService" as S
+participant "DataContex" as D
+
+U -> F : Register
+activate F
+F -> A : Register(AccountDto)
+deactivate F 
+activate A
+A -> S : IsEmailValid(Email)
+activate S
+S --> A : true
+deactivate S 
+A -> S : IsEmailUnique(Email)
+activate S
+S -> D : AnyAsync(x => x.Email == Email)
+activate D
+D --> S : false
+deactivate D
+S --> A : false
+deactivate S 
+A -> S : CreatePasswordHash(Password, PasswordHash, PasswordSalt)
+activate S
+S --> A : Password, PasswordHash, PasswordSalt
+deactivate S
+A -> S : Create(Account)
+activate S
+S -> D : SaveChangesAsync()
+activate D
+D --> S : ok
+deactivate D
+S --> A : ok
+deactivate S 
+A --> F : Email
+deactivate A
+
+
+
+@enduml

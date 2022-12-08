@@ -1,0 +1,40 @@
+@startuml AccountChangeEmail 
+
+
+Actor "User" as U
+participant "Frontend" as F
+participant "Account" as A
+participant "AccountService" as S
+participant "DataContex" as D
+
+U -> F : ChangeEmail
+activate F
+F -> A : ChangeEmail(AccountChangeEmailDto)
+deactivate F 
+activate A
+A -> S : Where(x => x.Email == request.Email)
+activate S
+S -> D : Where(x => x.Email == request.Email)
+activate D
+D --> S : Account
+deactivate D
+S --> A : Account
+deactivate S
+A -> S : TryVerifyPassword(Password,PasswordHash,PasswordSalt)
+activate S
+S --> A : true 
+deactivate S
+A -> S : SaveChangesAsync()
+activate S 
+S -> D : SaveChangesAsync()
+activate D
+D --> S : ok
+deactivate D
+S --> A : ok
+deactivate S
+A --> F : Accepted
+deactivate A 
+
+
+
+@enduml

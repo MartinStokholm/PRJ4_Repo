@@ -1,5 +1,5 @@
 @startuml AccountServiceClass
-
+!theme cerulean
 class AccountServices {
     + AccountServices(IConfiguration)
     + CreateToken(Account)
