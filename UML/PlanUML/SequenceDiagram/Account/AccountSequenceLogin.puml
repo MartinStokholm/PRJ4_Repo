@@ -16,28 +16,47 @@ A -> S : Where(x => x.Email == request.Email)
 activate S
 S -> D : Where(x => x.Email == request.Email)
 activate D
-D --> S : Account
-deactivate D
-S --> A : Account
-deactivate S
-A -> S : TryVerifyPasswordHash(Password,PasswordHash,PasswordSalt)
-activate S
-S --> A : true
-deactivate S
-A -> S : CreateToken(Account)
-activate S
-S --> A : JWT Token
-deactivate S
-A -> S : UpdateAccount(Account)
-activate S
-S -> D : Adapt<AccountGetLoginDto>(Account)
-activate D
-D --> S : ok
-deactivate D
-S --> A : ok
-deactivate S 
-A --> F : JWT Token
-deactivate A
 
+alt Email not found
+    D -->> S : false
+    deactivate D
+    S -->> A : false
+    deactivate S
+    A -->> F : NotFound(Email)
+else 
+    activate D
+    activate S
+    D -->> S : Account
+    deactivate D
+    S -->> A : Account
+    deactivate S
+
+    A -> S : TryVerifyPasswordHash(Password,PasswordHash,PasswordSalt)
+    alt Password does not match
+        activate S
+        S -->> A: false
+        deactivate S
+        A -->> F : BadRequest("Not a valid Password")
+    else 
+        activate S
+        S -->> A : true
+        deactivate S
+        A -> S : CreateToken(Account)
+        activate S
+        S -->> A : JWT Token
+        deactivate S
+        A -> S : UpdateAccount(Account)
+        activate S
+        S -> D : Adapt<AccountGetLoginDto>(Account)
+        activate D
+        D -->> S : ok
+        deactivate D
+        S -->> A : ok
+        deactivate S 
+        A -->> F : Accepted(JWT Token)
+        deactivate A
+    end
+
+end
 
 @enduml

@@ -1,10 +1,10 @@
 @startuml AccountRegistreSequenceDiagram
-
+mainframe **Epic 1, US1:** Opret bruger
 Actor "User" as U
 participant "Frontend" as F
 participant "Account" as A
 participant "AccountService" as S
-participant "DataContex" as D
+participant "DataContext" as D
 
 U -> F : Register
 activate F
@@ -12,31 +12,55 @@ F -> A : Register(AccountDto)
 deactivate F 
 activate A
 A -> S : IsEmailValid(Email)
-activate S
-S --> A : true
-deactivate S 
-A -> S : IsEmailUnique(Email)
-activate S
-S -> D : AnyAsync(x => x.Email == Email)
-activate D
-D --> S : false
-deactivate D
-S --> A : false
-deactivate S 
-A -> S : CreatePasswordHash(Password, PasswordHash, PasswordSalt)
-activate S
-S --> A : Password, PasswordHash, PasswordSalt
-deactivate S
-A -> S : Create(Account)
-activate S
-S -> D : SaveChangesAsync()
-activate D
-D --> S : ok
-deactivate D
-S --> A : ok
-deactivate S 
-A --> F : Email
-deactivate A
+
+alt Email is not valid
+    activate S
+    S -->> A: false
+    deactivate S
+    A -->> F: BadRequest("Email is not valid")
+else 
+    activate S
+    S -->> A : true
+    deactivate S 
+
+
+    A -> S : IsEmailUnique(Email)
+    activate S
+    S -> D : AnyAsync(x => x.Email == Email)
+    activate D
+    alt Email is not unique
+        D -->> S : true
+        deactivate D
+        S -->> A : true
+        deactivate S
+        A --> F : BadRequest("Email is already taken")
+    else
+        activate S 
+        activate D
+        D -->> S : false
+        deactivate D
+        S -->> A : false
+        deactivate S
+    
+
+    A -> S : CreatePasswordHash(Password, PasswordHash, PasswordSalt)
+    activate S
+    S -->> A : Password, PasswordHash, PasswordSalt
+    deactivate S
+    A -> S : Create(Account)
+    activate S
+    S -> D : SaveChangesAsync()
+    activate D
+    D -->> S : ok
+    deactivate D
+    S -->> A : ok
+    deactivate S 
+    A -->> F : Accepted(Email)
+    deactivate A
+    end
+end
+
+
 
 
 
