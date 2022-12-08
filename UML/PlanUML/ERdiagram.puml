@@ -54,14 +54,6 @@ entity Exercise{
     workouts: List<Workout>
 }
 
-entity Milestone{
-    id: Long
-    category: String
-    goal: String
-    startTime: DateTime 
-    endDate: DateTime
-}
-
 entity WorkoutOnDay{
     id: Long
     workoutId: Long
@@ -80,11 +72,9 @@ Account "1" -- "1..*" Workout
 Account "1" -- "1..*" Meal
 Meal "1" -- "1..*" Dish
 Workout "1" -- "1..*" Exercise
-Account "1" -- "1..*" Milestone
 Calendar "1" -- "1..*" WorkoutOnDay
 Calendar "1" -- "1..*" MealOnDay
-Meal "1..*" -- "1..*" MealOnDay
-Workout "1..*" -- "1..*" WorkoutOnDay
+
 
 
 @enduml
