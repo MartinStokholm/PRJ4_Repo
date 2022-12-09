@@ -140,6 +140,22 @@ namespace WebAPI.Controllers
 
             return Ok(workouts);
         }
+        /// <summary>
+        /// Delete a workout
+        /// </summary>
+        /// <param name="workoutId"></param>
+        /// <returns></returns>
+        [HttpDelete("{workoutId}")]
+        public async Task<ActionResult<WorkoutCreateNoIdDto>> DeleteWorkout(long workoutId)
+        {
+            var dbWorkout = await _context.Workouts.FindAsync(workoutId);
+            if (dbWorkout == null) { return NotFound($"Workout with id {workoutId} was not found"); }
+
+            _context.Workouts.Remove(dbWorkout);
+            await _context.SaveChangesAsync();
+
+            return Ok(dbWorkout.Adapt<WorkoutCreateNoIdDto>());
+        }
 
     }
 }

@@ -174,7 +174,27 @@ namespace WebAPI.Controllers
 
             return Ok(dbMeals.Adapt<List<MealWithDishesFullDto>>());
         }
-      
+
+        /// <summary>
+        /// Delete a meal
+        /// </summary>
+        /// <param name="mealId"></param>
+        /// <returns></returns>
+        [HttpDelete("{mealId}")]
+        public async Task<IActionResult> DeleteMeal(long mealId)
+        {
+            var mealModel = await _context.Meals.FindAsync(mealId);
+            if (mealModel == null)
+            {
+                return NotFound();
+            }
+
+            _context.Meals.Remove(mealModel);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         private bool MealModelExists(long id)
         {
             return _context.Meals.Any(e => e.Id == id);
