@@ -140,16 +140,6 @@ namespace WebAPI.Controllers
             return Ok(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
         }
 
-        [HttpGet("WithExerciseFull")]
-        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> GetWorkoutsWithExercisesFull()
-        {
-            var dbWorkouts = await _context.Workouts.Include(w => w.Exercises).ToListAsync();
-
-            if (dbWorkouts == null) { return NotFound("No Workout found"); }
-
-            return Ok(dbWorkouts.Adapt<List<WorkoutWithExerciseFullDto>>());
-        }
-
         /// <summary>
         /// When logged in a user can get a list of all their workouts with list of exercisesIds
         /// </summary>
@@ -170,9 +160,11 @@ namespace WebAPI.Controllers
             return Ok(workouts);
         }
 
-    
-       
-
+        /// <summary>
+        /// When logged in a user can get a list of their workouts with all exercises related
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("Account/{email}")]
         public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> GetWorkoutsByAccountEmail(string email)
         {
@@ -193,114 +185,5 @@ namespace WebAPI.Controllers
             return Ok(workouts);
         }
 
-       
-
-        // Below are endpoints for develepment
-
-        [HttpGet("{workoutId}")]
-        public async Task<ActionResult<WorkoutCreateWithExercisesIdsDto>> GetWorkoutById(long workoutId)
-        {
-            var dbWorkout = await _context.Workouts.Include(w => w.Exercises).FirstOrDefaultAsync(w => w.Id == workoutId);
-            if (dbWorkout == null)
-            {
-                return NotFound($"Workout with id {workoutId} was not found");
-            }
-
-            var workout = dbWorkout.Adapt<WorkoutCreateWithExercisesIdsDto>();
-
-            workout.ExercisesIds = dbWorkout.Exercises.Select(e => e.Id).ToList();
-
-            return Ok(workout);
-        }
-
-        [HttpPost("{workoutId}/AddExercise/list")]
-        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> AddExercisesToWorkout(long workoutId, List<long> exerciseIds)
-        {
-            var dbWorkout = await _context.Workouts.FindAsync(workoutId);
-            if (dbWorkout == null) { return NotFound($"Could not find workout with id {workoutId}"); }
-            var dbExercises = _context.Exercises.ToList().FindAll(e => exerciseIds.Contains(e.Id));
-            if (dbExercises.Count != exerciseIds.Count) { return NotFound($"Could not find all exercises"); }
-
-            _context.Entry(dbWorkout)
-               .Collection(w => w.Exercises)
-               .Load();
-
-            foreach (var exercise in dbExercises)
-            {
-                if (dbWorkout.Exercises.Contains(exercise)) { return Conflict("Exercise already exists in workout"); }
-
-                dbWorkout.Exercises.Add(exercise);
-            }
-
-            await _context.SaveChangesAsync();
-            return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
-
-        }
-
-        [HttpPost("{workoutId}/RemoveExercise/list")]
-        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> RemoveExercisesFromWorkout(long workoutId, List<long> exerciseIds)
-        {
-            var dbWorkout = await _context.Workouts.FindAsync(workoutId);
-            if (dbWorkout == null) { return NotFound($"Could not find workout with id {workoutId}"); }
-            var dbExercises = _context.Exercises.ToList().FindAll(e => exerciseIds.Contains(e.Id));
-            if (dbExercises.Count != exerciseIds.Count) { return NotFound($"Could not find all exercises"); }
-
-            _context.Entry(dbWorkout)
-               .Collection(w => w.Exercises)
-               .Load();
-
-            foreach (var exercise in dbExercises)
-            {
-                if (!dbWorkout.Exercises.Contains(exercise)) { return Conflict("Exercise does not exist in workout"); }
-
-                dbWorkout.Exercises.Remove(exercise);
-            }
-
-            await _context.SaveChangesAsync();
-            return Accepted(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
-
-        }
-
-        [HttpPost("list/WithExercisesIds")]
-        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> PostWorkoutsWithExercisesIds(List<WorkoutCreateWithExercisesIdsDto> newWorkouts)
-        {
-            var workoutsToAdd = newWorkouts.Adapt<List<Workout>>();
-
-            foreach (var workout in newWorkouts)
-            {
-                foreach (var exercise in workout.ExercisesIds)
-                {
-                    var dbExercise = await _context.Exercises.FindAsync(exercise);
-                    if (dbExercise == null) { return NotFound($"Could not find exercise with id {exercise}"); }
-                    workoutsToAdd.Find(w => w.Name == workout.Name).Exercises.Add(dbExercise);
-                }
-
-            }
-
-            await _context.Workouts.AddRangeAsync(workoutsToAdd);
-            await _context.SaveChangesAsync();
-            return Ok(workoutsToAdd.Adapt<List<WorkoutWithExerciseFullDto>>());
-        }
-
-        [HttpPost("list")]
-        public async Task<ActionResult<List<WorkoutWithExerciseFullDto>>> PostWorkouts(List<WorkoutCreateNoIdDto> newWorkouts)
-        {
-            var workoutsToAdd = newWorkouts.Adapt<List<Workout>>();
-            await _context.Workouts.AddRangeAsync(workoutsToAdd);
-            await _context.SaveChangesAsync();
-            return workoutsToAdd.Adapt<List<WorkoutWithExerciseFullDto>>();
-        }
-
-        [HttpDelete("{workoutId}")]
-        public async Task<ActionResult<WorkoutCreateNoIdDto>> DeleteWorkout(long workoutId)
-        {
-            var dbWorkout = await _context.Workouts.FindAsync(workoutId);
-            if (dbWorkout == null) { return NotFound($"Workout with id {workoutId} was not found"); }
-
-            _context.Workouts.Remove(dbWorkout);
-            await _context.SaveChangesAsync();
-
-            return Ok(dbWorkout.Adapt<WorkoutCreateNoIdDto>());
-        }
     }
 }
