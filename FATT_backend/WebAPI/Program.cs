@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
 using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,8 +64,6 @@ app.UseCors(x => x
                 .AllowCredentials()); // allow credentials
 
 app.UseHttpsRedirection();
-
-// app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 
