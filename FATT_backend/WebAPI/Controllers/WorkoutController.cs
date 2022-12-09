@@ -117,30 +117,6 @@ namespace WebAPI.Controllers
         }
 
         /// <summary>
-        /// When a user is logged in they can add an existing workout to their account given workoutId and email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="workoutId"></param>
-        /// <returns></returns>
-        [HttpPut("{workoutId}/Account/{email}")]
-        public async Task<ActionResult<WorkoutWithExerciseFullDto>> AddWorkoutToAccount(string email, long workoutId)
-        {
-            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.Email == email);
-
-            if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
-
-            var dbWorkout = await _context.Workouts.FirstOrDefaultAsync(w => w.Id == workoutId);
-
-            if (dbWorkout == null) { return NotFound($"Workout with id {workoutId} was not found"); }
-
-            dbAccount.Workouts.Add(dbWorkout);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(dbWorkout.Adapt<WorkoutWithExerciseFullDto>());
-        }
-
-        /// <summary>
         /// When logged in a user can get a list of their workouts with all exercises related
         /// </summary>
         /// <param name="email"></param>

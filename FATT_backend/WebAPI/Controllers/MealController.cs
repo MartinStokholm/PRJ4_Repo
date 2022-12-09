@@ -159,30 +159,6 @@ namespace WebAPI.Controllers
         }
 
         /// <summary>
-        /// When a user is logged in they can add an existing meal to their account given mealId and email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="mealId"></param>
-        /// <returns></returns>
-        [HttpPut("{mealId}/account/{email}")]
-        public async Task<ActionResult<MealWithDishesFullDto>> AddMealToAccount(string email, long mealId)
-        {
-            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.Email == email);
-
-            if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
-
-            var dbMeal = await _context.Meals.FirstOrDefaultAsync(w => w.Id == mealId);
-
-            if (dbMeal == null) { return NotFound($"Meal with id {mealId} was not found"); }
-
-            dbAccount.Meals.Add(dbMeal);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(dbMeal.Adapt<MealWithDishesFullDto>());
-        }
-
-        /// <summary>
         /// When logged in a user can get a list of their meals with all dishes related
         /// </summary>
         /// <param name="email"></param>
