@@ -1,5 +1,4 @@
 import { request } from "../utils/axios";
-import type { Dish } from "../../interfaces/Dish";
 import { useQuery, useQueryClient } from "react-query";
 
 const fetchDish = async ({ queryKey }) => {
