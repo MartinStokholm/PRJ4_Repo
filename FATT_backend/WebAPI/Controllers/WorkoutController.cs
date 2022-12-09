@@ -141,26 +141,6 @@ namespace WebAPI.Controllers
         }
 
         /// <summary>
-        /// When logged in a user can get a list of all their workouts with list of exercisesIds
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<List<WorkoutWithIdsWithExercisesIdsDto>>> GetWorkoutsWithIdExercisesId()
-        {
-            var dbWorkouts = await _context.Workouts.Include(w => w.Exercises).ToListAsync();
-
-            var workouts = dbWorkouts.Adapt<List<WorkoutWithIdsWithExercisesIdsDto>>();
-
-            foreach (var workout in dbWorkouts)
-            {
-                workouts.Find(w => w.Name == workout.Name).ExercisesIds = workout.Exercises.Select(e => e.Id).ToList();
-
-            }
-
-            return Ok(workouts);
-        }
-
-        /// <summary>
         /// When logged in a user can get a list of their workouts with all exercises related
         /// </summary>
         /// <param name="email"></param>
