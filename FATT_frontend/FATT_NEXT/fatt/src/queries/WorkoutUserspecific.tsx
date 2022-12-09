@@ -1,4 +1,3 @@
-import type { Workout } from "../../interfaces/Workout";
 import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
@@ -14,8 +13,6 @@ const fetchWorkout = async ({ queryKey }) => {
     throw new Error("Problem fetching data");
   }
   const exercise = await response.data;
-  //assertIsExercise(exercise);
-
   return response;
 };
 
