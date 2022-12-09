@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "react-query";
-import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { CalandarCreateNoIdDto } from "../../../interfaces/Calender";
+import type { CalenderCreateNoIdDto } from "../../../interfaces/Calender";
 
-export const updateWorkout = async (calandar: CalandarCreateNoIdDto) => {
+export const updateWorkout = async (calandar: CalenderCreateNoIdDto) => {
   return request({
     url: `calandar/${calandar.calandarId}`,
     method: "put",

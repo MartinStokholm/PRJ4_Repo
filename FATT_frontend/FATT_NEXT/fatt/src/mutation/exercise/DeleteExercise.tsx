@@ -2,8 +2,6 @@ import { useMutation, useQueryClient } from "react-query";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { Exercise } from "../../../interfaces/Exercise";
-
 export const deleteExercise = async (id: number) => {
   return request({
     url: `exercise/${id}`,

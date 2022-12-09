@@ -1,4 +1,3 @@
-import type { Exercise } from "../../interfaces/Exercise";
 import { assertIsExercise } from "../assert/assertIsExercise";
 import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
@@ -38,22 +37,3 @@ export const getExercise = (id, onSuccess, onError) => {
 };
 
 export default getExercise;
-
-//<AxiosResponse<WorkOut>>
-
-// const response = await axios.get<AxiosResponse<Exercise>>(
-//   `${server}exercise/${id}`,
-//   {
-//     headers: {
-//       Accept: "application/json",
-//     },
-//   }
-// );
-// console.log(response.status);
-// if (response.status == 304) {
-//   throw new Error("Problem fetching data");
-// }
-// const exercise = await response.data;
-// assertIsExercise(exercise);
-
-// return response;

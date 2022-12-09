@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "react-query";
-import { server } from "../../../config/config";
 import type { Meal } from "../../../interfaces/Meal";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";

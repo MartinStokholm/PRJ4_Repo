@@ -1,10 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosResponse } from "axios";
-import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
-
-import type { Workout } from "../../../interfaces/Workout";
 
 export const deleteWorkout = async (workout) => {
   return request({

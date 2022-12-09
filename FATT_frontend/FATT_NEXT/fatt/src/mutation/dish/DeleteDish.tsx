@@ -1,6 +1,4 @@
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosResponse } from "axios";
-import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
@@ -8,7 +6,7 @@ import type { Dish } from "../../../interfaces/Dish";
 
 export const deleteDish = async (dish: Dish) => {
   return request({
-    url: `dish/${dish.Id}`,
+    url: `dish/${dish.id}`,
     method: "delete",
   });
 };

@@ -11,7 +11,6 @@ const fecthMeals = async () => {
     throw new Error("Problem fetching data");
   }
   const dish = await response.data;
-  //assertIsExercise(exercise);
 
   return response;
 };

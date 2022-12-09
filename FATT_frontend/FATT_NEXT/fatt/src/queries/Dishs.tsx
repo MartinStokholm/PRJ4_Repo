@@ -1,5 +1,3 @@
-import axios, { AxiosResponse } from "axios";
-import type { Dishs } from "../../interfaces/Dish";
 import { useQuery } from "react-query";
 import { request } from "../utils/axios";
 

@@ -1,4 +1,3 @@
-import type { Meal } from "../../interfaces/Meal";
 import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
@@ -13,8 +12,6 @@ const fetchMeal = async ({ queryKey }) => {
   if (response.status == 304) {
     throw new Error("Problem fetching data");
   }
-  const dish = await response.data;
-  //assertIsExercise(exercise);
 
   return response;
 };

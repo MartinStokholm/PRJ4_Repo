@@ -1,11 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { ExerciseIds } from "../../../interfaces/Exercise";
-// workoutId: number,
-//   exerciseIds: ExerciseIds
 export const addExercisesToWorkout = async (data) => {
   console.log(data.workoutId, data.exerciseIds);
   return request({

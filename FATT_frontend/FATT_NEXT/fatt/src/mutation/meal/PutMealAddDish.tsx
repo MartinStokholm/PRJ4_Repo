@@ -1,9 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
-
-import type { Meal } from "../../../interfaces/Meal";
 
 export const updateMealAddDish = async (meal) => {
   console.log(meal);
@@ -30,5 +27,3 @@ export const useUpdateMealAddDishData = () => {
     },
   });
 };
-
-import type { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";

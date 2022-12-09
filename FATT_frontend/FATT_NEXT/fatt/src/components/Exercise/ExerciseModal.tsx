@@ -1,6 +1,4 @@
-import NumberField from "../NumberField";
 import { useState } from "react";
-import { useUpdateWeight } from "../../mutation/account/PutWeight";
 import InputButton from "../Button/InputButton";
 import InputField from "../InputField";
 import { usePostExercise } from "../../mutation/exercise/PostExercise";

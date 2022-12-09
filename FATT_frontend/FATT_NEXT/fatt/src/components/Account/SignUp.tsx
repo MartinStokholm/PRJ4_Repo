@@ -1,11 +1,11 @@
 import { Label } from "flowbite-react";
-import InputField from "../InputField";
-import React from "react";
 import { useState } from "react";
 import { useRegister } from "../../mutation/account/PostRegister";
+import React from "react";
 import InputButton from "../Button/InputButton";
-import type { AccountNoIdDto } from "../../../interfaces/Account";
+import InputField from "../InputField";
 import Heading from "../Layout/Heading";
+import type { AccountNoIdDto } from "../../../interfaces/Account";
 
 export const SignUp = () => {
   const [Password, setPassword] = useState("");

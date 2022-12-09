@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
-import type { AccountChangeEmailDto } from "../../../interfaces/Account";
 
 export const updateWeight = async (weight: number) => {
   return request({
@@ -20,8 +19,6 @@ export const useUpdateWeight = () => {
     onError: () => {
       toast.error("Updating Weight Failed");
     },
-    onSettled: () => {
-      //queryClient.invalidateQueries("accountKey");
-    },
+    onSettled: () => {},
   });
 };

@@ -1,5 +1,3 @@
-import type { MealJustNameDto } from "./Meal";
-
 export type Dish = {
   id: number;
   name: string;

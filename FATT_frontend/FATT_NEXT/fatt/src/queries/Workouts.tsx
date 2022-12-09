@@ -7,8 +7,6 @@ const fecthWorkouts = async () => {
   if (response.status == 304) {
     throw new Error("Problem fetching data");
   }
-  const exercise = await response.data;
-  //assertIsExercise(exercise);
 
   return response;
 };

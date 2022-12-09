@@ -8,8 +8,6 @@ const fetchMeal = async ({ queryKey }) => {
   if (response.status == 304) {
     throw new Error("Problem fetching data");
   }
-  const dish = await response.data;
-  //assertIsExercise(exercise);
 
   return response;
 };
