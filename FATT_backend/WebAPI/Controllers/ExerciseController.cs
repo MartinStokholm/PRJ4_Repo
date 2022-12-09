@@ -19,15 +19,11 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
-        [HttpPost("list")]
-        public async Task<ActionResult<List<ExerciseCreateNoIdDto>>> PostExercises(List<ExerciseCreateNoIdDto> exercises)
-        {
-            var exercisesToAdd = exercises.Adapt<List<Exercise>>();
-            await _context.Exercises.AddRangeAsync(exercisesToAdd);
-            await _context.SaveChangesAsync();
-            return Accepted(exercisesToAdd.Adapt<List<ExerciseCreateNoIdDto>>());
-        }
-
+        /// <summary>
+        /// Create a new exercise
+        /// </summary>
+        /// <param name="exerciseCreate"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<ExerciseCreateNoIdDto>> PostExercise(ExerciseNoIdNoWorkoutsDto exerciseCreate)
         {
@@ -42,23 +38,10 @@ namespace WebAPI.Controllers
             return Accepted(exerciseToAdd.Adapt<ExerciseCreateNoIdDto>());
         }
 
-        [HttpPut("{exerciseId}")]
-        public async Task<ActionResult<Exercise>> PutExercise(long exerciseId, ExerciseUpdateDto exerciseUpdate)
-        {
-            var dbExercise = await _context.Exercises.FindAsync(exerciseId);
-
-            if (dbExercise == null) { return NotFound($"Could not find exercise with id {exerciseId}"); }
-
-            _context.Entry(dbExercise)
-                .CurrentValues
-                .SetValues(exerciseUpdate);
-
-            await _context.SaveChangesAsync();
-
-            return Accepted(await _context.Exercises.FindAsync(exerciseId));
-        }
-
-      
+        /// <summary>
+        /// Get all exercises
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<ExerciseNoWorkoutsDto>>> GetExerciseFull()
         {
@@ -67,6 +50,11 @@ namespace WebAPI.Controllers
             return Ok(dbExercise.Adapt<List<ExerciseNoWorkoutsDto>>());
         }
 
+        /// <summary>
+        /// Get an exercise by id
+        /// </summary>
+        /// <param name="exerciseId"></param>
+        /// <returns></returns>
         [HttpGet("{exerciseId}")]
         public async Task<ActionResult<ExerciseNoWorkoutsDto>> GetExerciseById(long exerciseId)
         {
@@ -79,6 +67,11 @@ namespace WebAPI.Controllers
             return Ok(dbExercise.Adapt<ExerciseNoWorkoutsDto>());
         }
 
+        /// <summary>
+        /// Delete exercise by id
+        /// </summary>
+        /// <param name="exerciseId"></param>
+        /// <returns></returns>
         [HttpDelete("{exerciseId}")]
         public async Task<ActionResult<ExerciseCreateNoIdDto>> DeleteExercise(long exerciseId)
         {
