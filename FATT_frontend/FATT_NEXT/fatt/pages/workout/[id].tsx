@@ -21,6 +21,7 @@ export default function WorkoutPage() {
     isError,
     error,
   } = getWorkout(useRouter().query.id as string);
+
   const { data: exerciseData } = getExercisesList(onSuccess, onError);
 
   if (isLoading) {

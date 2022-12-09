@@ -157,5 +157,21 @@ namespace WebAPI.Controllers
             return Ok(dbWorkout.Adapt<WorkoutCreateNoIdDto>());
         }
 
+        [HttpGet("{workoutId}")]
+        public async Task<ActionResult<WorkoutCreateWithExercisesIdsDto>> GetWorkoutById(long workoutId)
+        {
+            var dbWorkout = await _context.Workouts.Include(w => w.Exercises).FirstOrDefaultAsync(w => w.Id == workoutId);
+            if (dbWorkout == null)
+            {
+                return NotFound($"Workout with id {workoutId} was not found");
+            }
+
+            var workout = dbWorkout.Adapt<WorkoutCreateWithExercisesIdsDto>();
+
+            workout.ExercisesIds = dbWorkout.Exercises.Select(e => e.Id).ToList();
+
+            return Ok(workout);
+        }
+
     }
 }

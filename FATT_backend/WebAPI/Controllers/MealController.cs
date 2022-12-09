@@ -195,6 +195,22 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
+        [HttpGet("{mealId}")]
+        public async Task<ActionResult<MealCreateWithDishesIdsDto>> GetMeal(long mealId)
+        {
+            var dbMeal = await _context.Meals.Include(w => w.Dishes).FirstOrDefaultAsync(w => w.Id == mealId);
+            if (dbMeal == null)
+            {
+                return NotFound($"Meal with id {mealId} was not found");
+            }
+
+            var meal = dbMeal.Adapt<MealCreateWithDishesIdsDto>();
+
+            meal.DishesIds = dbMeal.Dishes.Select(e => e.Id).ToList();
+
+            return Ok(meal);
+        }
+
         private bool MealModelExists(long id)
         {
             return _context.Meals.Any(e => e.Id == id);
