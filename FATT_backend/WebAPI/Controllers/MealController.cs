@@ -22,34 +22,20 @@ namespace WebAPI.Controllers
         {
             _context = context;
         }
-     
-        [HttpPost("WithDishNames")]
-        public async Task<ActionResult<MealWithDishNameDto>> PostMealWithDishes(MealWithDishNameDto newMeal)
-        {
-            var adapted = newMeal.Adapt<Meal>();
-            adapted.Dishes = new List<Dish>();
-            foreach (var dishName in newMeal.DishNames)
-            {
-                var dish = _context.Dishes.FirstOrDefault(d => d.Name == dishName);
-                if (dish == null)
-                {
-                    return BadRequest("Dish does not exist in database");
-                }
 
-                adapted.Dishes.Add(dish);
-            }
-            _context.Meals.Add(adapted);
-            await _context.SaveChangesAsync();
-            return Accepted(adapted.Adapt<MealWithDishNameDto>());
-        }
-
+        /// <summary>
+        /// When a user is logged in they can create a meal which gets added to their list of meals
+        /// </summary>
+        /// <param name="mealCreate"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("{email}")]
         public async Task<ActionResult<MealCreateNoIdDto>> PostWorkout(MealCreateNoIdDto mealCreate, string email)
         {
             var dbAccount = await _context.Accounts.FirstOrDefaultAsync(x => x.Email == email);
 
             if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
-            
+
             var newMeal = mealCreate.Adapt<Meal>();
             newMeal.AccountId = dbAccount.Id;
             _context.Meals.Add(newMeal);
@@ -57,26 +43,13 @@ namespace WebAPI.Controllers
 
             return Accepted(newMeal.Adapt<MealCreateNoIdDto>());
         }
-        
-        [HttpPut("{mealId}/account/{email}")]
-        public async Task<ActionResult<MealWithDishesFullDto>> AddMealToAccount(string email, long mealId)
-        {
-            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.Email == email);
 
-            if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
-
-            var dbMeal = await _context.Meals.FirstOrDefaultAsync(w => w.Id == mealId);
-
-            if (dbMeal == null) { return NotFound($"Meal with id {mealId} was not found"); }
-
-            dbAccount.Meals.Add(dbMeal);
-
-            await _context.SaveChangesAsync();
-
-            return Ok(dbMeal.Adapt<MealWithDishesFullDto>());
-        }
-
-
+        /// <summary>
+        /// When a user is logged in they can add a dish to their meal given the meal id and the dish id
+        /// </summary>
+        /// <param name="mealId"></param>
+        /// <param name="dishId"></param>
+        /// <returns></returns>
         [HttpPut("{mealId}/AddDish/{dishId}")]
         public async Task<IActionResult> PutAddDish(long mealId, long dishId)
         {
@@ -121,6 +94,12 @@ namespace WebAPI.Controllers
             return Accepted(meal.Adapt<MealWithDishesFullDto>());
         }
 
+        /// <summary>
+        /// When a user is logged in they can remove a dish from their meal given the meal is and the dish id
+        /// </summary>
+        /// <param name="mealId"></param>
+        /// <param name="dishId"></param>
+        /// <returns></returns>
         [HttpPut("{mealId}/RemoveDish/{dishId}")]
         public async Task<IActionResult> PutRemoveDish(long mealId, long dishId)
         {
@@ -157,6 +136,13 @@ namespace WebAPI.Controllers
             return Accepted(meal.Adapt<MealWithDishesFullDto>());
         }
 
+        /// <summary>
+        /// When a user is logged in they can add a meal to their calendar given the meal id, day and their email
+        /// </summary>
+        /// <param name="mealId"></param>
+        /// <param name="day"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPut("{mealId}/AddToCalender/{day}/Account/{email}")]
         public async Task<ActionResult<Calender>> AddMealToCalender(long mealId, string day, string email)
         {
@@ -172,57 +158,35 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Calender);
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<MealWithDishIdDto>>> GetMeals()
+        /// <summary>
+        /// When a user is logged in they can add an existing meal to their account given mealId and email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="mealId"></param>
+        /// <returns></returns>
+        [HttpPut("{mealId}/account/{email}")]
+        public async Task<ActionResult<MealWithDishesFullDto>> AddMealToAccount(string email, long mealId)
         {
-            var dbMeals = await _context.Meals.Include(m => m.Dishes).ToListAsync();
-            var result = dbMeals.Adapt<List<MealWithDishIdDto>>();
-            foreach (var meal in dbMeals)
-            {
-                result.Find(m => m.Id == meal.Id).DishIds = meal.Dishes.Select(e => e.Id).ToList();
-            }
-            return Ok(result);
+            var dbAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.Email == email);
+
+            if (dbAccount == null) { return NotFound($"Account with email {email} was not found"); }
+
+            var dbMeal = await _context.Meals.FirstOrDefaultAsync(w => w.Id == mealId);
+
+            if (dbMeal == null) { return NotFound($"Meal with id {mealId} was not found"); }
+
+            dbAccount.Meals.Add(dbMeal);
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dbMeal.Adapt<MealWithDishesFullDto>());
         }
 
-
-        [HttpGet("{mealId}")]
-        public async Task<ActionResult<MealCreateWithDishesIdsDto>> GetMeal(long mealId)
-        {
-            var dbMeal = await _context.Meals.Include(w => w.Dishes).FirstOrDefaultAsync(w => w.Id == mealId);
-            if (dbMeal == null)
-            {
-                return NotFound($"Meal with id {mealId} was not found");
-            }
-
-            var meal = dbMeal.Adapt<MealCreateWithDishesIdsDto>();
-
-            meal.DishesIds = dbMeal.Dishes.Select(e => e.Id).ToList();
-
-            return Ok(meal);
-        }
-
-        [HttpGet("{mealId}/Dishes")]
-        public async Task<ActionResult<IEnumerable<DishNoMealsDto>>> GetDishes(long mealId)
-        {
-            var dbMeal = await _context.Meals.FindAsync(mealId);
-
-            if (dbMeal == null)
-            {
-                return NotFound();
-            }
-
-            _context.Entry(dbMeal)
-                .Collection(m => m.Dishes)
-                .Load();
-
-            List<DishNoMealsDto> dishes = new List<DishNoMealsDto>();
-            foreach (var d in dbMeal.Dishes)
-            {
-                dishes.Add(d.Adapt<DishNoMealsDto>());
-            }
-            return Ok(dishes);
-        }
-        
+        /// <summary>
+        /// When logged in a user can get a list of their meals with all dishes related
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("Account/{email}")]
         public async Task<ActionResult<List<MealWithDishesFullDto>>> GetMealsByAccountEmail(string email)
         {
@@ -234,23 +198,7 @@ namespace WebAPI.Controllers
 
             return Ok(dbMeals.Adapt<List<MealWithDishesFullDto>>());
         }
-
-
-        [HttpDelete("{mealId}")]
-        public async Task<IActionResult> DeleteMeal(long mealId)
-        {
-            var mealModel = await _context.Meals.FindAsync(mealId);
-            if (mealModel == null)
-            {
-                return NotFound();
-            }
-
-            _context.Meals.Remove(mealModel);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
+      
         private bool MealModelExists(long id)
         {
             return _context.Meals.Any(e => e.Id == id);
