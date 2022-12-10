@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Accepted(dishToAdd.Adapt<DishNoIdDto>());
+            return Accepted(dishToAdd.Adapt<DishNoMealsDto>());
         }
 
         /// <summary>
