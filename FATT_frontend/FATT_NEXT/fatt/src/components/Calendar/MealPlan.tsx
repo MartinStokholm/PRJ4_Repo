@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import MealPlanColoumn from "./MealPlanColoumn";
 
 const MealPlan = ({ mealDays, mealData }) => {

@@ -9,6 +9,7 @@ import TextButton from "../Button/TextButton";
 import Modal from "../util/Modal";
 import Heading from "../Layout/Heading";
 import SignUp from "./SignUp";
+import Link from "next/link";
 
 const Login = (props) => {
   const [showModal, setShowModal] = useState(false);

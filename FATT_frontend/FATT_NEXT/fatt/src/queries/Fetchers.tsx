@@ -2,12 +2,12 @@ import axios from "axios";
 import { server } from "../../config/config";
 import PropTypes from "prop-types";
 
-const fecth = ({ type }) => {
+const Fecth = ({ type }) => {
   return axios.get(`${server}type`);
 };
 
-export default fecth;
+export default Fecth;
 
-fecth.propType = {
+Fecth.propType = {
   type: PropTypes.string.isRequired,
 };

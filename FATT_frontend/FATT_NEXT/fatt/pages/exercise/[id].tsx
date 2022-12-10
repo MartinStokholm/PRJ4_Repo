@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { getExercise } from "../../src/queries/Exercise";
+import { GetExercise } from "../../src/queries/Exercise";
 import ExerciseItem from "../../src/components/Exercise/ExerciseItem";
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import Error from "next/error";
@@ -19,7 +19,7 @@ export default function ExercisePage() {
   const id = parseInt(router.query.id as string, 10);
 
   // Get exercise
-  const { isLoading, data, isError, error } = getExercise(
+  const { isLoading, data, isError, error } = GetExercise(
     id,
     onSuccess,
     onError

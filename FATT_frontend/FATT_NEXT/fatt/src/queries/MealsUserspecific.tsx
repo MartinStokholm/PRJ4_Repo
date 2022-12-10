@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { request } from "../utils/axios";
 
-const fecthMeals = async () => {
+const FecthMeals = async () => {
   const response = await request({
     url: `meal/account/${localStorage.getItem("email")}`,
     method: "get",
@@ -15,13 +15,12 @@ const fecthMeals = async () => {
   return response;
 };
 
-export const getMealsList = (onSuccess, onError) => {
-  return useQuery("mealsKey", fecthMeals, {
-    refetchOnWindowFocus: true,
+export const GetMealsList = (onSuccess, onError) => {
+  return useQuery("mealsKey", FecthMeals, {
     onSuccess,
     onError,
     refetchOnWindowFocus: false,
   });
 };
 
-export default getMealsList;
+export default GetMealsList;

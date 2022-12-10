@@ -22,7 +22,9 @@ export default function ModalGender() {
           Update Gender
         </h3>
         <InputField
-          className="m-4"
+          type={"text"}
+          value={gender}
+          required={true}
           placeholder="Gender"
           onChange={(e) => setGender(e.target.value)}
         />

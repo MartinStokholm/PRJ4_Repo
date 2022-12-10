@@ -1,5 +1,6 @@
 import InputButton from "../Button/InputButton";
 import InputField from "../InputField";
+import { useDeleteMeal } from "../../mutation/meal/DeleteMeal";
 import { useAddMeal } from "../../mutation/meal/PostMeal";
 import { MealCreateNoIdDto } from "../../../interfaces/Meal";
 import { useState } from "react";
@@ -16,6 +17,7 @@ const MealModal = () => {
     meal(mealDto);
   };
 
+  const { mutate: deleteMeal } = useDeleteMeal();
   return (
     <div className="bg-gradient-to-b from-green-200 ">
       <h1 className="py-2 px-10 font-bold">Create a meal</h1>

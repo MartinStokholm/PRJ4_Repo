@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
-const fetchMeal = async ({ queryKey }) => {
+const FetchMeal = async ({ queryKey }) => {
   console.log(`Fetch from ${queryKey[1]}`);
   const id = queryKey[1];
   const response = await request({
@@ -12,13 +12,15 @@ const fetchMeal = async ({ queryKey }) => {
   if (response.status == 304) {
     throw new Error("Problem fetching data");
   }
+  const dish = await response.data;
 
   return response;
 };
 
-export const getMeal = (id: string) => {
+export const GetMeal = (id: string) => {
   const queryClient = useQueryClient();
-  return useQuery([`workoutKey`, id], fetchMeal, {
+  return useQuery([`workoutKey`, id], FetchMeal, {
+    /*
     initialData: () => {
       const meal = queryClient
         .getQueriesData("workoutsKey")
@@ -30,6 +32,7 @@ export const getMeal = (id: string) => {
         return undefined;
       }
     },
+    */
     refetchOnWindowFocus: false,
   });
 };

@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
+import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
@@ -15,7 +16,7 @@ export const usePostDish = () => {
       toast.success(`Created Dish "${newDish.name}"`);
       await queryClient.cancelQueries("dishsKey");
       const previouesDishData = queryClient.getQueryData("dishsKey");
-      queryClient.setQueryData("dishsKey", (oldQueryData) => {
+      queryClient.setQueryData("dishsKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [

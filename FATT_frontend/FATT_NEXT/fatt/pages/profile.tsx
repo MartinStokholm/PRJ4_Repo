@@ -7,7 +7,8 @@ import ModalGender from "../src/components/Account/ModalGender";
 import ModalName from "../src/components/Account/ModalName";
 import Heading from "../src/components/Layout/Heading";
 import Profile from "../src/components/Account/Profile";
-export default function profile() {
+
+export default function ProfilePage() {
   const [showModal, setShowModal] = useState(false);
   return (
     <div>
