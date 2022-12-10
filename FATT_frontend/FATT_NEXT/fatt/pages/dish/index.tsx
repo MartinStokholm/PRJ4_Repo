@@ -21,7 +21,6 @@ export default function ExercisePage() {
   }
 
   if (isError) {
-    return <Error statusCode={error.message} />;
   }
   return <DishList data={data} />;
 }
