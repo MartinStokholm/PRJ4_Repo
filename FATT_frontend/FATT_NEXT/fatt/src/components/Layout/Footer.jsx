@@ -28,7 +28,7 @@ const Footer = () => {
           </li>
         </ul>
       </div>
-      <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+      <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400 text-center">
         © 2022 All Rights Reserved.
       </span>
     </div>

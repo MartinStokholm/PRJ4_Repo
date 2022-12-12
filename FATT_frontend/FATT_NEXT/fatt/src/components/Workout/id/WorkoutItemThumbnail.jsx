@@ -8,7 +8,7 @@ const WorkoutItemThumbnail = ({ exercise }) => {
           key={exercise.id}
           className="flex hover:bg-green-50 w-full hover:shadow-inner hover:text-green-400"
         >
-          <img src={exercise.picturePath} className="h-20" />
+          <img src={exercise.picturePath} className="h-10" />
           <h1 className="my-auto mx-auto md:mx-4">{exercise.name}</h1>
         </Link>
       </div>

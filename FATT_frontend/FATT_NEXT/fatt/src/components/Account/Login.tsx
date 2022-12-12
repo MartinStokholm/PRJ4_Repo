@@ -27,8 +27,10 @@ const Login = (props) => {
     <div>
       <Heading text="Log-in" />
       <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex p-4 justify-center">
-        <div className="flex flex-col w-1/3">
-          <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+        <div className="flex flex-col md:w-1/3">
+          <div className="flex justify-center">
+            <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+          </div>
           <form onSubmit={handleForm} className="flex flex-col justify-center">
             <Label className="mx-4">Email: </Label>
             <InputField

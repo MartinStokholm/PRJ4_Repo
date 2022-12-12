@@ -6,7 +6,7 @@ const MealPlan = ({ mealDays, mealData }) => {
   console.log({ mealDays });
   console.log({ mealData });
   return (
-    <div className="flex flex-wrap justify-center bg-white overflow-hidden shadow-lg p-2">
+    <div className="flex md:flex-wrap flex-col justify-center bg-white overflow-hidden shadow-lg p-2">
       <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Monday" />
       <MealPlanColoumn mealDays={mealDays} mealData={mealData} day="Tuesday" />
       <MealPlanColoumn

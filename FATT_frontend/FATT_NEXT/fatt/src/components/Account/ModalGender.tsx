@@ -13,28 +13,23 @@ export default function ModalGender() {
   };
 
   return (
-    <div className="p-6 flex">
-      <form
-        onSubmit={handleOnClick}
-        className="flex border rounded border-gray-200 items-center"
-      >
-        <h3 className="text-xl font-semibold text-gray-900 m-4">
-          Update Gender
-        </h3>
-        <InputField
-          type={"text"}
-          value={gender}
-          required={true}
-          placeholder="Gender"
-          onChange={(e) => setGender(e.target.value)}
-        />
-      </form>
+    <form
+      onSubmit={handleOnClick}
+      className="flex border rounded border-gray-200 items-center"
+    >
+      <InputField
+        type={"text"}
+        value={gender}
+        required={true}
+        placeholder="Gender"
+        onChange={(e) => setGender(e.target.value)}
+      />
       <InputButton
         onClick={handleOnClick}
         type={"onSubmit"}
-        text={"Update"}
+        text={"Update Gender"}
         key={undefined}
       />
-    </div>
+    </form>
   );
 }

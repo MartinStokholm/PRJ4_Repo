@@ -1,6 +1,6 @@
 import InputButton from "../Button/InputButton";
 import DeleteButton from "../Button/DeleteButton";
-import { TextInput } from "flowbite-react";
+import InputField from "../InputField";
 import { useUpdateEmail } from "../../mutation/account/PutEmail";
 import { useUpdatePassword } from "../../mutation/account/PutPassword";
 import { useDeleteAccount } from "../../mutation/account/DeleteAccount";
@@ -52,28 +52,31 @@ const Settings = () => {
   };
 
   return (
-    <div>
+    <>
       <Heading text="Account settings" />
       <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
         <SubHeading text="Change email" />
         <form
           onSubmit={handleUpdateEmailButtonClick}
-          className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
+          className="flex flex-wrap justify-center border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
         >
-          <TextInput
-            className="m-4"
+          <InputField
+            required={true}
+            value={email}
             type="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextInput
-            className="m-4"
+          <InputField
+            required={true}
+            value={newEmail}
             type="email"
             placeholder="New email"
             onChange={(e) => setNewEmail(e.target.value)}
           />
-          <TextInput
-            className="m-4"
+          <InputField
+            required={true}
+            value={password}
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
@@ -84,22 +87,25 @@ const Settings = () => {
         <SubHeading text="Change password" />
         <form
           onSubmit={handleUpdatePasswordButtonClick}
-          className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
+          className="flex flex-wrap justify-center border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
         >
-          <TextInput
-            className="m-4"
+          <InputField
+            required={true}
+            value={email}
             type="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextInput
-            className="m-4"
+          <InputField
+            required={true}
+            value={password}
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <TextInput
-            className="m-4"
+          <InputField
+            required={true}
+            value={newPassword}
             type="password"
             placeholder="New Password"
             onChange={(e) => setNewPassword(e.target.value)}
@@ -110,16 +116,18 @@ const Settings = () => {
         <SubHeading text="Delete Account" />
         <form
           onSubmit={handleDeleteButtonClick}
-          className="flex border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
+          className="flex flex-wrap justify-center border rounded overflow-hidden shadow-lg border-gray-200 bg-white"
         >
-          <TextInput
-            className="m-4"
-            type="text"
+          <InputField
+            required={true}
+            value={email}
+            type="email"
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextInput
-            className="m-4"
+          <InputField
+            required={true}
+            value={password}
             type="password"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
@@ -127,7 +135,7 @@ const Settings = () => {
           <DeleteButton text={"Delete"} key={undefined} />
         </form>
       </div>
-    </div>
+    </>
   );
 };
 

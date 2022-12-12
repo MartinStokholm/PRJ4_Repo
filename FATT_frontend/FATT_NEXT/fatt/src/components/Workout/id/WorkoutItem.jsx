@@ -12,19 +12,19 @@ const WorkoutItem = ({ workoutData, exerciseData }) => {
       <div className="text-center">
         <h1 className="mt-4 font-bold">{workoutData?.data?.name}</h1>
         <h2 className="italic mb-2">{workoutData?.data?.duration}</h2>
-
-        <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
-          <Button
-            onClick={() => setShowModal(true)}
-            text={"Add exercise"}
-            key={undefined}
-          />
-          <RemoveExercise
-            workoutData={workoutData}
-            exerciseData={exerciseData}
-          />
-        </div>
       </div>
+
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col m-4">
+        <Button
+          onClick={() => setShowModal(true)}
+          text={"Add exercise"}
+          key={undefined}
+        />
+      </div>
+      <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col m-4 p-4">
+        <RemoveExercise workoutData={workoutData} exerciseData={exerciseData} />
+      </div>
+
       <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
         <AddExercise workoutData={workoutData} exerciseData={exerciseData} />
       </Modal>

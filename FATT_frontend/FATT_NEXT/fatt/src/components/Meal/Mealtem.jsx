@@ -29,27 +29,34 @@ const MealItem = ({ mealData, dishData }) => {
       <div className="md:flex flex-cols">
         <div className="text-center">
           <h1 className="mt-4 mb-2 font-bold">{mealData?.data?.name}</h1>
-
-          <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col p-4">
-            <Button onClick={() => setShowModal(true)} text={"Add dish"} />
-            {dishData?.data.map((dish) =>
-              mealData?.data?.dishesIds?.includes(dish.id) ? (
-                <div
-                  key={dish.id}
-                  className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
-                >
-                  <DeleteButton
-                    text={"Remove"}
-                    onClick={() => {
-                      handleRemoveButtonClick(dish.id);
-                    }}
-                  />
-                  <MealItemThumbnail dish={dish} />
-                </div>
-              ) : null
-            )}
-          </div>
         </div>
+
+        <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col m-4">
+          <Button
+            onClick={() => setShowModal(true)}
+            text={"Add dish"}
+            key={undefined}
+          />
+        </div>
+        <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col m-4 p-4">
+          {dishData?.data.map((dish) =>
+            mealData?.data?.dishesIds?.includes(dish.id) ? (
+              <div
+                key={dish.id}
+                className="bg-white overflow-hidden shadow-lg mx-4 my-4 flex"
+              >
+                <DeleteButton
+                  text={"Remove"}
+                  onClick={() => {
+                    handleRemoveButtonClick(dish.id);
+                  }}
+                />
+                <MealItemThumbnail dish={dish} />
+              </div>
+            ) : null
+          )}
+        </div>
+
         <Modal IsVisible={showModal} onClose={() => setShowModal(false)}>
           <div>
             <h1 className="mt-4 font-bold">All dishes</h1>

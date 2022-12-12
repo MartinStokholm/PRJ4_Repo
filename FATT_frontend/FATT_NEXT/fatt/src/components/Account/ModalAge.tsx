@@ -1,4 +1,4 @@
-import NumberField from "../NumberField";
+import InputField from "../InputField";
 import { useState } from "react";
 import { useUpdateAge } from "../../mutation/account/PutAge";
 import InputButton from "../Button/InputButton";
@@ -13,27 +13,23 @@ export default function ModalAge() {
   };
 
   return (
-    <div className="p-6 flex">
-      <form
-        onSubmit={handleOnClick}
-        className="flex border rounded border-gray-200 items-center"
-      >
-        <h3 className="text-xl font-semibold text-gray-900 m-4">Update age</h3>
-        <NumberField
-          value={age}
-          required={true}
-          placeholder="age"
-          onChange={(e) => setAge(e.target.value)}
-          min={14}
-          max={120}
-        />
-      </form>
+    <form
+      onSubmit={handleOnClick}
+      className="flex border rounded border-gray-200 items-center"
+    >
+      <InputField
+        required={true}
+        type="number"
+        value={age}
+        placeholder="age"
+        onChange={(e) => setAge(e.target.value)}
+      />
       <InputButton
         onClick={handleOnClick}
         type={"onSubmit"}
-        text={"Update"}
+        text={"Update Age"}
         key={undefined}
       />
-    </div>
+    </form>
   );
 }

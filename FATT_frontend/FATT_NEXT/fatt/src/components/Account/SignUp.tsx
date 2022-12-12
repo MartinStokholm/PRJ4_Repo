@@ -26,8 +26,10 @@ export const SignUp = () => {
 
   return (
     <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex p-4 justify-center">
-      <div className="flex flex-col justify-center w-1/3">
-        <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+      <div className="flex flex-col justify-center md:w-1/3">
+        <div className="flex justify-center">
+          <img src="/fatt-logo.png" alt="Fattylee" width="50%" height="50%" />
+        </div>
         <Heading text="Sign Up" />
         <h3 className="italic">It’s free, quick and easy</h3>
         <form

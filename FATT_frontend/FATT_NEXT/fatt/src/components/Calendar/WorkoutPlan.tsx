@@ -6,7 +6,7 @@ const WorkoutPlan = ({ workoutDays, workoutData }) => {
   console.log({ workoutDays });
   console.log({ workoutData });
   return (
-    <div className="flex flex-wrap justify-center bg-white overflow-hidden shadow-lg p-2">
+    <div className="flex md:flex-wrap flex-col justify-center bg-white overflow-hidden shadow-lg p-2">
       <WorkoutPlanColoumn
         workoutDays={workoutDays}
         workoutData={workoutData}
