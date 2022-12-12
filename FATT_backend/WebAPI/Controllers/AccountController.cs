@@ -52,9 +52,24 @@ namespace WebAPI.Controllers
                 Email = request.Email,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
+            }; 
+            var defaultWorkout = new Workout
+            {
+                Name = "My first Workout",
+                Duration = "1 Hour",
+                AccountId = account.Id,
+                Account = account,
             };
-            //_context.Calender.Add(Calender);
+            var defaultMeal = new Meal
+            {
+                Name = "My first Meal",
+                AccountId = account.Id,
+                Account = account,
+            };
+            
             _context.Accounts.Add(account);
+            _context.Workouts.Add(defaultWorkout);
+            _context.Meals.Add(defaultMeal);
 
             await _context.SaveChangesAsync();
 
