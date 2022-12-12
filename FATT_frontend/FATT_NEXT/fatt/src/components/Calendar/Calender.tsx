@@ -1,6 +1,6 @@
 import LoadingSpinner from "../Layout/LoadingSpinner";
-import { getWorkoutsList } from "../../queries/WorkoutsUserspecific";
-import { getMealsList } from "../../queries/MealsUserspecific";
+import { GetWorkoutsList } from "../../queries/WorkoutsUserspecific";
+import { GetMealsList } from "../../queries/MealsUserspecific";
 import WorkoutPlan from "../Calendar/WorkoutPlan";
 import MealPlan from "../Calendar/MealPlan";
 import SubHeading from "../Layout/SubHeading";
@@ -20,9 +20,9 @@ export default function Calender({ calendarData }) {
     data: workoutData,
     isError,
     error,
-  } = getWorkoutsList(onSuccess, onError);
+  } = GetWorkoutsList(onSuccess, onError);
 
-  const { data: mealData } = getMealsList(onSuccess, onError);
+  const { data: mealData } = GetMealsList(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;

@@ -1,6 +1,6 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import ExerciseList from "../../src/components/Exercise/ExerciseList";
-import getExercisesList from "../../src/queries/Exercises";
+import GetExercisesList from "../../src/queries/Exercises";
 import Error from "next/error";
 import { Exercises } from "../../interfaces/Exercise";
 
@@ -18,7 +18,7 @@ const onError = (error) => {
 
 export default function ExercisePage() {
   const { isLoading, data, isError, error, isFetching, refetch } =
-    getExercisesList(onSuccess, onError);
+    GetExercisesList(onSuccess, onError);
   //convert to to of interface.
   let exercises: Exercises = null;
   exercises = data;

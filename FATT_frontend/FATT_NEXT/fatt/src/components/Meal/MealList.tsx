@@ -1,13 +1,13 @@
+import DeleteButton from "../Button/DeleteButton";
+import CreateMealModal from "./CreateMealModal";
 import { useState } from "react";
-import { useDeleteMeal } from "../../mutation/meal/DeleteMeal";
 import Button from "../Button/Button";
 import Modal from "../util/Modal";
 import ModalDropdown from "../util/ModalDropdown";
+import { useDeleteMeal } from "../../mutation/meal/DeleteMeal";
 import AddMealToCalendarModal from "./AddMealToCalendarModal";
 import Heading from "../Layout/Heading";
 import MealHeader from "./MealHeader";
-import DeleteButton from "../Button/DeleteButton";
-import CreateMealModal from "./CreateMealModal";
 
 const MealList = ({ mealData }) => {
   const [showModal, setShowModal] = useState(false);

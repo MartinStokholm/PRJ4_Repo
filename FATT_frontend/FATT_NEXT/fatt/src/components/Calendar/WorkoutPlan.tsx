@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import WorkoutPlanColoumn from "./WorkoutPlanColoumn";
 
 const WorkoutPlan = ({ workoutDays, workoutData }) => {

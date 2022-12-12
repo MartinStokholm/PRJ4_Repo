@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
-const fetchWorkout = async ({ queryKey }) => {
+const FetchWorkout = async ({ queryKey }) => {
   console.log(`Fetch from ${queryKey[1]}`);
   const id = queryKey[1];
   const response = await request({
@@ -12,13 +12,15 @@ const fetchWorkout = async ({ queryKey }) => {
   if (response.status == 304) {
     throw new Error("Problem fetching data");
   }
+  const exercise = await response.data;
 
   return response;
 };
 
-export const getWorkout = (id: string) => {
+export const GetWorkout = (id: string) => {
   const queryClient = useQueryClient();
-  return useQuery([`workoutKey`, id], fetchWorkout, {
+  return useQuery([`workoutKey`, id], FetchWorkout, {
+    /*
     initialData: () => {
       const workout = queryClient
         .getQueriesData("workoutsKey")
@@ -30,6 +32,7 @@ export const getWorkout = (id: string) => {
         return undefined;
       }
     },
+    */
     refetchOnWindowFocus: false,
   });
 };

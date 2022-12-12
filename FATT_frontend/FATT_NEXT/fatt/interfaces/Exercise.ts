@@ -2,10 +2,10 @@ export type Exercise = {
   Id: number;
   Name: string;
   Category: string;
-  Durantion: number;
-  Intensity: number;
-  Repetitions: number;
-  Sets: number;
+  Intensity: string;
+  Equipment: string;
+  Repetitions: string;
+  Sets: string;
   PicturePath: string;
   VideoPath: string;
 };
@@ -33,8 +33,8 @@ export type ExerciseFullDto = {
   Id: number;
   Name: string;
   Category: string;
-  Durantion: number;
-  Intensity: number;
+  Equipment: string;
+  Intensity: string;
   Repetitions: number;
   Sets: number;
   PicturePath: string;

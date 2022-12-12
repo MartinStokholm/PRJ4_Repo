@@ -1,4 +1,4 @@
-import { getMeal } from "../../src/queries/Meal";
+import { GetMeal } from "../../src/queries/Meal";
 import getDishesList from "../../src/queries/Dishs";
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { useUpdateMealAddDishData } from "../../src/mutation/meal/PutMealAddDish";
@@ -16,15 +16,24 @@ const onError = (error) => {
 };
 
 export default function MealPage() {
-  // Get dishes and meals
   const {
     isLoading,
     data: mealData,
     isError,
     error,
-  } = getMeal(useRouter().query.id as string);
+  } = GetMeal(useRouter().query.id as string);
 
   const { data: dishData } = getDishesList(onSuccess, onError);
+
+  // Handler for when button is clicked. We send a request to add or remove a specific exercise to/from workout
+  const handleAddButtonClick = (dishId) => {
+    const data = { dishId };
+    console.log(data);
+    updateMealAddDish(data);
+  };
+
+  // Function call need to mutate date (PUT)
+  const { mutate: updateMealAddDish } = useUpdateMealAddDishData();
 
   if (isLoading) {
     return <LoadingSpinner />;

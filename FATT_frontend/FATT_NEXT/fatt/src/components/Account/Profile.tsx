@@ -1,6 +1,6 @@
 import React from "react";
 import LoadingSpinner from "../Layout/LoadingSpinner";
-import { getAccountProfile } from "../../queries/AccountProfile";
+import { GetAccountProfile } from "../../queries/AccountProfile";
 import Error from "next/error";
 
 const onSuccess = (profileData) => {
@@ -16,7 +16,7 @@ const Profile = () => {
     data: profileData,
     isError,
     error,
-  } = getAccountProfile(onError);
+  } = GetAccountProfile(onError);
 
   if (isLoading) {
     return <LoadingSpinner />;

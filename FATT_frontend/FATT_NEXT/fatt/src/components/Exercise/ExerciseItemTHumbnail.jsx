@@ -1,6 +1,13 @@
 import Link from "next/link";
+import { useDeleteExercise } from "../../mutation/exercise/DeleteExercise";
 
 const ExerciseItemThumbnail = ({ exercise }) => {
+  const { mutate: deleteExercise } = useDeleteExercise();
+
+  const handleDeleteButtonClick = (id) => {
+    deleteExercise(id);
+  };
+
   return (
     <div className="bg-white max-w-sm rounded overflow-hidden shadow-lg content-center h-200 flex flex-col justify-center">
       <Link

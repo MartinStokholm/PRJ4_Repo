@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export default function signout() {
+export default function SignoutPage() {
   const router = useRouter();
   if (typeof window !== "undefined") {
     localStorage.removeItem("token");

@@ -1,4 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
+import axios, { AxiosResponse } from "axios";
+import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
@@ -13,7 +15,7 @@ export const useAddWorkoutListData = () => {
   return useMutation(addWorkoutList, {
     onSuccess: (newWorkout) => {
       toast.success(`Add List of workout`);
-      queryClient.setQueryData("workoutsKey", (oldQueryData) => {
+      queryClient.setQueryData("workoutsKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [...oldQueryData.data, newWorkout.data],
@@ -23,5 +25,8 @@ export const useAddWorkoutListData = () => {
     onError: () => {
       alert("there was an error");
     },
+    // onSettled: () => {
+    //   queryClient.invalidateQueries("workoutsKey");
+    // },
   });
 };

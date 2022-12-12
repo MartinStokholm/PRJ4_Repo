@@ -1,6 +1,9 @@
+import type { MealJustNameDto } from "./Meal";
+
 export type Dish = {
   id: number;
   name: string;
+  prepTime: string;
   ingredients: string;
   nutritionalValue: string;
   recipe: string;

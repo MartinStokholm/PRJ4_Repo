@@ -20,7 +20,9 @@ export default function ModalName() {
       >
         <h3 className="text-xl font-semibold text-gray-900 m-4">Update Name</h3>
         <InputField
-          className="m-4"
+          type={"text"}
+          value={name}
+          required={true}
           placeholder="Name"
           onChange={(e) => setName(e.target.value)}
         />

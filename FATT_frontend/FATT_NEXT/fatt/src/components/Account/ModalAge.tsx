@@ -20,7 +20,8 @@ export default function ModalAge() {
       >
         <h3 className="text-xl font-semibold text-gray-900 m-4">Update age</h3>
         <NumberField
-          className="m-4"
+          value={age}
+          required={true}
           placeholder="age"
           onChange={(e) => setAge(e.target.value)}
           min={14}

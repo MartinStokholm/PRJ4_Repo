@@ -1,6 +1,10 @@
 import { useMutation, useQueryClient } from "react-query";
+import axios, { AxiosResponse } from "axios";
+import { server } from "../../../config/config";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
+
+import type { Meal } from "../../../interfaces/Meal";
 
 export const deleteMeal = async (meal) => {
   return request({
