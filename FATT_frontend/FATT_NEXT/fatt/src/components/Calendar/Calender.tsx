@@ -39,7 +39,7 @@ export default function Calender({ calendarData }) {
   const mealDays = calendarData?.mealDays;
 
   return (
-    <div className="flex flex-col border rounded border-grey-300 bg-white overflow-hidden shadow-lg ">
+    <div className="md:flex border rounded border-grey-300 bg-white overflow-hidden shadow-lg ">
       <div className="m-4">
         <SubHeading text="Workout Plan" />
         <WorkoutPlan workoutDays={workoutDays} workoutData={workoutData} />

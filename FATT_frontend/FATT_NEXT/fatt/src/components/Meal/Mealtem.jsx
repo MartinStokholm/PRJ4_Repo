@@ -25,13 +25,11 @@ const MealItem = ({ mealData, dishData }) => {
   const { mutate: updateMealAddDish } = useUpdateMealAddDishData();
 
   return (
-    <>
-      <div className="md:flex flex-cols">
+    <div className="md:flex flex-cols">
+      <div className="flex flex-col m-4 text-center bg-white p-4">
         <div className="text-center">
           <h1 className="mt-4 mb-2 font-bold">{mealData?.data?.name}</h1>
-        </div>
 
-        <div className="border rounded border-grey-300 bg-white overflow-hidden shadow-lg flex flex-col m-4">
           <Button
             onClick={() => setShowModal(true)}
             text={"Add dish"}
@@ -83,7 +81,7 @@ const MealItem = ({ mealData, dishData }) => {
           </div>
         </Modal>
       </div>
-    </>
+    </div>
   );
 };
 
