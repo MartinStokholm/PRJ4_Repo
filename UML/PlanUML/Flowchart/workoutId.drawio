@@ -1,0 +1,223 @@
+<mxfile host="65bd71144e">
+    <diagram id="hH-F4-SFHgtsGaRmMaDD" name="Page-1">
+        <mxGraphModel dx="991" dy="758" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="3" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;endArrow=classic;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="4" target="5">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="716.4722222222222" y="287.25923665364576" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="483.25" y="241"/>
+                            <mxPoint x="595.25" y="241"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="4" value="Exercise" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="453" y="175" width="60" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Exercise/id page" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+                    <mxGeometry x="532.25" y="275" width="125" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="Click on Workout / id" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+                    <mxGeometry x="347.25" y="30" width="125" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="edgeStyle=none;html=1;endArrow=classic;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="410.5" y="80" as="sourcePoint"/>
+                        <mxPoint x="409.75" y="115" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="8" value="Workout id Page" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="115" width="99.5" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="10" target="12">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="422.51" y="244.9999999999999" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="422.76" y="244"/>
+                            <mxPoint x="449.76" y="244"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="10" value="Remove&lt;br&gt;Exercise" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="392.51" y="175" width="60" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0.026;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="12">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="449.5049999999999" y="373.3399999999999" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="12" value="Send REST call to put workout" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="399.76" y="275" width="99.5" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;endArrow=classic;endFill=1;exitX=0.498;exitY=0.962;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" target="18">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="449.28549999999996" y="457.5799999999999" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="No" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;exitX=0.972;exitY=0.504;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" target="16">
+                    <mxGeometry x="-0.4467" y="8" relative="1" as="geometry">
+                        <mxPoint x="501.3069999999998" y="416.3599999999999" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="591.76" y="416"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="16" target="19">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="592" y="644"/>
+                            <mxPoint x="450" y="644"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="16" value="alert error" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="531.76" y="480" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;endArrow=classic;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="21" target="19">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="450.38016528925607" y="627.9999999999999" as="sourcePoint"/>
+                        <mxPoint x="449.0165289256198" y="694" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" value="alert successfully" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="389.5" y="484" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="Workout page" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+                    <mxGeometry x="387" y="694" width="125" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="Success&lt;br&gt;200 OK&amp;nbsp;" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="394.63" y="372" width="109.75" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="Update Workout" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="389.5" y="568" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;endArrow=none;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="18" target="21">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="449.5" y="544" as="sourcePoint"/>
+                        <mxPoint x="449.5" y="694" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="Yes" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;entryX=0.502;entryY=0.038;entryDx=0;entryDy=0;endArrow=classic;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="24" target="31">
+                    <mxGeometry x="0.046" y="-10" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="363" y="240"/>
+                            <mxPoint x="239" y="240"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="Add Exercise" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="332.51" y="175" width="60" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.498;exitY=0.956;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="31">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="282.0625" y="352" as="sourcePoint"/>
+                        <mxPoint x="238.8800000000001" y="374" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="26" style="edgeStyle=none;html=1;entryX=0.497;entryY=0.029;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;" edge="1" parent="1" source="40" target="30">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="238.88" y="428.0000000000001" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=none;html=1;exitX=0.501;exitY=0.971;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitPerimeter=0;startArrow=none;" edge="1" parent="1" source="41" target="35">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="454.25" y="692" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="239" y="779"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="28" value="No" style="edgeStyle=none;sketch=0;jumpStyle=arc;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="30" target="33">
+                    <mxGeometry x="-0.551" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="79" y="503"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="29" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="30" target="35">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="Success&lt;br&gt;202 Accepted" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="184" y="458" width="109.75" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="Show Modal" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="198.87" y="265" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;endArrow=classic;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="33" target="43">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="281" y="781" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="79" y="781"/>
+                            <mxPoint x="239" y="781"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="33" value="alert error" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="19" y="587" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" style="edgeStyle=none;sketch=0;jumpStyle=arc;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="35" target="41">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="alert successfully" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="178.88" y="587" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;" edge="1" parent="1" target="43">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="239" y="781" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" value="Workout page" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;" vertex="1" parent="1">
+                    <mxGeometry x="176.38" y="917" width="125" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="" style="edgeStyle=none;sketch=0;jumpStyle=arc;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;startArrow=none;" edge="1" parent="1" source="43" target="37">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="238.88" y="894" as="sourcePoint"/>
+                        <mxPoint x="315" y="940" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="239" y="911"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="39" value="No" style="edgeStyle=none;sketch=0;jumpStyle=none;html=1;endArrow=classic;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="40" target="43">
+                    <mxGeometry x="-0.8844" y="10" relative="1" as="geometry">
+                        <mxPoint x="351" y="742" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="350" y="402"/>
+                            <mxPoint x="350" y="779"/>
+                            <mxPoint x="239" y="779"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="40" value="Click add exercise/id to workout" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+                    <mxGeometry x="189.12" y="372" width="99.5" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="Update Workout" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="178.88" y="697" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;" edge="1" parent="1" source="35" target="41">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="238.88" y="587" as="targetPoint"/>
+                        <Array as="points"/>
+                        <mxPoint x="238.98474999999985" y="545.3899999999999" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="43" value="Close Modal" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="178.87" y="807" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="" style="edgeStyle=none;sketch=0;jumpStyle=arc;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="41" target="43">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="238.88" y="757" as="sourcePoint"/>
+                        <mxPoint x="315" y="940" as="targetPoint"/>
+                        <Array as="points"/>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

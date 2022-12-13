@@ -1,0 +1,30 @@
+@startuml AccountChangeEmail 
+
+
+Actor "User" as u
+
+participant "Login" as l
+participant "SignUp" as s
+participant "UseLogin" as query
+participant "login" as fecth
+participant "Backend" as b
+mainframe **Epic 1, US4:** Ændre Email 
+
+activate l
+alt 
+u -> l : Email
+u -> l : Password
+u -> l : <<Button>> Log in 
+
+deactivate l
+else
+
+activate l
+u -> l : <<Button>> Click here to sign up
+l -> s : true 
+activate s : 
+
+
+end
+
+@enduml
