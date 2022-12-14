@@ -1,15 +1,15 @@
 import { useQuery } from "react-query";
 import { request } from "../utils/axios";
 
-export const fetchAccountProfile = async () => {
+export const FetchAccountProfile = async () => {
   return request({
     url: `account/${localStorage.getItem("email")}`,
     method: "get",
   });
 };
 
-export const getAccountProfile = (onError) => {
-  return useQuery([`accountKey`], fetchAccountProfile, {
+export const GetAccountProfile = (onError) => {
+  return useQuery([`accountKey`], FetchAccountProfile, {
     onError,
   });
 };

@@ -18,7 +18,7 @@ export const useAddWorkout = () => {
     onMutate: async (newWorkout) => {
       await queryClient.cancelQueries("workoutsKey");
       const previouesWorkoutData = queryClient.getQueryData("workoutsKey");
-      queryClient.setQueryData("workoutsKey", (oldQueryData) => {
+      queryClient.setQueryData("workoutsKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [

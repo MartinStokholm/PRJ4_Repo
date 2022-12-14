@@ -10,7 +10,7 @@ export const updateDish = async (dish: Dish) => {
   let dishNoIdDto: DishNoIdDto = null;
   dishNoIdDto = dish;
   return request({
-    url: `workout/${dish.Id}`,
+    url: `workout/${dish.id}`,
     method: "put",
     data: dishNoIdDto,
   });

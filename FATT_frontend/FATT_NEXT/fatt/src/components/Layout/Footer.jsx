@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -6,24 +7,24 @@ const Footer = () => {
       <div className="flex items-center justify-center">
         <ul className="flex flex-wrap m-4 text-sm text-gray-500 dark:text-gray-400 text-center">
           <li>
-            <a href="/about" className="mr-4 hover:underline md:mr-6 ">
+            <Link href="/about" className="mr-4 hover:underline md:mr-6 ">
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/profile" className="mr-4 hover:underline md:mr-6">
+            <Link href="/profile" className="mr-4 hover:underline md:mr-6">
               Profile
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/settings" className="mr-4 hover:underline md:mr-6">
+            <Link href="/settings" className="mr-4 hover:underline md:mr-6">
               Settings
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/login" className="mr-4 hover:underline md:mr-6 ">
+            <Link href="/login" className="mr-4 hover:underline md:mr-6 ">
               Log-in
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

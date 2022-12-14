@@ -15,7 +15,7 @@ export const useAddWorkoutListData = () => {
   return useMutation(addWorkoutList, {
     onSuccess: (newWorkout) => {
       toast.success(`Add List of workout`);
-      queryClient.setQueryData("workoutsKey", (oldQueryData) => {
+      queryClient.setQueryData("workoutsKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [...oldQueryData.data, newWorkout.data],

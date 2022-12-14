@@ -8,7 +8,7 @@ const addMeal = (meal: Meal) => {
   return request({ url: `meal`, methode: "post", data: meal });
 };
 
-export const postAddMealData = () => {
+export const PostAddMealData = () => {
   const queryClient = useQueryClient();
   return useMutation(addMeal, {
     onSuccess: (data) => {

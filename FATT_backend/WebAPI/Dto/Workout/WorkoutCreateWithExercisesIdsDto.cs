@@ -1,7 +1,4 @@
-﻿using WebAPI.Dto.Exercise;
-using WebAPI.Models;
-
-namespace WebAPI.Dto.Workout
+﻿namespace WebAPI.Dto.Workout
 {
     public class WorkoutCreateWithExercisesIdsDto
     {

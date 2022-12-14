@@ -1,6 +1,6 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
-import { getMealsList } from "../../src/queries/MealsUserspecific";
-import getDishsList from "../../src/queries/Dishs";
+import { GetMealsList } from "../../src/queries/MealsUserspecific";
+import GetDishsList from "../../src/queries/Dishs";
 import MealList from "../../src/components/Meal/MealList";
 import Error from "next/error";
 const onSuccess = (mealData, dishData) => {
@@ -21,9 +21,9 @@ export default function MealPage() {
     data: mealData,
     isError,
     error,
-  } = getMealsList(onSuccess, onError);
+  } = GetMealsList(onSuccess, onError);
 
-  const { data: dishData } = getDishsList(onSuccess, onError);
+  const { data: dishData } = GetDishsList(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -33,5 +33,5 @@ export default function MealPage() {
     return <Error statusCode={(error as any).message} />;
   }
 
-  return <MealList mealData={mealData} dishData={dishData} />;
+  return <MealList mealData={mealData} />;
 }

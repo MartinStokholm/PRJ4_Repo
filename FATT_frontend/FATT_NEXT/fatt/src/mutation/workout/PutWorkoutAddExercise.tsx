@@ -30,5 +30,3 @@ export const useUpdateWorkoutAddExerciseData = () => {
     },
   });
 };
-
-import type { WorkoutCreateNoIdDto } from "../../../interfaces/Workout";

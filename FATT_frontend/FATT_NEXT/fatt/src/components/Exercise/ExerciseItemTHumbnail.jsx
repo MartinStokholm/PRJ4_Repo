@@ -1,5 +1,4 @@
 import Link from "next/link";
-import DeleteButton from "../Button/DeleteButton";
 import { useDeleteExercise } from "../../mutation/exercise/DeleteExercise";
 
 const ExerciseItemThumbnail = ({ exercise }) => {

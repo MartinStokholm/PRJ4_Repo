@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
-const fetchMeal = async ({ queryKey }) => {
+const FetchMeal = async ({ queryKey }) => {
   const id = queryKey[1];
   const response = await request({ url: `meal/${id}`, method: "get" });
   console.log(response.status);
@@ -14,9 +14,10 @@ const fetchMeal = async ({ queryKey }) => {
   return response;
 };
 
-export const getMeal = (id: string) => {
+export const GetMeal = (id: string) => {
   const queryClient = useQueryClient();
-  return useQuery([`mealKey`, id], fetchMeal, {
+  return useQuery([`mealKey`, id], FetchMeal, {
+    /*
     initialData: () => {
       const meal = queryClient
         .getQueriesData("mealsKey")
@@ -27,8 +28,10 @@ export const getMeal = (id: string) => {
       } else {
         return undefined;
       }
+      
     },
+    */
   });
 };
 
-export default getMeal;
+export default GetMeal;

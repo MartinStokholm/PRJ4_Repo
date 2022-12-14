@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
 using Mapster;
 using WebAPI.Dto.Dish;
-using WebAPI.Dto.Meal;
 using Microsoft.AspNetCore.Authorization;
 using WebAPI.Dto.Exercise;
 
@@ -26,55 +20,29 @@ namespace WebAPI.Controllers
             _context = context;
         }
         
+        /// <summary>
+        /// Create a dish
+        /// </summary>
+        /// <param name="newDish"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<DishNoMealsDto>> PostDishModel(DishNoIdDto newDish)
         {
-            var d = newDish.Adapt<Dish>();
-            _context.Dishes.Add(d);
+            var dbDishe = _context.Dishes.ToList().Find(d => d.Name == newDish.Name);
+            if (dbDishe != null) { return Conflict($"Dishes with name {newDish.Name} already exists"); }
+
+            var dishToAdd = newDish.Adapt<Dish>();
+            _context.Dishes.Add(dishToAdd);
+
             await _context.SaveChangesAsync();
 
-            return Accepted(d.Adapt<DishNoMealsDto>());
+            return Accepted(dishToAdd.Adapt<DishNoMealsDto>());
         }
 
-        [HttpPost("list")]
-        public async Task<ActionResult<List<DishNoMealsDto>>> PostDishModel(List<DishNoIdDto> newDishes)
-        {
-            var dishes = newDishes.Adapt<List<Dish>>();
-            _context.Dishes.AddRange(dishes);
-            await _context.SaveChangesAsync();
-
-            return Accepted(dishes.Adapt<List<DishNoMealsDto>>());
-        }
-
-        [HttpPut("{dishId}")]
-        public async Task<IActionResult> PutDishModel(long dishId, DishNoIdDto dish)
-        {
-            var dbDish = await _context.Dishes.FindAsync(dishId);
-            if (dbDish == null) { return NotFound($"Could not find dish with id {dishId}"); }
-
-            _context.Entry(dbDish)
-                .CurrentValues
-                .SetValues(dish);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DishModelExists((int)dishId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Accepted(dbDish.Adapt<DishNoMealsDto>());
-        }
-
+        /// <summary>
+        /// Get all dishes
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<List<DishNoMealsDto>>> GetDishes()
         {
@@ -82,6 +50,11 @@ namespace WebAPI.Controllers
             return dbDishes.Adapt<List<DishNoMealsDto>>();
         }
 
+        /// <summary>
+        /// Get a dish by id
+        /// </summary>
+        /// <param name="dishId"></param>
+        /// <returns></returns>
         [HttpGet("{dishId}")]
         public async Task<ActionResult<DishNoMealsDto>> GetDish(long dishId)
         {
@@ -98,6 +71,11 @@ namespace WebAPI.Controllers
             return Ok(ret);
         }
 
+        /// <summary>
+        /// Delete dish by id
+        /// </summary>
+        /// <param name="dishId"></param>
+        /// <returns></returns>
         [HttpDelete("{dishId}")]
         public async Task<IActionResult> DeleteDish(long dishId)
         {
@@ -110,11 +88,6 @@ namespace WebAPI.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool DishModelExists(long dishId)
-        {
-            return _context.Dishes.Any(e => e.Id == dishId);
         }
     }
 }

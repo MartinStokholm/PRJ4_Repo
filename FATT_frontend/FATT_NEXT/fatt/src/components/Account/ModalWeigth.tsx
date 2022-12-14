@@ -22,7 +22,8 @@ export default function ModalWeight() {
           Update Weight
         </h3>
         <NumberField
-          className="m-4"
+          required={true}
+          value={weight}
           placeholder="Weight"
           onChange={(e) => setWeight(e.target.value)}
           min={40}

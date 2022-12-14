@@ -1,4 +1,4 @@
-import ExerciseItemThumbnail from "./ExerciseItemThumbnail";
+import ExerciseItemThumbnail from "./ExerciseItemTHumbnail";
 import { useState } from "react";
 import Button from "../Button/Button";
 import Modal from "../util/Modal";

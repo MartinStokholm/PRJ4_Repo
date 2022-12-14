@@ -27,6 +27,11 @@ namespace WebAPI.Controllers
             _accountServices = new AccountServices(configuration);
         }
 
+        /// <summary>
+        /// A user can create an Account
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<ActionResult<AccountGetDto>> Register(AccountDto request)
@@ -56,6 +61,11 @@ namespace WebAPI.Controllers
             return Accepted(request.Email);
         }
 
+        /// <summary>
+        /// User can login to their account given their email and password
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<ActionResult<AccountGetLoginDto>> Login(AccountLoginDto request)
@@ -79,7 +89,11 @@ namespace WebAPI.Controllers
             
         }
 
-
+        /// <summary>
+        /// A user can change their email given their current email and password
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut("ChangeEmail")]
         public async Task<ActionResult<string>> ChangeEmail(AccountChangeEmailDto request)
         {
@@ -99,10 +113,14 @@ namespace WebAPI.Controllers
 
             await _context.SaveChangesAsync();
             return Accepted(dbAccount);
-        
-            
+          
         }
 
+        /// <summary>
+        /// A user can change their password given their current email and password
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut("ChangePassword")]
         public async Task<ActionResult<string>> ChangePassword(AccountChangePasswordDto request)
         {
@@ -131,6 +149,12 @@ namespace WebAPI.Controllers
 
         }
 
+        /// <summary>
+        /// A user can change their name given their current email, name and password
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPut("{email}/Name/{name}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountName(string email, string name)
         {
@@ -143,6 +167,12 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
+        /// <summary>
+        /// A user can change their age given their current email, age and password
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="age"></param>
+        /// <returns></returns>
         [HttpPut("{email}/Age/{age}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountAge(string email, int age)
         {
@@ -155,6 +185,12 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
+        /// <summary>
+        ///  A user can change their gender given their current email, gender and password
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="gender"></param>
+        /// <returns></returns>
         [HttpPut("{email}/Gender/{gender}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountGender(string email, string gender)
         {
@@ -167,6 +203,12 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
+        /// <summary>
+        /// A user can change their weight given their current email, weight and password
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="weight"></param>
+        /// <returns></returns>
         [HttpPut("{email}/Weight/{weight}")]
         public async Task<ActionResult<AccountGetDto>> UpdateAccountWeight(string email, int weight)
         {
@@ -179,6 +221,11 @@ namespace WebAPI.Controllers
             return Accepted(dbAccount.Adapt<AccountGetDto>());
         }
 
+        /// <summary>
+        /// A user can delete their account given their email and password
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<ActionResult<string>> DeleteAccount(AccountDeleteDto account)
         {
@@ -196,6 +243,11 @@ namespace WebAPI.Controllers
             
         }
 
+        /// <summary>
+        /// A user can get their account information given their email 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("{email}")]
         public async Task<ActionResult<AccountGetDto>> GetAccountEmail(string email)
         {
@@ -205,6 +257,11 @@ namespace WebAPI.Controllers
             return Ok(dbAccount.Adapt<AccountGetDto>());      
         }
         
+        /// <summary>
+        /// A user can get their personal calendar given their email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("{email}/calender")]
         public async Task<ActionResult<CalenderGetDto>> GetAccountCalender(string email)
         {

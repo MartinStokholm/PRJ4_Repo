@@ -1,6 +1,5 @@
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-// import { SessionProvider } from "next-auth/react";
 import Layout from "../src/components/Layout/Layout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -1,5 +1,5 @@
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
-import { getWorkoutsList } from "../../src/queries/WorkoutsUserspecific";
+import { GetWorkoutsList } from "../../src/queries/WorkoutsUserspecific";
 import WorkoutList from "../../src/components/Workout/index/WorkoutList";
 import Error from "next/error";
 const onSuccess = () => {
@@ -16,7 +16,7 @@ export default function WorkoutPage() {
     data: workoutData,
     isError,
     error,
-  } = getWorkoutsList(onSuccess, onError);
+  } = GetWorkoutsList(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;

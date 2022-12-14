@@ -1,7 +1,4 @@
-﻿using WebAPI.Dto.Dish;
-using WebAPI.Models;
-
-namespace WebAPI.Dto.Meal
+﻿namespace WebAPI.Dto.Meal
 {
     public class MealCreateWithDishesIdsDto
     {

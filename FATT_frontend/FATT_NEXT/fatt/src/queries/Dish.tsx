@@ -2,14 +2,16 @@ import { request } from "../utils/axios";
 import type { Dish } from "../../interfaces/Dish";
 import { useQuery, useQueryClient } from "react-query";
 
-const fetchDish = async ({ queryKey }) => {
+const FetchDish = async ({ queryKey }) => {
   const id = queryKey[1];
   return request({ url: `dish/${id}`, method: "get" });
 };
 
-export const getDish = (id, onSuccess, onError) => {
+export const GetDish = (id: any, onSuccess, onError) => {
   const queryClient = useQueryClient();
-  return useQuery([`dishKey`, id], fetchDish, {
+
+  return useQuery([`dishKey`, id], FetchDish, {
+    /*
     initialData: () => {
       const dish = queryClient
         .getQueriesData("dishsKey")
@@ -21,9 +23,10 @@ export const getDish = (id, onSuccess, onError) => {
         return undefined;
       }
     },
+    */
     onSuccess,
     onError,
   });
 };
 
-export default getDish;
+export default GetDish;

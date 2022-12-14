@@ -1,5 +1,5 @@
-import { getWorkout } from "../../src/queries/Workout";
-import getExercisesList from "../../src/queries/Exercises";
+import { GetWorkout } from "../../src/queries/Workout";
+import GetExercisesList from "../../src/queries/Exercises";
 import LoadingSpinner from "../../src/components/Layout/LoadingSpinner";
 import { useRouter } from "next/router";
 import WorkoutItem from "../../src/components/Workout/id/WorkoutItem";
@@ -20,8 +20,8 @@ export default function WorkoutPage() {
     data: workoutData,
     isError,
     error,
-  } = getWorkout(useRouter().query.id as string);
-  const { data: exerciseData } = getExercisesList(onSuccess, onError);
+  } = GetWorkout(useRouter().query.id as string);
+  const { data: exerciseData } = GetExercisesList(onSuccess, onError);
 
   if (isLoading) {
     return <LoadingSpinner />;

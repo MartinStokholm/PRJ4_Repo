@@ -3,7 +3,7 @@ import { assertIsExercise } from "../assert/assertIsExercise";
 import { useQuery, useQueryClient } from "react-query";
 import { request } from "../utils/axios";
 
-const fetchExercise = async ({ queryKey }) => {
+const FetchExercise = async ({ queryKey }) => {
   const id = queryKey[1];
 
   const response = await request({ url: `exercise/${id}`, method: "get" });
@@ -17,9 +17,11 @@ const fetchExercise = async ({ queryKey }) => {
   return response;
 };
 
-export const getExercise = (id, onSuccess, onError) => {
+export const GetExercise = (id: any, onSuccess, onError) => {
   const queryClient = useQueryClient();
-  return useQuery([`exerciseKey`, id], fetchExercise, {
+
+  return useQuery([`exerciseKey`, id], FetchExercise, {
+    /*
     initialData: () => {
       const exercise = queryClient
         .getQueriesData("exercisesKey")
@@ -31,29 +33,11 @@ export const getExercise = (id, onSuccess, onError) => {
         return undefined;
       }
     },
+    */
     onSuccess,
     onError,
     refetchOnWindowFocus: false,
   });
 };
 
-export default getExercise;
-
-//<AxiosResponse<WorkOut>>
-
-// const response = await axios.get<AxiosResponse<Exercise>>(
-//   `${server}exercise/${id}`,
-//   {
-//     headers: {
-//       Accept: "application/json",
-//     },
-//   }
-// );
-// console.log(response.status);
-// if (response.status == 304) {
-//   throw new Error("Problem fetching data");
-// }
-// const exercise = await response.data;
-// assertIsExercise(exercise);
-
-// return response;
+export default GetExercise;

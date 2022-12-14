@@ -3,29 +3,27 @@ import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { ExerciseIds } from "../../../interfaces/Exercise";
-
-export const removeExercisesToWorkout = async (
-  workoutId: number,
-  exerciseIds: ExerciseIds
-) => {
+export const removeExercisesToWorkout = async (data) => {
+  console.log(data.workoutId, data.exerciseIds);
   return request({
-    url: `${workoutId}/RemoveExercise/list`,
+    url: `${data.workoutId}/RemoveExercise/list`,
     method: "post",
-    data: exerciseIds,
+    data: data.exerciseIds,
   });
 };
 
 export const useRemoveExercisesToWorkoutData = () => {
   const queryClient = useQueryClient();
   return useMutation(removeExercisesToWorkout, {
-    onMutate: async (newExerciseList) => {
+    onMutate: async (newExerciseList: any) => {
       toast(`Remove Exercise List From Workout`);
+
       await queryClient.cancelQueries("workoutsKey");
+
       const previouesWorkoutData = queryClient.getQueryData("workoutsKey");
-      queryClient.setQueryData("workoutsKey", (oldQueryData) => {
+
+      queryClient.setQueryData("workoutsKey", (oldQueryData: any) => {
         return {
-          //Missing logic to don't find the old id in query - Bjarke implement that later
           ...oldQueryData,
           data: [
             ...oldQueryData.data,
@@ -36,7 +34,6 @@ export const useRemoveExercisesToWorkoutData = () => {
       return {
         previouesWorkoutData,
       };
-      //toast(`Add Exercise "${newExerciseList.name}"`);
     },
     onError: (_error, _workout, context) => {
       queryClient.setQueryData("workoutsKey", context.previouesWorkoutData);

@@ -3,15 +3,15 @@ import type { Dishs } from "../../interfaces/Dish";
 import { useQuery } from "react-query";
 import { request } from "../utils/axios";
 
-const fecthDishs = () => {
+const FecthDishs = () => {
   return request({ url: `dish`, method: "get" });
 };
 
-export const getDishsList = (onSuccess, onError) => {
-  return useQuery("dishsKey", fecthDishs, {
+export const GetDishsList = (onSuccess, onError) => {
+  return useQuery("dishsKey", FecthDishs, {
     onSuccess,
     onError,
   });
 };
 
-export default getDishsList;
+export default GetDishsList;

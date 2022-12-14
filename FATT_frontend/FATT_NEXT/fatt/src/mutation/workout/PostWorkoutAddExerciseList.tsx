@@ -3,9 +3,6 @@ import axios, { AxiosResponse } from "axios";
 import { request } from "../../utils/axios";
 import { toast } from "react-toastify";
 
-import type { ExerciseIds } from "../../../interfaces/Exercise";
-// workoutId: number,
-//   exerciseIds: ExerciseIds
 export const addExercisesToWorkout = async (data) => {
   console.log(data.workoutId, data.exerciseIds);
   return request({
@@ -20,9 +17,12 @@ export const useAddExercisesToWorkoutData = () => {
   return useMutation(addExercisesToWorkout, {
     onMutate: async (newExerciseList) => {
       toast.success(`Add List of exercise in workout`);
+
       await queryClient.cancelQueries("workoutsKey");
+
       const previouesWorkoutData = queryClient.getQueryData("workoutsKey");
-      queryClient.setQueryData("workoutsKey", (oldQueryData) => {
+
+      queryClient.setQueryData("workoutsKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [

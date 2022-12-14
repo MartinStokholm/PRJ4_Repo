@@ -8,7 +8,7 @@ import type { Dish } from "../../../interfaces/Dish";
 
 export const deleteDish = async (dish: Dish) => {
   return request({
-    url: `dish/${dish.Id}`,
+    url: `dish/${dish.id}`,
     method: "delete",
   });
 };

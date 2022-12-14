@@ -5,6 +5,7 @@ import InputButton from "../Button/InputButton";
 import InputField from "../InputField";
 import { usePostExercise } from "../../mutation/exercise/PostExercise";
 import { ExerciseNoIdDto } from "../../../interfaces/Exercise";
+import { DocumentChartBarIcon } from "@heroicons/react/20/solid";
 
 export default function ExerciseModal() {
   const { mutate: exercise } = usePostExercise();

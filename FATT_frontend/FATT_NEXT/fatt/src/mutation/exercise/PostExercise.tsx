@@ -16,7 +16,7 @@ export const usePostExercise = () => {
       await queryClient.cancelQueries("exercisesKey");
       const previouesExerciseData: Exercise[] =
         queryClient.getQueryData("exercisesKey");
-      queryClient.setQueryData("exercisesKey", (oldQueryData) => {
+      queryClient.setQueryData("exercisesKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [

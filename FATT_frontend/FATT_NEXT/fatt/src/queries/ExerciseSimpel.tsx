@@ -3,7 +3,7 @@ import { request } from "../utils/axios";
 import type { Exercises } from "../../interfaces/Exercise";
 import axios from "axios";
 
-const fecthExercisesSimpel = async () => {
+const FecthExercisesSimpel = async () => {
   let exercises: Exercises = null;
   try {
     const response = await request({ url: `exercise/simpel`, method: "get" });
@@ -25,8 +25,8 @@ const fecthExercisesSimpel = async () => {
   }
 };
 
-export const getExercisesListSimpel = (onSuccess, onError) => {
-  return useQuery("exercisesKey", fecthExercisesSimpel, {
+export const GetExercisesListSimpel = (onSuccess, onError) => {
+  return useQuery("exercisesKey", FecthExercisesSimpel, {
     onSuccess,
     onError,
   });

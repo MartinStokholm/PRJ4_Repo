@@ -1,24 +1,23 @@
 import { useQuery } from "react-query";
 import { request } from "../utils/axios";
 
-const fecthWorkouts = async () => {
+const FecthWorkouts = async () => {
   const response = await request({ url: `workout`, method: "get" });
   console.log(response.status);
   if (response.status == 304) {
     throw new Error("Problem fetching data");
   }
   const exercise = await response.data;
-  //assertIsExercise(exercise);
 
   return response;
 };
 
-export const getWorkoutsList = (onSuccess, onError) => {
-  return useQuery("workoutsKey", fecthWorkouts, {
-    refetchOnWindowFocus: true,
+export const GetWorkoutsList = (onSuccess, onError) => {
+  return useQuery("workoutsKey", FecthWorkouts, {
     onSuccess,
     onError,
+    refetchOnWindowFocus: false,
   });
 };
 
-export default getWorkoutsList;
+export default GetWorkoutsList;

@@ -18,7 +18,7 @@ export const useAddMeal = () => {
     onMutate: async (newMeal) => {
       await queryClient.cancelQueries("mealsKey");
       const previouesMealData = queryClient.getQueryData("mealsKey");
-      queryClient.setQueryData("mealsKey", (oldQueryData) => {
+      queryClient.setQueryData("mealsKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [

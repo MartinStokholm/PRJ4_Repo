@@ -16,7 +16,7 @@ export const usePostDish = () => {
       toast.success(`Created Dish "${newDish.name}"`);
       await queryClient.cancelQueries("dishsKey");
       const previouesDishData = queryClient.getQueryData("dishsKey");
-      queryClient.setQueryData("dishsKey", (oldQueryData) => {
+      queryClient.setQueryData("dishsKey", (oldQueryData: any) => {
         return {
           ...oldQueryData,
           data: [

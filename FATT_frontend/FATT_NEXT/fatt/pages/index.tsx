@@ -1,5 +1,5 @@
 import Calender from "../src/components/Calendar/Calender";
-import { getCalender } from "../src/queries/Calender";
+import { GetCalender } from "../src/queries/Calender";
 import { toast } from "react-toastify";
 import Heading from "../src/components/Layout/Heading";
 
@@ -8,7 +8,7 @@ const onError = (error) => {
 };
 
 export default function HomePage() {
-  const { data: calendarData, error } = getCalender(onError);
+  const { data: calendarData, error } = GetCalender(onError);
 
   return (
     <div>
