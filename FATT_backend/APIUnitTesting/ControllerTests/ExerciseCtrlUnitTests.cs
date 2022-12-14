@@ -32,6 +32,7 @@ public class ExerciseCtrlUnitTests
         }
         _dataId.Clear();
     }
+
     [Test]
     public async Task GetExById_ReturnsStatus200()
     {
@@ -75,15 +76,19 @@ public class ExerciseCtrlUnitTests
     [Test]
     public async Task Post_DuplicateReturns409()
     {
+        // Arrange
         var e = new ExerciseNoIdNoWorkoutsDto() { Name = "TestExercise" };
         var result1 = new Tools.TestCallResult<ExerciseCreateNoIdDto>(await _controller.PostExercise(e));
+        // For cleanup
         var exFromDb = _context.Exercises.First(x => x.Name == e.Name);
         _dataId.Add((long)exFromDb.Id);
+        // Act
         var result2 = new Tools.TestCallResult<ExerciseCreateNoIdDto>(await _controller.PostExercise(e));
         if (result2.Id != null)
         {
             _dataId.Add((long)result2.Id);
         }
+        // Assert
         Assert.AreEqual(result2.StatusCode, 409);
     }
 }
