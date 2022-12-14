@@ -12,11 +12,6 @@ describe('DishItem test debug', () => {
         </QueryClientProvider>      
       
       )
-     
      expect(screen.queryByText(/Preperation time: 20/)).toBeNull();
-     expect(screen.queryByText(/Total Energy 398 kcal/)).toBeNull();
-
-
-
-     screen.debug();
+     expect(screen.queryByText(/Total Energy 398 kcal/)).toBeNull();   
     }) })

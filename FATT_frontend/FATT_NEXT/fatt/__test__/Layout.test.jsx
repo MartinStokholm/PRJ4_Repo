@@ -9,8 +9,7 @@ describe('Layout test', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <Layout />
-        </QueryClientProvider>      
-      
+        </QueryClientProvider>  
       )     
       screen.debug();
     }) })

@@ -13,7 +13,7 @@ describe('Settings test debug', () => {
      screen.debug();
     })
 })
-describe('test set new email ', () => {
+describe('test inserts email ', () => {
     it(' Email',  () => {
       render(
         <QueryClientProvider client={queryClient}> 
@@ -27,7 +27,7 @@ describe('test set new email ', () => {
     
     })  })
 
-    describe('test set new Password ', () => {
+    describe('test inserts Password ', () => {
         it(' Password',  () => {
           render(
             <QueryClientProvider client={queryClient}> 
