@@ -14,7 +14,7 @@ describe('Login test debug', () => {
     })
 })
 
-describe('Test change for Name Sign Up', () => {
+describe('Test inserts Name Sign Up', () => {
     it(' Name',  () => {
       render(
         <QueryClientProvider client={queryClient}> 
@@ -31,7 +31,7 @@ describe('Test change for Name Sign Up', () => {
     
   })
 
-  describe('test change for Password Sign Up', () => {
+  describe('test inserts  Password Sign Up', () => {
     it(' Password',  () => {
       render(
         <QueryClientProvider client={queryClient}> 
@@ -49,7 +49,7 @@ describe('Test change for Name Sign Up', () => {
   })
 
 
-  describe('Test change for Email Sign Up ', () => {
+  describe('Test inserts  Email Sign Up ', () => {
     it(' Email',  () => {
       render(
         <QueryClientProvider client={queryClient}> 

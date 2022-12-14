@@ -11,9 +11,8 @@ describe('Calender test debug', () => {
       render(
         <QueryClientProvider client={queryClient}> 
           <Calender />
-        </QueryClientProvider>      
-      
-      )
+        </QueryClientProvider>     
+         )
      screen.debug();
     }) })
 
@@ -23,9 +22,7 @@ describe('Calender test debug', () => {
             <QueryClientProvider client={queryClient}> 
               <Calender />
             </QueryClientProvider>
-                
-          )
-    
+                       )    
           const myCalender = screen.getByText(/Monday/);
           expect(myCalender).toBeInTheDocument();
             
