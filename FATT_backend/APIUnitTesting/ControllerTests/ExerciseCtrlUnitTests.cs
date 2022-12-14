@@ -32,6 +32,7 @@ public class ExerciseCtrlUnitTests
         }
         _dataId.Clear();
     }
+
     [Test]
     public async Task GetExById_ReturnsStatus200()
     {
