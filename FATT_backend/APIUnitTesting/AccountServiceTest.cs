@@ -91,49 +91,4 @@ public class AccountServiceTest
 
         Assert.IsFalse(token.IsNullOrEmpty());
     }
-
-    [Test]
-    public void CreateToken_CalledTwice_ReturnsSameTokens()
-    {
-        string pass = "test";
-        _service.CreatePasswordHash(pass, out byte[] passwordHash, out byte[] passwordSalt);
-        var account = new Account
-        {
-            Name = "Frederick Douglass",
-            Email = "mail@dk",
-            PasswordHash = passwordHash,
-            PasswordSalt = passwordSalt,
-        };
-        string token = _service.CreateToken(account);
-        string token2 = _service.CreateToken(account);
-        Assert.AreEqual(token, token2);
-    }
-
-    [Test]
-    public void CreateToken_Twice_DifferentAccounts_ReturnsDifferentTokens()
-    {
-        string pass = "test";
-        _service.CreatePasswordHash(pass, out byte[] passwordHash, out byte[] passwordSalt);
-        var account = new Account
-        {
-            Name = "Frederick Douglass",
-            Email = "mail@dk",
-            PasswordHash = passwordHash,
-            PasswordSalt = passwordSalt,
-        };
-
-        string pass2 = "test2";
-        _service.CreatePasswordHash(pass, out byte[] passwordHash2, out byte[] passwordSalt2);
-        var account2 = new Account
-        {
-            Name = "Frederick Douglass",
-            Email = "mail@dk",
-            PasswordHash = passwordHash2,
-            PasswordSalt = passwordSalt2,
-        };
-
-        string token = _service.CreateToken(account);
-        string token2 = _service.CreateToken(account2);
-        Assert.AreEqual(token, token2);
-    }
 }
