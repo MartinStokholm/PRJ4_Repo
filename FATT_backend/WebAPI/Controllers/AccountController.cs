@@ -280,14 +280,26 @@ namespace WebAPI.Controllers
         [HttpGet("{email}/calender")]
         public async Task<ActionResult<CalenderGetDto>> GetAccountCalender(string email)
         {
+            var dbWorkouts = await _context.Workouts.Where(x => x.Account.Email == email).ToListAsync();
+
+
             var dbAccount = await _context.Accounts
                 .Include(a => a.Calender)
-                    .ThenInclude(c => c.WorkoutDays)
+                    .ThenInclude(c => c.WorkoutDays )
                 .Include(a => a.Calender)
                     .ThenInclude(c => c.MealDays)
                 .FirstOrDefaultAsync(x => x.Email == email);
 
             if (dbAccount == null) { return NotFound($"could not find account with email {email}"); }
+
+            // check if workout exists in calender and delete if not
+            foreach (var workout in dbWorkouts)
+            {
+                if (!dbAccount.Calender.WorkoutDays.Any(x => x.WorkoutId == workout.Id))
+                {
+                    dbAccount.Calender.WorkoutDays.Remove(dbAccount.Calender.WorkoutDays.FirstOrDefault(x => x.WorkoutId == workout.Id));
+                }
+            }
 
             var result = dbAccount.Calender.Adapt<CalenderGetDto>();
 
