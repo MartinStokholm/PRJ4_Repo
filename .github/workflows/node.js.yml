@@ -66,18 +66,19 @@ jobs:
         cache: 'npm'
         cache-dependency-path: ./FATT_frontend/FATT_NEXT/fatt/package-lock.json
     
-    - run: 
-        
+    - run:
         npm ci 
+    - run:
+        npm i jest-junit
     - run: 
         npm run build  --if-present
       env:
         CI: ""
     - run:  
-        npm run test -- --ci --watchAll=false
+        npm run test -- --ci --Coverage --watchAll=false --reporters=jest-junit
       env:
         CI: ""
-    - uses: actions/upload-artifact@v2  # upload test results
+    - uses: actions/upload-artifact@v3  # upload test results
       if: success() || failure()        # run this step even if previous step failed
       with:
         name: test-results
