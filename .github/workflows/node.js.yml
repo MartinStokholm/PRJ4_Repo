@@ -64,7 +64,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: '$Package_Lock_Path'
     
     - run: 
         
@@ -77,3 +76,8 @@ jobs:
         npm run test -- --ci --watchAll=false
       env:
         CI: ""
+    - uses: actions/upload-artifact@v2  # upload test results
+      if: success() || failure()        # run this step even if previous step failed
+      with:
+        name: test-results
+        path: jest-junit.xml
