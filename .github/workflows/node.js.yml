@@ -45,6 +45,9 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.Project_Path }}
     needs: 
       build
     strategy:
