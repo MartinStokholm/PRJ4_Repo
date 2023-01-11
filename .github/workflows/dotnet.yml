@@ -49,6 +49,15 @@ jobs:
     - name: Test Unit
       run: dotnet test $Test_Path --configuration Release --no-restore --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
    
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        junit_files: "test-results/junit/**/*.xml"
+        nunit_files: "test-results/nunit/**/*.xml"
+        xunit_files: "test-results/xunit/**/*.xml"
+        trx_files: "test-results/**/*.trx"
+    
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
