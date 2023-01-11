@@ -5,6 +5,7 @@ name: Node.js CI
 env: 
   Project_Path: ./FATT_frontend/FATT_NEXT/fatt/
   Test_Path: $Project_Path
+  Package_Lock_Path: ./FATT_frontend/FATT_NEXT/fatt/package-lock.json
 
 on:
   push:
@@ -30,7 +31,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: '$Project_Path/package-lock.json'
+        cache-dependency-path: $Package_Lock_Path
         
     - run: npm ci $Project_Path
     - run: npm run build $Project_Path --if-present
@@ -53,6 +54,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: $Package_Lock_Path
     - run: npm ci $Project_Path
     - run: npm run build $Project_Path --if-present
       env:
