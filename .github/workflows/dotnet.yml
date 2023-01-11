@@ -42,7 +42,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj
       
     - name: Test Unit
       run: dotnet test ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj --configuration Release --no-restore --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
