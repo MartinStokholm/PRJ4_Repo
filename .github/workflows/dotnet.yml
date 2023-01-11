@@ -11,7 +11,7 @@ on:
     
 env:
   Test_Path: ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj
-  Build_Path: TestPath
+  Build_Path: ./FATT_backend/
 
 jobs:
   build:
