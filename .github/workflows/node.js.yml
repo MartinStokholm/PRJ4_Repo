@@ -2,6 +2,9 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
 name: Node.js CI
+env: 
+  Project_Path: ./FATT_frontend/FATT_NEXT/fatt/
+  Test_Path: $Project_Path
 
 on:
   push:
@@ -27,8 +30,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build ./FATT_frontend/FATT_NEXT/fatt/ --if-present
+        
+    - run: npm ci $Project_Path
+    - run: npm run build $Project_Path --if-present
       env:
         CI: ""
   test:
@@ -48,10 +52,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run build ./FATT_frontend/FATT_NEXT/fatt/ --if-present
+    - run: npm ci $Project_Path
+    - run: npm run build $Project_Path --if-present
       env:
         CI: ""
-    - run: npm run test ./FATT_frontend/FATT_NEXT/fatt/ -- --ci --watchAll=false
+    - run: npm run test $Test_Path -- --ci --watchAll=false
       env:
         CI: ""
