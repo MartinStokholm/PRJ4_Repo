@@ -10,7 +10,8 @@ on:
     branches: [ "develepment" ]
     
 env:
-  TestPath: ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj
+  Test_Path: ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj
+  Build_Path: TestPath
 
 jobs:
   build:
@@ -24,10 +25,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./FATT_backend/
+      run: dotnet restore $Build_Path
       
     - name: Build
-      run: dotnet build ./FATT_backend/ --configuration Release --no-restore
+      run: dotnet build $Build_Path --configuration Release --no-restore
 
         
   test1:
@@ -43,10 +44,10 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore 
+      run: dotnet restore $Test_Path
       
     - name: Test Unit
-      run: dotnet test $TestPath --configuration Release --no-restore --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+      run: dotnet test $Test_Path --configuration Release --no-restore --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
    
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
