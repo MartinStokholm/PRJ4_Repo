@@ -23,7 +23,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./FATT_backend/
       
     - name: Build
       run: dotnet build ./FATT_backend/ --configuration Release --no-restore
