@@ -50,5 +50,15 @@
     "jest-environment-jsdom": "^29.3.1",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.2"
+  },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "outputDirectory": ".",
+    "outputName": "jest-junit.xml",
+    "uniqueOutputName": "false",
+    "classNameTemplate": "{classname}-{title}",
+    "titleTemplate": "{classname}-{title}",
+    "ancestorSeparator": " › ",
+    "usePathForSuiteName": "true"
   }
 }
