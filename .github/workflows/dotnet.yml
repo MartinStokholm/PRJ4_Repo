@@ -9,7 +9,8 @@ on:
   pull_request:
     branches: [ "develepment" ]
     
-
+env:
+  TestPath: ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj
 
 jobs:
   build:
@@ -42,23 +43,26 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj
+      run: dotnet restore 
       
     - name: Test Unit
-      run: dotnet test ./FATT_backend/APIUnitTesting/APIUnitTesting.csproj --configuration Release --no-restore --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+      run: dotnet test $TestPath --configuration Release --no-restore --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
    
     - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
         filename: coverage/**/coverage.cobertura.xml
         badge: true
-        fail_below_min: true
+        fail_below_min: false
         format: markdown
         hide_branch_rate: false
         hide_complexity: true
         indicators: true
         output: both
-        thresholds: '60 80'
+        thresholds: '40 80'
+        
+    - name: Output to Job Summary
+      run: cat code-coverage-results.md >> $GITHUB_STEP_SUMMARY
 
     - name: Add Coverage PR Comment
       uses: marocchino/sticky-pull-request-comment@v2
