@@ -32,11 +32,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: ./FATT_frontend/FATT_NEXT/fatt/package-lock.json
-        
-    - run: npm ci $Project_Path
-    - run: npm run build $Project_Path --if-present
+    - run: cd $Project_Path
+    - run: npm ci 
+    - run: npm run build  --if-present
       env:
         CI: ""
+
   test:
     runs-on: ubuntu-latest
 
@@ -55,10 +56,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: $Package_Lock_Path
-    - run: npm ci $Project_Path
-    - run: npm run build $Project_Path --if-present
+    - run: cd $Project_Path
+    - run: npm ci 
+    - run: npm run build  --if-present
       env:
         CI: ""
-    - run: npm run test $Test_Path -- --ci --watchAll=false
+    - run: npm run test -- --ci --watchAll=false
       env:
         CI: ""
