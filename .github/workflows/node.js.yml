@@ -16,7 +16,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ${{ env.Project_Path }}
+        
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -34,17 +37,16 @@ jobs:
         cache-dependency-path: ./FATT_frontend/FATT_NEXT/fatt/package-lock.json
   
     - run: 
-        cd $Project_Path
         npm ci 
-    - run:  
-        cd $Project_Path
+    - run:
         npm run build  --if-present
       env:
         CI: ""
 
   test:
     runs-on: ubuntu-latest
-
+    needs: 
+      build
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -62,15 +64,13 @@ jobs:
         cache-dependency-path: $Package_Lock_Path
     
     - run: 
-        cd $Project_Path
+        
         npm ci 
     - run: 
-        cd $Project_Path
         npm run build  --if-present
       env:
         CI: ""
     - run:  
-        cd $Project_Path
         npm run test -- --ci --watchAll=false
       env:
         CI: ""
