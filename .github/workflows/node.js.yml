@@ -73,16 +73,18 @@ jobs:
         npm run build  --if-present
       env:
         CI: ""
-    - run:  
+    - run:
         npm run test -- --ci --watchAll=false 
       env:
         CI: ""
     - run:  
-        npm run test -- --ci --coverage --watchAll=false 
+        npm run test -- --ci --coverage --watchAll=false
+      if: success() || failure()    # run this step even if previous step failed
       env:
         CI: ""
     - run:  
         npm run test -- --ci --testResultsProcessor="jest-junit"
+      if: success() || failure()    # run this step even if previous step failed
       env:
         CI: ""
     - uses: actions/upload-artifact@v3  # upload test results
