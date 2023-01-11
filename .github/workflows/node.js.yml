@@ -74,7 +74,7 @@ jobs:
       env:
         CI: ""
     - run:
-        npm run test -- --ci --watchAll=false 
+        npm test -- --ci --watchAll=false 
       env:
         CI: ""
     - run:  
@@ -83,7 +83,7 @@ jobs:
       env:
         CI: ""
     - run:  
-        npm run test -- --ci --reporters=default --reporters=jest-junit
+        npm test -- --ci --reporters=default --reporters=jest-junit
       if: success() || failure()    # run this step even if previous step failed
       env:
         CI: ""
