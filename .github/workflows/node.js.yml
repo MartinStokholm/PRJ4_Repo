@@ -83,7 +83,7 @@ jobs:
       env:
         CI: ""
     - run:  
-        npm run test -- --ci --testResultsProcessor="jest-junit"
+        npm run test -- --ci --reporters=default --reporters=jest-junit
       if: success() || failure()    # run this step even if previous step failed
       env:
         CI: ""
