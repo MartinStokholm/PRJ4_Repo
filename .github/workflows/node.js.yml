@@ -74,7 +74,15 @@ jobs:
       env:
         CI: ""
     - run:  
-        npm run test -- --ci --Coverage --watchAll=false --reporters=jest-junit
+        npm run test -- --ci --watchAll=false 
+      env:
+        CI: ""
+    - run:  
+        npm run test -- --ci --coverage --watchAll=false 
+      env:
+        CI: ""
+    - run:  
+        npm run test -- --ci --testResultsProcessor="jest-junit"
       env:
         CI: ""
     - uses: actions/upload-artifact@v3  # upload test results
