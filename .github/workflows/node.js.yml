@@ -78,7 +78,7 @@ jobs:
       env:
         CI: ""
     - run:  
-        npm run test -- --ci --coverage --watchAll=false
+        npm run test -- --reporters=default --reporters=github-actions
       if: success() || failure()    # run this step even if previous step failed
       env:
         CI: ""
